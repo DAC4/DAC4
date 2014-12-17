@@ -2,7 +2,7 @@
 <html>
 <head>
 	<%!
-		String message = "YANN ANUS !";
+		String message = "Yann est vraiment trop un guedin du dessin animalier !";
 	%>
 	<title><%= message %>
 	</title>
