@@ -1,3 +1,4 @@
+<jsp:useBean id="HelloBean" scope="request" class="beans.HelloBean"/>
 <!doctype html>
 <html>
 <head>
@@ -19,5 +20,9 @@
 	<h4>
 		<%= request.getAttribute("text") %>
 	</h4>
+
+	<h5>
+		${HelloBean.message}
+	</h5>
 </body>
 </html>
