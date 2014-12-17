@@ -3,7 +3,7 @@
 <html>
 <head>
 	<%!
-		String message = "Hello World!";
+		String message = "Rémi est dég parce qu'il sait pas dessiner de Pikachu !";
 	%>
 	<title><%= message %>
 	</title>
