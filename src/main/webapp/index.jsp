@@ -4,13 +4,20 @@
 	<%!
 		String message = "Hello World!";
 	%>
-	<title><%= message%>
+	<title><%= message %>
 	</title>
 </head>
 <body>
 	<h2>
-		<%= message%>
+		<%= message %>
 	</h2>
-	<%= new java.util.Date() %>
+
+	<h3>
+		<%= new java.util.Date() %>
+	</h3>
+
+	<h4>
+		<%= request.getAttribute("text") %>
+	</h4>
 </body>
 </html>
