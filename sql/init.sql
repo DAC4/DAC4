@@ -1,0 +1,34 @@
+CREATE DATABASE `test`;
+ 
+CREATE TABLE test.USERS
+(
+    USID VARCHAR(30)  NOT NULL,
+    USNM VARCHAR(120) NULL,
+    PASS VARCHAR(45)  NULL,
+    EMAL VARCHAR(55)  NULL,
+ 
+    PRIMARY KEY (USID)
+);
+
+CREATE TABLE test.USRGP
+(
+    USGP VARCHAR(30) NOT NULL,
+    USID VARCHAR(30) NULL,
+ 
+    PRIMARY KEY (USGP),
+    INDEX USRGPFK00_idx (USID ASC),
+ 
+    CONSTRAINT USRGPFK00 FOREIGN KEY (USID) REFERENCES test.users (USID)
+);
+ 
+INSERT INTO booreg.USERS VALUES ('ribesg', 'Gawel wel', 'kek', 'daniel.gisbert@notmyemail.com');
+INSERT INTO booreg.USRGP VALUES ('allUsers', 'ribesg');
+
+CREATE TABLE test.TABLETEST
+{
+
+  numtest INTEGER PRIMARY KEY,  
+
+};
+ 
+COMMIT;
