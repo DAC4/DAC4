@@ -3,28 +3,50 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>imag.dac</groupId>
-    <artifactId>dac4</artifactId>
-    <packaging>pom</packaging>
+	<groupId>imag.dac</groupId>
+	<artifactId>dac4</artifactId>
+	<packaging>war</packaging>
 
-    <version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 
-    <name>DAC4</name>
-    <url>https://github.com/DAC4/DAC4</url>
+	<name>DAC4</name>
+	<url>https://github.com/DAC4/DAC4</url>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-    <modules>
-        <!-- TODO -->
-    </modules>
+	<dependencies>
+		<!-- TODO -->
+	</dependencies>
 
-    <dependencies>
-        <!-- TODO -->
-    </dependencies>
+	<build>
+		<finalName>DAC4</finalName>
+		<defaultGoal>clean package</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 
 </project>
 
