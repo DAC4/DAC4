@@ -2,7 +2,7 @@
 <html>
 <head>
 	<%!
-		String message = "Hello World!";
+		String message = "Hello Wolrd!";
 	%>
 	<title><%= message%>
 	</title>
