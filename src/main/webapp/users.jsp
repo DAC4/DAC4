@@ -27,7 +27,6 @@
 	<hr>
 	<table>
 		<tr>
-			<th>ID</th>
 			<th>Login</th>
 			<th>Password (!)</th>
 			<th>Name</th>
@@ -58,5 +57,7 @@
 			}
 		%>
 	</table>
+
+	<a href="${pageContext.request.contextPath}/">Home</a>
 </body>
 </html>
