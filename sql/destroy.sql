@@ -1,5 +1,5 @@
 -- Destroy database
-DROP DATABASE troc_box;
+DROP DATABASE IF EXISTS troc_box;
 
 -- Commit
 COMMIT;
