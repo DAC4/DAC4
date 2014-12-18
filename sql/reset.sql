@@ -28,7 +28,7 @@ CREATE TABLE groups
 );
 
 CREATE TABLE Guest (
-  id   LONG        NOT NULL,
+  id   INT(1)      NOT NULL,
   name VARCHAR(30) NULL,
 
   PRIMARY KEY (id)
