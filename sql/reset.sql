@@ -27,7 +27,7 @@ CREATE TABLE groups
   CONSTRAINT USRGPFK00 FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-CREATE TABLE Guest (
+CREATE TABLE guests (
   id   INT(1)      NOT NULL,
   name VARCHAR(30) NULL,
 
@@ -38,12 +38,12 @@ CREATE TABLE Guest (
 INSERT INTO users VALUES ('admin', 'Mr Admin', 'admin', 'admin@admin.admin');
 INSERT INTO groups VALUES ('all', 'admin');
 
-INSERT INTO Guest VALUES (1, 'Toto');
-INSERT INTO Guest VALUES (2, 'Yann');
-INSERT INTO Guest VALUES (3, 'Yann aussi');
-INSERT INTO Guest VALUES (4, 'Yann encore');
-INSERT INTO Guest VALUES (5, 'Yannou');
-INSERT INTO Guest VALUES (6, 'Yhahn');
+INSERT INTO guests VALUES (1, 'Toto');
+INSERT INTO guests VALUES (2, 'Yann');
+INSERT INTO guests VALUES (3, 'Yann aussi');
+INSERT INTO guests VALUES (4, 'Yann encore');
+INSERT INTO guests VALUES (5, 'Yannou');
+INSERT INTO guests VALUES (6, 'Yhahn');
 
 -- Commit
 COMMIT;

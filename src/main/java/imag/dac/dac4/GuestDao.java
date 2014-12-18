@@ -18,7 +18,7 @@ public class GuestDao {
 
     // Retrieves all the guests:
     public List<Guest> getAllGuests() {
-        TypedQuery<Guest> query = em.createQuery("SELECT g FROM Guest g ORDER BY g.id", Guest.class);
+        TypedQuery<Guest> query = em.createQuery("SELECT g FROM guests g ORDER BY g.id", Guest.class);
         return query.getResultList();
     }
 }
