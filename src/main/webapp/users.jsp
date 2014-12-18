@@ -1,31 +1,36 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@page import="imag.dac.dac4.User,java.util.List" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 
 <html>
 <head>
 	<title>Users</title>
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
 </head>
 
 <body>
-	<form method="POST" action="user">
-		Login: <input type="text" name="login"/>
-		Password: <input type="password" name="password"/>
-		Name: <input type="text" name="name"/>
-		E-Mail: <input type="email" name="email"/>
-		<input type="submit" value="Add"/>
-		<%
-			String error = (String) request.getAttribute("error");
-			if (error != null) {
-				out.print("<span style=\"color:red\">" + error + "</span>");
-			}
-		%>
+	<form class="pure-form" method="POST" action="user">
+		<fieldset>
+			<legend>
+				<span>Create a new User</span>
+				<%
+					String error = (String) request.getAttribute("error");
+					if (error != null) {
+						out.print(" - <span style=\"color:red\">" + error + "</span>");
+					}
+				%>
+			</legend>
+			<input type="text" name="login" placeholder="Login" required/>
+			<input type="password" name="password" placeholder="Password" required/>
+			<input type="text" name="name" placeholder="Name" required/>
+			<input type="email" name="email" placeholder="Email" required/>
+			<button type="submit" class="pure-button pure-button-primary">Create</button>
+		</fieldset>
 	</form>
 
 	<hr>
-	<table>
+	<table class="pure-table">
 		<tr>
 			<th>Login</th>
 			<th>Password (!)</th>
