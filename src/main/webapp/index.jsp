@@ -4,7 +4,7 @@
 <html>
 <head>
 	<%!
-		String message = "Rémi est dég parce qu'il sait pas dessiner de Pikachu !";
+		String message = "Hello world!";
 	%>
 	<title>
 		<%= message %>
@@ -26,5 +26,7 @@
 	<h5>
 		${HelloBean.message}
 	</h5>
+
+	<a href="${pageContext.request.contextPath}/user">User JDBC/JPA/EJB/MySQL test page</a>
 </body>
 </html>
