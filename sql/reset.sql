@@ -1,3 +1,6 @@
+-- Destroy database if it exists
+DROP DATABASE IF EXISTS troc_box;
+
 -- Database creation and selection
 CREATE DATABASE troc_box;
 USE troc_box;
