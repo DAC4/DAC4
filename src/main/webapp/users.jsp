@@ -45,7 +45,7 @@
 
 		<hr>
 
-		<table class="pure-table">
+		<table class="pure-table pure-table-bordered pure-table-striped">
 			<thead>
 				<tr>
 					<th>Login</th>
