@@ -8,42 +8,24 @@ USE `troc_box`;
 -- Create tables in the database
 CREATE TABLE `users`
 (
-  `id`       VARCHAR(30)  NOT NULL,
-  `name`     VARCHAR(120) NULL,
-  `password` VARCHAR(45)  NULL,
-  `email`    VARCHAR(55)  NULL,
-
-  PRIMARY KEY (`id`)
-);
-
-CREATE TABLE `groups`
-(
-  `id`      VARCHAR(30) NOT NULL,
-  `user_id` VARCHAR(30) NULL,
-
-  PRIMARY KEY (`id`),
-  INDEX `USRGPFK00_idx` (`user_id` ASC),
-
-  CONSTRAINT `USRGPFK00` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-);
-
-CREATE TABLE `guests` (
-  `id`   BIGINT      NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(30) NULL,
+  `id`       BIGINT       NOT NULL AUTO_INCREMENT,
+  `login`    VARCHAR(30)  NOT NULL UNIQUE,
+  `password` VARCHAR(45)  NOT NULL,
+  `name`     VARCHAR(120) NOT NULL,
+  `email`    VARCHAR(55)  NOT NULL,
 
   PRIMARY KEY (`id`)
 );
 
 -- Insert base values
-INSERT INTO `users` VALUES ('admin', 'Mr Admin', 'admin', 'admin@admin.admin');
-INSERT INTO `groups` VALUES ('all', 'admin');
-
-INSERT INTO `guests` VALUES (1, 'Toto');
-INSERT INTO `guests` VALUES (2, 'Yann');
-INSERT INTO `guests` VALUES (3, 'Yann aussi');
-INSERT INTO `guests` VALUES (4, 'Yann encore');
-INSERT INTO `guests` VALUES (5, 'Yannou');
-INSERT INTO `guests` VALUES (6, 'Yhahn');
+INSERT INTO `users` VALUES (0, 'admin', 'Mr Admin', 'admin', 'admin@admin.admin');
+INSERT INTO `users` VALUES (1, 'Ribesg', 'Gael Ribes', 'mdp', 'ribesg@yahoo.fr');
+INSERT INTO `users` VALUES (2, 'Phalexei', 'Tom André-Poyaud', 'mdp', 'tandrepoyaud@gmail.com');
+INSERT INTO `users` VALUES (3, 'pacaletx', 'Xavier Pacalet', 'mdp', 'x.pacalet@gmail.com');
+INSERT INTO `users` VALUES (4, 'momo', 'Mohammed Taha El Ahmar', 'mdp', 'med.taha.elahmar@gmail.com');
+INSERT INTO `users` VALUES (5, 'laforesy', 'Yann Laforest', 'mdp', 'laforest.yann@gmail.com');
+INSERT INTO `users` VALUES (6, 'levillar', 'Remi Levillain', 'mdp', 'levillain.remi@gmail.com');
+INSERT INTO `users` VALUES (7, 'bienners', 'Solenne Bienner', 'mdp', 'solenne.bienner@gmail.com');
 
 -- Commit
 COMMIT;

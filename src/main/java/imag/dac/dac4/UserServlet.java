@@ -8,26 +8,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "GuestServlet", urlPatterns = {"/guest"})
-public class GuestServlet extends HttpServlet {
+@WebServlet(name = "UserServlet", urlPatterns = {"/user"})
+public class UserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     // Injected DAO EJB:
-    @EJB GuestDao guestDao;
+    @EJB UserDao userDao;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Display the list of guests:
-        request.setAttribute("guests", guestDao.getAllGuests());
-        request.getRequestDispatcher("/guest.jsp").forward(request, response);
+        request.setAttribute("users", userDao.getUsers());
+        request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Handle a new guest:
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
         String name = request.getParameter("name");
+        String email = request.getParameter("email");
+
         if (name != null) {
-            guestDao.persist(new Guest(name));
+            userDao.persist(new User(login, password, name, email));
         }
 
         // Display the list of guests:
