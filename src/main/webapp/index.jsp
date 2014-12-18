@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <jsp:useBean id="HelloBean" scope="request" class="beans.HelloBean"/>
 <!doctype html>
 <html>
@@ -5,7 +6,8 @@
 	<%!
 		String message = "Rémi est dég parce qu'il sait pas dessiner de Pikachu !";
 	%>
-	<title><%= message %>
+	<title>
+		<%= message %>
 	</title>
 </head>
 <body>
