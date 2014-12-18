@@ -16,6 +16,12 @@
 		Name: <input type="text" name="name"/>
 		E-Mail: <input type="email" name="email"/>
 		<input type="submit" value="Add"/>
+		<%
+			String error = (String) request.getAttribute("error");
+			if (error != null) {
+				out.print("<span style=\"color:red\">" + error + "</span>");
+			}
+		%>
 	</form>
 
 	<hr>

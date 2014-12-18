@@ -1,6 +1,7 @@
 package imag.dac.dac4;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +31,11 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
 
         if (name != null) {
-            userDao.persist(new User(login, password, name, email));
+            try {
+                userDao.persist(new User(login, password, name, email));
+            } catch (EJBException e) {
+                request.setAttribute("error", "Failed to insert new User");
+            }
         }
 
         // Display the list of guests:
