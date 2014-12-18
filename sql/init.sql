@@ -1,34 +1,32 @@
-CREATE DATABASE `test`;
- 
-CREATE TABLE test.USERS
+-- Database creation and selection
+CREATE DATABASE troc_box;
+USE troc_box;
+
+-- Create tables in the database
+CREATE TABLE users
 (
-    USID VARCHAR(30)  NOT NULL,
-    USNM VARCHAR(120) NULL,
-    PASS VARCHAR(45)  NULL,
-    EMAL VARCHAR(55)  NULL,
- 
-    PRIMARY KEY (USID)
+  USID VARCHAR(30)  NOT NULL,
+  USNM VARCHAR(120) NULL,
+  PASS VARCHAR(45)  NULL,
+  EMAL VARCHAR(55)  NULL,
+
+  PRIMARY KEY (USID)
 );
 
-CREATE TABLE test.USRGP
+CREATE TABLE groups
 (
-    USGP VARCHAR(30) NOT NULL,
-    USID VARCHAR(30) NULL,
- 
-    PRIMARY KEY (USGP),
-    INDEX USRGPFK00_idx (USID ASC),
- 
-    CONSTRAINT USRGPFK00 FOREIGN KEY (USID) REFERENCES test.users (USID)
+  USGP VARCHAR(30) NOT NULL,
+  USID VARCHAR(30) NULL,
+
+  PRIMARY KEY (USGP),
+  INDEX USRGPFK00_idx (USID ASC),
+
+  CONSTRAINT USRGPFK00 FOREIGN KEY (USID) REFERENCES users (USID)
 );
- 
-INSERT INTO booreg.USERS VALUES ('ribesg', 'Gawel wel', 'kek', 'daniel.gisbert@notmyemail.com');
-INSERT INTO booreg.USRGP VALUES ('allUsers', 'ribesg');
 
-CREATE TABLE test.TABLETEST
-{
+-- Insert base values
+INSERT INTO users VALUES ('admin', 'Mr Admin', 'admin', 'admin@admin.admin');
+INSERT INTO groups VALUES ('all', 'admin');
 
-  numtest INTEGER PRIMARY KEY,  
-
-};
- 
+-- Commit
 COMMIT;

@@ -1,1 +1,5 @@
-DROP DATABASE `test`;
+-- Destroy database
+DROP DATABASE troc_box;
+
+-- Commit
+COMMIT;
