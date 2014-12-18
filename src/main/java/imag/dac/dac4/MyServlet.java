@@ -12,7 +12,7 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("text", "kek");
+        req.setAttribute("text", "Hello World!");
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }
