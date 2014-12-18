@@ -28,7 +28,7 @@ CREATE TABLE `groups`
 );
 
 CREATE TABLE `guests` (
-  `id`   BIGINT      NOT NULL,
+  `id`   BIGINT      NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(30) NULL,
 
   PRIMARY KEY (`id`)

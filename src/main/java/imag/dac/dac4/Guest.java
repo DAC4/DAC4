@@ -10,7 +10,7 @@ public class Guest implements Serializable {
 
     // Persistent Fields:
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     Long id;
 
