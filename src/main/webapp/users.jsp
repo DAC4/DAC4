@@ -46,36 +46,40 @@
 		<hr>
 
 		<table class="pure-table">
-			<tr>
-				<th>Login</th>
-				<th>Password (!)</th>
-				<th>Name</th>
-				<th>E-Mail</th>
-			</tr>
-			<%
-				@SuppressWarnings("unchecked")
-				List<User> users = (List<User>) request.getAttribute("users");
-				if (users != null) {
-					for (User user : users) {
-			%>
-			<tr>
-				<td>
-					<%= user.getLogin() %>
-				</td>
-				<td>
-					<%= user.getPassword() %>
-				</td>
-				<td>
-					<%= user.getName() %>
-				</td>
-				<td>
-					<%= user.getEmail() %>
-				</td>
-			</tr>
-			<%
+			<thead>
+				<tr>
+					<th>Login</th>
+					<th>Password (!)</th>
+					<th>Name</th>
+					<th>E-Mail</th>
+				</tr>
+			</thead>
+			<tbody>
+				<%
+					@SuppressWarnings("unchecked")
+					List<User> users = (List<User>) request.getAttribute("users");
+					if (users != null) {
+						for (User user : users) {
+				%>
+				<tr>
+					<td>
+						<%= user.getLogin() %>
+					</td>
+					<td>
+						<%= user.getPassword() %>
+					</td>
+					<td>
+						<%= user.getName() %>
+					</td>
+					<td>
+						<%= user.getEmail() %>
+					</td>
+				</tr>
+				<%
+						}
 					}
-				}
-			%>
+				%>
+			</tbody>
 		</table>
 
 		<a class="pure-button" href="${pageContext.request.contextPath}/">Home</a>
