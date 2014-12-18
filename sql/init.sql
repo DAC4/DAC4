@@ -5,23 +5,23 @@ USE troc_box;
 -- Create tables in the database
 CREATE TABLE users
 (
-  USID VARCHAR(30)  NOT NULL,
-  USNM VARCHAR(120) NULL,
-  PASS VARCHAR(45)  NULL,
-  EMAL VARCHAR(55)  NULL,
+  id       VARCHAR(30)  NOT NULL,
+  name     VARCHAR(120) NULL,
+  password VARCHAR(45)  NULL,
+  email    VARCHAR(55)  NULL,
 
-  PRIMARY KEY (USID)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE groups
 (
-  USGP VARCHAR(30) NOT NULL,
-  USID VARCHAR(30) NULL,
+  id      VARCHAR(30) NOT NULL,
+  user_id VARCHAR(30) NULL,
 
-  PRIMARY KEY (USGP),
-  INDEX USRGPFK00_idx (USID ASC),
+  PRIMARY KEY (id),
+  INDEX USRGPFK00_idx (user_id ASC),
 
-  CONSTRAINT USRGPFK00 FOREIGN KEY (USID) REFERENCES users (USID)
+  CONSTRAINT USRGPFK00 FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 -- Insert base values
