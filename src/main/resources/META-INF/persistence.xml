@@ -2,5 +2,6 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence">
 	<persistence-unit name="TrocBox">
 		<jta-data-source>TrocBox</jta-data-source>
+		<class>imag.dac.dac4.Guest</class>
 	</persistence-unit>
 </persistence>

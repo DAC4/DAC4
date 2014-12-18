@@ -1,18 +1,20 @@
 package imag.dac.dac4;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "guests")
 public class Guest implements Serializable {
     private static final long serialVersionUID = 1L;
 
     // Persistent Fields:
     @Id
     @GeneratedValue
+    @Column(name = "id")
     Long id;
+
+    @Column(name = "name")
     private String name;
 
     // Constructors:
