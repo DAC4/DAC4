@@ -41,9 +41,6 @@
 		%>
 		<tr>
 			<td>
-				<%= user.getId() %>
-			</td>
-			<td>
 				<%= user.getLogin() %>
 			</td>
 			<td>
