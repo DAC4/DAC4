@@ -15,6 +15,11 @@
 	<!--[if gt IE 8]><!-->
 	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
 	<!--<![endif]-->
+	<style>
+		#content, table {
+			margin: 25px auto;
+		}
+	</style>
 </head>
 
 <body class="pure-g">
@@ -39,6 +44,7 @@
 		</form>
 
 		<hr>
+
 		<table class="pure-table">
 			<tr>
 				<th>Login</th>
