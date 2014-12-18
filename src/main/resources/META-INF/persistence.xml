@@ -3,5 +3,8 @@
 	<persistence-unit name="TrocBox">
 		<jta-data-source>TrocBox</jta-data-source>
 		<class>imag.dac.dac4.Guest</class>
+		<properties>
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+		</properties>
 	</persistence-unit>
 </persistence>
