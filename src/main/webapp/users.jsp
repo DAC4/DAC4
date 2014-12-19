@@ -52,7 +52,6 @@
 					<th>Password (!)</th>
 					<th>Name</th>
 					<th>E-Mail</th>
-					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -74,11 +73,6 @@
 					</td>
 					<td>
 						<%= user.getEmail() %>
-					</td>
-					<td>
-						<form method="DELETE" action="user">
-							<button type="submit" class="pure-button pure-button-error">Delete</button>
-						</form>
 					</td>
 				</tr>
 				<%
