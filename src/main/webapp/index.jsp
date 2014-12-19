@@ -4,7 +4,7 @@
 <html>
 <head>
 	<%!
-		String message = "Hello world!";
+		String message = "Hello world! (jsp)";
 	%>
 	<title>
 		<%= message %>
