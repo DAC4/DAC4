@@ -11,19 +11,19 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    Long id;
 
     @Column(name = "login")
-    private final String login;
+    private String login;
 
     @Column(name = "password")
-    private final String password;
+    private String password;
 
     @Column(name = "name")
-    private final String name;
+    private String name;
 
     @Column(name = "email")
-    private final String email;
+    private String email;
 
     public User(String login, String password, String name, String email) {
         this.login = login;
