@@ -30,15 +30,26 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
 
-        if (name != null) {
-            try {
-                userDao.persist(new User(login, password, name, email));
-            } catch (EJBException e) {
-                request.setAttribute("error", "Failed to insert new User");
-            }
+        try {
+            userDao.create(new User(login, password, name, email));
+        } catch (EJBException e) {
+            request.setAttribute("error", "Failed to insert new User");
         }
 
         // Display the list of guests:
+        doGet(request, response);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        long id = Long.parseLong(request.getParameter("id"));
+
+        try {
+            userDao.delete(id);
+        } catch (EJBException e) {
+            request.setAttribute("error", "Failed to remove user");
+        }
+
         doGet(request, response);
     }
 }
