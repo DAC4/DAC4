@@ -43,7 +43,7 @@ CREATE TABLE `items` (
   `?object-disp`         BOOLEAN       NOT NULL, -- TODO Wtf is this
   `lockerNum`            INT(11)       NOT NULL,
   `?object-dureemax`     VARCHAR(30)   NOT NULL, -- TODO Wtf is this
-  `?Object-accepted`     BOOLEAN       NOT NULL, -- TODO Wtf is this
+  `?object-accepted`     BOOLEAN       NOT NULL, -- TODO Wtf is this
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB
@@ -52,13 +52,13 @@ CREATE TABLE `items` (
 
 -- Loan table
 CREATE TABLE `loans` (
-  `id`          INT(11) NOT NULL AUTO_INCREMENT,
-  `date`        DATE    NOT NULL,
-  `emp-retDate` DATE    NOT NULL, -- TODO Wtf is this
-  `userId`      INT(11) NOT NULL,
-  `itemId`      INT(11) NOT NULL,
-  `returned`    BOOLEAN NOT NULL,
-  `emp-datedep` BOOLEAN NOT NULL, -- TODO Wtf is this
+  `id`           INT(11) NOT NULL AUTO_INCREMENT,
+  `date`         DATE    NOT NULL,
+  `?emp-retDate` DATE    NOT NULL, -- TODO Wtf is this
+  `userId`       INT(11) NOT NULL,
+  `itemId`       INT(11) NOT NULL,
+  `returned`     BOOLEAN NOT NULL,
+  `?emp-datedep` BOOLEAN NOT NULL, -- TODO Wtf is this
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userId`) REFERENCES users (`id`),
   FOREIGN KEY (`itemId`) REFERENCES items (`id`)
