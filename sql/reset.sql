@@ -34,17 +34,17 @@ CREATE TABLE `users`
 
 -- Item table
 CREATE TABLE `items` (
-  `id`                   INT(11)       NOT NULL AUTO_INCREMENT,
-  `name`                 VARCHAR(50)            DEFAULT NULL,
-  `imageId`              VARCHAR(100)  NOT NULL, -- TODO Varchar?
-  `description`          VARCHAR(1000) NOT NULL,
-  `?object-availability` VARCHAR(20)            DEFAULT NULL, -- TODO Wtf is this
-  `?object-depDate`      DATE          NOT NULL, -- TODO Wtf is this
-  `?object-disp`         BOOLEAN       NOT NULL, -- TODO Wtf is this
-  `lockerNum`            INT(11)       NOT NULL,
-  `?object-dureemax`     VARCHAR(30)   NOT NULL, -- TODO Wtf is this
-  `?object-accepted`     BOOLEAN       NOT NULL, -- TODO Wtf is this
-  PRIMARY KEY (`id`)
+  `id`              INT(11)       NOT NULL AUTO_INCREMENT,
+  `owner`           INT(11)       NOT NULL,
+  `name`            VARCHAR(50)   NOT NULL,
+  `imageId`         VARCHAR(1000) NOT NULL,
+  `description`     VARCHAR(1000) NOT NULL,
+  `availability`    BOOLEAN       NOT NULL,
+  `lockerNum`       INT(11)       NOT NULL,
+  `maxLoanDuration` INT(11)       NOT NULL,
+  `accepted`        BOOLEAN       NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`owner`) REFERENCES users (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
@@ -52,13 +52,12 @@ CREATE TABLE `items` (
 
 -- Loan table
 CREATE TABLE `loans` (
-  `id`           INT(11) NOT NULL AUTO_INCREMENT,
-  `date`         DATE    NOT NULL,
-  `?emp-retDate` DATE    NOT NULL, -- TODO Wtf is this
-  `userId`       INT(11) NOT NULL,
-  `itemId`       INT(11) NOT NULL,
-  `returned`     BOOLEAN NOT NULL,
-  `?emp-datedep` BOOLEAN NOT NULL, -- TODO Wtf is this
+  `id`        INT(11) NOT NULL AUTO_INCREMENT,
+  `userId`    INT(11) NOT NULL,
+  `itemId`    INT(11) NOT NULL,
+  `returned`  BOOLEAN NOT NULL,
+  `startDate` DATE    NOT NULL,
+  `endDate`   DATE    NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userId`) REFERENCES users (`id`),
   FOREIGN KEY (`itemId`) REFERENCES items (`id`)
@@ -80,9 +79,9 @@ INSERT INTO `users` VALUES (DEFAULT, 'laforesy', 'mdp', 'Yann Laforest', 'lafore
 INSERT INTO `users` VALUES (DEFAULT, 'levillar', 'mdp', 'Remi Levillain', 'levillain.remi@gmail.com', 50, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'bienners', 'mdp', 'Solenne Bienner', 'solenne.bienner@gmail.com', 50, TRUE);
 
-INSERT INTO `items` VALUES (DEFAULT, 'Example Item', '42', 'This is an example item', '?', '2015-01-01', FALSE, 12, '?', TRUE);
+INSERT INTO `items` VALUES (DEFAULT, 'Example Item', '42', 'This is an example item', FALSE, 12, 10, TRUE);
 
-INSERT INTO `loans` VALUES (DEFAULT, '2015-01-01', '2015-01-01', 1, 1, FALSE, TRUE);
+INSERT INTO `loans` VALUES (DEFAULT, 1, 1, FALSE, '2015-01-01', '2015-01-01');
 
 -- Commit
 COMMIT;

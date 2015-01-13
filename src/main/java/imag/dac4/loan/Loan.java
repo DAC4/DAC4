@@ -15,12 +15,6 @@ public class Loan implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "date")
-    private Date date;
-
-    @Column(name = "?emp-retDate")
-    private Date emp_retDate; // TODO Wtf is this
-
     @Column(name = "userId")
     private int userId;
 
@@ -30,31 +24,25 @@ public class Loan implements Serializable {
     @Column(name = "returned")
     private boolean returned;
 
-    @Column(name = "?emp-datedep")
-    private boolean emp_datedep; // TODO Wtf is this
+    @Column(name = "startDate")
+    private Date startDate;
+
+    @Column(name = "endDate")
+    private Date endDate;
 
     public Loan() {
     }
 
-    public Loan(Date date, Date emp_retDate, int userId, int itemId, boolean returned, boolean emp_datedep) {
-        this.date = date;
-        this.emp_retDate = emp_retDate;
+    public Loan(int userId, int itemId, boolean returned, Date startDate, Date endDate) {
         this.userId = userId;
         this.itemId = itemId;
         this.returned = returned;
-        this.emp_datedep = emp_datedep;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public int getId() {
         return id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public Date getEmp_retDate() {
-        return emp_retDate;
     }
 
     public int getUserId() {
@@ -69,7 +57,11 @@ public class Loan implements Serializable {
         return returned;
     }
 
-    public boolean isEmp_datedep() {
-        return emp_datedep;
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 }

@@ -2,7 +2,6 @@ package imag.dac4.item;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
 
 @Entity
 @Table(name = "items")
@@ -15,6 +14,9 @@ public class Item implements Serializable {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "owner")
+    private int owner;
+
     @Column(name = "name")
     private String name;
 
@@ -24,41 +26,38 @@ public class Item implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "?object-availability")
-    private String object_availability; // TODO Wtf is this
-
-    @Column(name = "?object-depDate")
-    private Date object_depDate; // TODO Wtf is this
-
-    @Column(name = "?object-disp")
-    private boolean object_disp; // TODO Wtf is this
+    @Column(name = "availability")
+    private boolean availability;
 
     @Column(name = "lockerNum")
     private int lockerNum;
 
-    @Column(name = "?object-dureemax")
-    private boolean object_dureemax; // TODO Wtf is this
+    @Column(name = "maxLoanDuration")
+    private int maxLoanDuration;
 
-    @Column(name = "?object-accepted")
-    private boolean object_accepted; // TODO Wtf is this
+    @Column(name = "accepted")
+    private boolean accepted;
 
     public Item() {
     }
 
-    public Item(String name, String imageId, String description, String object_availability, Date object_depDate, boolean object_disp, int lockerNum, boolean object_dureemax, boolean object_accepted) {
+    public Item(int owner, String name, String imageId, String description, boolean availability, int lockerNum, int maxLoanDuration, boolean accepted) {
+        this.owner = owner;
         this.name = name;
         this.imageId = imageId;
         this.description = description;
-        this.object_availability = object_availability;
-        this.object_depDate = object_depDate;
-        this.object_disp = object_disp;
+        this.availability = availability;
         this.lockerNum = lockerNum;
-        this.object_dureemax = object_dureemax;
-        this.object_accepted = object_accepted;
+        this.maxLoanDuration = maxLoanDuration;
+        this.accepted = accepted;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getOwner() {
+        return owner;
     }
 
     public String getName() {
@@ -73,27 +72,19 @@ public class Item implements Serializable {
         return description;
     }
 
-    public String getObject_availability() {
-        return object_availability;
-    }
-
-    public Date getObject_depDate() {
-        return object_depDate;
-    }
-
-    public boolean isObject_disp() {
-        return object_disp;
+    public boolean isAvailability() {
+        return availability;
     }
 
     public int getLockerNum() {
         return lockerNum;
     }
 
-    public boolean isObject_dureemax() {
-        return object_dureemax;
+    public int getMaxLoanDuration() {
+        return maxLoanDuration;
     }
 
-    public boolean isObject_accepted() {
-        return object_accepted;
+    public boolean isAccepted() {
+        return accepted;
     }
 }
