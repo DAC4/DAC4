@@ -15,7 +15,6 @@ import java.io.IOException;
 @WebServlet(name = "DbDumpServlet", urlPatterns = "/db")
 public class DbDumpServlet extends HttpServlet {
 
-    // Injected DAO EJB:
     @EJB UserDao userDao;
     @EJB ItemDao itemDao;
     @EJB LoanDao loanDao;

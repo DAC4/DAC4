@@ -1,4 +1,4 @@
-package imag.dac4.model;
+package imag.dac4;
 
 import imag.dac4.model.user.User;
 import imag.dac4.model.user.UserDao;
@@ -16,7 +16,6 @@ import java.io.IOException;
 public class UserServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // Injected DAO EJB:
     @EJB UserDao userDao;
 
     @Override
@@ -41,21 +40,4 @@ public class UserServlet extends HttpServlet {
         // Display the list of users
         doGet(request, response);
     }
-
-    /* TODO We can only really use GET and POST.
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long id = Long.parseLong(request.getParameter("id"));
-
-        try {
-            userDao.delete(id);
-        } catch (EJBException e) {
-            request.setAttribute("error", "Failed to remove user");
-        }
-
-        doGet(request, response);
-    }
-
-    */
 }

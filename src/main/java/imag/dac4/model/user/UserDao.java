@@ -2,8 +2,8 @@ package imag.dac4.model.user;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
@@ -36,8 +36,19 @@ public class UserDao {
      * Other operations  *
      * * * * * * * * * * */
 
+    public User getByLogin(final String login) {
+        try {
+            return entityManager
+                    .createQuery("SELECT u FROM User u WHERE login = :login", User.class)
+                    .setParameter("login", login)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
     public List<User> getUsers() {
-        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u ORDER BY u.id", User.class);
-        return query.getResultList();
+        return entityManager.createQuery("SELECT u FROM User u ORDER BY u.id", User.class).getResultList();
     }
 }

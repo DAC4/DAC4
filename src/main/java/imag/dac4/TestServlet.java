@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "MyServlet", urlPatterns = "/")
-public class MyServlet extends HttpServlet {
+@WebServlet(name = "TestServlet", urlPatterns = "/")
+public class TestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("text", "Hello World! (servlet)");
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/test.jsp").forward(req, resp);
     }
 }
