@@ -1,4 +1,4 @@
-package imag.dac.dac4;
+package imag.dac4.user;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +11,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private int id;
 
     @Column(name = "login")
     private String login;
@@ -25,14 +25,26 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "credits")
+    private int credits;
+
+    @Column(name = "registrationComplete")
+    private boolean registrationComplete;
+
     public User() {
     }
 
-    public User(String login, String password, String name, String email) {
+    public User(String login, String password, String name, String email, int credits, boolean registrationComplete) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.email = email;
+        this.credits = credits;
+        this.registrationComplete = registrationComplete;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getLogin() {
@@ -51,6 +63,14 @@ public class User implements Serializable {
         return email;
     }
 
+    public int getCredits() {
+        return credits;
+    }
+
+    public boolean isRegistrationComplete() {
+        return registrationComplete;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -59,6 +79,8 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", credits=" + credits +
+                ", registrationComplete=" + registrationComplete +
                 '}';
     }
 }

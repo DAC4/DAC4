@@ -1,4 +1,4 @@
-package imag.dac.dac4;
+package imag.dac4.user;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -18,7 +18,6 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Display the list of guests:
         request.setAttribute("users", userDao.getUsers());
         request.getRequestDispatcher("/users.jsp").forward(request, response);
     }
@@ -31,14 +30,16 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
 
         try {
-            userDao.create(new User(login, password, name, email));
+            userDao.create(new User(login, password, name, email, 50, false));
         } catch (EJBException e) {
             request.setAttribute("error", "Failed to insert new User");
         }
 
-        // Display the list of guests:
+        // Display the list of users
         doGet(request, response);
     }
+
+    /* TODO We can only really use GET and POST.
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,4 +53,6 @@ public class UserServlet extends HttpServlet {
 
         doGet(request, response);
     }
+
+    */
 }

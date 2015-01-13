@@ -1,4 +1,4 @@
-package imag.dac.dac4;
+package imag.dac4;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

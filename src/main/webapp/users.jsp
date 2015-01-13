@@ -1,4 +1,4 @@
-<%@ page import="imag.dac.dac4.User" %>
+<%@ page import="imag.dac4.user.User" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
@@ -48,10 +48,13 @@
 		<table class="pure-table pure-table-bordered pure-table-striped">
 			<thead>
 				<tr>
+					<th>Id</th>
 					<th>Login</th>
 					<th>Password (!)</th>
 					<th>Name</th>
 					<th>E-Mail</th>
+					<th>Credits</th>
+					<th>Registration Complete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -63,6 +66,9 @@
 				%>
 				<tr>
 					<td>
+						<%= user.getId()%>
+					</td>
+					<td>
 						<%= user.getLogin() %>
 					</td>
 					<td>
@@ -73,6 +79,12 @@
 					</td>
 					<td>
 						<%= user.getEmail() %>
+					</td>
+					<td>
+						<%= user.getCredits() %>
+					</td>
+					<td>
+						<%= user.isRegistrationComplete() %>
 					</td>
 				</tr>
 				<%
