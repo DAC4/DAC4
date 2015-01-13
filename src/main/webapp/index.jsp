@@ -23,5 +23,6 @@
 	</h4>
 
 	<a href="${pageContext.request.contextPath}/user">User JDBC/JPA/EJB/MySQL test page</a>
+	<a href="${pageContext.request.contextPath}/db">See Database Content</a>
 </body>
 </html>
