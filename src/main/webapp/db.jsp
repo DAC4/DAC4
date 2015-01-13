@@ -115,7 +115,7 @@
 						<%= item.getDescription() %>
 					</td>
 					<td>
-						<%= item.getOwner() %>
+						<%= item.getOwnerId() %>
 					</td>
 					<td>
 						<%= item.isAvailable() %>

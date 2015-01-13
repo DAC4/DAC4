@@ -14,8 +14,8 @@ public class Item implements Serializable {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "owner")
-    private int owner;
+    @Column(name = "ownerId")
+    private int ownerId;
 
     @Column(name = "name")
     private String name;
@@ -41,8 +41,8 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(int owner, String name, String imageId, String description, boolean availability, int lockerNum, int maxLoanDuration, boolean accepted) {
-        this.owner = owner;
+    public Item(int ownerId, String name, String imageId, String description, boolean availability, int lockerNum, int maxLoanDuration, boolean accepted) {
+        this.ownerId = ownerId;
         this.name = name;
         this.imageId = imageId;
         this.description = description;
@@ -56,8 +56,8 @@ public class Item implements Serializable {
         return id;
     }
 
-    public int getOwner() {
-        return owner;
+    public int getOwnerId() {
+        return ownerId;
     }
 
     public String getName() {
