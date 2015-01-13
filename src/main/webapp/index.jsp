@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<jsp:useBean id="HelloBean" scope="request" class="beans.HelloBean"/>
 <!doctype html>
 <html>
 <head>
@@ -22,10 +21,6 @@
 	<h4>
 		<%= request.getAttribute("text") %>
 	</h4>
-
-	<h5>
-		${HelloBean.message}
-	</h5>
 
 	<a href="${pageContext.request.contextPath}/user">User JDBC/JPA/EJB/MySQL test page</a>
 </body>

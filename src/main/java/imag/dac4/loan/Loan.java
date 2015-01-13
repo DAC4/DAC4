@@ -2,7 +2,7 @@ package imag.dac4.loan;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "loans")
