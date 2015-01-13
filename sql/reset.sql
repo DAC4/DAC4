@@ -30,7 +30,7 @@ CREATE TABLE `users`
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
-  AUTO_INCREMENT = 0;
+  AUTO_INCREMENT = 1;
 
 -- Item table
 CREATE TABLE `items` (
@@ -48,7 +48,7 @@ CREATE TABLE `items` (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
-  AUTO_INCREMENT = 0;
+  AUTO_INCREMENT = 1;
 
 -- Loan table
 CREATE TABLE `loans` (
@@ -64,13 +64,13 @@ CREATE TABLE `loans` (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
-  AUTO_INCREMENT = 0;
+  AUTO_INCREMENT = 1;
 
 --
 -- Insert example values
 --
 
-INSERT INTO `users` VALUES (DEFAULT, 'admin', 'admin', 'Mr Admin', 'admin@admin.admin', 0, TRUE);
+INSERT INTO `users` VALUES (0, 'admin', 'admin', 'Mr Admin', 'admin@admin.admin', 0, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'Ribesg', 'mdp', 'Gael Ribes', 'ribesg@yahoo.fr', 50, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'Phalexei', 'mdp', 'Tom André-Poyaud', 'tandrepoyaud@gmail.com', 50, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'pacaletx', 'mdp', 'Xavier Pacalet', 'x.pacalet@gmail.com', 50, TRUE);

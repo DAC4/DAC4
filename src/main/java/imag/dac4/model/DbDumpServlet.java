@@ -23,6 +23,8 @@ public class DbDumpServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("users", userDao.getUsers());
+        req.setAttribute("items", itemDao.getItems());
+        req.setAttribute("loans", loanDao.getLoans());
         req.getRequestDispatcher("/db.jsp").forward(req, resp);
     }
 }
