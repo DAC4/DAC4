@@ -30,7 +30,7 @@ CREATE TABLE `users`
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
-  AUTO_INCREMENT = 1;
+  AUTO_INCREMENT = 0;
 
 -- Item table
 CREATE TABLE `items` (
@@ -48,7 +48,7 @@ CREATE TABLE `items` (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
-  AUTO_INCREMENT = 1;
+  AUTO_INCREMENT = 0;
 
 -- Loan table
 CREATE TABLE `loans` (
@@ -65,7 +65,7 @@ CREATE TABLE `loans` (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
-  AUTO_INCREMENT = 1;
+  AUTO_INCREMENT = 0;
 
 --
 -- Insert example values
