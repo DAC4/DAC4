@@ -18,7 +18,6 @@ public class User implements Serializable {
 	private int credits;
 	private int inscrValidee;
 	
-	
 	public User(int id, String name, String fname, String email, String login, String password, int credits, int inscrValidee){
 	super();
 	this.id=id;
@@ -31,7 +30,7 @@ public class User implements Serializable {
 	this.inscrValidee=inscrValidee;
 	}
 	
-	    public void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -94,7 +93,5 @@ public class User implements Serializable {
     public int isInscrValidee() {
         return inscrValidee;
     }
-	
-
 
 }

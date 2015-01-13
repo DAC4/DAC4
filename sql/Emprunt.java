@@ -73,6 +73,5 @@ public class Emprunt implements Serializable {
     public void setDatedep(int datedep) {
         this.datedep = datedep;
     }
- 
 
 }
