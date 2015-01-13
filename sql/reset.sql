@@ -35,16 +35,16 @@ CREATE TABLE `users`
 -- Item table
 CREATE TABLE `items` (
   `id`              INT(11)       NOT NULL AUTO_INCREMENT,
-  `owner`           INT(11)       NOT NULL,
   `name`            VARCHAR(50)   NOT NULL,
   `imageId`         VARCHAR(1000) NOT NULL,
   `description`     VARCHAR(1000) NOT NULL,
+  `ownerId`         INT(11)       NOT NULL,
   `availability`    BOOLEAN       NOT NULL,
   `lockerNum`       INT(11)       NOT NULL,
   `maxLoanDuration` INT(11)       NOT NULL,
   `accepted`        BOOLEAN       NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`owner`) REFERENCES users (`id`)
+  FOREIGN KEY (`ownerId`) REFERENCES users (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
@@ -79,7 +79,7 @@ INSERT INTO `users` VALUES (DEFAULT, 'laforesy', 'mdp', 'Yann Laforest', 'lafore
 INSERT INTO `users` VALUES (DEFAULT, 'levillar', 'mdp', 'Remi Levillain', 'levillain.remi@gmail.com', 50, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'bienners', 'mdp', 'Solenne Bienner', 'solenne.bienner@gmail.com', 50, TRUE);
 
-INSERT INTO `items` VALUES (DEFAULT, 'Example Item', '42', 'This is an example item', FALSE, 12, 10, TRUE);
+INSERT INTO `items` VALUES (DEFAULT, 'Example Item', '42', 'This is an example item', 1, FALSE, 12, 10, TRUE);
 
 INSERT INTO `loans` VALUES (DEFAULT, 1, 1, FALSE, '2015-01-01', '2015-01-01');
 

@@ -1,4 +1,4 @@
-package imag.dac4.loan;
+package imag.dac4.model.item;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -7,7 +7,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
-public class LoanDao {
+public class ItemDao {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -16,28 +16,28 @@ public class LoanDao {
      * CRUD Operations *
      * * * * * * * * * */
 
-    public void create(Loan loan) {
-        entityManager.persist(loan);
+    public void create(Item item) {
+        entityManager.persist(item);
     }
 
-    public Loan read(int id) {
-        return entityManager.find(Loan.class, id);
+    public Item read(int id) {
+        return entityManager.find(Item.class, id);
     }
 
-    public void update(Loan loan) {
-        entityManager.merge(loan);
+    public void update(Item item) {
+        entityManager.merge(item);
     }
 
     public void delete(int id) {
-        entityManager.remove(entityManager.find(Loan.class, id));
+        entityManager.remove(entityManager.find(Item.class, id));
     }
 
     /* * * * * * * * * * *
      * Other operations  *
      * * * * * * * * * * */
 
-    public List<Loan> getLoans() {
-        TypedQuery<Loan> query = entityManager.createQuery("SELECT l FROM Loan l ORDER BY l.id", Loan.class);
+    public List<Item> getItems() {
+        TypedQuery<Item> query = entityManager.createQuery("SELECT i FROM Item i ORDER BY i.id", Item.class);
         return query.getResultList();
     }
 }

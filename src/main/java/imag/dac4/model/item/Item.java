@@ -1,4 +1,4 @@
-package imag.dac4.item;
+package imag.dac4.model.item;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -72,7 +72,7 @@ public class Item implements Serializable {
         return description;
     }
 
-    public boolean isAvailability() {
+    public boolean isAvailable() {
         return availability;
     }
 

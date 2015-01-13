@@ -1,4 +1,7 @@
-package imag.dac4.user;
+package imag.dac4.model;
+
+import imag.dac4.model.user.User;
+import imag.dac4.model.user.UserDao;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;

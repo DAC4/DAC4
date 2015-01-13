@@ -1,4 +1,4 @@
-package imag.dac4.loan;
+package imag.dac4.model.loan;
 
 import javax.persistence.*;
 import java.io.Serializable;

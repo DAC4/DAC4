@@ -1,4 +1,4 @@
-package imag.dac4.item;
+package imag.dac4.model.user;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -7,7 +7,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
-public class ItemDao {
+public class UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -16,28 +16,28 @@ public class ItemDao {
      * CRUD Operations *
      * * * * * * * * * */
 
-    public void create(Item item) {
-        entityManager.persist(item);
+    public void create(User user) {
+        entityManager.persist(user);
     }
 
-    public Item read(int id) {
-        return entityManager.find(Item.class, id);
+    public User read(int id) {
+        return entityManager.find(User.class, id);
     }
 
-    public void update(Item item) {
-        entityManager.merge(item);
+    public void update(User user) {
+        entityManager.merge(user);
     }
 
     public void delete(int id) {
-        entityManager.remove(entityManager.find(Item.class, id));
+        entityManager.remove(entityManager.find(User.class, id));
     }
 
     /* * * * * * * * * * *
      * Other operations  *
      * * * * * * * * * * */
 
-    public List<Item> getItems() {
-        TypedQuery<Item> query = entityManager.createQuery("SELECT i FROM Item i ORDER BY i.id", Item.class);
+    public List<User> getUsers() {
+        TypedQuery<User> query = entityManager.createQuery("SELECT u FROM User u ORDER BY u.id", User.class);
         return query.getResultList();
     }
 }

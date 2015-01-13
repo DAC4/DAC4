@@ -1,4 +1,4 @@
-<%@ page import="imag.dac4.user.User" %>
+<%@ page import="imag.dac4.model.user.User" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 

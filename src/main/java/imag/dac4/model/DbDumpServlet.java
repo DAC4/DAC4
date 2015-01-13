@@ -1,0 +1,28 @@
+package imag.dac4.model;
+
+import imag.dac4.model.item.ItemDao;
+import imag.dac4.model.loan.LoanDao;
+import imag.dac4.model.user.UserDao;
+
+import javax.ejb.EJB;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet(name = "DbDumpServlet", urlPatterns = "/db")
+public class DbDumpServlet extends HttpServlet {
+
+    // Injected DAO EJB:
+    @EJB UserDao userDao;
+    @EJB ItemDao itemDao;
+    @EJB LoanDao loanDao;
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("users", userDao.getUsers());
+        req.getRequestDispatcher("/db.jsp").forward(req, resp);
+    }
+}
