@@ -11,7 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "AuthServlet", urlPatterns = "/auth/*")
+@WebServlet(name = "AuthServlet", urlPatterns = {
+        "/auth/register",
+        "/auth/login",
+        "/auth/logout",
+        "/auth/awaiting-validation"
+})
 public class AuthServlet extends HttpServlet {
 
     @EJB UserDao userDao;
@@ -21,7 +26,7 @@ public class AuthServlet extends HttpServlet {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         if (action != null && !action.equalsIgnoreCase("auth")) {
-            switch (action.split("\\.")[0].toLowerCase()) {
+            switch (action.toLowerCase()) {
                 case "register":
                     req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
                     return;
@@ -50,7 +55,7 @@ public class AuthServlet extends HttpServlet {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         if (action != null && !action.equalsIgnoreCase("auth")) {
-            switch (action.split("\\.")[0].toLowerCase()) {
+            switch (action.toLowerCase()) {
                 case "login":
                     this.onConnectionRequest(req, resp);
                     return;
