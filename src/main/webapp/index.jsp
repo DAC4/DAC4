@@ -15,7 +15,7 @@
 			final String errorMessage = (String) request.getAttribute("error_msg");
 	%>
 	<p style="color:red;font-weight:bold">
-		<%= errorMessage %>
+		Error <%= error %>: <%= errorMessage %>
 	</p>
 
 	<hr>
