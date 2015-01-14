@@ -14,7 +14,7 @@ import java.io.IOException;
 @WebServlet(name = "AuthServlet", urlPatterns = "/auth")
 public class AuthServlet extends HttpServlet {
 
-    private static final String EMAIL_PATTERN = "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b";
+    private static final String EMAIL_PATTERN = "/\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b/i";
 
     @EJB UserDao userDao;
 
