@@ -17,10 +17,13 @@
 	<p style="color:red;font-weight:bold">
 		<%= errorMessage %>
 	</p>
+
 	<hr>
 	<%
 		}
 	%>
+
+	<h2>Login</h2>
 
 	<form action="${pageContext.request.contextPath}/auth" method="POST">
 		<input type="hidden" name="action" value="login"/>
@@ -30,5 +33,9 @@
 		<input id="password" type="password" placeholder="password" name="password" required/>
 		<input type="submit" value="Login"/>
 	</form>
+
+	<hr>
+
+	<h2><a href="${pageContext.request.contextPath}/auth?action=register">Register</a></h2>
 </body>
 </html>

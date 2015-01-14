@@ -1,5 +1,7 @@
 package imag.dac4;
 
+import imag.dac4.model.user.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +14,18 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+        final User user = (User) req.getSession().getAttribute("user");
+        if (user != null) {
+            req.setAttribute("login", user.getLogin());
+            req.setAttribute("name", user.getName());
+            req.setAttribute("email", user.getEmail());
+            if ((Boolean) req.getSession().getAttribute("isAdmin")) {
+                req.getRequestDispatcher(Constants.JSP_ADMIN_HOME).forward(req, resp);
+            } else {
+                req.getRequestDispatcher(Constants.JSP_USER_HOME).forward(req, resp);
+            }
+        } else {
+            req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+        }
     }
 }

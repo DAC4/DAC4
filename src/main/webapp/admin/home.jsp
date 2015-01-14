@@ -20,5 +20,9 @@
 			Email: <%= request.getAttribute("email") %>
 		</li>
 	</ul>
+
+	<hr>
+
+	<h2><a href="${pageContext.request.contextPath}/auth?action=logout">Logout</a></h2>
 </body>
 </html>

@@ -27,6 +27,10 @@ public class AuthServlet extends HttpServlet {
                 case "register":
                     req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
                     return;
+                case "logout":
+                    req.getSession().removeAttribute("user");
+                    req.getSession().removeAttribute("isAdmin");
+                    req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 default:
                     break;
             }
