@@ -2,15 +2,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Awaiting Validation</title>
+	<title>Registration Complete</title>
 </head>
 <body>
-	<h1>Awaiting Validation</h1>
+	<h1>Registration Complete</h1>
 
 	<hr>
 
 	<p>
-		Registration processed, for <%= request.getAttribute("name") %> (<%= request.getAttribute("login") %>).
+		The administrator needs to approve your account before you can login.
 	</p>
+
+	<hr>
+
+	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
 </body>
 </html>

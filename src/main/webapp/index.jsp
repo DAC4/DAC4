@@ -25,8 +25,7 @@
 
 	<h2>Login</h2>
 
-	<form action="${pageContext.request.contextPath}/auth" method="POST">
-		<input type="hidden" name="action" value="login"/>
+	<form action="${pageContext.request.contextPath}/auth/login" method="POST">
 		<label for="login">Login:</label>
 		<input id="login" type="text" placeholder="Login" name="login" required/>
 		<label for="password">Password:</label>
@@ -36,6 +35,6 @@
 
 	<hr>
 
-	<h2><a href="${pageContext.request.contextPath}/auth?action=register">Register</a></h2>
+	<h2><a href="${pageContext.request.contextPath}/auth/register">Register</a></h2>
 </body>
 </html>

@@ -11,23 +11,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "AuthServlet", urlPatterns = "/auth")
+@WebServlet(name = "AuthServlet", urlPatterns = "/auth/*")
 public class AuthServlet extends HttpServlet {
 
     @EJB UserDao userDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String action = req.getParameter("action");
-        if (action != null) {
+        final String[] split = req.getRequestURI().split("/");
+        final String action = split[split.length - 1];
+        if (action != null && !action.equalsIgnoreCase("auth")) {
             switch (action.toLowerCase()) {
                 case "register":
                     req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
                     return;
+                case "login":
+                    resp.sendRedirect("/");
+                    return;
                 case "logout":
                     req.getSession().removeAttribute("user");
                     req.getSession().removeAttribute("isAdmin");
-                    req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+                    resp.sendRedirect("/");
+                    return;
+                case "awaiting-validation":
+                    req.getRequestDispatcher(Constants.JSP_AUTH_AWAITING_VALIDATION).forward(req, resp);
                 default:
                     break;
             }
@@ -39,8 +46,9 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String action = req.getParameter("action");
-        if (action != null) {
+        final String[] split = req.getRequestURI().split("/");
+        final String action = split[split.length - 1];
+        if (action != null && !action.equalsIgnoreCase("auth")) {
             switch (action.toLowerCase()) {
                 case "login":
                     this.onConnectionRequest(req, resp);
@@ -49,9 +57,6 @@ public class AuthServlet extends HttpServlet {
                     this.onRegistrationRequest(req, resp);
                     return;
                 default:
-                    req.setAttribute("error", 400);
-                    req.setAttribute("error_msg", "Bad Request: Unknown action '" + action + "'");
-                    req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                     break;
             }
         }
@@ -128,9 +133,7 @@ public class AuthServlet extends HttpServlet {
         } else {
             user = new User(login, password, name, email);
             this.userDao.create(user);
-            req.setAttribute("login", login);
-            req.setAttribute("name", name);
-            req.getRequestDispatcher(Constants.JSP_AUTH_AWAITING_VALIDATION).forward(req, resp);
+            resp.sendRedirect("/auth/awaiting-validation");
         }
     }
 }

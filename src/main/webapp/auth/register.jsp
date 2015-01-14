@@ -9,8 +9,7 @@
 
 	<hr>
 
-	<form action="${pageContext.request.contextPath}/auth" method="POST">
-		<input type="hidden" name="action" value="register"/>
+	<form action="${pageContext.request.contextPath}/auth/register" method="POST">
 		<fieldset>
 			<legend>
 				<span>Create an account</span>

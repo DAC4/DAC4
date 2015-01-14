@@ -23,6 +23,6 @@
 
 	<hr>
 
-	<h2><a href="${pageContext.request.contextPath}/auth?action=logout">Logout</a></h2>
+	<h2><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
 </body>
 </html>
