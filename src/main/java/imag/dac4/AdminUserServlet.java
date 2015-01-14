@@ -20,7 +20,7 @@ public class AdminUserServlet extends HttpServlet {
     @EJB UserDao userDao;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (this.isAdmin(req)) {
             resp.sendError(403); // TODO Better Error
             return;
@@ -33,6 +33,24 @@ public class AdminUserServlet extends HttpServlet {
                 req.setAttribute("users", this.userDao.getUsers());
                 req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
                 break;
+            default:
+                req.setAttribute("error", 400);
+                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+                break;
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (this.isAdmin(req)) {
+            resp.sendError(403); // TODO Better Error
+            return;
+        }
+
+        final String[] split = req.getRequestURI().split("/");
+        final String action = split[split.length - 1];
+        switch (action.toLowerCase()) {
             case "approve":
                 this.onApproveUserRequest(req, resp);
                 break;
@@ -45,11 +63,6 @@ public class AdminUserServlet extends HttpServlet {
     }
 
     private void onApproveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (this.isAdmin(req)) {
-            resp.sendError(403); // TODO Better Error
-            return;
-        }
-
         final String login = req.getParameter("login");
         req.removeAttribute("login");
 
