@@ -46,7 +46,7 @@
 					yes
 					<% } else { %>
 					<form action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
-						<input type="hidden" value="<%= user.getId() %>"/>
+						<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
 						<input type="submit" value="no"/>
 					</form>
 					<% } %>
