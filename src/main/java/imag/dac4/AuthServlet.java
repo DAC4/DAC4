@@ -22,34 +22,41 @@ public class AuthServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String action = req.getParameter("action");
-        switch (action.toLowerCase()) {
-            case "register":
-                req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
-                break;
-            default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request");
-                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
-                break;
+        if (action != null) {
+            switch (action.toLowerCase()) {
+                case "register":
+                    req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
+                    return;
+                default:
+                    break;
+            }
         }
+        req.setAttribute("error", 400);
+        req.setAttribute("error_msg", "Bad Request");
+        req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String action = req.getParameter("action");
-        switch (action.toLowerCase()) {
-            case "login":
-                this.onConnectionRequest(req, resp);
-                break;
-            case "register":
-                this.onRegistrationRequest(req, resp);
-                break;
-            default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: Unknown action '" + action + "'");
-                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
-                break;
+        if (action != null) {
+            switch (action.toLowerCase()) {
+                case "login":
+                    this.onConnectionRequest(req, resp);
+                    return;
+                case "register":
+                    this.onRegistrationRequest(req, resp);
+                    return;
+                default:
+                    req.setAttribute("error", 400);
+                    req.setAttribute("error_msg", "Bad Request: Unknown action '" + action + "'");
+                    req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+                    break;
+            }
         }
+        req.setAttribute("error", 400);
+        req.setAttribute("error_msg", "Bad Request");
+        req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
     }
 
     private void onConnectionRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
