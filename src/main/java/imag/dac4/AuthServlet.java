@@ -35,12 +35,13 @@ public class AuthServlet extends HttpServlet {
                     return;
                 case "awaiting-validation":
                     req.getRequestDispatcher(Constants.JSP_AUTH_AWAITING_VALIDATION).forward(req, resp);
+                    return;
                 default:
                     break;
             }
         }
         req.setAttribute("error", 400);
-        req.setAttribute("error_msg", "Bad Request");
+        req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
         req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
     }
 
@@ -61,7 +62,7 @@ public class AuthServlet extends HttpServlet {
             }
         }
         req.setAttribute("error", 400);
-        req.setAttribute("error_msg", "Bad Request");
+        req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
         req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
     }
 
