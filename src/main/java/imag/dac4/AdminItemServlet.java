@@ -22,7 +22,9 @@ public class AdminItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (!this.isAdmin(req)) {
-            resp.sendError(403); // TODO Better Error
+            req.setAttribute("error", 403);
+            req.setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+            req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
             return;
         }
 

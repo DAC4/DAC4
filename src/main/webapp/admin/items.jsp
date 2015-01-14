@@ -1,6 +1,5 @@
-<%@ page import="imag.dac4.model.user.User" %>
-<%@ page import="java.util.List" %>
 <%@ page import="imag.dac4.model.item.Item" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -73,7 +72,7 @@
 					yes
 					<% } else { %>
 					<form action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
-						<input type="hidden" value="<%= item.getId() %>"/>
+						<input type="hidden" name="id" value="<%= item.getId() %>"/>
 						<input type="submit" value="no"/>
 					</form>
 					<% } %>
