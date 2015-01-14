@@ -7,14 +7,6 @@
 <html>
 <head>
 	<title>Users</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-	<!--[if lte IE 8]>
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
-	<![endif]-->
-	<!--[if gt IE 8]><!-->
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
-	<!--<![endif]-->
 	<style>
 		#content, table {
 			margin: 25px auto;
@@ -22,9 +14,9 @@
 	</style>
 </head>
 
-<body class="pure-g">
-	<div id="content" class="pure-u-1 pure-u-md-3-5">
-		<form class="pure-form" method="POST" action="user">
+<body>
+	<div id="content">
+		<form method="POST" action="user">
 			<fieldset>
 				<legend>
 					<span>Create a new User</span>

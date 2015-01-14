@@ -9,14 +9,6 @@
 <html>
 <head>
 	<title>Database dump</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-	<!--[if lte IE 8]>
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
-	<![endif]-->
-	<!--[if gt IE 8]><!-->
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
-	<!--<![endif]-->
 	<style>
 		#content, table {
 			margin: 25px auto;
@@ -24,11 +16,11 @@
 	</style>
 </head>
 
-<body class="pure-g">
-	<div id="content" class="pure-u-1 pure-u-md-3-5">
+<body>
+	<div id="content">
 
 		<h1>Users</h1>
-		<table class="pure-table pure-table-bordered pure-table-striped">
+		<table>
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -80,7 +72,7 @@
 		<hr>
 
 		<h1>Items</h1>
-		<table class="pure-table pure-table-bordered pure-table-striped">
+		<table>
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -140,7 +132,7 @@
 		<hr>
 
 		<h1>Loans</h1>
-		<table class="pure-table pure-table-bordered pure-table-striped">
+		<table>
 			<thead>
 				<tr>
 					<th>Id</th>
@@ -185,7 +177,7 @@
 			</tbody>
 		</table>
 
-		<a class="pure-button" href="${pageContext.request.contextPath}/">Home</a>
+		<a href="${pageContext.request.contextPath}/">Home</a>
 	</div>
 </body>
 </html>
