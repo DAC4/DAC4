@@ -70,7 +70,7 @@ CREATE TABLE `loans` (
 -- Insert example values
 --
 
-INSERT INTO `users` VALUES (0, 'admin', 'admin', 'Mr Admin', 'admin@admin.admin', 0, TRUE);
+INSERT INTO `users` VALUES (DEFAULT, 'admin', 'admin', 'Mr Admin', 'admin@admin.admin', 0, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'Ribesg', 'mdp', 'Gael Ribes', 'ribesg@yahoo.fr', 50, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'Phalexei', 'mdp', 'Tom André-Poyaud', 'tandrepoyaud@gmail.com', 50, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'pacaletx', 'mdp', 'Xavier Pacalet', 'x.pacalet@gmail.com', 50, TRUE);
@@ -78,8 +78,10 @@ INSERT INTO `users` VALUES (DEFAULT, 'momo', 'mdp', 'Mohammed Taha El Ahmar', 'm
 INSERT INTO `users` VALUES (DEFAULT, 'laforesy', 'mdp', 'Yann Laforest', 'laforest.yann@gmail.com', 50, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'levillar', 'mdp', 'Remi Levillain', 'levillain.remi@gmail.com', 50, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'bienners', 'mdp', 'Solenne Bienner', 'solenne.bienner@gmail.com', 50, TRUE);
+INSERT INTO `users` VALUES (DEFAULT, 'test', 'test', 'Test', 'test@test.test', 50, FALSE);
 
 INSERT INTO `items` VALUES (DEFAULT, 'Example Item', '42', 'This is an example item', 1, FALSE, 12, 10, TRUE);
+INSERT INTO `items` VALUES (DEFAULT, 'Example Item 2', '1337', 'This is another example item', 2, TRUE, 11, 2, FALSE);
 
 INSERT INTO `loans` VALUES (DEFAULT, 1, 1, FALSE, '2015-01-01', '2015-01-01');
 
