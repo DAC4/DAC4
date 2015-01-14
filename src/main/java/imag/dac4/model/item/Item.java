@@ -76,4 +76,32 @@ public class Item implements Serializable {
     public boolean isAccepted() {
         return accepted;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
+    }
+
+    public void setLockerNum(int lockerNum) {
+        this.lockerNum = lockerNum;
+    }
+
+    public void setMaxLoanDuration(int maxLoanDuration) {
+        this.maxLoanDuration = maxLoanDuration;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
 }

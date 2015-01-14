@@ -1,7 +1,7 @@
 package imag.dac4;
 
-import imag.dac4.model.user.User;
-import imag.dac4.model.user.UserDao;
+import imag.dac4.model.item.Item;
+import imag.dac4.model.item.ItemDao;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,29 +11,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "AdminUserServlet", urlPatterns = {
-        "/admin/user",
-        "/admin/user/approve",
+@WebServlet(name = "AdminItemServlet", urlPatterns = {
+        "/admin/item",
+        "/admin/item/approve",
 })
-public class AdminUserServlet extends HttpServlet {
+public class AdminItemServlet extends HttpServlet {
 
-    @EJB UserDao userDao;
+    @EJB ItemDao itemDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (!this.isAdmin(req)) {
-            req.setAttribute("error", 403);
-            req.setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
-            req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+            resp.sendError(403); // TODO Better Error
             return;
         }
 
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
-            case "user":
-                req.setAttribute("users", this.userDao.getUsers());
-                req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
+            case "item":
+                req.setAttribute("items", this.itemDao.getItems());
+                req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
                 break;
             default:
                 req.setAttribute("error", 400);
@@ -56,7 +54,7 @@ public class AdminUserServlet extends HttpServlet {
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
             case "approve":
-                this.onApproveUserRequest(req, resp);
+                this.onApproveItemRequest(req, resp);
                 break;
             default:
                 req.setAttribute("error", 400);
@@ -66,32 +64,32 @@ public class AdminUserServlet extends HttpServlet {
         }
     }
 
-    private void onApproveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String login = req.getParameter("login");
-        req.removeAttribute("login");
+    private void onApproveItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final String id = req.getParameter("id");
+        req.removeAttribute("id");
 
-        if (login == null) {
+        if (id == null) {
             req.setAttribute("error", 400);
             req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
-            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
+            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
             return;
         }
 
-        final User user = this.userDao.getByLogin(login);
-        if (user == null) {
+        final Item item = this.itemDao.read(Integer.parseInt(id));
+        if (item == null) {
             // User doesn't exist
             req.setAttribute("error", 404);
-            req.setAttribute("error_msg", "Not Found: Invalid login");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
-        } else if (user.isRegistrationComplete()) {
+            req.setAttribute("error_msg", "Not Found: Invalid id");
+            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+        } else if (item.isAccepted()) {
             // User registration is already complete
             req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: User registration already complete");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
+            req.setAttribute("error_msg", "Bad Request: Item already accepted");
+            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
         } else {
-            user.setRegistrationComplete(true);
-            this.userDao.update(user);
-            resp.sendRedirect("/admin/user");
+            item.setAccepted(true);
+            this.itemDao.update(item);
+            resp.sendRedirect("/admin/item");
         }
     }
 
