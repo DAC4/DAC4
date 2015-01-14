@@ -13,7 +13,9 @@ public final class Constants {
     public static final String JSP_AUTH_REGISTER            = "/auth/register.jsp";
     public static final String JSP_AUTH_AWAITING_VALIDATION = "/auth/awaitingValidation.jsp";
 
-    public static final String JSP_ADMIN_HOME = "/admin/home.jsp";
+    public static final String JSP_ADMIN_HOME  = "/admin/home.jsp";
+    public static final String JSP_ADMIN_USERS = "/admin/users.jsp";
+    public static final String JSP_ADMIN_ITEMS = "/admin/items.jsp";
 
     public static final String JSP_USER_HOME = "/user/home.jsp";
 

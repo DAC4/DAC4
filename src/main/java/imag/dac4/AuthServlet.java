@@ -25,50 +25,46 @@ public class AuthServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
-        if (action != null && !action.equalsIgnoreCase("auth")) {
-            switch (action.toLowerCase()) {
-                case "register":
-                    req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
-                    return;
-                case "login":
-                    resp.sendRedirect("/");
-                    return;
-                case "logout":
-                    req.getSession().removeAttribute("user");
-                    req.getSession().removeAttribute("isAdmin");
-                    resp.sendRedirect("/");
-                    return;
-                case "awaiting-validation":
-                    req.getRequestDispatcher(Constants.JSP_AUTH_AWAITING_VALIDATION).forward(req, resp);
-                    return;
-                default:
-                    break;
-            }
+        switch (action.toLowerCase()) {
+            case "register":
+                req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
+                break;
+            case "login":
+                resp.sendRedirect("/");
+                break;
+            case "logout":
+                req.getSession().removeAttribute("user");
+                req.getSession().removeAttribute("isAdmin");
+                resp.sendRedirect("/");
+                break;
+            case "awaiting-validation":
+                req.getRequestDispatcher(Constants.JSP_AUTH_AWAITING_VALIDATION).forward(req, resp);
+                break;
+            default:
+                req.setAttribute("error", 400);
+                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+                break;
         }
-        req.setAttribute("error", 400);
-        req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
-        req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
-        if (action != null && !action.equalsIgnoreCase("auth")) {
-            switch (action.toLowerCase()) {
-                case "login":
-                    this.onConnectionRequest(req, resp);
-                    return;
-                case "register":
-                    this.onRegistrationRequest(req, resp);
-                    return;
-                default:
-                    break;
-            }
+        switch (action.toLowerCase()) {
+            case "login":
+                this.onConnectionRequest(req, resp);
+                break;
+            case "register":
+                this.onRegistrationRequest(req, resp);
+                break;
+            default:
+                req.setAttribute("error", 400);
+                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+                break;
         }
-        req.setAttribute("error", 400);
-        req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
-        req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
     }
 
     private void onConnectionRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
