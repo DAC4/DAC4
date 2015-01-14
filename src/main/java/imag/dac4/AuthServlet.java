@@ -21,7 +21,7 @@ public class AuthServlet extends HttpServlet {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         if (action != null && !action.equalsIgnoreCase("auth")) {
-            switch (action.toLowerCase()) {
+            switch (action.split("\\.")[0].toLowerCase()) {
                 case "register":
                     req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
                     return;
@@ -41,7 +41,7 @@ public class AuthServlet extends HttpServlet {
             }
         }
         req.setAttribute("error", 400);
-        req.setAttribute("error_msg", "Bad Request: " + req.getRequestURL());
+        req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
         req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
     }
 
@@ -50,7 +50,7 @@ public class AuthServlet extends HttpServlet {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         if (action != null && !action.equalsIgnoreCase("auth")) {
-            switch (action.toLowerCase()) {
+            switch (action.split("\\.")[0].toLowerCase()) {
                 case "login":
                     this.onConnectionRequest(req, resp);
                     return;
