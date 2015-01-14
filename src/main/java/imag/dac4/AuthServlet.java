@@ -41,7 +41,7 @@ public class AuthServlet extends HttpServlet {
             }
         }
         req.setAttribute("error", 400);
-        req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+        req.setAttribute("error_msg", "Bad Request: " + req.getRequestURL());
         req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
     }
 
