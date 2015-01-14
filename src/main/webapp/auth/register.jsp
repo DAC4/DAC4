@@ -52,5 +52,7 @@
 		</fieldset>
 		<input type="submit" value="Register"/>
 	</form>
+
+	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
 </body>
 </html>

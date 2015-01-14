@@ -11,6 +11,20 @@
 
 	<hr>
 
+	<%
+		final Integer error = (Integer) request.getAttribute("error");
+		if (error != null) {
+			final String errorMessage = (String) request.getAttribute("error_msg");
+	%>
+	<p style="color:red;font-weight:bold">
+		Error <%= error %>: <%= errorMessage %>
+	</p>
+
+	<hr>
+	<%
+		}
+	%>
+
 	<table>
 		<thead>
 			<tr>
@@ -59,5 +73,6 @@
 		</tbody>
 	</table>
 
+	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
 </body>
 </html>

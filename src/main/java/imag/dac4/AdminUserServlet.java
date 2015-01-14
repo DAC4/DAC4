@@ -71,12 +71,12 @@ public class AdminUserServlet extends HttpServlet {
             // User doesn't exist
             req.setAttribute("error", 404);
             req.setAttribute("error_msg", "Not Found: Invalid login");
-            req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp); // TODO Jsp
+            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
         } else if (user.isRegistrationComplete()) {
             // User registration is already complete
             req.setAttribute("error", 400);
             req.setAttribute("error_msg", "Bad Request: User registration already complete");
-            req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp); // TODO Jsp
+            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
         } else {
             user.setRegistrationComplete(true);
             this.userDao.update(user);
