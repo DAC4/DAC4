@@ -15,7 +15,7 @@
 			<legend>
 				<span>Create an account</span>
 				<%
-					final String error = (String) request.getAttribute("error");
+					final Integer error = (Integer) request.getAttribute("error");
 					final String errorMessage = (String) request.getAttribute("error_msg");
 					if (error != null) {
 				%>
