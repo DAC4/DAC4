@@ -21,7 +21,7 @@ public class AdminUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (this.isAdmin(req)) {
+        if (!this.isAdmin(req)) {
             resp.sendError(403); // TODO Better Error
             return;
         }
@@ -43,7 +43,7 @@ public class AdminUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (this.isAdmin(req)) {
+        if (!this.isAdmin(req)) {
             resp.sendError(403); // TODO Better Error
             return;
         }

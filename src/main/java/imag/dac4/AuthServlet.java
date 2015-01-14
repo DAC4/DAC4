@@ -92,14 +92,7 @@ public class AuthServlet extends HttpServlet {
             // User exists and password is valid
             req.getSession().setAttribute("user", user);
             req.getSession().setAttribute("isAdmin", isAdmin);
-            req.setAttribute("login", user.getLogin());
-            req.setAttribute("name", user.getName());
-            req.setAttribute("email", user.getEmail());
-            if (isAdmin) {
-                req.getRequestDispatcher(Constants.JSP_ADMIN_HOME).forward(req, resp);
-            } else {
-                req.getRequestDispatcher(Constants.JSP_USER_HOME).forward(req, resp);
-            }
+            resp.sendRedirect("/");
         }
     }
 
