@@ -24,12 +24,12 @@ public class AuthServlet extends HttpServlet {
         final String action = req.getParameter("action");
         switch (action.toLowerCase()) {
             case "register":
-                req.getRequestDispatcher("/register.jsp").forward(req, resp);
+                req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
                 break;
             default:
                 req.setAttribute("error", 400);
                 req.setAttribute("error_msg", "Bad Request");
-                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
     }
@@ -46,8 +46,8 @@ public class AuthServlet extends HttpServlet {
                 break;
             default:
                 req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request");
-                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                req.setAttribute("error_msg", "Bad Request: Unknown action '" + action + "'");
+                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
     }
@@ -67,19 +67,23 @@ public class AuthServlet extends HttpServlet {
             // User doesn't exist, password is invalid
             req.setAttribute("error", 401);
             req.setAttribute("error_msg", "Unauthorized: Invalid login/password");
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
         } else if (!user.isRegistrationComplete()) {
             // User registration isn't complete
             req.setAttribute("error", 403);
             req.setAttribute("error_msg", "Forbidden: User registration incomplete");
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
         } else {
             // User exists and password is valid
-            // TODO Session
+            req.getSession().setAttribute("user", user);
+            req.getSession().setAttribute("isAdmin", isAdmin);
+            req.setAttribute("login", user.getLogin());
+            req.setAttribute("name", user.getName());
+            req.setAttribute("email", user.getEmail());
             if (isAdmin) {
-                req.getRequestDispatcher("/homeAdmin.jsp").forward(req, resp);
+                req.getRequestDispatcher(Constants.JSP_ADMIN_HOME).forward(req, resp);
             } else {
-                req.getRequestDispatcher("/home.jsp").forward(req, resp);
+                req.getRequestDispatcher(Constants.JSP_USER_HOME).forward(req, resp);
             }
         }
     }
@@ -94,20 +98,24 @@ public class AuthServlet extends HttpServlet {
         req.removeAttribute("name");
         req.removeAttribute("email");
 
-        final User user = this.userDao.getByLogin(login);
+        User user = this.userDao.getByLogin(login);
 
         if (user != null) {
             // User already exists
             req.setAttribute("error", 409);
             req.setAttribute("error_msg", "Conflict: Login already used");
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
         } else if (!EMAIL_PATTERN.matcher(email).matches()) {
             // Email is invalid
             req.setAttribute("error", 400);
             req.setAttribute("error_msg", "Bad Request: Email is invalid");
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
         } else {
-            // TODO Actually register
+            user = new User(login, password, name, email);
+            this.userDao.create(user);
+            req.setAttribute("login", login);
+            req.setAttribute("name", name);
+            req.getRequestDispatcher(Constants.JSP_AUTH_AWAITING_VALIDATION).forward(req, resp);
         }
     }
 }

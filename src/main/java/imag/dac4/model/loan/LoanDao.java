@@ -12,9 +12,9 @@ public class LoanDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    /* * * * * * * * * *
-     * CRUD Operations *
-     * * * * * * * * * */
+    // ##################### //
+    // ## CRUD operations ## //
+    // ##################### //
 
     public void create(Loan loan) {
         entityManager.persist(loan);
@@ -32,9 +32,9 @@ public class LoanDao {
         entityManager.remove(entityManager.find(Loan.class, id));
     }
 
-    /* * * * * * * * * * *
-     * Other operations  *
-     * * * * * * * * * * */
+    // ###################### //
+    // ## Other operations ## //
+    // ###################### //
 
     public List<Loan> getLoans() {
         TypedQuery<Loan> query = entityManager.createQuery("SELECT l FROM Loan l ORDER BY l.id", Loan.class);

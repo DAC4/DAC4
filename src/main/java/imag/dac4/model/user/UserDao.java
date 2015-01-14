@@ -12,9 +12,9 @@ public class UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    /* * * * * * * * * *
-     * CRUD Operations *
-     * * * * * * * * * */
+    // ##################### //
+    // ## CRUD operations ## //
+    // ##################### //
 
     public void create(User user) {
         entityManager.persist(user);
@@ -32,16 +32,15 @@ public class UserDao {
         entityManager.remove(entityManager.find(User.class, id));
     }
 
-    /* * * * * * * * * * *
-     * Other operations  *
-     * * * * * * * * * * */
+    // ###################### //
+    // ## Other operations ## //
+    // ###################### //
 
     public User getByLogin(final String login) {
         try {
             return entityManager
-                    .createQuery("SELECT u FROM User u WHERE login = :login", User.class)
+                    .createQuery("SELECT u FROM User u WHERE u.login = :login", User.class)
                     .setParameter("login", login)
-                    .setMaxResults(1)
                     .getSingleResult();
         } catch (NoResultException e) {
             return null;

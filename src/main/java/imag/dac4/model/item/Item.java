@@ -41,17 +41,6 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(int ownerId, String name, String imageId, String description, boolean availability, int lockerNum, int maxLoanDuration, boolean accepted) {
-        this.ownerId = ownerId;
-        this.name = name;
-        this.imageId = imageId;
-        this.description = description;
-        this.availability = availability;
-        this.lockerNum = lockerNum;
-        this.maxLoanDuration = maxLoanDuration;
-        this.accepted = accepted;
-    }
-
     public int getId() {
         return id;
     }

@@ -12,9 +12,9 @@ public class ItemDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    /* * * * * * * * * *
-     * CRUD Operations *
-     * * * * * * * * * */
+    // ##################### //
+    // ## CRUD operations ## //
+    // ##################### //
 
     public void create(Item item) {
         entityManager.persist(item);
@@ -32,9 +32,9 @@ public class ItemDao {
         entityManager.remove(entityManager.find(Item.class, id));
     }
 
-    /* * * * * * * * * * *
-     * Other operations  *
-     * * * * * * * * * * */
+    // ###################### //
+    // ## Other operations ## //
+    // ###################### //
 
     public List<Item> getItems() {
         TypedQuery<Item> query = entityManager.createQuery("SELECT i FROM Item i ORDER BY i.id", Item.class);

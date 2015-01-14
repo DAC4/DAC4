@@ -21,7 +21,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("users", userDao.getUsers());
-        request.getRequestDispatcher("/users.jsp").forward(request, response);
+        request.getRequestDispatcher("/debug/users.jsp").forward(request, response);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
 
         try {
-            userDao.create(new User(login, password, name, email, 50, false));
+            userDao.create(new User(login, password, name, email));
         } catch (EJBException e) {
             request.setAttribute("error", "Failed to insert new User");
         }

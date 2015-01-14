@@ -24,6 +24,6 @@ public class DbDumpServlet extends HttpServlet {
         req.setAttribute("users", userDao.getUsers());
         req.setAttribute("items", itemDao.getItems());
         req.setAttribute("loans", loanDao.getLoans());
-        req.getRequestDispatcher("/db.jsp").forward(req, resp);
+        req.getRequestDispatcher("/debug/db.jsp").forward(req, resp);
     }
 }

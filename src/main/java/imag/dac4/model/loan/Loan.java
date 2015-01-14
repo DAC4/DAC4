@@ -33,14 +33,6 @@ public class Loan implements Serializable {
     public Loan() {
     }
 
-    public Loan(int userId, int itemId, boolean returned, Date startDate, Date endDate) {
-        this.userId = userId;
-        this.itemId = itemId;
-        this.returned = returned;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
-
     public int getId() {
         return id;
     }

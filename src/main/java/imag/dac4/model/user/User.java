@@ -37,13 +37,13 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String login, String password, String name, String email, int credits, boolean registrationComplete) {
+    public User(String login, String password, String name, String email) {
         this.login = login;
         this.password = password;
         this.name = name;
         this.email = email;
-        this.credits = credits;
-        this.registrationComplete = registrationComplete;
+        this.credits = 0;
+        this.registrationComplete = false;
     }
 
     public int getId() {
@@ -72,6 +72,26 @@ public class User implements Serializable {
 
     public boolean isRegistrationComplete() {
         return registrationComplete;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+
+    public void setRegistrationComplete(boolean registrationComplete) {
+        this.registrationComplete = registrationComplete;
     }
 
     @Override
