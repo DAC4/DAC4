@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 @WebServlet(name = "AuthServlet", urlPatterns = "/auth")
 public class AuthServlet extends HttpServlet {
 
-    private static final Pattern EMAIL_PATTERN = Pattern.compile("\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b");
+    private static final String EMAIL_PATTERN = "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}\\b";
 
     @EJB UserDao userDao;
 
@@ -123,7 +122,7 @@ public class AuthServlet extends HttpServlet {
             req.setAttribute("error", 400);
             req.setAttribute("error_msg", "Bad Request: Passwords don't match");
             req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
-        } else if (!EMAIL_PATTERN.matcher(email).matches()) {
+        } else if (!email.matches(EMAIL_PATTERN)) {
             // Email is invalid
             req.setAttribute("error", 400);
             req.setAttribute("error_msg", "Bad Request: Email is invalid");

@@ -51,7 +51,7 @@
 				</li>
 			</ul>
 		</fieldset>
-		<input type="submit" value="Login"/>
+		<input type="submit" value="Register"/>
 	</form>
 </body>
 </html>
