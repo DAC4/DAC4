@@ -102,10 +102,12 @@ public class AuthServlet extends HttpServlet {
     private void onRegistrationRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String login = req.getParameter("login");
         final String password = req.getParameter("password");
+        final String passwordConfirm = req.getParameter("passwordConfirm");
         final String name = req.getParameter("name");
         final String email = req.getParameter("email");
         req.removeAttribute("login");
         req.removeAttribute("password");
+        req.removeAttribute("passwordConfirm");
         req.removeAttribute("name");
         req.removeAttribute("email");
 
@@ -115,6 +117,11 @@ public class AuthServlet extends HttpServlet {
             // User already exists
             req.setAttribute("error", 409);
             req.setAttribute("error_msg", "Conflict: Login already used");
+            req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
+        } else if (!password.equals(passwordConfirm)) {
+            // Passwords don't match
+            req.setAttribute("error", 400);
+            req.setAttribute("error_msg", "Bad Request: Passwords don't match");
             req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
         } else if (!EMAIL_PATTERN.matcher(email).matches()) {
             // Email is invalid
