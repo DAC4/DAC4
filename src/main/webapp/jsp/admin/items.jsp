@@ -66,7 +66,7 @@
 						<%= item.getMaxLoanDuration() %>
 					</td>
 					<td>
-						<% if (item.isAccepted()) { %>
+						<% if (item.isApproved()) { %>
 						yes
 						<% } else { %>
 						<form action="${pageContext.request.contextPath}/admin/item/approve" method="POST">

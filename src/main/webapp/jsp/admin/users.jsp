@@ -54,7 +54,7 @@
 						<%= user.getCredits() %>
 					</td>
 					<td>
-						<% if (user.isRegistrationComplete()) { %>
+						<% if (user.isApproved()) { %>
 						yes
 						<% } else { %>
 						<form action="${pageContext.request.contextPath}/admin/user/approve" method="POST">

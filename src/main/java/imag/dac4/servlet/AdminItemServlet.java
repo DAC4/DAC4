@@ -83,13 +83,13 @@ public class AdminItemServlet extends HttpServlet {
             req.setAttribute("error", 404);
             req.setAttribute("error_msg", "Not Found: Invalid id");
             req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
-        } else if (item.isAccepted()) {
+        } else if (item.isApproved()) {
             // User registration is already complete
             req.setAttribute("error", 400);
             req.setAttribute("error_msg", "Bad Request: Item already accepted");
             req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
         } else {
-            item.setAccepted(true);
+            item.setApproved(true);
             this.itemDao.update(item);
             resp.sendRedirect("/admin/item");
         }

@@ -64,7 +64,7 @@
 						<%= user.getCredits() %>
 					</td>
 					<td>
-						<%= user.isRegistrationComplete() %>
+						<%= user.isApproved() %>
 					</td>
 				</tr>
 				<%
@@ -124,7 +124,7 @@
 						<%= item.getMaxLoanDuration() %>
 					</td>
 					<td>
-						<%= item.isAccepted() %>
+						<%= item.isApproved() %>
 					</td>
 				</tr>
 				<%

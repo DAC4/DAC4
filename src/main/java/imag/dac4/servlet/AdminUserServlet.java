@@ -83,13 +83,13 @@ public class AdminUserServlet extends HttpServlet {
             req.setAttribute("error", 404);
             req.setAttribute("error_msg", "Not Found: Invalid login");
             req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
-        } else if (user.isRegistrationComplete()) {
+        } else if (user.isApproved()) {
             // User registration is already complete
             req.setAttribute("error", 400);
             req.setAttribute("error_msg", "Bad Request: User registration already complete");
             req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
         } else {
-            user.setRegistrationComplete(true);
+            user.setApproved(true);
             this.userDao.update(user);
             resp.sendRedirect("/admin/user");
         }

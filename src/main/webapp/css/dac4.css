@@ -2,6 +2,10 @@
  * DAC4 CSS
  */
 
+/* ############ */
+/* ## Header ## */
+/* ############ */
+
 /* Fix header to top */
 #header {
     position: fixed;
@@ -24,4 +28,21 @@
 /* Reduce padding on form menu item */
 #header #form-item {
     padding: .58571em .95em;
+}
+
+/* ############ */
+/* ## Footer ## */
+/* ############ */
+
+/* Fix footer to bottom */
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+/* Fix menu buttons width */
+#footer .ui.button {
+    width: 100px;
 }

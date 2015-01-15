@@ -31,8 +31,8 @@ public class User implements Serializable {
     @Column(name = "credits")
     private int credits;
 
-    @Column(name = "registrationComplete")
-    private boolean registrationComplete;
+    @Column(name = "approved")
+    private boolean approved;
 
     public User() {
     }
@@ -43,7 +43,7 @@ public class User implements Serializable {
         this.name = name;
         this.email = email;
         this.credits = 0;
-        this.registrationComplete = false;
+        this.approved = false;
     }
 
     public int getId() {
@@ -70,8 +70,8 @@ public class User implements Serializable {
         return credits;
     }
 
-    public boolean isRegistrationComplete() {
-        return registrationComplete;
+    public boolean isApproved() {
+        return approved;
     }
 
     public void setPassword(String password) {
@@ -90,8 +90,8 @@ public class User implements Serializable {
         this.credits = credits;
     }
 
-    public void setRegistrationComplete(boolean registrationComplete) {
-        this.registrationComplete = registrationComplete;
+    public void setApproved(boolean approved) {
+        this.approved = approved;
     }
 
     @Override
@@ -103,7 +103,7 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", credits=" + credits +
-                ", registrationComplete=" + registrationComplete +
+                ", approved=" + approved +
                 '}';
     }
 }

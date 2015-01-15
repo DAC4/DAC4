@@ -83,7 +83,7 @@ public class AuthServlet extends HttpServlet {
             req.setAttribute("error", 401);
             req.setAttribute("error_msg", "Unauthorized: Invalid login/password");
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
-        } else if (!user.isRegistrationComplete()) {
+        } else if (!user.isApproved()) {
             // User registration isn't complete
             req.setAttribute("error", 403);
             req.setAttribute("error_msg", "Forbidden: User registration incomplete");

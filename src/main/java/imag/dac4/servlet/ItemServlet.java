@@ -40,7 +40,7 @@ public class ItemServlet extends HttpServlet {
                     return;
                 }
                 final Item item = this.itemDao.read(id);
-                if (item == null || !item.isAccepted() && !isAdmin) {
+                if (item == null || !item.isApproved() && !isAdmin) {
                     req.setAttribute("error", 400);
                     req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
                 } else {
@@ -98,7 +98,7 @@ public class ItemServlet extends HttpServlet {
         }
 
         final Item item = this.itemDao.read(id);
-        if (item == null || !item.isAccepted()) {
+        if (item == null || !item.isApproved()) {
             // Item doesn't exist
             req.setAttribute("error", 404);
             req.setAttribute("error_msg", "Not Found: Invalid id");

@@ -40,23 +40,19 @@
 			<li>
 				Max Loan Duration: <%= item.getMaxLoanDuration() %>
 			</li>
-			<% if (!item.isAccepted()) { %>
+			<% if (!item.isApproved()) { %>
 			<li style="color:red">
 				Approved: no
 			</li>
 			<% } %>
 		</ul>
 
-		<% if (item.isAccepted() && item.isAvailable()) { %>
+		<% if (item.isApproved() && item.isAvailable()) { %>
 		<form action="${pageContext.request.contextPath}/item/loan" method="POST">
 			<input type="hidden" name="id" value="<%= item.getId() %>"/>
 			<input type="submit" value="Loan"/>
 		</form>
 		<% } %>
-
-		<%
-			}
-		%>
 
 		<hr>
 
