@@ -12,6 +12,11 @@
     border-collapse: collapse; /* And not separate... */
 }
 
+/* Forms are weird */
+.ui.form {
+    font-size: 1rem;
+}
+
 /* ############ */
 /* ## Header ## */
 /* ############ */

@@ -16,11 +16,9 @@
 <body>
 	<c:import url="../partial/header.jsp"/>
 
-	<h1>Registration Complete</h1>
+	<h1 class="ui block header">Registration Complete</h1>
 
-	<hr>
-
-	<p>
+	<p class="ui section">
 		The administrator needs to approve your account before you can login.
 	</p>
 

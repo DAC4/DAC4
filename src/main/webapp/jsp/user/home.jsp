@@ -19,9 +19,7 @@
 <body>
 	<c:import url="../partial/header.jsp"/>
 
-	<h1 class="ui header">User Home</h1>
-
-	<hr>
+	<h1 class="ui block header">User Home</h1>
 
 	<ul>
 		<li>

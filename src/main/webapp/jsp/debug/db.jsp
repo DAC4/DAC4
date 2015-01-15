@@ -21,7 +21,7 @@
 <body>
 	<c:import url="../partial/header.jsp"/>
 
-	<h1 class="ui header">Users</h1>
+	<h1 class="ui block header">Users</h1>
 	<table class="ui table">
 		<thead>
 			<tr>
@@ -73,7 +73,7 @@
 
 	<hr>
 
-	<h1 class="ui header">Items</h1>
+	<h1 class="ui block header">Items</h1>
 	<table class="ui table">
 		<thead>
 			<tr>
@@ -133,7 +133,7 @@
 
 	<hr>
 
-	<h1 class="ui header">Loans</h1>
+	<h1 class="ui block header">Loans</h1>
 	<table class="ui table">
 		<thead>
 			<tr>

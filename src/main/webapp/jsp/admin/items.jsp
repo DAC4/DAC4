@@ -18,9 +18,7 @@
 <body>
 	<c:import url="../partial/header.jsp"/>
 
-	<h1 class="ui header">Items List</h1>
-
-	<hr>
+	<h1 class="ui block header">Items List</h1>
 
 	<table class="ui table">
 		<thead>

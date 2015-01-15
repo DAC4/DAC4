@@ -19,7 +19,7 @@
 <body>
 	<c:import url="../partial/header.jsp"/>
 
-	<h1 class="ui header">Admin Home</h1>
+	<h1 class="ui block header">Admin Home</h1>
 
 	<hr>
 
