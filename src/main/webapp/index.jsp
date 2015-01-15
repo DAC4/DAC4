@@ -35,11 +35,10 @@
                     <label for="pass">Mot de passe</label>
                     <input id="password" type="password" class="form-control" placeholder="password" name="password" required/>
                 </div>
-                <button type="submit" class="btn btn-default" value="Login"/>
+                <button type="submit" class="btn btn-default"> Login </button>
             </form>
             <br />
             <form action=href="${pageContext.request.contextPath}/auth/register">
-                <input type="hidden" name="action" value="inscription" />
                 <button type="submit" class="btn btn-default">Register</button>
             </form>
         </div>
