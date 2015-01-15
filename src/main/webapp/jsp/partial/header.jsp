@@ -26,10 +26,12 @@
 		</div>
 		<% } else if (request.getAttribute("user") != null) {%>
 		<% final User user = (User) request.getAttribute("user"); %>
-		<div class="item">
+		<div class="item bar-text-small">
 			<span>
 				Logged in as <%= user.getName() %>
 			</span>
+		</div>
+		<div class="item">
 			<a href="${pageContext.request.contextPath}/auth/logout">
 				<button type="button" class="ui button">Logout</button>
 			</a>
