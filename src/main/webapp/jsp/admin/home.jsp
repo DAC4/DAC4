@@ -21,8 +21,6 @@
 
 	<h1 class="ui block header">Admin Home</h1>
 
-	<hr>
-
 	<ul>
 		<li>
 			Login: <%= user.getLogin() %>
