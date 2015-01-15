@@ -18,7 +18,7 @@
 
 /* Fix header to top */
 #header {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -53,7 +53,7 @@
 
 /* Fix footer to bottom */
 #footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
