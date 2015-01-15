@@ -3,7 +3,7 @@
 
 <div id="header" class="ui menu">
 	<div class="item">
-		<h1>DAC4</h1>
+		<h1 class="ui header">DAC4</h1>
 	</div>
 	<div class="right menu">
 		<% if (request.getAttribute("showLoginForm") != null) { %>
