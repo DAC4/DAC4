@@ -25,6 +25,7 @@
 /* Fix menu buttons width */
 #header .ui.button {
     width: 100px;
+    height: 38px;
 }
 
 /* Reduce padding on form menu item */
