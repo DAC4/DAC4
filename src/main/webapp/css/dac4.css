@@ -12,6 +12,6 @@
     display: inline-block;
 }
 
-#header #register-button {
-    padding: inherit;
+#header .ui.button {
+    width: 100px;
 }

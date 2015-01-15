@@ -17,7 +17,9 @@
 				</div>
 				<input class="ui submit button" type="submit" value="Login"/>
 			</form>
-			<a id="register-button" class="ui primary button" href="${pageContext.request.contextPath}/auth/register">Register</a>
+			<a href="${pageContext.request.contextPath}/auth/register">
+				<button type="button" class="ui primary button">Register</button>
+			</a>
 		</div>
 		<% } else if (request.getAttribute("user") != null) {%>
 		<% final User user = (User) request.getAttribute("user"); %>
