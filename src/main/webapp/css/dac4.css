@@ -12,7 +12,28 @@
     top: 0;
     left: 0;
     width: 100%;
-    margin-bottom: 60px;
+    margin: 0 0 65px;
+    height: 60px;
+}
+
+/* Center text in item */
+#header .site-title,
+#header .page-title {
+    padding: 0;
+}
+
+#header .site-title span,
+#header .page-title span {
+    line-height: 60px;
+    height: 60px;
+}
+
+#header .site-title span {
+    font-size: 1.5rem;
+}
+
+#header .page-title span {
+    font-size: 1.2rem;
 }
 
 /* Display menu Login form inline with Register button */
@@ -40,6 +61,8 @@
     bottom: 0;
     left: 0;
     width: 100%;
+    margin: 0;
+    height: 60px;
 }
 
 /* Fix menu buttons width */

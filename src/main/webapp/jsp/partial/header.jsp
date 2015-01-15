@@ -2,13 +2,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <div id="header" class="ui menu">
-	<div class="item">
-		<h1 class="ui header">DAC4</h1>
+	<div class="item site-title">
+		<span>DAC4</span>
 	</div>
-	<div class="item">
-		<h3 class="ui header">
-			<%= request.getAttribute("title") %>
-		</h3>
+	<div class="item page-title">
+		<span><%= request.getAttribute("title") %></span>
 	</div>
 	<div class="right menu">
 		<% if (request.getAttribute("showLoginForm") != null) { %>
