@@ -16,15 +16,14 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final User user = (User) req.getSession().getAttribute("user");
+        Tools.setHeaderAttributes(req);
         if (user != null) {
-            req.setAttribute("user", user);
             if ((Boolean) req.getSession().getAttribute("isAdmin")) {
                 req.getRequestDispatcher(Constants.JSP_ADMIN_HOME).forward(req, resp);
             } else {
                 req.getRequestDispatcher(Constants.JSP_USER_HOME).forward(req, resp);
             }
         } else {
-            req.setAttribute("showLoginForm", true);
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
         }
     }
