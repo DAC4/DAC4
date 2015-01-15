@@ -23,6 +23,8 @@ public final class Constants {
     public static final String JSP_ITEMS = "/jsp/item/items.jsp";
     public static final String JSP_ITEM  = "/jsp/item/item.jsp";
 
+    public static final String JSP_DEBUG = "/jsp/debug/db.jsp";
+
     // ########## //
     // ## Misc ## //
     // ########## //
