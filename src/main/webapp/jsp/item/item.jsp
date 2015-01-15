@@ -1,66 +1,61 @@
 <%@ page import="imag.dac4.model.item.Item" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Item Page</title>
+	<c:import url="../partial/head.jsp"/>
+
+	<% final Item item = (Item) request.getAttribute("item"); %>
 </head>
 <body>
-	<h1>Item Page</h1>
+	<c:import url="../partial/header.jsp"/>
 
-	<hr>
+	<div id="content">
+		<h1 class="ui header">Item Page</h1>
 
-	<%
-		final Integer error = (Integer) request.getAttribute("error");
-		if (error != null) {
-			final String errorMessage = (String) request.getAttribute("error_msg");
-	%>
+		<hr>
 
-	<p style="color:red;font-weight:bold">
-		Error <%= error %>: <%= errorMessage %>
-	</p>
+		<ul>
+			<li>
+				Image: <%= item.getImageId() %>
+			</li>
+			<li>
+				Name: <%= item.getName() %>
+			</li>
+			<li>
+				Description: <%= item.getDescription() %>
+			</li>
+			<li>
+				Locker Number: <%= item.getLockerNum() %>
+			</li>
+			<li>
+				Max Loan Duration: <%= item.getMaxLoanDuration() %>
+			</li>
+			<% if (!item.isAccepted()) { %>
+			<li style="color:red">
+				Approved: no
+			</li>
+			<% } %>
+		</ul>
 
-	<%
-	} else {
-		final Item item = (Item) request.getAttribute("item");
-	%>
-
-	<ul>
-		<li>
-			Image: <%= item.getImageId() %>
-		</li>
-		<li>
-			Name: <%= item.getName() %>
-		</li>
-		<li>
-			Description: <%= item.getDescription() %>
-		</li>
-		<li>
-			Locker Number: <%= item.getLockerNum() %>
-		</li>
-		<li>
-			Max Loan Duration: <%= item.getMaxLoanDuration() %>
-		</li>
-		<% if (!item.isAccepted()) { %>
-		<li style="color:red">
-			Approved: no
-		</li>
+		<% if (item.isAccepted() && item.isAvailable()) { %>
+		<form action="${pageContext.request.contextPath}/item/loan" method="POST">
+			<input type="hidden" name="id" value="<%= item.getId() %>"/>
+			<input type="submit" value="Loan"/>
+		</form>
 		<% } %>
-	</ul>
 
-	<% if (item.isAccepted() && item.isAvailable()) { %>
-	<form action="${pageContext.request.contextPath}/item/loan" method="POST">
-		<input type="hidden" name="id" value="<%= item.getId() %>"/>
-		<input type="submit" value="Loan"/>
-	</form>
-	<% } %>
+		<%
+			}
+		%>
 
-	<%
-		}
-	%>
+		<hr>
 
-	<hr>
+		<h2 class="ui header"><a href="${pageContext.request.contextPath}/">Index</a></h2>
+	</div>
 
-	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
+	<c:import url="../partial/footer.jsp"/>
 </body>
 </html>

@@ -34,3 +34,15 @@
 		<% } %>
 	</div>
 </div>
+
+<% if (request.getAttribute("error") != null) {
+	final Integer error = (Integer) request.getAttribute("error");
+	final String error_msg = (String) request.getAttribute("error_msg");
+%>
+<div id="error">
+	<h2 class="ui red header">
+		Error <%= error %>: <%= error_msg %>
+	</h2>
+	<hr>
+</div>
+<% } %>
