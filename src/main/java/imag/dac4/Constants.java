@@ -19,6 +19,9 @@ public final class Constants {
 
     public static final String JSP_USER_HOME = "/user/home.jsp";
 
+    public static final String JSP_ITEMS = "/item/items.jsp";
+    public static final String JSP_ITEM  = "/item/item.jsp";
+
     // ########## //
     // ## Misc ## //
     // ########## //
