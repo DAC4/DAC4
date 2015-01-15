@@ -1,5 +1,6 @@
-package imag.dac4;
+package imag.dac4.servlet;
 
+import imag.dac4.Constants;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
 
