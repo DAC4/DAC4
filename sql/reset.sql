@@ -36,7 +36,7 @@ CREATE TABLE `users`
 CREATE TABLE `items` (
   `id`              INT(11)       NOT NULL AUTO_INCREMENT,
   `name`            VARCHAR(50)   NOT NULL,
-  `imageId`         VARCHAR(1000) NOT NULL,
+  `imageId`         VARCHAR(1000)          DEFAULT NULL,
   `description`     VARCHAR(1000) NOT NULL,
   `ownerId`         INT(11)       NOT NULL,
   `availability`    BOOLEAN       NOT NULL,

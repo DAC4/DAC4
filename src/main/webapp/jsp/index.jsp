@@ -1,46 +1,27 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Index</title>
-    </head>
-    <body>
-        <div class="container" role="main">
-            <div class="page-header">
-                <h1>Bienvenue sur l'application TrocBox</h1>
-            </div>
+<head>
+	<title>Index</title>
+	<c:import url="partial/head.jsp"/>
+</head>
+<body>
+	<c:import url="partial/header.jsp"/>
+	<c:import url="partial/nav.jsp"/>
+	<div id="content">
 
-            <hr>
+		<form class="ui form" method="POST" action="${pageContext.request.contextPath}/auth/login">
+			<label for="login">Login</label>
+			<input id="login" type="text" placeholder="Login" name="login" required/>
+			<label for="password">Mot de passe</label>
+			<input id="password" type="password" placeholder="password" name="password" required/>
+			<input type="submit">Login</input>
+		</form>
+		<br/>
 
-            <%
-                final Integer error = (Integer) request.getAttribute("error");
-                if (error != null) {
-                    final String errorMessage = (String) request.getAttribute("error_msg");
-            %>
-            <p style="color:red;font-weight:bold">
-                Error <%= error%>: <%= errorMessage%>
-            </p>
-
-            <hr>
-            <%
-                }
-            %>
-            <form role="form" action="${pageContext.request.contextPath}/auth/login">
-                <input type="hidden" name="action" value="effectuerConnexion" />
-                <div class="form-group">
-                    <label for="login">Identifiant</label>
-                    <input id="login" type="text" class="form-control" placeholder="Login" name="login" required/>
-                </div>
-                <div class="form-group">
-                    <label for="pass">Mot de passe</label>
-                    <input id="password" type="password" class="form-control" placeholder="password" name="password" required/>
-                </div>
-                <button type="submit" class="btn btn-default"> Login </button>
-            </form>
-            <br />
-            <form action=href="${pageContext.request.contextPath}/auth/register">
-                <button type="submit" class="btn btn-default">Register</button>
-            </form>
-        </div>
-    </body>
+		<a class="ui primary button" href="${pageContext.request.contextPath}/auth/register">Register</a>
+	</div>
+	<c:import url="partial/footer.jsp"/>
+</body>
 </html>
