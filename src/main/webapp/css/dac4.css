@@ -13,7 +13,8 @@
     left: 0;
     width: 100%;
     margin: 0;
-    height: 60px;
+    height: 54px;
+    z-index: 1337;
 }
 
 /* Display menu Login form inline with Register button */
@@ -32,7 +33,7 @@
 }
 
 #content {
-    margin-top: 65px;
+    margin-top: 75px;
 }
 
 /* ############ */
@@ -46,7 +47,8 @@
     left: 0;
     width: 100%;
     margin: 0;
-    height: 60px;
+    height: 54px;
+    z-index: 1337;
 }
 
 /* Fix menu buttons width */
@@ -69,8 +71,8 @@
 .ui.menu .item.bar-text-big span,
 .ui.menu .item.bar-text-medium span,
 .ui.menu .item.bar-text-small span {
-    line-height: 60px;
-    height: 60px;
+    line-height: 54px;
+    height: 54px;
     font-weight: bold;
 }
 
