@@ -55,29 +55,29 @@
 /* ##################### */
 
 /* Center text in item */
-.bar-text-big,
-.bar-text-medium,
-.bar-text-small {
+.ui.menu .item.bar-text-big,
+.ui.menu .item.bar-text-medium,
+.ui.menu .item.bar-text-small {
     padding-top: 0;
     padding-bottom: 0;
 }
 
-.bar-text-big span,
-.bar-text-medium span,
-.bar-text-small span {
+.ui.menu .item.bar-text-big span,
+.ui.menu .item.bar-text-medium span,
+.ui.menu .item.bar-text-small span {
     line-height: 60px;
     height: 60px;
     font-weight: bold;
 }
 
-.bar-text-big span {
+.ui.menu .item.bar-text-big span {
     font-size: 1.5rem;
 }
 
-.bar-text-medium span {
+.ui.menu .item.bar-text-medium span {
     font-size: 1.2rem;
 }
 
-.bar-text-small span {
+.ui.menu .item.bar-text-small span {
     font-size: 1.0rem;
 }
