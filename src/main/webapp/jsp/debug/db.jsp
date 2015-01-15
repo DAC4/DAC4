@@ -4,11 +4,16 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<!DOCTYPE html>
+<%
+	request.setAttribute("title", "Debug - Database dump");
+%>
 
+<!DOCTYPE html>
 <html>
 <head>
-	<title><%= request.getAttribute("title") %></title>
+	<title>
+		<%= request.getAttribute("title") %>
+	</title>
 	<style>
 		#content, table {
 			margin: 25px auto;
