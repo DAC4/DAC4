@@ -12,11 +12,20 @@
 	<div id="content">
 
 		<form class="ui form" method="POST" action="${pageContext.request.contextPath}/auth/login">
-			<label for="login">Login</label>
-			<input id="login" type="text" placeholder="Login" name="login" required/>
-			<label for="password">Mot de passe</label>
-			<input id="password" type="password" placeholder="password" name="password" required/>
-			<input type="submit">Login</input>
+			<fieldset>
+				<legend>Login</legend>
+				<div class="two fields">
+					<div class="field">
+						<label for="login">Login</label>
+						<input id="login" type="text" placeholder="Login" name="login" required/>
+					</div>
+					<div class="field">
+						<label for="password">Mot de passe</label>
+						<input id="password" type="password" placeholder="password" name="password" required/>
+					</div>
+				</div>
+			</fieldset>
+			<input class="ui submit primary button" type="submit" value="Login"/>
 		</form>
 		<br/>
 
