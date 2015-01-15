@@ -1,58 +1,44 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Registration</title>
+	<c:import url="../partial/head.jsp"/>
 </head>
 <body>
-	<h1>Registration</h1>
+	<c:import url="../partial/header.jsp"/>
 
-	<hr>
+	<div id="content">
+		<h1 class="ui header">Registration</h1>
 
-	<form action="${pageContext.request.contextPath}/auth/register" method="POST">
-		<fieldset>
-			<legend>
-				<span>Create an account</span>
-				<%
-					final Integer error = (Integer) request.getAttribute("error");
-					final String errorMessage = (String) request.getAttribute("error_msg");
-					if (error != null) {
-				%>
-				<span style="color:red">Error <%= error %>: <%= errorMessage %></span>
-				<%
-					}
-				%>
-			</legend>
-			<ul style="list-style-type:none">
-				<li>
-					<label for="login">Login:</label>
-					<input id="login" type="text" placeholder="Login" name="login" required/>
-				</li>
+		<hr>
 
-				<li>
-					<label for="password">Password:</label>
-					<input id="password" type="password" placeholder="password" name="password" required/>
-				</li>
+		<form class="ui form" method="POST" action="${pageContext.request.contextPath}/auth/register">
+			<div class="field">
+				<label for="login">Login:</label>
+				<input id="login" type="text" placeholder="Login" name="login" required/>
+			</div>
+			<div class="field">
+				<label for="password">Password:</label>
+				<input id="password" type="password" placeholder="password" name="password" required/>
+			</div>
+			<div class="field">
+				<label for="passwordConfirm">Confirm Password:</label>
+				<input id="passwordConfirm" type="password" placeholder="password" name="passwordConfirm" required/>
+			</div>
+			<div class="field">
+				<label for="name">Name:</label>
+				<input id="name" type="text" placeholder="Chuck Norris" name="name" required/>
+			</div>
+			<div class="field">
+				<label for="email">Password:</label>
+				<input id="email" type="email" placeholder="chuck@norris.com" name="email" required/>
+			</div>
+			<input type="submit" value="Register"/>
+		</form>
+	</div>
 
-				<li>
-					<label for="passwordConfirm">Confirm Password:</label>
-					<input id="passwordConfirm" type="password" placeholder="password" name="passwordConfirm" required/>
-				</li>
-
-				<li>
-					<label for="name">Name:</label>
-					<input id="name" type="text" placeholder="Chuck Norris" name="name" required/>
-				</li>
-
-				<li>
-					<label for="email">Password:</label>
-					<input id="email" type="email" placeholder="chuck@norris.com" name="email" required/>
-				</li>
-			</ul>
-		</fieldset>
-		<input type="submit" value="Register"/>
-	</form>
-
-	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
+	<c:import url="../partial/footer.jsp"/>
 </body>
 </html>

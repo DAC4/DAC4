@@ -13,7 +13,7 @@
 	<c:import url="../partial/header.jsp"/>
 
 	<div id="content">
-		<h1>Admin Home</h1>
+		<h1 class="ui header">Admin Home</h1>
 
 		<hr>
 
@@ -31,13 +31,9 @@
 
 		<hr>
 
-		<h2><a href="${pageContext.request.contextPath}/admin/user">Users</a></h2>
+		<h2 class="ui header"><a href="${pageContext.request.contextPath}/admin/user">Users</a></h2>
 
-		<h2><a href="${pageContext.request.contextPath}/admin/item">Items</a></h2>
-
-		<hr>
-
-		<h2><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
+		<h2 class="ui header"><a href="${pageContext.request.contextPath}/admin/item">Items</a></h2>
 	</div>
 
 	<c:import url="../partial/footer.jsp"/>

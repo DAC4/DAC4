@@ -27,6 +27,9 @@
 			<p>
 				Logged in as <%= user.getName() %>
 			</p>
+			<a href="${pageContext.request.contextPath}/auth/logout">
+				<button type="button" class="ui button">Logout</button>
+			</a>
 		</div>
 		<% } %>
 	</div>
