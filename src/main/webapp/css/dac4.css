@@ -2,6 +2,16 @@
  * DAC4 CSS
  */
 
+/* ############################ */
+/* ## Fix Semantic UI Errors ## */
+/* ############################ */
+
+/* Tables are weird */
+.ui.table {
+    font-size: 1rem; /* And not 1em... */
+    border-collapse: collapse; /* And not separate... */
+}
+
 /* ############ */
 /* ## Header ## */
 /* ############ */
