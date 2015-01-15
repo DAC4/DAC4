@@ -18,7 +18,7 @@
 
 	<div class="section">
 		<form class="ui form" method="POST" action="${pageContext.request.contextPath}/auth/register">
-			<h4 class="ui dividing header">Registration</h4>
+			<h1 class="ui dividing header">Registration</h1>
 
 			<div class="field">
 				<label for="login">Login:</label>
