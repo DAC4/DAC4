@@ -68,7 +68,6 @@ public class AdminItemServlet extends HttpServlet {
 
     private void onApproveItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String id = req.getParameter("id");
-        req.removeAttribute("id");
 
         if (id == null) {
             req.setAttribute("error", 400);

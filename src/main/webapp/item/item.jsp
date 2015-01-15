@@ -48,6 +48,13 @@
 		<% } %>
 	</ul>
 
+	<% if (item.isAccepted() && item.isAvailable()) { %>
+	<form action="${pageContext.request.contextPath}/item/loan" method="POST">
+		<input type="hidden" name="id" value="<%= item.getId() %>"/>
+		<input type="submit" value="Loan"/>
+	</form>
+	<% } %>
+
 	<%
 		}
 	%>

@@ -29,7 +29,16 @@ public class ItemServlet extends HttpServlet {
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
             case "item":
-                final Item item = this.itemDao.read(Integer.parseInt(req.getParameter("id")));
+                final int id;
+                try {
+                    id = Integer.parseInt(req.getParameter("id"));
+                } catch (final NumberFormatException e) {
+                    req.setAttribute("error", 400);
+                    req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+                    req.getRequestDispatcher(Constants.JSP_ITEM).forward(req, resp);
+                    return;
+                }
+                final Item item = this.itemDao.read(id);
                 if (item == null || !item.isAccepted() && !isAdmin) {
                     req.setAttribute("error", 400);
                     req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
@@ -53,7 +62,6 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
@@ -69,33 +77,40 @@ public class ItemServlet extends HttpServlet {
     }
 
     private void onLoanItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        /* TODO
-        final String id = req.getParameter("id");
-        req.removeAttribute("id");
+        final String idString = req.getParameter("id");
 
-        if (id == null) {
+        if (idString == null) {
             req.setAttribute("error", 400);
             req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
             return;
         }
 
-        final Item item = this.itemDao.read(Integer.parseInt(id));
-        if (item == null) {
-            // User doesn't exist
+        final int id;
+        try {
+            id = Integer.parseInt(idString);
+        } catch (final NumberFormatException e) {
+            req.setAttribute("error", 400);
+            req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+            req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
+            return;
+        }
+
+        final Item item = this.itemDao.read(id);
+        if (item == null || !item.isAccepted()) {
+            // Item doesn't exist
             req.setAttribute("error", 404);
             req.setAttribute("error_msg", "Not Found: Invalid id");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
-        } else if (item.isAccepted()) {
-            // User registration is already complete
+            req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
+        } else if (!item.isAvailable()) {
+            // Item not available
             req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: Item already accepted");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+            req.setAttribute("error_msg", "Bad Request: Item already loaned");
+            req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
         } else {
-            item.setAccepted(true);
-            this.itemDao.update(item);
-            resp.sendRedirect("/admin/item");
+            // TODO Check credits
+            // TODO Register item loan
+            // TODO Redirect to confirmation page with max loan end date
         }
-        */
     }
 }

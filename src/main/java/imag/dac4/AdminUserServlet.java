@@ -68,7 +68,6 @@ public class AdminUserServlet extends HttpServlet {
 
     private void onApproveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String login = req.getParameter("login");
-        req.removeAttribute("login");
 
         if (login == null) {
             req.setAttribute("error", 400);

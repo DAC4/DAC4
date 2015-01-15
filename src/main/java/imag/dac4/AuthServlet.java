@@ -70,7 +70,6 @@ public class AuthServlet extends HttpServlet {
     private void onConnectionRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String login = req.getParameter("login");
         final String password = req.getParameter("password");
-        req.removeAttribute("login");
         req.removeAttribute("password");
 
         final User user = this.userDao.getByLogin(login);
@@ -102,11 +101,8 @@ public class AuthServlet extends HttpServlet {
         final String passwordConfirm = req.getParameter("passwordConfirm");
         final String name = req.getParameter("name");
         final String email = req.getParameter("email");
-        req.removeAttribute("login");
         req.removeAttribute("password");
         req.removeAttribute("passwordConfirm");
-        req.removeAttribute("name");
-        req.removeAttribute("email");
 
         User user = this.userDao.getByLogin(login);
 
