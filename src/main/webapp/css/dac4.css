@@ -16,26 +16,6 @@
     height: 60px;
 }
 
-/* Center text in item */
-#header .site-title,
-#header .page-title {
-    padding: 0;
-}
-
-#header .site-title span,
-#header .page-title span {
-    line-height: 60px;
-    height: 60px;
-}
-
-#header .site-title span {
-    font-size: 1.5rem;
-}
-
-#header .page-title span {
-    font-size: 1.2rem;
-}
-
 /* Display menu Login form inline with Register button */
 #header form {
     display: inline-block;
@@ -68,4 +48,35 @@
 /* Fix menu buttons width */
 #footer .ui.button {
     width: 100px;
+}
+
+/* ##################### */
+/* ## Header & Footer ## */
+/* ##################### */
+
+/* Center text in item */
+.bar-text-big,
+.bar-text-medium,
+.bar-text-small {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.bar-text-big span,
+.bar-text-medium span,
+.bar-text-small span {
+    line-height: 60px;
+    height: 60px;
+}
+
+.bar-text-big span {
+    font-size: 1.5rem;
+}
+
+.bar-text-medium span {
+    font-size: 1.2rem;
+}
+
+.bar-text-small span {
+    font-size: 1.0rem;
 }

@@ -2,10 +2,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <div id="header" class="ui menu">
-	<div class="item site-title">
+	<div class="item bar-text-big">
 		<span>DAC4</span>
 	</div>
-	<div class="item page-title">
+	<div class="item bar-text-medium">
 		<span><%= request.getAttribute("title") %></span>
 	</div>
 	<div class="right menu">
