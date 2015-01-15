@@ -12,7 +12,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    margin: 0 0 65px;
+    margin: 0;
     height: 60px;
 }
 
@@ -29,6 +29,10 @@
 /* Reduce padding on form menu item */
 #header #form-item {
     padding: .58571em .95em;
+}
+
+#content {
+    margin-top: 65px;
 }
 
 /* ############ */
@@ -71,13 +75,13 @@
 }
 
 .ui.menu .item.bar-text-big span {
-    font-size: 1.5rem;
+    font-size: 2.0rem;
 }
 
 .ui.menu .item.bar-text-medium span {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
 }
 
 .ui.menu .item.bar-text-small span {
-    font-size: 1.0rem;
+    font-size: 1.1rem;
 }
