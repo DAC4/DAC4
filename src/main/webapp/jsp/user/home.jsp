@@ -5,12 +5,12 @@
 <html>
 <head>
 	<title>User Home</title>
-	<c:import url="${pageContext.request.contextPath}/partial/head.jsp"/>
-	
+	<c:import url="../partial/head.jsp"/>
+
 	<% final User user = (User) request.getAttribute("user"); %>
 </head>
 <body>
-	<c:import url="${pageContext.request.contextPath}/partial/header.jsp"/>
+	<c:import url="../partial/header.jsp"/>
 
 	<div id="content">
 		<h1>User Home</h1>
@@ -34,6 +34,6 @@
 		<h2><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
 	</div>
 
-	<c:import url="${pageContext.request.contextPath}/partial/footer.jsp"/>
+	<c:import url="../partial/footer.jsp"/>
 </body>
 </html>

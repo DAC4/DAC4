@@ -4,10 +4,10 @@
 <html>
 <head>
 	<title>Index</title>
-	<c:import url="${pageContext.request.contextPath}/partial/head.jsp"/>
+	<c:import url="partial/head.jsp"/>
 </head>
 <body>
-	<c:import url="${pageContext.request.contextPath}/partial/header.jsp"/>
+	<c:import url="partial/header.jsp"/>
 
 	<div id="content">
 
@@ -15,6 +15,6 @@
 
 	</div>
 
-	<c:import url="${pageContext.request.contextPath}/partial/footer.jsp"/>
+	<c:import url="partial/footer.jsp"/>
 </body>
 </html>
