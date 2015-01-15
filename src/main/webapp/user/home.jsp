@@ -5,6 +5,7 @@
 	<title>User Home</title>
 </head>
 <body>
+        <jsp:include page="header.jsp" />
 	<h1>User Home</h1>
 
 	<hr>

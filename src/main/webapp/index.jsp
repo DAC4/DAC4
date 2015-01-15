@@ -5,7 +5,6 @@
         <title>Index</title>
     </head>
     <body>
-        <jsp:include page="header.jsp" />
         <h1>Index</h1>
 
         <hr>
