@@ -13,11 +13,26 @@
 
 	<hr>
 
+	<%
+		final Integer error = (Integer) request.getAttribute("error");
+		if (error != null) {
+			final String errorMessage = (String) request.getAttribute("error_msg");
+	%>
+	<p style="color:red;font-weight:bold">
+		Error <%= error %>: <%= errorMessage %>
+	</p>
+
+	<hr>
+	<%
+		}
+	%>
+
 	<table>
 		<thead>
 			<tr>
 				<th>Image</th>
 				<th>Name</th>
+				<th>Available</th>
 				<% if (isAdmin != null && isAdmin) { %>
 				<th>Approved</th>
 				<% } %>
@@ -36,19 +51,16 @@
 					<td>
 						TODO <!-- <%= item.getImageId() %> -->
 					</td>
-					<td style="color:<%= item.isAvailable() ? "green" : "red" %>">
+					<td>
 						<%= item.getName() %>
 					</td>
+					<td style="color:<%= item.isAvailable() ? "green" : "red" %>">
+						<%= item.isAvailable() ? "yes" : "no" %>
+					</td>
 					<% if (isAdmin != null && isAdmin) { %>
-					<% if (item.isAccepted()) { %>
-					<td style="color:red">
-						no
+					<td>
+						<%= item.isAccepted() ? "yes" : "no" %>
 					</td>
-					<% } else {%>
-					<td style="color:green">
-						yes
-					</td>
-					<% } %>
 					<% } %>
 				</tr>
 			</a>
