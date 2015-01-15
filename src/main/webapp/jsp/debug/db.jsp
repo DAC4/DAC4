@@ -8,7 +8,7 @@
 
 <html>
 <head>
-	<title>Database dump</title>
+	<title><%= request.getAttribute("title") %></title>
 	<style>
 		#content, table {
 			margin: 25px auto;

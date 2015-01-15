@@ -2,10 +2,17 @@
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+	request.setAttribute("title", "Admin - Items List");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Items List</title>
+	<title>
+		<%= request.getAttribute("title") %>
+	</title>
 	<c:import url="../partial/head.jsp"/>
 </head>
 <body>

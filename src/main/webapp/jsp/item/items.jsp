@@ -1,10 +1,17 @@
 <%@ page import="imag.dac4.model.item.Item" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
+<%
+	request.setAttribute("title", "Items List");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Items List</title>
+	<title>
+		<%= request.getAttribute("title") %>
+	</title>
 
 	<% final Boolean isAdmin = (Boolean) request.getAttribute("isAdmin"); %>
 </head>

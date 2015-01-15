@@ -5,6 +5,11 @@
 	<div class="item">
 		<h1 class="ui header">DAC4</h1>
 	</div>
+	<div class="item">
+		<h3 class="ui header">
+			<%= request.getAttribute("title") %>
+		</h3>
+	</div>
 	<div class="right menu">
 		<% if (request.getAttribute("showLoginForm") != null) { %>
 		<div id="form-item" class="item">
@@ -24,9 +29,9 @@
 		<% } else if (request.getAttribute("user") != null) {%>
 		<% final User user = (User) request.getAttribute("user"); %>
 		<div class="item">
-			<p>
+			<span>
 				Logged in as <%= user.getName() %>
-			</p>
+			</span>
 			<a href="${pageContext.request.contextPath}/auth/logout">
 				<button type="button" class="ui button">Logout</button>
 			</a>
