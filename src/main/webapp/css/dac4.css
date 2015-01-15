@@ -1,7 +1,7 @@
 /*
  * DAC4 CSS
  */
-#header .ui.menu {
+#header.ui.menu {
     position: fixed;
     top: 0;
     left: 0;
