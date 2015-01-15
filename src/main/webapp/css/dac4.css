@@ -1,17 +1,27 @@
 /*
  * DAC4 CSS
  */
-#header.ui.menu {
+
+/* Fix header to top */
+#header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    margin-bottom: 60px;
 }
 
+/* Display menu Login form inline with Register button */
 #header form {
     display: inline-block;
 }
 
+/* Fix menu buttons width */
 #header .ui.button {
     width: 100px;
+}
+
+/* Reduce padding on form menu item */
+#header #form-item {
+    padding: .58571em .95em;
 }

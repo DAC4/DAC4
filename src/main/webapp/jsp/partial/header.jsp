@@ -7,7 +7,7 @@
 	</div>
 	<div class="right menu">
 		<% if (request.getAttribute("showLoginForm") != null) { %>
-		<div class="item">
+		<div id="form-item" class="item">
 			<form method="POST" action="${pageContext.request.contextPath}/auth/login">
 				<div class="ui input">
 					<input id="login" type="text" placeholder="Login" name="login" required/>
