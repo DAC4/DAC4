@@ -1,4 +1,4 @@
-package imag.dac4.model;
+package imag.dac4.servlet;
 
 import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.loan.LoanDao;
