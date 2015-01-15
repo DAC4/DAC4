@@ -1,34 +1,45 @@
+<%@ page import="imag.dac4.model.user.User" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Admin Home</title>
+	<c:import url="${pageContext.request.contextPath}/partial/head.jsp"/>
+
+	<% final User user = (User) request.getAttribute("user"); %>
 </head>
 <body>
-	<h1>Admin Home</h1>
+	<c:import url="${pageContext.request.contextPath}/partial/header.jsp"/>
 
-	<hr>
+	<div id="content">
+		<h1>Admin Home</h1>
 
-	<ul>
-		<li>
-			Login: <%= request.getAttribute("login") %>
-		</li>
-		<li>
-			Name: <%= request.getAttribute("name") %>
-		</li>
-		<li>
-			Email: <%= request.getAttribute("email") %>
-		</li>
-	</ul>
+		<hr>
 
-	<hr>
+		<ul>
+			<li>
+				Login: <%= user.getLogin() %>
+			</li>
+			<li>
+				Name: <%= user.getName() %>
+			</li>
+			<li>
+				Email: <%= user.getEmail() %>
+			</li>
+		</ul>
 
-	<h2><a href="${pageContext.request.contextPath}/admin/user">Users</a></h2>
+		<hr>
 
-	<h2><a href="${pageContext.request.contextPath}/admin/item">Items</a></h2>
+		<h2><a href="${pageContext.request.contextPath}/admin/user">Users</a></h2>
 
-	<hr>
+		<h2><a href="${pageContext.request.contextPath}/admin/item">Items</a></h2>
 
-	<h2><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
+		<hr>
+
+		<h2><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
+	</div>
+
+	<c:import url="${pageContext.request.contextPath}/partial/footer.jsp"/>
 </body>
 </html>

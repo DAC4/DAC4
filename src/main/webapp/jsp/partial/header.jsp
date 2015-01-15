@@ -1,20 +1,31 @@
+<%@ page import="imag.dac4.model.user.User" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+
 <div id="header" class="ui menu">
 	<div class="item">
 		<h1>DAC4</h1>
 	</div>
 	<div class="right menu">
+		<% if (request.getAttribute("showLoginForm") != null) { %>
 		<div class="item">
 			<form method="POST" action="${pageContext.request.contextPath}/auth/login">
-				<div class="ui transparent input">
+				<div class="ui input">
 					<input id="login" type="text" placeholder="Login" name="login" required/>
 				</div>
-				<div class="ui transparent input">
-					<input id="password" type="password" placeholder="password" name="password" required/>
+				<div class="ui input">
+					<input id="password" type="password" placeholder="Password" name="password" required/>
 				</div>
 				<input class="ui submit button" type="submit" value="Login"/>
 			</form>
-			<a class="ui primary button" href="${pageContext.request.contextPath}/auth/register">Register</a>
+			<a id="register-button" class="ui primary button" href="${pageContext.request.contextPath}/auth/register">Register</a>
 		</div>
+		<% } else if (request.getAttribute("user") != null) {%>
+		<% final User user = (User) request.getAttribute("user"); %>
+		<div class="item">
+			<p>
+				Logged in as <%= user.getName() %>
+			</p>
+		</div>
+		<% } %>
 	</div>
 </div>
