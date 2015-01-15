@@ -8,19 +8,20 @@ public final class Constants {
     // ## JSP Paths ## //
     // ############### //
 
-    public static final String JSP_INDEX = "/index.jsp";
+    public static final String JSP_HEADER = "/jsp/header.jsp";
+    public static final String JSP_INDEX  = "/jsp/index.jsp";
 
-    public static final String JSP_AUTH_REGISTER            = "/auth/register.jsp";
-    public static final String JSP_AUTH_AWAITING_VALIDATION = "/auth/awaitingValidation.jsp";
+    public static final String JSP_AUTH_REGISTER            = "/jsp/auth/register.jsp";
+    public static final String JSP_AUTH_AWAITING_VALIDATION = "/jsp/auth/awaitingValidation.jsp";
 
-    public static final String JSP_ADMIN_HOME  = "/admin/home.jsp";
-    public static final String JSP_ADMIN_USERS = "/admin/users.jsp";
-    public static final String JSP_ADMIN_ITEMS = "/admin/items.jsp";
+    public static final String JSP_ADMIN_HOME  = "/jsp/admin/home.jsp";
+    public static final String JSP_ADMIN_USERS = "/jsp/admin/users.jsp";
+    public static final String JSP_ADMIN_ITEMS = "/jsp/admin/items.jsp";
 
-    public static final String JSP_USER_HOME = "/user/home.jsp";
+    public static final String JSP_USER_HOME = "/jsp/user/home.jsp";
 
-    public static final String JSP_ITEMS = "/item/items.jsp";
-    public static final String JSP_ITEM  = "/item/item.jsp";
+    public static final String JSP_ITEMS = "/jsp/item/items.jsp";
+    public static final String JSP_ITEM  = "/jsp/item/item.jsp";
 
     // ########## //
     // ## Misc ## //
