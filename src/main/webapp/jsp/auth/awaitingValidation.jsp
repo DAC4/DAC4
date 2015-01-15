@@ -16,19 +16,17 @@
 <body>
 	<c:import url="../partial/header.jsp"/>
 
-	<div id="content">
-		<h1>Registration Complete</h1>
+	<h1>Registration Complete</h1>
 
-		<hr>
+	<hr>
 
-		<p>
-			The administrator needs to approve your account before you can login.
-		</p>
+	<p>
+		The administrator needs to approve your account before you can login.
+	</p>
 
-		<hr>
+	<hr>
 
-		<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
-	</div>
+	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
 
 	<c:import url="../partial/footer.jsp"/>
 </body>

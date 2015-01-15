@@ -16,11 +16,7 @@
 <body>
 	<c:import url="partial/header.jsp"/>
 
-	<div id="content">
-
-		<h1>Content</h1>
-
-	</div>
+	<h1 class="ui header">Content</h1>
 
 	<c:import url="partial/footer.jsp"/>
 </body>

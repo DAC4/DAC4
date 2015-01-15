@@ -19,45 +19,43 @@
 <body>
 	<c:import url="../partial/header.jsp"/>
 
-	<div id="content">
-		<h1 class="ui header">Item Page</h1>
+	<h1 class="ui header">Item Page</h1>
 
-		<hr>
+	<hr>
 
-		<ul>
-			<li>
-				Image: <%= item.getImageId() %>
-			</li>
-			<li>
-				Name: <%= item.getName() %>
-			</li>
-			<li>
-				Description: <%= item.getDescription() %>
-			</li>
-			<li>
-				Locker Number: <%= item.getLockerNum() %>
-			</li>
-			<li>
-				Max Loan Duration: <%= item.getMaxLoanDuration() %>
-			</li>
-			<% if (!item.isApproved()) { %>
-			<li style="color:red">
-				Approved: no
-			</li>
-			<% } %>
-		</ul>
-
-		<% if (item.isApproved() && item.isAvailable()) { %>
-		<form action="${pageContext.request.contextPath}/item/loan" method="POST">
-			<input type="hidden" name="id" value="<%= item.getId() %>"/>
-			<input type="submit" value="Loan"/>
-		</form>
+	<ul>
+		<li>
+			Image: <%= item.getImageId() %>
+		</li>
+		<li>
+			Name: <%= item.getName() %>
+		</li>
+		<li>
+			Description: <%= item.getDescription() %>
+		</li>
+		<li>
+			Locker Number: <%= item.getLockerNum() %>
+		</li>
+		<li>
+			Max Loan Duration: <%= item.getMaxLoanDuration() %>
+		</li>
+		<% if (!item.isApproved()) { %>
+		<li style="color:red">
+			Approved: no
+		</li>
 		<% } %>
+	</ul>
 
-		<hr>
+	<% if (item.isApproved() && item.isAvailable()) { %>
+	<form action="${pageContext.request.contextPath}/item/loan" method="POST">
+		<input type="hidden" name="id" value="<%= item.getId() %>"/>
+		<input type="submit" value="Loan"/>
+	</form>
+	<% } %>
 
-		<h2 class="ui header"><a href="${pageContext.request.contextPath}/">Index</a></h2>
-	</div>
+	<hr>
+
+	<h2 class="ui header"><a href="${pageContext.request.contextPath}/">Index</a></h2>
 
 	<c:import url="../partial/footer.jsp"/>
 </body>

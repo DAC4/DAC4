@@ -18,61 +18,59 @@
 <body>
 	<c:import url="../partial/header.jsp"/>
 
-	<div id="content">
-		<h1 class="ui header">Users List</h1>
+	<h1 class="ui header">Users List</h1>
 
-		<hr>
+	<hr>
 
-		<table>
-			<thead>
-				<tr>
-					<th>Login</th>
-					<th>Name</th>
-					<th>E-Mail</th>
-					<th>Credits</th>
-					<th>Approved</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-					@SuppressWarnings("unchecked")
-					List<User> users = (List<User>) request.getAttribute("users");
-					if (users != null) {
-						for (User user : users) {
-				%>
-				<tr>
-					<td>
-						<%= user.getLogin() %>
-					</td>
-					<td>
-						<%= user.getName() %>
-					</td>
-					<td>
-						<%= user.getEmail() %>
-					</td>
-					<td>
-						<%= user.getCredits() %>
-					</td>
-					<td>
-						<% if (user.isApproved()) { %>
-						yes
-						<% } else { %>
-						<form action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
-							<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
-							<input type="submit" value="no"/>
-						</form>
-						<% } %>
-					</td>
-				</tr>
-				<%
-						}
+	<table class="ui table">
+		<thead>
+			<tr>
+				<th>Login</th>
+				<th>Name</th>
+				<th>E-Mail</th>
+				<th>Credits</th>
+				<th>Approved</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%
+				@SuppressWarnings("unchecked")
+				List<User> users = (List<User>) request.getAttribute("users");
+				if (users != null) {
+					for (User user : users) {
+			%>
+			<tr>
+				<td>
+					<%= user.getLogin() %>
+				</td>
+				<td>
+					<%= user.getName() %>
+				</td>
+				<td>
+					<%= user.getEmail() %>
+				</td>
+				<td>
+					<%= user.getCredits() %>
+				</td>
+				<td>
+					<% if (user.isApproved()) { %>
+					yes
+					<% } else { %>
+					<form action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
+						<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
+						<input type="submit" value="no"/>
+					</form>
+					<% } %>
+				</td>
+			</tr>
+			<%
 					}
-				%>
-			</tbody>
-		</table>
+				}
+			%>
+		</tbody>
+	</table>
 
-		<h2 class="ui header"><a href="${pageContext.request.contextPath}/">Index</a></h2>
-	</div>
+	<h2 class="ui header"><a href="${pageContext.request.contextPath}/">Index</a></h2>
 
 	<c:import url="../partial/footer.jsp"/>
 </body>

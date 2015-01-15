@@ -49,3 +49,5 @@
 	<hr>
 </div>
 <% } %>
+
+<div id="content" class="ui page grid">
