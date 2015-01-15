@@ -8,6 +8,10 @@
     width: 100%;
 }
 
+#header form {
+    display: inline-block;
+}
+
 #header #register-button {
     padding: inherit;
 }
