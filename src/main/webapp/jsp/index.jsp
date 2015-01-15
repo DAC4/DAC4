@@ -8,7 +8,6 @@
 </head>
 <body>
 	<c:import url="partial/header.jsp"/>
-	<c:import url="partial/nav.jsp"/>
 	<div id="content">
 
 		<h1>Content</h1>
