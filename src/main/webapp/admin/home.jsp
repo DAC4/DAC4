@@ -27,6 +27,8 @@
 
 	<h2><a href="${pageContext.request.contextPath}/admin/item">Items</a></h2>
 
+	<hr>
+
 	<h2><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
 </body>
 </html>
