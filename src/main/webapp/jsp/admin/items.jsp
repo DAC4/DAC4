@@ -30,7 +30,7 @@
 				<th>Available</th>
 				<th>Locker Number</th>
 				<th>Max Loan Duration</th>
-				<th>Accepted</th>
+				<th>Approved</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -64,11 +64,11 @@
 				</td>
 				<td>
 					<% if (item.isApproved()) { %>
-					yes
+					<span style="color:green"><i class="checkmark icon"></i></span>
 					<% } else { %>
 					<form action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
 						<input type="hidden" name="id" value="<%= item.getId() %>"/>
-						<input type="submit" value="no"/>
+						<input type="submit" value="Approve" class="ui orange button"/>
 					</form>
 					<% } %>
 				</td>
