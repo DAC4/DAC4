@@ -28,15 +28,17 @@
 				<label for="description">Description:</label>
 				<textarea id="description" placeholder="Description" name="description" rows="5" maxlength="1000" required></textarea>
 			</div>
-			<div class="field">
-				<label for="lockerNum">Locker Number:</label>
-				<input id="lockerNum" type="number" min="1" max="9" step="1" placeholder="1" name="lockerNum" required/>
+			<div class="two fields">
+				<div class="field">
+					<label for="lockerNum">Locker Number:</label>
+					<input id="lockerNum" type="number" min="1" max="9" step="1" placeholder="1" name="lockerNum" required/>
+				</div>
+				<div class="field">
+					<label for="maxLoanDuration">Maximum Loan Duration:</label>
+					<input id="maxLoanDuration" type="number" min="1" step="1" placeholder="10" name="maxLoanDuration" required/>
+				</div>
 			</div>
-			<div class="field">
-				<label for="maxLoanDuration">Maximum Loan Duration:</label>
-				<input id="maxLoanDuration" type="number" min="1" step="1" placeholder="10" name="maxLoanDuration" required/>
-			</div>
-			<input type="submit" value="Register Item"/>
+			<input type="submit" value="Register Item" class="ui primary submit button"/>
 		</form>
 	</div>
 
