@@ -3,6 +3,7 @@
 
 <%
 	request.setAttribute("title", "Index");
+	request.setAttribute("menu-current-page", "index");
 %>
 
 <!DOCTYPE html>
@@ -11,13 +12,13 @@
 	<title>
 		<%= request.getAttribute("title") %>
 	</title>
-	<c:import url="partial/head.jsp"/>
+	<%@ include file="partial/head.jsp" %>
 </head>
 <body>
-	<c:import url="partial/header.jsp"/>
+	<%@ include file="partial/header.jsp" %>
 
 	<h1 class="ui block header">Content</h1>
 
-	<c:import url="partial/footer.jsp"/>
+	<%@ include file="partial/footer.jsp" %>
 </body>
 </html>

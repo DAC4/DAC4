@@ -3,6 +3,7 @@
 
 <%
 	request.setAttribute("title", "User Registration");
+	request.setAttribute("menu-current-page", "auth-register");
 %>
 
 <!DOCTYPE html>
@@ -11,10 +12,10 @@
 	<title>
 		<%= request.getAttribute("title") %>
 	</title>
-	<c:import url="../partial/head.jsp"/>
+	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>
-	<c:import url="../partial/header.jsp"/>
+	<%@ include file="../partial/header.jsp" %>
 
 	<div class="section">
 		<form class="ui form" method="POST" action="${pageContext.request.contextPath}/auth/register">
@@ -26,11 +27,11 @@
 			</div>
 			<div class="field">
 				<label for="password">Password:</label>
-				<input id="password" type="password" placeholder="password" name="password" required/>
+				<input id="password" type="password" placeholder="Password" name="password" required/>
 			</div>
 			<div class="field">
 				<label for="passwordConfirm">Confirm Password:</label>
-				<input id="passwordConfirm" type="password" placeholder="password" name="passwordConfirm" required/>
+				<input id="passwordConfirm" type="password" placeholder="Password" name="passwordConfirm" required/>
 			</div>
 			<div class="field">
 				<label for="name">Name:</label>
@@ -44,6 +45,6 @@
 		</form>
 	</div>
 
-	<c:import url="../partial/footer.jsp"/>
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

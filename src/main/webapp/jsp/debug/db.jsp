@@ -7,6 +7,7 @@
 
 <%
 	request.setAttribute("title", "Debug - Database dump");
+	request.setAttribute("menu-current-page", "db");
 %>
 
 <!DOCTYPE html>
@@ -15,11 +16,11 @@
 	<title>
 		<%= request.getAttribute("title") %>
 	</title>
-	<c:import url="../partial/head.jsp"/>
+	<%@ include file="../partial/head.jsp" %>
 </head>
 
 <body>
-	<c:import url="../partial/header.jsp"/>
+	<%@ include file="../partial/header.jsp" %>
 
 	<h1 class="ui block header">Users</h1>
 	<table class="ui table">
@@ -181,6 +182,6 @@
 
 	<a href="${pageContext.request.contextPath}/">Home</a>
 
-	<c:import url="../partial/footer.jsp"/>
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

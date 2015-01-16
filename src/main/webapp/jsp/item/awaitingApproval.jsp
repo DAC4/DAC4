@@ -3,6 +3,7 @@
 
 <%
 	request.setAttribute("title", "Item Registration - Awaiting Approval");
+	request.setAttribute("menu-current-page", "item-awaiting-approval");
 %>
 
 <!DOCTYPE html>
@@ -11,10 +12,10 @@
 	<title>
 		<%= request.getAttribute("title") %>
 	</title>
-	<c:import url="../partial/head.jsp"/>
+	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>
-	<c:import url="../partial/header.jsp"/>
+	<%@ include file="../partial/header.jsp" %>
 
 	<h1 class="ui block header">Item Registration Complete</h1>
 
@@ -26,6 +27,6 @@
 
 	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
 
-	<c:import url="../partial/footer.jsp"/>
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

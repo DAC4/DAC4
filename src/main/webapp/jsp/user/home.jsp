@@ -4,6 +4,7 @@
 
 <%
 	request.setAttribute("title", "Home");
+	request.setAttribute("menu-current-page", "user-home");
 %>
 
 <!DOCTYPE html>
@@ -12,12 +13,12 @@
 	<title>
 		<%= request.getAttribute("title") %>
 	</title>
-	<c:import url="../partial/head.jsp"/>
+	<%@ include file="../partial/head.jsp" %>
 
 	<% final User user = (User) request.getAttribute("user"); %>
 </head>
 <body>
-	<c:import url="../partial/header.jsp"/>
+	<%@ include file="../partial/header.jsp" %>
 
 	<h1 class="ui block header">User Home</h1>
 
@@ -37,6 +38,6 @@
 
 	<h2 class="ui header"><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
 
-	<c:import url="../partial/footer.jsp"/>
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

@@ -4,6 +4,7 @@
 
 <%
 	request.setAttribute("title", "Item Details");
+	request.setAttribute("menu-current-page", "item");
 %>
 
 <!DOCTYPE html>
@@ -12,12 +13,12 @@
 	<title>
 		<%= request.getAttribute("title") %>
 	</title>
-	<c:import url="../partial/head.jsp"/>
+	<%@ include file="../partial/head.jsp" %>
 
 	<% final Item item = (Item) request.getAttribute("item"); %>
 </head>
 <body>
-	<c:import url="../partial/header.jsp"/>
+	<%@ include file="../partial/header.jsp" %>
 
 	<h1 class="ui block header">Item Page</h1>
 
@@ -55,6 +56,6 @@
 
 	<h2 class="ui header"><a href="${pageContext.request.contextPath}/">Index</a></h2>
 
-	<c:import url="../partial/footer.jsp"/>
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

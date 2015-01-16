@@ -3,6 +3,7 @@
 
 <%
 	request.setAttribute("title", "Item Registration");
+	request.setAttribute("menu-current-page", "item-register");
 %>
 
 <!DOCTYPE html>
@@ -11,10 +12,10 @@
 	<title>
 		<%= request.getAttribute("title") %>
 	</title>
-	<c:import url="../partial/head.jsp"/>
+	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>
-	<c:import url="../partial/header.jsp"/>
+	<%@ include file="../partial/header.jsp" %>
 
 	<div class="section">
 		<form class="ui form" method="POST" action="${pageContext.request.contextPath}/item/register">
@@ -40,6 +41,6 @@
 		</form>
 	</div>
 
-	<c:import url="../partial/footer.jsp"/>
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>
