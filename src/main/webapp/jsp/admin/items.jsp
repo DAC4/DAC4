@@ -21,7 +21,7 @@
 
 	<h1 class="ui block header">Items List</h1>
 
-	<table class="ui table">
+	<table class="ui striped table">
 		<thead>
 			<tr>
 				<th>Image</th>

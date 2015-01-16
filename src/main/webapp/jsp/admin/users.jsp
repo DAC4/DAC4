@@ -21,7 +21,7 @@
 
 	<h1 class="ui block header">Users List</h1>
 
-	<table class="ui table">
+	<table class="ui striped table">
 		<thead>
 			<tr>
 				<th>Login</th>
@@ -52,11 +52,11 @@
 					<%= user.getCredits() %>
 				</td>
 				<% if (user.isApproved()) { %>
-				<td class="positive">
+				<td class="positive collapsing">
 					<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 				</td>
 				<% } else { %>
-				<td class="negative">
+				<td class="negative collapsing">
 					<form action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
 						<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
 						<span style="color:red"><i class="remove icon"></i></span>

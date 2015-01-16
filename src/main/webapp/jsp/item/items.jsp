@@ -23,7 +23,7 @@
 
 	<h1 class="ui block header">Items List</h1>
 
-	<table class="ui table">
+	<table class="ui striped table">
 		<thead>
 			<tr>
 				<th>Image</th>
@@ -52,26 +52,26 @@
 						<%= item.getName() %>
 					</td>
 					<% if (item.isAvailable()) { %>
-					<td class="positive">
+					<td class="positive collapsing">
 						<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 					</td>
 					<% } else { %>
-					<td class="negative">
+					<td class="negative collapsing">
 						<span style="color:red"><i class="remove icon"></i> No</span>
 					</td>
 					<% } %>
 					<% if (isAdmin != null && isAdmin) { %>
 					<% if (item.isApproved()) { %>
-					<td class="positive">
+					<td class="positive collapsing">
 						<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 					</td>
 					<% } else { %>
-					<td class="negative">
+					<td class="negative collapsing">
 						<span style="color:red"><i class="remove icon"></i> No</span>
 					</td>
 					<% } %>
 					<% } %>
-					<td>
+					<td class="collapsing">
 						<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
 							<button type="button" class="ui button">Details</button>
 						</a>
