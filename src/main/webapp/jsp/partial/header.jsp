@@ -10,7 +10,7 @@
 	</div>
 	<div class="right menu">
 		<% if (request.getAttribute("showLoginForm") != null) { %>
-		<div id="form-item" class="item">
+		<div class="item button-item">
 			<form method="POST" action="${pageContext.request.contextPath}/auth/login">
 				<div class="ui input">
 					<input id="login" type="text" placeholder="Login" name="login" required/>
@@ -31,7 +31,7 @@
 				Logged in as <%= user.getName() %>
 			</span>
 		</div>
-		<div class="item">
+		<div class="item button-item">
 			<a href="${pageContext.request.contextPath}/auth/logout">
 				<button type="button" class="ui button">Logout</button>
 			</a>

@@ -44,7 +44,7 @@
 }
 
 /* Reduce padding on form menu item */
-#header #form-item {
+#header .item.button-item {
     padding: .58571em .95em;
 }
 
