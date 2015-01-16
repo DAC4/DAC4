@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="imag.dac4.model.user.User" %>
 
 <%
