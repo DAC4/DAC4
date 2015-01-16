@@ -32,6 +32,7 @@
 				<% if (isAdmin != null && isAdmin) { %>
 				<th>Approved</th>
 				<% } %>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
