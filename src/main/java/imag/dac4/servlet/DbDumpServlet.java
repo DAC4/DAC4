@@ -22,7 +22,7 @@ public class DbDumpServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.updateSessionAttributes(req);
+        Tools.updateSessionAttributes(req.getSession());
         req.setAttribute("users", userDao.getUsers());
         req.setAttribute("items", itemDao.getItems());
         req.setAttribute("loans", loanDao.getLoans());

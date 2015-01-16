@@ -50,9 +50,11 @@
 				</div>
 				<input class="ui submit button" type="submit" value="Login"/>
 			</form>
+			<% if (!"auth-register".equals(current)) { %>
 			<a href="${pageContext.request.contextPath}/auth/register">
 				<button type="button" class="ui primary button">Register</button>
 			</a>
+			<% } %>
 		</div>
 		<% } else if (request.getAttribute("user") != null) {%>
 		<% final User user = (User) request.getAttribute("user"); %>
@@ -71,12 +73,12 @@
 </div>
 
 <div id="content" class="ui page grid">
-		<%
+	<%
 		if (session.getAttribute("error") != null) {
-		final Integer error = (Integer) session.getAttribute("error");
-		final String error_msg = (String) session.getAttribute("error_msg");
-		session.removeAttribute("error");
-		session.removeAttribute("error_msg");
+			final Integer error = (Integer) session.getAttribute("error");
+			final String error_msg = (String) session.getAttribute("error_msg");
+			session.removeAttribute("error");
+			session.removeAttribute("error_msg");
 	%>
 	<div id="error" class="ui negative message">
 		<h2 class="header">

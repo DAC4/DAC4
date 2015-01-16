@@ -24,7 +24,7 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.updateSessionAttributes(req);
+        Tools.updateSessionAttributes(req.getSession());
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
@@ -37,7 +37,7 @@ public class AuthServlet extends HttpServlet {
             case "logout":
                 req.getSession().removeAttribute("user");
                 req.getSession().removeAttribute("isAdmin");
-                Tools.updateSessionAttributes(req);
+                Tools.updateSessionAttributes(req.getSession());
                 resp.sendRedirect("/");
                 break;
             case "awaiting-validation":
@@ -53,7 +53,7 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.updateSessionAttributes(req);
+        Tools.updateSessionAttributes(req.getSession());
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
@@ -95,7 +95,7 @@ public class AuthServlet extends HttpServlet {
             // User exists and password is valid
             req.getSession().setAttribute("user", user);
             req.getSession().setAttribute("isAdmin", isAdmin);
-            Tools.updateSessionAttributes(req);
+            Tools.updateSessionAttributes(req.getSession());
             resp.sendRedirect("/");
         }
     }
