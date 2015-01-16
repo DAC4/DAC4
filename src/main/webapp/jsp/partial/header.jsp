@@ -40,16 +40,19 @@
 	</div>
 </div>
 
-<% if (request.getAttribute("error") != null) {
-	final Integer error = (Integer) request.getAttribute("error");
-	final String error_msg = (String) request.getAttribute("error_msg");
-%>
-<div id="error">
-	<h2 class="ui red header">
-		Error <%= error %>: <%= error_msg %>
-	</h2>
-	<hr>
-</div>
-<% } %>
-
 <div id="content" class="ui page grid">
+	<%
+		if (request.getAttribute("error") != null) {
+		final Integer error = (Integer) request.getAttribute("error");
+		final String error_msg = (String) request.getAttribute("error_msg");
+	%>
+	<div id="error" class="ui negative message">
+		<h2 class="header">
+			Error <%= error %>
+		</h2>
+		<p>
+			<%= error_msg %>
+		</p>
+		<hr>
+	</div>
+	<% } %>
