@@ -21,7 +21,7 @@
 
 	<h1 class="ui block header">Items List</h1>
 
-	<table class="ui striped table">
+	<table class="ui striped celled table">
 		<thead>
 			<tr>
 				<th>Image</th>
@@ -73,7 +73,7 @@
 					<span style="color:red"><i class="remove icon"></i> No</span>
 				</td>
 				<% } %>
-				<td>
+				<td class="right-aligned">
 					<% if (!item.isApproved()) { %>
 					<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
 						<input type="hidden" name="id" value="<%= item.getId() %>"/>

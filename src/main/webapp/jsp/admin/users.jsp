@@ -21,7 +21,7 @@
 
 	<h1 class="ui block header">Users List</h1>
 
-	<table class="ui striped table">
+	<table class="ui striped celled table">
 		<thead>
 			<tr>
 				<th>Login</th>
