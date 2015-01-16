@@ -52,22 +52,24 @@
 						<%= item.getName() %>
 					</td>
 					<% if (item.isAvailable()) { %>
-					<td class="positive collapsing right aligned">
+					<td class="positive collapsing">
 						<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 					</td>
 					<% } else { %>
-					<td class="negative collapsing right aligned">
+					<td class="negative collapsing">
 						<span style="color:red"><i class="remove icon"></i> No</span>
 					</td>
 					<% } %>
 					<% if (isAdmin != null && isAdmin) { %>
-					<td class="collapsing">
-						<% if (item.isApproved()) { %>
+					<% if (item.isApproved()) { %>
+					<td class="positive collapsing">
 						<span style="color:green"><i class="checkmark icon"></i> Yes</span>
-						<% } else { %>
-						<span style="color:red"><i class="remove icon"></i> No</span>
-						<% } %>
 					</td>
+					<% } else { %>
+					<td class="negative collapsing">
+						<span style="color:red"><i class="remove icon"></i> No</span>
+					</td>
+					<% } %>
 					<% } %>
 					<td class="collapsing">
 						<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
