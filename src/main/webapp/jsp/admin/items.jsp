@@ -1,90 +1,104 @@
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="imag.dac4.model.item.Item" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+	request.setAttribute("title", "Admin - Items List");
+	request.setAttribute("menu-current-page", "admin-items");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Items List</title>
+	<title>
+		<%= request.getAttribute("title") %>
+	</title>
+	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>
-	<h1>Items List</h1>
+	<%@ include file="../partial/header.jsp" %>
 
-	<hr>
+	<div class="sixteen wide column">
+		<div class="section">
 
-	<%
-		final Integer error = (Integer) request.getAttribute("error");
-		if (error != null) {
-			final String errorMessage = (String) request.getAttribute("error_msg");
-	%>
-	<p style="color:red;font-weight:bold">
-		Error <%= error %>: <%= errorMessage %>
-	</p>
+			<h1 class="ui block header">Items List</h1>
 
-	<hr>
-	<%
-		}
-	%>
+			<table class="ui striped celled table">
+				<thead>
+					<tr>
+						<th>Image</th>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Owner</th>
+						<th>Available</th>
+						<th>Locker Number</th>
+						<th>Max Loan Duration</th>
+						<th>Approved</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						@SuppressWarnings("unchecked")
+						List<Item> items = (List<Item>) request.getAttribute("items");
+						if (items != null) {
+							for (Item item : items) {
+					%>
+					<tr>
+						<td>
+							<img src="<%= item.getImageId() %>"/>
+						</td>
+						<td>
+							<%= item.getName() %>
+						</td>
+						<td>
+							<%= item.getDescription() %>
+						</td>
+						<td class="right aligned collapsing">
+							<%= item.getOwnerId() %> <!-- TODO Login with Link to User page -->
+						</td>
+						<td class="right aligned collapsing">
+							<%= item.isAvailable() %>
+						</td>
+						<td class="right aligned collapsing">
+							<%= item.getLockerNum() %>
+						</td>
+						<td class="right aligned collapsing">
+							<%= item.getMaxLoanDuration() %>
+						</td>
+						<% if (item.isApproved()) { %>
+						<td class="positive collapsing">
+							<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+						</td>
+						<% } else { %>
+						<td class="negative collapsing">
+							<span style="color:red"><i class="remove icon"></i> No</span>
+						</td>
+						<% } %>
+						<td class="right aligned collapsing">
+							<% if (!item.isApproved()) { %>
+							<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
+								<input type="hidden" name="id" value="<%= item.getId() %>"/>
+								<input type="submit" value="Approve" class="ui orange button"/>
+							</form>
+							<% } %>
+							<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/remove" method="POST">
+								<input type="hidden" name="id" value="<%= item.getId() %>"/>
+								<input type="submit" value="Remove" class="ui disabled red button"/>
+							</form>
+						</td>
+					</tr>
+					<%
+							}
+						}
+					%>
+				</tbody>
+			</table>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Image</th>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Owner</th>
-				<th>Available</th>
-				<th>Locker Number</th>
-				<th>Max Loan Duration</th>
-				<th>Accepted</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				@SuppressWarnings("unchecked")
-				List<Item> items = (List<Item>) request.getAttribute("items");
-				if (items != null) {
-					for (Item item : items) {
-			%>
-			<tr>
-				<td>
-					TODO <!-- <%= item.getImageId() %> -->
-				</td>
-				<td>
-					<%= item.getName() %>
-				</td>
-				<td>
-					<%= item.getDescription() %>
-				</td>
-				<td>
-					<%= item.getOwnerId() %> <!-- TODO Login with Link to User page -->
-				</td>
-				<td>
-					<%= item.isAvailable() %>
-				</td>
-				<td>
-					<%= item.getLockerNum() %>
-				</td>
-				<td>
-					<%= item.getMaxLoanDuration() %>
-				</td>
-				<td>
-					<% if (item.isAccepted()) { %>
-					yes
-					<% } else { %>
-					<form action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
-						<input type="hidden" name="id" value="<%= item.getId() %>"/>
-						<input type="submit" value="no"/>
-					</form>
-					<% } %>
-				</td>
-			</tr>
-			<%
-					}
-				}
-			%>
-		</tbody>
-	</table>
+		</div>
+	</div>
 
-	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

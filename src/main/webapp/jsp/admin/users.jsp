@@ -1,78 +1,91 @@
-<%@ page import="imag.dac4.model.user.User" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+	request.setAttribute("title", "Admin - Users List");
+	request.setAttribute("menu-current-page", "admin-users");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Users List</title>
+	<title>
+		<%= request.getAttribute("title") %>
+	</title>
+	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>
-	<h1>Users List</h1>
+	<%@ include file="../partial/header.jsp" %>
 
-	<hr>
+	<div class="sixteen wide column">
+		<div class="section">
 
-	<%
-		final Integer error = (Integer) request.getAttribute("error");
-		if (error != null) {
-			final String errorMessage = (String) request.getAttribute("error_msg");
-	%>
-	<p style="color:red;font-weight:bold">
-		Error <%= error %>: <%= errorMessage %>
-	</p>
+			<h1 class="ui block header">Users List</h1>
 
-	<hr>
-	<%
-		}
-	%>
+			<table class="ui striped celled table">
+				<thead>
+					<tr>
+						<th>Login</th>
+						<th>Name</th>
+						<th>E-Mail</th>
+						<th>Credits</th>
+						<th>Approved</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%
+						@SuppressWarnings("unchecked")
+						List<User> users = (List<User>) request.getAttribute("users");
+						if (users != null) {
+							for (User u : users) {
+					%>
+					<tr>
+						<td>
+							<%= u.getLogin() %>
+						</td>
+						<td>
+							<%= u.getName() %>
+						</td>
+						<td>
+							<%= u.getEmail() %>
+						</td>
+						<td class="right aligned">
+							<%= u.getCredits() %>
+						</td>
+						<% if (u.isApproved()) { %>
+						<td class="positive collapsing">
+							<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+						</td>
+						<% } else { %>
+						<td class="negative collapsing">
+							<span style="color:red"><i class="remove icon"></i> No</span>
+						</td>
+						<% } %>
+						<td class="right aligned collapsing">
+							<% if (!u.isApproved()) { %>
+							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
+								<input type="hidden" name="login" value="<%= u.getLogin() %>"/>
+								<input type="submit" value="Approve" class="ui orange button"/>
+							</form>
+							<% } %>
+							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
+								<input type="hidden" name="login" value="<%= u.getLogin() %>"/>
+								<input type="submit" value="Remove" class="ui disabled red button"/>
+							</form>
+						</td>
+					</tr>
+					<%
+							}
+						}
+					%>
+				</tbody>
+			</table>
 
-	<table>
-		<thead>
-			<tr>
-				<th>Login</th>
-				<th>Name</th>
-				<th>E-Mail</th>
-				<th>Credits</th>
-				<th>Approved</th>
-			</tr>
-		</thead>
-		<tbody>
-			<%
-				@SuppressWarnings("unchecked")
-				List<User> users = (List<User>) request.getAttribute("users");
-				if (users != null) {
-					for (User user : users) {
-			%>
-			<tr>
-				<td>
-					<%= user.getLogin() %>
-				</td>
-				<td>
-					<%= user.getName() %>
-				</td>
-				<td>
-					<%= user.getEmail() %>
-				</td>
-				<td>
-					<%= user.getCredits() %>
-				</td>
-				<td>
-					<% if (user.isRegistrationComplete()) { %>
-					yes
-					<% } else { %>
-					<form action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
-						<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
-						<input type="submit" value="no"/>
-					</form>
-					<% } %>
-				</td>
-			</tr>
-			<%
-					}
-				}
-			%>
-		</tbody>
-	</table>
+		</div>
+	</div>
 
-	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

@@ -1,5 +1,6 @@
-package imag.dac4.model;
+package imag.dac4.servlet;
 
+import imag.dac4.Constants;
 import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.loan.LoanDao;
 import imag.dac4.model.user.UserDao;
@@ -24,6 +25,6 @@ public class DbDumpServlet extends HttpServlet {
         req.setAttribute("users", userDao.getUsers());
         req.setAttribute("items", itemDao.getItems());
         req.setAttribute("loans", loanDao.getLoans());
-        req.getRequestDispatcher("/debug/db.jsp").forward(req, resp);
+        req.getRequestDispatcher(Constants.JSP_DEBUG).forward(req, resp);
     }
 }

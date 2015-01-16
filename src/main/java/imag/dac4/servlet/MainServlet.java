@@ -17,9 +17,6 @@ public class MainServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final User user = (User) req.getSession().getAttribute("user");
         if (user != null) {
-            req.setAttribute("login", user.getLogin());
-            req.setAttribute("name", user.getName());
-            req.setAttribute("email", user.getEmail());
             if ((Boolean) req.getSession().getAttribute("isAdmin")) {
                 req.getRequestDispatcher(Constants.JSP_ADMIN_HOME).forward(req, resp);
             } else {

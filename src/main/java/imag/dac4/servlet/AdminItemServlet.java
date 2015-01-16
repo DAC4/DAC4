@@ -15,6 +15,7 @@ import java.io.IOException;
 @WebServlet(name = "AdminItemServlet", urlPatterns = {
         "/admin/item",
         "/admin/item/approve",
+        "/admin/item/remove",
 })
 public class AdminItemServlet extends HttpServlet {
 
@@ -23,8 +24,8 @@ public class AdminItemServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (!this.isAdmin(req)) {
-            req.setAttribute("error", 403);
-            req.setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+            req.getSession().setAttribute("error", 403);
+            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
             return;
         }
@@ -37,8 +38,8 @@ public class AdminItemServlet extends HttpServlet {
                 req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
                 break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
@@ -47,8 +48,8 @@ public class AdminItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (!this.isAdmin(req)) {
-            req.setAttribute("error", 403);
-            req.setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+            req.getSession().setAttribute("error", 403);
+            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
             return;
         }
@@ -59,9 +60,12 @@ public class AdminItemServlet extends HttpServlet {
             case "approve":
                 this.onApproveItemRequest(req, resp);
                 break;
+            case "remove":
+                this.onRemoveItemRequest(req, resp);
+                break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
@@ -71,8 +75,8 @@ public class AdminItemServlet extends HttpServlet {
         final String id = req.getParameter("id");
 
         if (id == null) {
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
             return;
         }
@@ -80,19 +84,24 @@ public class AdminItemServlet extends HttpServlet {
         final Item item = this.itemDao.read(Integer.parseInt(id));
         if (item == null) {
             // User doesn't exist
-            req.setAttribute("error", 404);
-            req.setAttribute("error_msg", "Not Found: Invalid id");
+            req.getSession().setAttribute("error", 404);
+            req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
             req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
-        } else if (item.isAccepted()) {
+        } else if (item.isApproved()) {
             // User registration is already complete
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: Item already accepted");
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Item already accepted");
             req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
         } else {
-            item.setAccepted(true);
+            item.setApproved(true);
             this.itemDao.update(item);
             resp.sendRedirect("/admin/item");
         }
+    }
+
+    private void onRemoveItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO
+        resp.sendRedirect("/admin/item");
     }
 
     private boolean isAdmin(final HttpServletRequest req) {

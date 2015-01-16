@@ -1,3 +1,110 @@
 /*
  * DAC4 CSS
  */
+
+/* ############################ */
+/* ## Fix Semantic UI Errors ## */
+/* ############################ */
+
+/* Tables are weird */
+.ui.table {
+    border-collapse: collapse; /* And not separate... */
+}
+
+/* Font size is broken on multiple things */
+.ui.table,
+.ui.message,
+.ui.form {
+    font-size: 1rem; /* And not 1em... */
+}
+
+/* ############ */
+/* ## Header ## */
+/* ############ */
+
+/* Fix header to top */
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    height: 54px;
+    z-index: 1337;
+}
+
+/* Display menu Login form inline with Register button */
+.inline-form {
+    display: inline-block;
+}
+
+/* Fix menu buttons width */
+#header .ui.button {
+    width: 100px;
+    height: 38px;
+}
+
+/* Reduce padding on form menu item */
+#header .item.button-item {
+    padding: .58571em .95em;
+}
+
+#content {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+/* ############ */
+/* ## Footer ## */
+/* ############ */
+
+/* Fix footer to bottom */
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    height: 54px;
+    z-index: 1337;
+}
+
+/* Fix menu buttons width */
+#footer .ui.button {
+    width: 100px;
+}
+
+/* ##################### */
+/* ## Header & Footer ## */
+/* ##################### */
+
+/* Center text in item */
+.ui.menu .item,
+.ui.menu .item,
+.ui.menu .item {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ui.menu .item span {
+    line-height: 54px;
+    height: 54px;
+}
+
+.ui.menu .item.bar-text-big span,
+.ui.menu .item.bar-text-medium span,
+.ui.menu .item.bar-text-small span {
+    font-weight: bold;
+}
+
+.ui.menu .item.bar-text-big span {
+    font-size: 2.0rem;
+}
+
+.ui.menu .item.bar-text-medium span {
+    font-size: 1.4rem;
+}
+
+.ui.menu .item.bar-text-small span {
+    font-size: 1.1rem;
+}

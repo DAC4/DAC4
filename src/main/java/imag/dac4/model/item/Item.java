@@ -35,10 +35,21 @@ public class Item implements Serializable {
     @Column(name = "maxLoanDuration")
     private int maxLoanDuration;
 
-    @Column(name = "accepted")
-    private boolean accepted;
+    @Column(name = "approved")
+    private boolean approved;
 
     public Item() {
+    }
+
+    public Item(int ownerId, String name, String imageId, String description, int lockerNum, int maxLoanDuration) {
+        this.ownerId = ownerId;
+        this.name = name;
+        this.imageId = imageId;
+        this.description = description;
+        this.availability = true;
+        this.lockerNum = lockerNum;
+        this.maxLoanDuration = maxLoanDuration;
+        this.approved = false;
     }
 
     public int getId() {
@@ -73,8 +84,8 @@ public class Item implements Serializable {
         return maxLoanDuration;
     }
 
-    public boolean isAccepted() {
-        return accepted;
+    public boolean isApproved() {
+        return approved;
     }
 
     public void setName(String name) {
@@ -89,7 +100,7 @@ public class Item implements Serializable {
         this.description = description;
     }
 
-    public void setAvailability(boolean availability) {
+    public void setAvailable(boolean availability) {
         this.availability = availability;
     }
 
@@ -101,7 +112,7 @@ public class Item implements Serializable {
         this.maxLoanDuration = maxLoanDuration;
     }
 
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
+    public void setApproved(boolean accepted) {
+        this.approved = accepted;
     }
 }

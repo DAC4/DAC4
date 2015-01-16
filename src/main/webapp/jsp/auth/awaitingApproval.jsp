@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
-	request.setAttribute("title", "Home");
-	request.setAttribute("menu-current-page", "user-home");
+	request.setAttribute("title", "Registration - Awaiting Approval");
+	request.setAttribute("menu-current-page", "auth-awaiting-approval");
 %>
 
 <!DOCTYPE html>
@@ -20,19 +20,11 @@
 	<div class="sixteen wide column">
 		<div class="section">
 
-			<h1 class="ui block header">User Home</h1>
+			<h1 class="ui block header">Registration Complete</h1>
 
-			<ul>
-				<li>
-					Login: <%= user.getLogin() %>
-				</li>
-				<li>
-					Name: <%= user.getName() %>
-				</li>
-				<li>
-					Email: <%= user.getEmail() %>
-				</li>
-			</ul>
+			<p class="ui section">
+				The administrator needs to approve your account before you can login.
+			</p>
 
 		</div>
 	</div>

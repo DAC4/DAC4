@@ -1,34 +1,43 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+	request.setAttribute("title", "Admin - Home");
+	request.setAttribute("menu-current-page", "admin-home");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Admin Home</title>
+	<title>
+		<%= request.getAttribute("title") %>
+	</title>
+	<%@ include file="../partial/head.jsp" %>
+
 </head>
 <body>
-	<h1>Admin Home</h1>
+	<%@ include file="../partial/header.jsp" %>
 
-	<hr>
+	<div class="sixteen wide column">
+		<div class="section">
 
-	<ul>
-		<li>
-			Login: <%= request.getAttribute("login") %>
-		</li>
-		<li>
-			Name: <%= request.getAttribute("name") %>
-		</li>
-		<li>
-			Email: <%= request.getAttribute("email") %>
-		</li>
-	</ul>
+			<h1 class="ui block header">Admin Home</h1>
 
-	<hr>
+			<ul>
+				<li>
+					Login: <%= user.getLogin() %>
+				</li>
+				<li>
+					Name: <%= user.getName() %>
+				</li>
+				<li>
+					Email: <%= user.getEmail() %>
+				</li>
+			</ul>
 
-	<h2><a href="${pageContext.request.contextPath}/admin/user">Users</a></h2>
+		</div>
+	</div>
 
-	<h2><a href="${pageContext.request.contextPath}/admin/item">Items</a></h2>
-
-	<hr>
-
-	<h2><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

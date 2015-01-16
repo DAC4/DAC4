@@ -15,6 +15,7 @@ import java.io.IOException;
 @WebServlet(name = "AdminUserServlet", urlPatterns = {
         "/admin/user",
         "/admin/user/approve",
+        "/admin/user/remove",
 })
 public class AdminUserServlet extends HttpServlet {
 
@@ -23,8 +24,8 @@ public class AdminUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (!this.isAdmin(req)) {
-            req.setAttribute("error", 403);
-            req.setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+            req.getSession().setAttribute("error", 403);
+            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
             return;
         }
@@ -37,8 +38,8 @@ public class AdminUserServlet extends HttpServlet {
                 req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
                 break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
@@ -47,8 +48,8 @@ public class AdminUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (!this.isAdmin(req)) {
-            req.setAttribute("error", 403);
-            req.setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+            req.getSession().setAttribute("error", 403);
+            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
             return;
         }
@@ -59,9 +60,12 @@ public class AdminUserServlet extends HttpServlet {
             case "approve":
                 this.onApproveUserRequest(req, resp);
                 break;
+            case "remove":
+                this.onRemoveUserRequest(req, resp);
+                break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
@@ -71,8 +75,8 @@ public class AdminUserServlet extends HttpServlet {
         final String login = req.getParameter("login");
 
         if (login == null) {
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
             return;
         }
@@ -80,19 +84,24 @@ public class AdminUserServlet extends HttpServlet {
         final User user = this.userDao.getByLogin(login);
         if (user == null) {
             // User doesn't exist
-            req.setAttribute("error", 404);
-            req.setAttribute("error_msg", "Not Found: Invalid login");
+            req.getSession().setAttribute("error", 404);
+            req.getSession().setAttribute("error_msg", "Not Found: Invalid login");
             req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
-        } else if (user.isRegistrationComplete()) {
+        } else if (user.isApproved()) {
             // User registration is already complete
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: User registration already complete");
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: User registration already complete");
             req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
         } else {
-            user.setRegistrationComplete(true);
+            user.setApproved(true);
             this.userDao.update(user);
             resp.sendRedirect("/admin/user");
         }
+    }
+
+    private void onRemoveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO
+        resp.sendRedirect("/admin/user");
     }
 
     private boolean isAdmin(final HttpServletRequest req) {
