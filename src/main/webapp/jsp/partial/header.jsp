@@ -1,9 +1,10 @@
 <%@ page import="imag.dac4.model.user.User" %>
 
 <%
-	final String current = request.getParameter("menu-current-page");
-	final boolean isConnected = request.getSession().getAttribute("user") != null;
-	final boolean isAdmin = request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin");
+	final String header_currentPage = request.getParameter("menu-current-page");
+	final User header_user = (User) request.getSession().getAttribute("user");
+	final boolean header_isConnected = header_user != null;
+	final boolean header_isAdmin = header_isConnected && request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin");
 %>
 
 <!-- TODO Add menu entries according to session.getAttribute("menu-config"); -->
@@ -18,27 +19,27 @@
 		<span style="font-style: italic"><%= request.getAttribute("title") %></span>
 	</div>
 
-	<% if (isConnected) { %>
+	<% if (header_isConnected) { %>
 	<a href="${pageContext.request.contextPath}/items">
-		<div class="<%= "items".equals(current) ? "pointing " : "" %>item">Items</div>
+		<div class="<%= "items".equals(header_currentPage) ? "pointing " : "" %>item">Items</div>
 	</a>
 
 	<a><!--href="${pageContext.request.contextPath}/loans"-->
-		<div class="disabled <%= "loans".equals(current) ? "pointing " : "" %>item">Loans</div>
+		<div class="disabled <%= "loans".equals(header_currentPage) ? "pointing " : "" %>item">Loans</div>
 	</a>
-	<% if (isAdmin) { %>
+	<% if (header_isAdmin) { %>
 	<a href="${pageContext.request.contextPath}/admin/user">
-		<div class="red <%= "admin-users".equals(current) ? "pointing " : "" %>item"><i class="setting icon"></i> Users</div>
+		<div class="red <%= "admin-users".equals(header_currentPage) ? "pointing " : "" %>item"><i class="setting icon"></i> Users</div>
 	</a>
 
 	<a href="${pageContext.request.contextPath}/admin/item">
-		<div class="red <%= "admin-items".equals(current) ? "pointing " : "" %>item"><i class="setting icon"></i> Items</div>
+		<div class="red <%= "admin-items".equals(header_currentPage) ? "pointing " : "" %>item"><i class="setting icon"></i> Items</div>
 	</a>
 	<% } %>
 	<% } %>
 
 	<div class="right menu">
-		<% if (request.getAttribute("user") == null) { %>
+		<% if (!header_isConnected) { %>
 		<div class="item button-item">
 			<form method="POST" action="${pageContext.request.contextPath}/auth/login">
 				<div class="ui input">
@@ -49,17 +50,16 @@
 				</div>
 				<input class="ui submit button" type="submit" value="Login"/>
 			</form>
-			<% if (!"auth-register".equals(current)) { %>
+			<% if (!"auth-register".equals(header_currentPage)) { %>
 			<a href="${pageContext.request.contextPath}/auth/register">
 				<button type="button" class="ui primary button">Register</button>
 			</a>
 			<% } %>
 		</div>
 		<% } else {%>
-		<% final User user = (User) request.getAttribute("user"); %>
 		<div class="item bar-text-small">
 			<span>
-				Logged in as <%= user.getName() %>
+				Logged in as <%= header_user.getName() %>
 			</span>
 		</div>
 		<div class="item button-item">
@@ -74,18 +74,18 @@
 <div id="content" class="ui page grid">
 	<%
 		if (session.getAttribute("error") != null) {
-			final Integer error = (Integer) session.getAttribute("error");
-			final String error_msg = (String) session.getAttribute("error_msg");
+			final Integer header_error = (Integer) session.getAttribute("error");
+			final String header_error_msg = (String) session.getAttribute("error_msg");
 			session.removeAttribute("error");
 			session.removeAttribute("error_msg");
 	%>
 	<div id="error" class="ui negative message">
 		<h2 class="header">
-			Error <%= error %>
+			Error <%= header_error %>
 		</h2>
 
 		<p>
-			<%= error_msg %>
+			<%= header_error_msg %>
 		</p>
 	</div>
-		<% } %>
+	<% } %>

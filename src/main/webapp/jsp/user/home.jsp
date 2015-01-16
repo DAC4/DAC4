@@ -1,4 +1,3 @@
-<%@ page import="imag.dac4.model.user.User" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
@@ -13,13 +12,13 @@
 		<%= request.getAttribute("title") %>
 	</title>
 	<%@ include file="../partial/head.jsp" %>
-
-	<% final User user = (User) request.getAttribute("user"); %>
 </head>
 <body>
 	<%@ include file="../partial/header.jsp" %>
 
 	<h1 class="ui block header">User Home</h1>
+
+	<% final User user = (User) request.getAttribute("user"); %>
 
 	<ul>
 		<li>
