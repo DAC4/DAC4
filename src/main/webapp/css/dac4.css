@@ -79,18 +79,21 @@
 /* ##################### */
 
 /* Center text in item */
-.ui.menu .item.bar-text-big,
-.ui.menu .item.bar-text-medium,
-.ui.menu .item.bar-text-small {
+.ui.menu .item,
+.ui.menu .item,
+.ui.menu .item {
     padding-top: 0;
     padding-bottom: 0;
+}
+
+.ui.menu .item span {
+    line-height: 54px;
+    height: 54px;
 }
 
 .ui.menu .item.bar-text-big span,
 .ui.menu .item.bar-text-medium span,
 .ui.menu .item.bar-text-small span {
-    line-height: 54px;
-    height: 54px;
     font-weight: bold;
 }
 
