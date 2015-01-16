@@ -48,7 +48,7 @@
 				<td>
 					<%= user.getEmail() %>
 				</td>
-				<td class="right-aligned">
+				<td class="right aligned">
 					<%= user.getCredits() %>
 				</td>
 				<% if (user.isApproved()) { %>

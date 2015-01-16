@@ -52,11 +52,11 @@
 						<%= item.getName() %>
 					</td>
 					<% if (item.isAvailable()) { %>
-					<td class="positive collapsing right-aligned">
+					<td class="positive collapsing right aligned">
 						<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 					</td>
 					<% } else { %>
-					<td class="negative collapsing right-aligned">
+					<td class="negative collapsing right aligned">
 						<span style="color:red"><i class="remove icon"></i> No</span>
 					</td>
 					<% } %>
