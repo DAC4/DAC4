@@ -63,7 +63,7 @@
 			</a>
 			<% } %>
 		</div>
-		<% } else {%>
+		<% } else { %>
 		<div class="item bar-text-small">
 			<span>
 				Logged in as <%= header_user.getName() %>
