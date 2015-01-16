@@ -8,13 +8,14 @@
 
 /* Tables are weird */
 .ui.table {
-    font-size: 1rem; /* And not 1em... */
     border-collapse: collapse; /* And not separate... */
 }
 
-/* Forms are weird */
+/* Font size is broken on multiple things */
+.ui.table,
+.ui.message,
 .ui.form {
-    font-size: 1rem;
+    font-size: 1rem; /* And not 1em... */
 }
 
 /* ############ */
