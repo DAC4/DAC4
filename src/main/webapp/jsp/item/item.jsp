@@ -20,42 +20,46 @@
 <body>
 	<%@ include file="../partial/header.jsp" %>
 
-	<div class="section">
-		<h1 class="ui block header">Item Page</h1>
+	<div class="sixteen wide column">
+		<div class="section">
 
-		<ul>
-			<li>
-				Image: <%= item.getImageId() %>
-			</li>
-			<li>
-				Name: <%= item.getName() %>
-			</li>
-			<li>
-				Description: <%= item.getDescription() %>
-			</li>
-			<li>
-				Locker Number: <%= item.getLockerNum() %>
-			</li>
-			<li>
-				Max Loan Duration: <%= item.getMaxLoanDuration() %>
-			</li>
-			<% if (!item.isApproved()) { %>
-			<li style="color:red">
-				Approved: no
-			</li>
+			<h1 class="ui block header">Item Page</h1>
+
+			<ul>
+				<li>
+					Image: <%= item.getImageId() %>
+				</li>
+				<li>
+					Name: <%= item.getName() %>
+				</li>
+				<li>
+					Description: <%= item.getDescription() %>
+				</li>
+				<li>
+					Locker Number: <%= item.getLockerNum() %>
+				</li>
+				<li>
+					Max Loan Duration: <%= item.getMaxLoanDuration() %>
+				</li>
+				<% if (!item.isApproved()) { %>
+				<li style="color:red">
+					Approved: no
+				</li>
+				<% } %>
+			</ul>
+
+			<% if (item.isApproved() && item.isAvailable()) { %>
+			<form action="${pageContext.request.contextPath}/item/loan" method="POST">
+				<input type="hidden" name="id" value="<%= item.getId() %>"/>
+				<input type="submit" value="Loan"/>
+			</form>
 			<% } %>
-		</ul>
 
-		<% if (item.isApproved() && item.isAvailable()) { %>
-		<form action="${pageContext.request.contextPath}/item/loan" method="POST">
-			<input type="hidden" name="id" value="<%= item.getId() %>"/>
-			<input type="submit" value="Loan"/>
-		</form>
-		<% } %>
+			<hr>
 
-		<hr>
+			<h2 class="ui header"><a href="${pageContext.request.contextPath}/">Index</a></h2>
 
-		<h2 class="ui header"><a href="${pageContext.request.contextPath}/">Index</a></h2>
+		</div>
 	</div>
 
 	<%@ include file="../partial/footer.jsp" %>

@@ -17,7 +17,8 @@
 <body>
 	<%@ include file="../partial/header.jsp" %>
 
-	<div class="section">
+	<div class="sixteen wide column">
+
 		<form class="ui form" method="POST" action="${pageContext.request.contextPath}/item/register">
 			<h1 class="ui dividing header">Item Registration</h1>
 
@@ -41,6 +42,7 @@
 			</div>
 			<input type="submit" value="Register Item" class="ui primary submit button"/>
 		</form>
+
 	</div>
 
 	<%@ include file="../partial/footer.jsp" %>

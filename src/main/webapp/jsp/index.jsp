@@ -16,7 +16,13 @@
 <body>
 	<%@ include file="partial/header.jsp" %>
 
-	<h1 class="ui block header">Content</h1>
+	<div class="sixteen wide column">
+		<div class="section">
+
+			<h1 class="ui block header">Content</h1>
+
+		</div>
+	</div>
 
 	<%@ include file="partial/footer.jsp" %>
 </body>

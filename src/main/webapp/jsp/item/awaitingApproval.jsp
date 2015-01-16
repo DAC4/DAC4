@@ -17,15 +17,21 @@
 <body>
 	<%@ include file="../partial/header.jsp" %>
 
-	<h1 class="ui block header">Item Registration Complete</h1>
+	<div class="sixteen wide column">
+		<div class="section">
 
-	<p class="ui section">
-		The administrator needs to approve your item before in order to finalize registration.
-	</p>
+			<h1 class="ui block header">Item Registration Complete</h1>
 
-	<hr>
+			<p class="ui section">
+				The administrator needs to approve your item before in order to finalize registration.
+			</p>
 
-	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
+			<hr>
+
+			<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
+
+		</div>
+	</div>
 
 	<%@ include file="../partial/footer.jsp" %>
 </body>

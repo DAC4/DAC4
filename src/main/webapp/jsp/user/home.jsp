@@ -17,25 +17,31 @@
 <body>
 	<%@ include file="../partial/header.jsp" %>
 
-	<h1 class="ui block header">User Home</h1>
+	<div class="sixteen wide column">
+		<div class="section">
 
-	<% final User user = (User) request.getAttribute("user"); %>
+			<h1 class="ui block header">User Home</h1>
 
-	<ul>
-		<li>
-			Login: <%= user.getLogin() %>
-		</li>
-		<li>
-			Name: <%= user.getName() %>
-		</li>
-		<li>
-			Email: <%= user.getEmail() %>
-		</li>
-	</ul>
+			<% final User user = (User) request.getAttribute("user"); %>
 
-	<hr>
+			<ul>
+				<li>
+					Login: <%= user.getLogin() %>
+				</li>
+				<li>
+					Name: <%= user.getName() %>
+				</li>
+				<li>
+					Email: <%= user.getEmail() %>
+				</li>
+			</ul>
 
-	<h2 class="ui header"><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
+			<hr>
+
+			<h2 class="ui header"><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
+
+		</div>
+	</div>
 
 	<%@ include file="../partial/footer.jsp" %>
 </body>
