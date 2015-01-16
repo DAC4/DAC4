@@ -39,7 +39,7 @@
 	<% } %>
 
 	<div class="right menu">
-		<% if (request.getAttribute("showLoginForm") != null) { %>
+		<% if (request.getAttribute("user") == null) { %>
 		<div class="item button-item">
 			<form method="POST" action="${pageContext.request.contextPath}/auth/login">
 				<div class="ui input">
@@ -56,7 +56,7 @@
 			</a>
 			<% } %>
 		</div>
-		<% } else if (request.getAttribute("user") != null) {%>
+		<% } else {%>
 		<% final User user = (User) request.getAttribute("user"); %>
 		<div class="item bar-text-small">
 			<span>

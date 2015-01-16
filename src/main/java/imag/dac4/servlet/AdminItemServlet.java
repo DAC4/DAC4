@@ -22,7 +22,6 @@ public class AdminItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.updateSessionAttributes(req.getSession());
         if (!this.isAdmin(req)) {
             req.getSession().setAttribute("error", 403);
             req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
@@ -47,7 +46,6 @@ public class AdminItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.updateSessionAttributes(req.getSession());
         if (!this.isAdmin(req)) {
             req.getSession().setAttribute("error", 403);
             req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
