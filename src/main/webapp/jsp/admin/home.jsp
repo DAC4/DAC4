@@ -37,12 +37,6 @@
 				</li>
 			</ul>
 
-			<hr>
-
-			<h2 class="ui header"><a href="${pageContext.request.contextPath}/admin/user">Users</a></h2>
-
-			<h2 class="ui header"><a href="${pageContext.request.contextPath}/admin/item">Items</a></h2>
-
 		</div>
 	</div>
 

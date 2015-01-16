@@ -83,8 +83,6 @@
 				</tbody>
 			</table>
 
-			<h2 class="ui header"><a href="${pageContext.request.contextPath}/">Index</a></h2>
-
 		</div>
 	</div>
 

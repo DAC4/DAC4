@@ -182,8 +182,6 @@
 				</tbody>
 			</table>
 
-			<a href="${pageContext.request.contextPath}/">Home</a>
-
 		</div>
 	</div>
 

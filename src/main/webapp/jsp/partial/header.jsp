@@ -29,14 +29,14 @@
 	</a>
 	<% if (header_isAdmin) { %>
 	<a href="${pageContext.request.contextPath}/admin/user">
-		<div class="red <%= "admin-users".equals(header_currentPage) ? "pointing " : "" %>item">
-			<span><i class="setting icon"></i> Users</span>
+		<div class="<%= "admin-users".equals(header_currentPage) ? "pointing " : "" %>item">
+			<span style="color:red"><i class="setting icon"></i> Users</span>
 		</div>
 	</a>
 
 	<a href="${pageContext.request.contextPath}/admin/item">
-		<div class="red <%= "admin-items".equals(header_currentPage) ? "pointing " : "" %>item">
-			<span><i class="setting icon"></i> Items</span>
+		<div class="<%= "admin-items".equals(header_currentPage) ? "pointing " : "" %>item">
+			<span style="color:red"><i class="setting icon"></i> Items</span>
 		</div>
 	</a>
 	<% } %>
@@ -79,7 +79,7 @@
 </div>
 
 <div id="content" class="ui page grid">
-	<%
+		<%
 		if (session.getAttribute("error") != null) {
 			final Integer header_error = (Integer) session.getAttribute("error");
 			final String header_error_msg = (String) session.getAttribute("error_msg");
@@ -95,4 +95,4 @@
 			<%= header_error_msg %>
 		</p>
 	</div>
-	<% } %>
+		<% } %>

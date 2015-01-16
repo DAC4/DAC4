@@ -36,10 +36,6 @@
 				</li>
 			</ul>
 
-			<hr>
-
-			<h2 class="ui header"><a href="${pageContext.request.contextPath}/auth/logout">Logout</a></h2>
-
 		</div>
 	</div>
 

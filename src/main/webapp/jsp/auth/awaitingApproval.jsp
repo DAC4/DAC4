@@ -26,10 +26,6 @@
 				The administrator needs to approve your account before you can login.
 			</p>
 
-			<hr>
-
-			<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
-
 		</div>
 	</div>
 
