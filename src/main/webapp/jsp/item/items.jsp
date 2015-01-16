@@ -69,6 +69,7 @@
 						<span style="color:red"><i class="remove icon"></i> No</span>
 					</td>
 					<% } %>
+					<% } %>
 					<td>
 						<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
 							<button type="button" class="ui button">Details</button>
