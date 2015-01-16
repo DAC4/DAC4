@@ -2,9 +2,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <div id="header" class="ui menu">
-	<div class="item bar-text-big">
-		<span>DAC4</span>
-	</div>
+	<a href="${pageContext.request.contextPath}/">
+		<div class="item bar-text-big">
+			<span>DAC4</span>
+		</div>
+	</a>
 	<div class="item bar-text-medium">
 		<span><%= request.getAttribute("title") %></span>
 	</div>
@@ -53,6 +55,5 @@
 		<p>
 			<%= error_msg %>
 		</p>
-		<hr>
 	</div>
 	<% } %>
