@@ -63,11 +63,11 @@
 							<span style="color:red"><i class="remove icon"></i> No</span>
 						</td>
 						<% } %>
-						<td class="collapsing">
+						<td class="right aligned collapsing">
 							<% if (!user.isApproved()) { %>
 							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
 								<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
-								<input type="submit" value="Approve" class="ui red button"/>
+								<input type="submit" value="Approve" class="ui orange button"/>
 							</form>
 							<% } %>
 							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
