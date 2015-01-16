@@ -15,6 +15,7 @@ import java.io.IOException;
 @WebServlet(name = "AdminUserServlet", urlPatterns = {
         "/admin/user",
         "/admin/user/approve",
+        "/admin/user/remove",
 })
 public class AdminUserServlet extends HttpServlet {
 
@@ -59,6 +60,9 @@ public class AdminUserServlet extends HttpServlet {
             case "approve":
                 this.onApproveUserRequest(req, resp);
                 break;
+            case "remove":
+                this.onRemoveUserRequest(req, resp);
+                break;
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
@@ -93,6 +97,11 @@ public class AdminUserServlet extends HttpServlet {
             this.userDao.update(user);
             resp.sendRedirect("/admin/user");
         }
+    }
+
+    private void onRemoveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO
+        resp.sendRedirect("/admin/user");
     }
 
     private boolean isAdmin(final HttpServletRequest req) {

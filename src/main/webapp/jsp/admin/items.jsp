@@ -85,7 +85,7 @@
 							<% } %>
 							<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/remove" method="POST">
 								<input type="hidden" name="id" value="<%= item.getId() %>"/>
-								<input type="submit" value="Remove" class="ui red button"/>
+								<input type="submit" value="Remove" class="ui disabled red button"/>
 							</form>
 						</td>
 					</tr>

@@ -70,6 +70,10 @@
 								<input type="submit" value="Approve" class="ui red button"/>
 							</form>
 							<% } %>
+							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
+								<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
+								<input type="submit" value="Remove" class="ui disabled red button"/>
+							</form>
 						</td>
 					</tr>
 					<%

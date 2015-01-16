@@ -62,6 +62,7 @@ public class AdminItemServlet extends HttpServlet {
                 break;
             case "remove":
                 this.onRemoveItemRequest(req, resp);
+                break;
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
