@@ -55,16 +55,16 @@
 						<td>
 							<%= item.getDescription() %>
 						</td>
-						<td class="right aligned">
+						<td class="right aligned collapsing">
 							<%= item.getOwnerId() %> <!-- TODO Login with Link to User page -->
 						</td>
-						<td class="right aligned">
+						<td class="right aligned collapsing">
 							<%= item.isAvailable() %>
 						</td>
-						<td class="right aligned">
+						<td class="right aligned collapsing">
 							<%= item.getLockerNum() %>
 						</td>
-						<td class="right aligned">
+						<td class="right aligned collapsing">
 							<%= item.getMaxLoanDuration() %>
 						</td>
 						<% if (item.isApproved()) { %>
@@ -76,7 +76,7 @@
 							<span style="color:red"><i class="remove icon"></i> No</span>
 						</td>
 						<% } %>
-						<td class="right aligned">
+						<td class="right aligned collapsing">
 							<% if (!item.isApproved()) { %>
 							<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
 								<input type="hidden" name="id" value="<%= item.getId() %>"/>

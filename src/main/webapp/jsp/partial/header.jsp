@@ -8,17 +8,12 @@
 	final boolean header_isAdmin = header_isConnected && request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin");
 %>
 
-<!-- TODO Add menu entries according to session.getAttribute("menu-config"); -->
 <div id="header" class="ui menu">
 	<a href="${pageContext.request.contextPath}/">
 		<div class="item bar-text-big">
 			<span>DAC4</span>
 		</div>
 	</a>
-
-	<div class="item bar-text-medium">
-		<span style="font-style: italic"><%= request.getAttribute("title") %></span>
-	</div>
 
 	<% if (header_isConnected) { %>
 	<a href="${pageContext.request.contextPath}/items">
@@ -48,6 +43,9 @@
 	<% } %>
 
 	<div class="right menu">
+		<div class="item bar-text-medium">
+			<span style="font-style: italic"><%= request.getAttribute("title") %></span>
+		</div>
 		<% if (!header_isConnected) { %>
 		<div class="item button-item">
 			<form class="inline-form" method="POST" action="${pageContext.request.contextPath}/auth/login">
