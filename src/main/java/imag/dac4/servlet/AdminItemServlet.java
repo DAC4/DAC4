@@ -22,10 +22,10 @@ public class AdminItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.setHeaderAttributes(req);
+        Tools.updateSessionAttributes(req);
         if (!this.isAdmin(req)) {
-            req.setAttribute("error", 403);
-            req.setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+            req.getSession().setAttribute("error", 403);
+            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
             return;
         }
@@ -38,8 +38,8 @@ public class AdminItemServlet extends HttpServlet {
                 req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
                 break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
@@ -47,10 +47,10 @@ public class AdminItemServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.setHeaderAttributes(req);
+        Tools.updateSessionAttributes(req);
         if (!this.isAdmin(req)) {
-            req.setAttribute("error", 403);
-            req.setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+            req.getSession().setAttribute("error", 403);
+            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
             return;
         }
@@ -62,8 +62,8 @@ public class AdminItemServlet extends HttpServlet {
                 this.onApproveItemRequest(req, resp);
                 break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
@@ -73,8 +73,8 @@ public class AdminItemServlet extends HttpServlet {
         final String id = req.getParameter("id");
 
         if (id == null) {
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
             req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
             return;
         }
@@ -82,13 +82,13 @@ public class AdminItemServlet extends HttpServlet {
         final Item item = this.itemDao.read(Integer.parseInt(id));
         if (item == null) {
             // User doesn't exist
-            req.setAttribute("error", 404);
-            req.setAttribute("error_msg", "Not Found: Invalid id");
+            req.getSession().setAttribute("error", 404);
+            req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
             req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
         } else if (item.isApproved()) {
             // User registration is already complete
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: Item already accepted");
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Item already accepted");
             req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
         } else {
             item.setApproved(true);

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
-	request.setAttribute("title", "Registration - Awaiting Validation");
+	request.setAttribute("title", "Registration - Awaiting Approval");
 %>
 
 <!DOCTYPE html>

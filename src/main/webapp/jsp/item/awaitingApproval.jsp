@@ -1,0 +1,31 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+	request.setAttribute("title", "Item Registration - Awaiting Approval");
+%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		<%= request.getAttribute("title") %>
+	</title>
+	<c:import url="../partial/head.jsp"/>
+</head>
+<body>
+	<c:import url="../partial/header.jsp"/>
+
+	<h1 class="ui block header">Item Registration Complete</h1>
+
+	<p class="ui section">
+		The administrator needs to approve your item before in order to finalize registration.
+	</p>
+
+	<hr>
+
+	<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
+
+	<c:import url="../partial/footer.jsp"/>
+</body>
+</html>

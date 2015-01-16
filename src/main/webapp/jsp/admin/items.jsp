@@ -70,6 +70,7 @@
 				<td class="negative">
 					<form action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
 						<input type="hidden" name="id" value="<%= item.getId() %>"/>
+						<span style="color:red"><i class="remove icon"></i></span>
 						<input type="submit" value="Approve" class="ui red button"/>
 					</form>
 				</td>

@@ -2,18 +2,23 @@ package imag.dac4.servlet;
 
 import imag.dac4.model.user.User;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public final class Tools {
 
-    public static void setHeaderAttributes(HttpServletRequest req) {
-        req.removeAttribute("showLoginForm");
-        req.removeAttribute("user");
-        final User user = (User) req.getSession().getAttribute("user");
+    public static void updateSessionAttributes(HttpSession session) {
+        final User user = (User) session.getAttribute("user");
+        final Boolean isAdmin = (Boolean) session.getAttribute("isAdmin");
         if (user == null) {
-            req.setAttribute("showLoginForm", true);
+            session.setAttribute("showLoginForm", true);
+            if (isAdmin != null && isAdmin) {
+                session.setAttribute("menu-config", "admin");
+            } else {
+                session.setAttribute("menu-config", "user");
+            }
         } else {
-            req.setAttribute("user", user);
+            session.removeAttribute("showLoginForm");
+            session.setAttribute("menu-config", "anon");
         }
     }
 

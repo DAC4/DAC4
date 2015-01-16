@@ -1,6 +1,7 @@
 <%@ page import="imag.dac4.model.user.User" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
+<!-- TODO Add menu entries according to session.getAttribute("menu-config"); -->
 <div id="header" class="ui menu">
 	<a href="${pageContext.request.contextPath}/">
 		<div class="item bar-text-big">
@@ -44,9 +45,11 @@
 
 <div id="content" class="ui page grid">
 	<%
-		if (request.getAttribute("error") != null) {
-		final Integer error = (Integer) request.getAttribute("error");
-		final String error_msg = (String) request.getAttribute("error_msg");
+		if (session.getAttribute("error") != null) {
+		final Integer error = (Integer) session.getAttribute("error");
+		final String error_msg = (String) session.getAttribute("error_msg");
+		session.removeAttribute("error");
+		session.removeAttribute("error_msg");
 	%>
 	<div id="error" class="ui negative message">
 		<h2 class="header">

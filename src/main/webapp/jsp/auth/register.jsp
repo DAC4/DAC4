@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
-	request.setAttribute("title", "Registration");
+	request.setAttribute("title", "User Registration");
 %>
 
 <!DOCTYPE html>

@@ -24,7 +24,7 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.setHeaderAttributes(req);
+        Tools.updateSessionAttributes(req);
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
@@ -37,15 +37,15 @@ public class AuthServlet extends HttpServlet {
             case "logout":
                 req.getSession().removeAttribute("user");
                 req.getSession().removeAttribute("isAdmin");
-                Tools.setHeaderAttributes(req);
+                Tools.updateSessionAttributes(req);
                 resp.sendRedirect("/");
                 break;
             case "awaiting-validation":
                 req.getRequestDispatcher(Constants.JSP_AUTH_AWAITING_VALIDATION).forward(req, resp);
                 break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
@@ -53,7 +53,7 @@ public class AuthServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.setHeaderAttributes(req);
+        Tools.updateSessionAttributes(req);
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
@@ -64,8 +64,8 @@ public class AuthServlet extends HttpServlet {
                 this.onRegistrationRequest(req, resp);
                 break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
         }
@@ -83,19 +83,19 @@ public class AuthServlet extends HttpServlet {
         req.setAttribute("admin", isAdmin);
         if (user == null || !user.getPassword().equals(password)) {
             // User doesn't exist, password is invalid
-            req.setAttribute("error", 401);
-            req.setAttribute("error_msg", "Unauthorized: Invalid login/password");
+            req.getSession().setAttribute("error", 401);
+            req.getSession().setAttribute("error_msg", "Unauthorized: Invalid login/password");
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
         } else if (!user.isApproved()) {
             // User registration isn't complete
-            req.setAttribute("error", 403);
-            req.setAttribute("error_msg", "Forbidden: User registration incomplete");
+            req.getSession().setAttribute("error", 403);
+            req.getSession().setAttribute("error_msg", "Forbidden: User registration incomplete");
             req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
         } else {
             // User exists and password is valid
             req.getSession().setAttribute("user", user);
             req.getSession().setAttribute("isAdmin", isAdmin);
-            Tools.setHeaderAttributes(req);
+            Tools.updateSessionAttributes(req);
             resp.sendRedirect("/");
         }
     }
@@ -113,18 +113,23 @@ public class AuthServlet extends HttpServlet {
 
         if (user != null) {
             // User already exists
-            req.setAttribute("error", 409);
-            req.setAttribute("error_msg", "Conflict: Login already used");
+            req.getSession().setAttribute("error", 409);
+            req.getSession().setAttribute("error_msg", "Conflict: Login already used");
+            req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
+        } else if (login == null || password == null || passwordConfirm == null || name == null || email == null) {
+            // Missing parameter
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
             req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
         } else if (!password.equals(passwordConfirm)) {
             // Passwords don't match
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: Passwords don't match");
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Passwords don't match");
             req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
         } else if (!Constants.EMAIL_PATTERN.matcher(email).matches()) {
             // Email is invalid
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: Email is invalid");
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Email is invalid");
             req.getRequestDispatcher(Constants.JSP_AUTH_REGISTER).forward(req, resp);
         } else {
             user = new User(login, password, name, email);

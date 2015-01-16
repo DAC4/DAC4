@@ -3,6 +3,7 @@ package imag.dac4.servlet;
 import imag.dac4.Constants;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
+import imag.dac4.model.user.User;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -23,7 +24,7 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.setHeaderAttributes(req);
+        Tools.updateSessionAttributes(req);
         final Boolean isAdminParam = (Boolean) req.getSession().getAttribute("isAdmin");
         final boolean isAdmin = isAdminParam != null && isAdminParam;
 
@@ -35,15 +36,15 @@ public class ItemServlet extends HttpServlet {
                 try {
                     id = Integer.parseInt(req.getParameter("id"));
                 } catch (final NumberFormatException e) {
-                    req.setAttribute("error", 400);
-                    req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+                    req.getSession().setAttribute("error", 400);
+                    req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
                     req.getRequestDispatcher(Constants.JSP_ITEM).forward(req, resp);
                     return;
                 }
                 final Item item = this.itemDao.read(id);
                 if (item == null || !item.isApproved() && !isAdmin) {
-                    req.setAttribute("error", 400);
-                    req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+                    req.getSession().setAttribute("error", 400);
+                    req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
                 } else {
                     req.setAttribute("item", item);
                 }
@@ -54,27 +55,36 @@ public class ItemServlet extends HttpServlet {
                 req.setAttribute("items", this.itemDao.getItems());
                 req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
                 break;
+            case "register":
+                req.getRequestDispatcher(Constants.JSP_ITEM_REGISTER).forward(req, resp);
+                break;
+            case "awaiting-validation":
+                req.getRequestDispatcher(Constants.JSP_ITEM_AWAITING_VALIDATION).forward(req, resp);
+                break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
-                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                resp.sendRedirect("/");
                 break;
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Tools.setHeaderAttributes(req);
+        Tools.updateSessionAttributes(req);
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
             case "loan":
                 this.onLoanItemRequest(req, resp);
                 break;
+            case "register":
+                this.onItemRegistrationRequest(req, resp);
+                break;
             default:
-                req.setAttribute("error", 400);
-                req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
-                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                resp.sendRedirect("/");
                 break;
         }
     }
@@ -83,9 +93,9 @@ public class ItemServlet extends HttpServlet {
         final String idString = req.getParameter("id");
 
         if (idString == null) {
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
-            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
+            resp.sendRedirect("/");
             return;
         }
 
@@ -93,27 +103,81 @@ public class ItemServlet extends HttpServlet {
         try {
             id = Integer.parseInt(idString);
         } catch (final NumberFormatException e) {
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
-            req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+            resp.sendRedirect("/");
             return;
         }
 
         final Item item = this.itemDao.read(id);
         if (item == null || !item.isApproved()) {
             // Item doesn't exist
-            req.setAttribute("error", 404);
-            req.setAttribute("error_msg", "Not Found: Invalid id");
-            req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
+            req.getSession().setAttribute("error", 404);
+            req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
+            resp.sendRedirect("/items");
         } else if (!item.isAvailable()) {
             // Item not available
-            req.setAttribute("error", 400);
-            req.setAttribute("error_msg", "Bad Request: Item already loaned");
-            req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Item already loaned");
+            resp.sendRedirect("/items");
         } else {
-            // TODO Check credits
+            final User user = (User) req.getSession().getAttribute("user");
+            if (user == null) {
+                // Not logged in
+                req.getSession().setAttribute("error", 403);
+                req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+                resp.sendRedirect("/");
+            } else if (user.getCredits() <= 0) {
+                // Not enough credits
+                req.getSession().setAttribute("error", 403);
+                req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
+                resp.sendRedirect("/item?id=" + idString);
+            }
+            item.setAvailable(false);
+            this.itemDao.update(item);
             // TODO Register item loan
-            // TODO Redirect to confirmation page with max loan end date
+            resp.sendRedirect("/item/awaiting-validation");
+        }
+    }
+
+    private void onItemRegistrationRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final String name = req.getParameter("name");
+        final String description = req.getParameter("description");
+        final String lockerNumString = req.getParameter("lockerNum");
+        final String maxLoanDurationString = req.getParameter("maxLoanDuration");
+
+        final User user = (User) req.getSession().getAttribute("user");
+
+        if (user == null) {
+            // Not logged in
+            req.getSession().setAttribute("error", 403);
+            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+            resp.sendRedirect("/");
+        } else if (name == null || description == null || lockerNumString == null || maxLoanDurationString == null) {
+            // Missing parameter
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
+            resp.sendRedirect("/item/register");
+        } else {
+            final int lockerNum, maxLoanDuration;
+            try {
+                lockerNum = Integer.parseInt(lockerNumString);
+                maxLoanDuration = Integer.parseInt(maxLoanDurationString);
+                if (lockerNum < Constants.LOCKER_NUM_MIN ||
+                        lockerNum > Constants.LOCKER_NUM_MAX ||
+                        maxLoanDuration < Constants.MAX_LOAN_DURATION_MIN) {
+                    throw new IllegalArgumentException();
+                }
+            } catch (final IllegalArgumentException e) {
+                // Invalid parameter type
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: Invalid parameter type");
+                resp.sendRedirect("/item/register");
+                return;
+            }
+            final Item item = new Item(user.getId(), name, null /* TODO */, description, lockerNum, maxLoanDuration);
+            this.itemDao.create(item);
+            resp.sendRedirect("/item/awaiting-validation");
         }
     }
 }

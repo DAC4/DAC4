@@ -41,6 +41,17 @@ public class Item implements Serializable {
     public Item() {
     }
 
+    public Item(int ownerId, String name, String imageId, String description, int lockerNum, int maxLoanDuration) {
+        this.ownerId = ownerId;
+        this.name = name;
+        this.imageId = imageId;
+        this.description = description;
+        this.availability = true;
+        this.lockerNum = lockerNum;
+        this.maxLoanDuration = maxLoanDuration;
+        this.approved = false;
+    }
+
     public int getId() {
         return id;
     }
@@ -89,7 +100,7 @@ public class Item implements Serializable {
         this.description = description;
     }
 
-    public void setAvailability(boolean availability) {
+    public void setAvailable(boolean availability) {
         this.availability = availability;
     }
 
