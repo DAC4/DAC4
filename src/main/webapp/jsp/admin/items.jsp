@@ -32,6 +32,7 @@
 				<th>Locker Number</th>
 				<th>Max Loan Duration</th>
 				<th>Approved</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -65,20 +66,24 @@
 				</td>
 				<% if (item.isApproved()) { %>
 				<td class="positive collapsing">
-					<button type="button" class="ui red disabled button">Remove</button>
+					<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 				</td>
 				<% } else { %>
 				<td class="negative collapsing">
-					<form action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
+					<span style="color:red"><i class="remove icon"></i> No</span>
+				</td>
+				<% } %>
+				<td>
+					<% if (!item.isApproved()) { %>
+					<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
 						<input type="hidden" name="id" value="<%= item.getId() %>"/>
 						<input type="submit" value="Approve" class="ui orange button"/>
 					</form>
-					<form action="${pageContext.request.contextPath}/admin/item/remove" method="POST">
+					<% } %>
+					<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/remove" method="POST">
 						<input type="hidden" name="id" value="<%= item.getId() %>"/>
 						<input type="submit" value="Remove" class="ui red button"/>
 					</form>
-				</td>
-				<% } %>
 				</td>
 			</tr>
 			<%

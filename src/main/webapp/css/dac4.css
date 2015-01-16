@@ -34,7 +34,7 @@
 }
 
 /* Display menu Login form inline with Register button */
-#header form {
+.inline-form {
     display: inline-block;
 }
 

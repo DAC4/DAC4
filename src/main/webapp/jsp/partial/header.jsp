@@ -50,7 +50,7 @@
 	<div class="right menu">
 		<% if (!header_isConnected) { %>
 		<div class="item button-item">
-			<form method="POST" action="${pageContext.request.contextPath}/auth/login">
+			<form class="inline-form" method="POST" action="${pageContext.request.contextPath}/auth/login">
 				<div class="ui input">
 					<input id="login" type="text" placeholder="Login" name="login" required/>
 				</div>
