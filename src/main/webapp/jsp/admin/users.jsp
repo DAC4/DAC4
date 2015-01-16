@@ -50,16 +50,18 @@
 				<td>
 					<%= user.getCredits() %>
 				</td>
-				<td>
-					<% if (user.isApproved()) { %>
-					yes
-					<% } else { %>
+				<% if (user.isApproved()) { %>
+				<td class="positive">
+					<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+				</td>
+				<% } else { %>
+				<td class="negative">
 					<form action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
 						<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
-						<input type="submit" value="no"/>
+						<input type="submit" value="Approve" class="ui red button"/>
 					</form>
-					<% } %>
 				</td>
+				<% } %>
 			</tr>
 			<%
 					}

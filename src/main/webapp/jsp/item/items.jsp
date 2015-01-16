@@ -49,13 +49,25 @@
 					<td>
 						<%= item.getName() %>
 					</td>
-					<td style="color:<%= item.isAvailable() ? "green" : "red" %>">
-						<%= item.isAvailable() ? "yes" : "no" %>
+					<% if (item.isAvailable()) { %>
+					<td class="positive">
+						<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 					</td>
+					<% } else { %>
+					<td class="negative">
+						<span style="color:red"><i class="remove icon"></i> No</span>
+					</td>
+					<% } %>
 					<% if (isAdmin != null && isAdmin) { %>
-					<td>
-						<%= item.isApproved() ? "yes" : "no" %>
+					<% if (item.isApproved()) { %>
+					<td class="positive">
+						<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 					</td>
+					<% } else { %>
+					<td class="negative">
+						<span style="color:red"><i class="remove icon"></i> No</span>
+					</td>
+					<% } %>
 					<% } %>
 				</tr>
 			</a>
