@@ -23,7 +23,7 @@
 
 	<h1 class="ui block header">Items List</h1>
 
-	<table class="ui striped table">
+	<table class="ui striped celled table">
 		<thead>
 			<tr>
 				<th>Image</th>
@@ -61,15 +61,13 @@
 					</td>
 					<% } %>
 					<% if (isAdmin != null && isAdmin) { %>
-					<% if (item.isApproved()) { %>
-					<td class="positive collapsing">
+					<td class="collapsing">
+						<% if (item.isApproved()) { %>
 						<span style="color:green"><i class="checkmark icon"></i> Yes</span>
-					</td>
-					<% } else { %>
-					<td class="negative collapsing">
+						<% } else { %>
 						<span style="color:red"><i class="remove icon"></i> No</span>
+						<% } %>
 					</td>
-					<% } %>
 					<% } %>
 					<td class="collapsing">
 						<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">

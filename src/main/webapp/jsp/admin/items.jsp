@@ -65,7 +65,7 @@
 				</td>
 				<% if (item.isApproved()) { %>
 				<td class="positive">
-					<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+					<span style="color:green"><i class="checkmark icon"></i><button type="button" class="ui green disabled button">Approved</button></span>
 				</td>
 				<% } else { %>
 				<td class="negative">
