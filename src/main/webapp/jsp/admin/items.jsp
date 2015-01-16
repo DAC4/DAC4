@@ -64,15 +64,18 @@
 					<%= item.getMaxLoanDuration() %>
 				</td>
 				<% if (item.isApproved()) { %>
-				<td class="positive">
-					<span style="color:green"><i class="checkmark icon"></i><button type="button" class="ui green disabled button">Approved</button></span>
+				<td class="positive collapsing">
+					<button type="button" class="ui red disabled button">Remove</button>
 				</td>
 				<% } else { %>
-				<td class="negative">
+				<td class="negative collapsing">
 					<form action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
 						<input type="hidden" name="id" value="<%= item.getId() %>"/>
-						<span style="color:red"><i class="remove icon"></i></span>
-						<input type="submit" value="Approve" class="ui red button"/>
+						<input type="submit" value="Approve" class="ui orange button"/>
+					</form>
+					<form action="${pageContext.request.contextPath}/admin/item/remove" method="POST">
+						<input type="hidden" name="id" value="<%= item.getId() %>"/>
+						<input type="submit" value="Remove" class="ui red button"/>
 					</form>
 				</td>
 				<% } %>
