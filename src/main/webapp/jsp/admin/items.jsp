@@ -52,16 +52,16 @@
 				<td>
 					<%= item.getDescription() %>
 				</td>
-				<td>
+				<td class="right-aligned">
 					<%= item.getOwnerId() %> <!-- TODO Login with Link to User page -->
 				</td>
-				<td>
+				<td class="right-aligned">
 					<%= item.isAvailable() %>
 				</td>
-				<td>
+				<td class="right-aligned">
 					<%= item.getLockerNum() %>
 				</td>
-				<td>
+				<td class="right-aligned">
 					<%= item.getMaxLoanDuration() %>
 				</td>
 				<% if (item.isApproved()) { %>

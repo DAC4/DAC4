@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="imag.dac4.model.user.User" %>
 <%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -29,6 +28,7 @@
 				<th>E-Mail</th>
 				<th>Credits</th>
 				<th>Approved</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -48,7 +48,7 @@
 				<td>
 					<%= user.getEmail() %>
 				</td>
-				<td>
+				<td class="right-aligned">
 					<%= user.getCredits() %>
 				</td>
 				<% if (user.isApproved()) { %>
@@ -57,13 +57,18 @@
 				</td>
 				<% } else { %>
 				<td class="negative collapsing">
+					<span style="color:red"><i class="remove icon"></i> No</span>
+				</td>
+				<% } %>
+				<td>
+					<% if (!user.isApproved()) { %>
 					<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
 						<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
 						<span style="color:red"><i class="remove icon"></i></span>
 						<input type="submit" value="Approve" class="ui red button"/>
 					</form>
+					<% } %>
 				</td>
-				<% } %>
 			</tr>
 			<%
 					}
