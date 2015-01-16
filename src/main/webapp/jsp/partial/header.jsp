@@ -21,19 +21,27 @@
 
 	<% if (header_isConnected) { %>
 	<a href="${pageContext.request.contextPath}/items">
-		<div class="<%= "items".equals(header_currentPage) ? "pointing " : "" %>item">Items</div>
+		<div class="<%= "items".equals(header_currentPage) ? "pointing " : "" %>item">
+			<span>Items</span>
+		</div>
 	</a>
 
 	<a><!--href="${pageContext.request.contextPath}/loans"-->
-		<div class="disabled <%= "loans".equals(header_currentPage) ? "pointing " : "" %>item">Loans</div>
+		<div class="disabled <%= "loans".equals(header_currentPage) ? "pointing " : "" %>item">
+			<span>Loans</span>
+		</div>
 	</a>
 	<% if (header_isAdmin) { %>
 	<a href="${pageContext.request.contextPath}/admin/user">
-		<div class="red <%= "admin-users".equals(header_currentPage) ? "pointing " : "" %>item"><i class="setting icon"></i> Users</div>
+		<div class="red <%= "admin-users".equals(header_currentPage) ? "pointing " : "" %>item">
+			<span><i class="setting icon"></i> Users</span>
+		</div>
 	</a>
 
 	<a href="${pageContext.request.contextPath}/admin/item">
-		<div class="red <%= "admin-items".equals(header_currentPage) ? "pointing " : "" %>item"><i class="setting icon"></i> Items</div>
+		<div class="red <%= "admin-items".equals(header_currentPage) ? "pointing " : "" %>item">
+			<span><i class="setting icon"></i> Items</span>
+		</div>
 	</a>
 	<% } %>
 	<% } %>
