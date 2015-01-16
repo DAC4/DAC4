@@ -24,23 +24,25 @@
 				<label for="login">Login:</label>
 				<input id="login" type="text" placeholder="Login" name="login" required/>
 			</div>
-			<div class="field">
-				<label for="password">Password:</label>
-				<input id="password" type="password" placeholder="Password" name="password" required/>
-			</div>
-			<div class="field">
-				<label for="passwordConfirm">Confirm Password:</label>
-				<input id="passwordConfirm" type="password" placeholder="Password" name="passwordConfirm" required/>
+			<div class="two fields">
+				<div class="field">
+					<label for="password">Password:</label>
+					<input id="password" type="password" placeholder="Password" name="password" required/>
+				</div>
+				<div class="field">
+					<label for="passwordConfirm">Confirm Password:</label>
+					<input id="passwordConfirm" type="password" placeholder="Password again" name="passwordConfirm" required/>
+				</div>
 			</div>
 			<div class="field">
 				<label for="name">Name:</label>
 				<input id="name" type="text" placeholder="Chuck Norris" name="name" required/>
 			</div>
 			<div class="field">
-				<label for="email">Password:</label>
+				<label for="email">Email:</label>
 				<input id="email" type="email" placeholder="chuck@norris.com" name="email" required/>
 			</div>
-			<input type="submit" value="Register"/>
+			<input type="submit" value="Register" class="ui primary submit button"/>
 		</form>
 	</div>
 
