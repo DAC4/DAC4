@@ -1,5 +1,4 @@
 <%@ page import="imag.dac4.model.user.User" %>
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
 
 <%
 	final String current = request.getParameter("menu-current-page");
