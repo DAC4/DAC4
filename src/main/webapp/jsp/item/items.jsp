@@ -95,8 +95,7 @@
                                     for (Item item : items2) {
                                         if (item.isApproved() || isAdmin) {
                             %>
-                            <div class="four wide column">
-                                <div style="color:green">
+                            <div class="four wide column"style="color:green">
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
                                     <button type="button" class="ui button">
                                         <!-- <img src="<%= item.getImageId() %>" class="ui fluid image" /> -->
@@ -115,7 +114,6 @@
                                         </div>
                                     </button>
                                 </a>
-                                        </div>
                             </div>
                             <% } %>
                             <% } %>
