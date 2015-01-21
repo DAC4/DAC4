@@ -84,8 +84,26 @@
 							}
 						}
 					%>
-				</tbody>
-			</table>
+                                        </tbody>
+                        </table>
+
+                        <div class="ui page grid">
+                            <%
+                                @SuppressWarnings(  "unchecked")
+                                final List<Item> items2 = (List<Item>) request.getAttribute("items");
+                                if (items2 != null) {
+                                    for (Item item : items2) {
+                                        if (item.isApproved() || isAdmin) {
+                            %>
+                            <div class="four wide column">
+                                <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
+                                    <button type="button" class="ui button">Details</button>
+                                </a>
+                            </div>
+                            <% } %>
+                            <% } %>
+                            <% } %>
+                        </div>
 
 			<% if (isConnected) { %>
 			<a href="${pageContext.request.contextPath}/item/register">

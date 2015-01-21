@@ -19,7 +19,7 @@
 	<div class="sixteen wide column">
 		<div class="section">
 
-			<h1 class="ui block header">Content</h1>
+			<h1 class="ui block header">Bienvenue sur le site du TrocBox !</h1>
 
 		</div>
 	</div>
