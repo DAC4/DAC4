@@ -39,7 +39,7 @@
 						<c:if test="${item.approved || isAdmin}">
 							<a href="${pageContext.request.contextPath}/item?id=${item.id}">
 								<tr>
-									<td class="collapsing">
+									<td style="padding:0" class="collapsing">
 										<c:choose>
 											<c:when test="${item.imagePath == null}">
 												<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
