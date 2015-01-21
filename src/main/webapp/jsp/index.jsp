@@ -1,16 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-	request.setAttribute("title", "Index");
-	request.setAttribute("menuCurrentPage", "index");
-%>
+<c:set var="title" value="Index"/>
+<c:set var="currentPage" value="index"/>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		<%= request.getAttribute("title") %>
-	</title>
 	<%@ include file="partial/head.jsp" %>
 </head>
 <body>

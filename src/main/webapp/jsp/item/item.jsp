@@ -1,21 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="imag.dac4.model.item.Item" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-	request.setAttribute("title", "Item Details");
-	request.setAttribute("menu-current-page", "item");
-%>
+<%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
+
+<c:set var="title" value="Item Details"/>
+<c:set var="currentPage" value="item"/>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		<%= request.getAttribute("title") %>
-	</title>
 	<%@ include file="../partial/head.jsp" %>
-
-	<% final Item item = (Item) request.getAttribute("item"); %>
 </head>
 <body>
 	<%@ include file="../partial/header.jsp" %>
@@ -28,37 +22,40 @@
 			<ul>
 				<li>
 					Image:
-					<% if (item.getImagePath() == null) { %>
-					<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
-					<% } else { %>
-					<img src="${pageContext.request.contextPath}<%= item.getImagePath() %>" width="64" height="64"/>
-					<% } %>
+					<c:choose>
+						<c:when test="${item.imagePath == null}">
+							<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+						</c:when>
+						<c:otherwise>
+							<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
+						</c:otherwise>
+					</c:choose>
 				</li>
 				<li>
-					Name: <%= item.getName() %>
+					Name: ${item.name}
 				</li>
 				<li>
-					Description: <%= item.getDescription() %>
+					Description: ${item.description}
 				</li>
 				<li>
-					Locker Number: <%= item.getLockerNum() %>
+					Locker Number: ${item.lockerNum}
 				</li>
 				<li>
-					Max Loan Duration: <%= item.getMaxLoanDuration() %>
+					Max Loan Duration: ${item.maxLoanDuration}
 				</li>
-				<% if (!item.isApproved()) { %>
-				<li style="color:red">
-					Approved: no
-				</li>
-				<% } %>
+				<c:if test="${item.approved}">
+					<li style="color:red">
+						Approved: no
+					</li>
+				</c:if>
 			</ul>
 
-			<% if (item.isApproved() && item.isAvailable()) { %>
-			<form action="${pageContext.request.contextPath}/item/loan" method="POST">
-				<input type="hidden" name="id" value="<%= item.getId() %>"/>
-				<input type="submit" class="ui submit button" value="Loan"/>
-			</form>
-			<% } %>
+			<c:if test="${item.approved && item.available}">
+				<form action="${pageContext.request.contextPath}/item/loan" method="POST">
+					<input type="hidden" name="id" value="${item.id}"/>
+					<input type="submit" class="ui submit button" value="Loan"/>
+				</form>
+			</c:if>
 
 		</div>
 	</div>

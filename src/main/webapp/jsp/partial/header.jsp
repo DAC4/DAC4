@@ -90,15 +90,15 @@
 
 <div id="content" class="ui page grid">
 	<c:if test="${sessionScope.error != null}">
-	<div id="error" class="ui negative message">
-		<h2 class="header">
-			Error <c:out value="${sessionScope.error}"/>
-		</h2>
+		<div id="error" class="ui negative message">
+			<h2 class="header">
+				Error <c:out value="${sessionScope.error}"/>
+			</h2>
 
-		<p>
-			<c:out value="${sessionScope.msg}"/>
-		</p>
-	</div>
+			<p>
+				<c:out value="${sessionScope.msg}"/>
+			</p>
+		</div>
 		<c:remove var="sessionScope.error"/>
 		<c:remove var="sessionScope.error_msg"/>
 	</c:if>

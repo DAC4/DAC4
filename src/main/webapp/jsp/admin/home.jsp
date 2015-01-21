@@ -7,9 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		<c:out value="${title}"/>
-	</title>
 	<%@ include file="../partial/head.jsp" %>
 
 </head>
