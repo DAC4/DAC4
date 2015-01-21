@@ -96,7 +96,7 @@
                                         if (item.isApproved() || isAdmin) {
                             %>
                             <div class="four wide column">
-                                <div class="positive collapsing">
+                                <div style="color:green">
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
                                     <button type="button" class="ui button">
                                         <!-- <img src="<%= item.getImageId() %>" class="ui fluid image" /> -->
