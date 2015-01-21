@@ -115,9 +115,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="hidden content">
-                                                    <div class="header">
-                                                        <c:out value="${item.name}"/>
-                                                    </div>
+                                                    <c:out value="${item.name}"/>
                                                     <c:choose>
                                                         <c:when test="${item.available}">
                                                             <span style="color:green"><i class="checkmark icon"></i> Available</span>
