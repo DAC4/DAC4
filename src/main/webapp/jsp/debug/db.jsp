@@ -42,29 +42,29 @@
 						@SuppressWarnings("unchecked")
 						List<User> users = (List<User>) request.getAttribute("users");
 						if (users != null) {
-							for (User user : users) {
+							for (User u : users) {
 					%>
 					<tr>
 						<td>
-							<%= user.getId()%>
+							<%= u.getId()%>
 						</td>
 						<td>
-							<%= user.getLogin() %>
+							<%= u.getLogin() %>
 						</td>
 						<td>
-							<%= user.getPassword() %>
+							<%= u.getPassword() %>
 						</td>
 						<td>
-							<%= user.getName() %>
+							<%= u.getName() %>
 						</td>
 						<td>
-							<%= user.getEmail() %>
+							<%= u.getEmail() %>
 						</td>
 						<td>
-							<%= user.getCredits() %>
+							<%= u.getCredits() %>
 						</td>
 						<td>
-							<%= user.isApproved() %>
+							<%= u.isApproved() %>
 						</td>
 					</tr>
 					<%

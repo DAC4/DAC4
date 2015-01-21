@@ -22,8 +22,6 @@
 
 			<h1 class="ui block header">User Home</h1>
 
-			<% final User user = (User) request.getSession().getAttribute("user"); %>
-
 			<ul>
 				<li>
 					Login: <%= user.getLogin() %>

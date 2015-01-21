@@ -26,10 +26,6 @@
 				The administrator needs to approve your item before in order to finalize registration.
 			</p>
 
-			<hr>
-
-			<h2><a href="${pageContext.request.contextPath}/">Index</a></h2>
-
 		</div>
 	</div>
 

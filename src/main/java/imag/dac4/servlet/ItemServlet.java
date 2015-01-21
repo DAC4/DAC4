@@ -16,6 +16,8 @@ import java.io.IOException;
 @WebServlet(name = "ItemServlet", urlPatterns = {
         "/item",
         "/item/loan",
+        "/item/register",
+        "/item/awaiting-validation",
         "/items",
 })
 public class ItemServlet extends HttpServlet {

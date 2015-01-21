@@ -3,9 +3,9 @@
 
 <%
 	final String header_currentPage = request.getParameter("menu-current-page");
-	final User header_user = (User) request.getSession().getAttribute("user");
-	final boolean header_isConnected = header_user != null;
-	final boolean header_isAdmin = header_isConnected && request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin");
+	final User user = (User) request.getSession().getAttribute("user");
+	final boolean isConnected = user != null;
+	final boolean isAdmin = isConnected && request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin");
 %>
 
 <div id="header" class="ui menu">
@@ -15,7 +15,7 @@
 		</div>
 	</a>
 
-	<% if (header_isConnected) { %>
+	<% if (isConnected) { %>
 	<a href="${pageContext.request.contextPath}/items">
 		<div class="<%= "items".equals(header_currentPage) ? "pointing " : "" %>item">
 			<span>Items</span>
@@ -27,7 +27,7 @@
 			<span>Loans</span>
 		</div>
 	</a>
-	<% if (header_isAdmin) { %>
+	<% if (isAdmin) { %>
 	<a href="${pageContext.request.contextPath}/admin/user">
 		<div class="<%= "admin-users".equals(header_currentPage) ? "pointing " : "" %>item">
 			<span style="color:red"><i class="setting icon"></i> Users</span>
@@ -46,7 +46,7 @@
 		<div class="item bar-text-medium">
 			<span style="font-style: italic"><%= request.getAttribute("title") %></span>
 		</div>
-		<% if (!header_isConnected) { %>
+		<% if (!isConnected) { %>
 		<div class="item button-item">
 			<form class="inline-form" method="POST" action="${pageContext.request.contextPath}/auth/login">
 				<div class="ui input">
@@ -66,7 +66,7 @@
 		<% } else { %>
 		<div class="item bar-text-small">
 			<span>
-				Logged in as <%= header_user.getName() %>
+				Logged in as <%= user.getName() %>
 			</span>
 		</div>
 		<div class="item button-item">

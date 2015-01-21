@@ -47,7 +47,7 @@
 					%>
 					<tr>
 						<td>
-							TODO <!-- <%= item.getImageId() %> -->
+							<img src="<%= item.getImageId() %>"/>
 						</td>
 						<td>
 							<%= item.getName() %>

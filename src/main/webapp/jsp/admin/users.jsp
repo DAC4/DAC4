@@ -39,22 +39,22 @@
 						@SuppressWarnings("unchecked")
 						List<User> users = (List<User>) request.getAttribute("users");
 						if (users != null) {
-							for (User user : users) {
+							for (User u : users) {
 					%>
 					<tr>
 						<td>
-							<%= user.getLogin() %>
+							<%= u.getLogin() %>
 						</td>
 						<td>
-							<%= user.getName() %>
+							<%= u.getName() %>
 						</td>
 						<td>
-							<%= user.getEmail() %>
+							<%= u.getEmail() %>
 						</td>
 						<td class="right aligned">
-							<%= user.getCredits() %>
+							<%= u.getCredits() %>
 						</td>
-						<% if (user.isApproved()) { %>
+						<% if (u.isApproved()) { %>
 						<td class="positive collapsing">
 							<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 						</td>
@@ -64,14 +64,14 @@
 						</td>
 						<% } %>
 						<td class="right aligned collapsing">
-							<% if (!user.isApproved()) { %>
+							<% if (!u.isApproved()) { %>
 							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
-								<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
+								<input type="hidden" name="login" value="<%= u.getLogin() %>"/>
 								<input type="submit" value="Approve" class="ui orange button"/>
 							</form>
 							<% } %>
 							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
-								<input type="hidden" name="login" value="<%= user.getLogin() %>"/>
+								<input type="hidden" name="login" value="<%= u.getLogin() %>"/>
 								<input type="submit" value="Remove" class="ui disabled red button"/>
 							</form>
 						</td>

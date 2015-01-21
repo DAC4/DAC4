@@ -15,8 +15,6 @@
 		<%= request.getAttribute("title") %>
 	</title>
 	<%@ include file="../partial/head.jsp" %>
-
-	<% final Boolean isAdmin = (Boolean) request.getAttribute("isAdmin"); %>
 </head>
 <body>
 	<%@ include file="../partial/header.jsp" %>
@@ -32,7 +30,7 @@
 						<th>Image</th>
 						<th>Name</th>
 						<th>Available</th>
-						<% if (isAdmin != null && isAdmin) { %>
+						<% if (isAdmin) { %>
 						<th>Approved</th>
 						<% } %>
 						<th></th>
@@ -44,12 +42,12 @@
 						final List<Item> items = (List<Item>) request.getAttribute("items");
 						if (items != null) {
 							for (Item item : items) {
-								if (item.isApproved() || isAdmin != null && isAdmin) {
+								if (item.isApproved() || isAdmin) {
 					%>
 					<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
 						<tr>
 							<td>
-								TODO <!-- <%= item.getImageId() %> -->
+								<img src="<%= item.getImageId() %>"/>
 							</td>
 							<td>
 								<%= item.getName() %>
@@ -63,7 +61,7 @@
 								<span style="color:red"><i class="remove icon"></i> No</span>
 							</td>
 							<% } %>
-							<% if (isAdmin != null && isAdmin) { %>
+							<% if (isAdmin) { %>
 							<% if (item.isApproved()) { %>
 							<td class="positive collapsing">
 								<span style="color:green"><i class="checkmark icon"></i> Yes</span>
@@ -88,6 +86,12 @@
 					%>
 				</tbody>
 			</table>
+
+			<% if (isConnected) { %>
+			<a href="${pageContext.request.contextPath}/item/register">
+				<button type="button" class="ui primary button">Add Item</button>
+			</a>
+			<% } %>
 
 		</div>
 	</div>

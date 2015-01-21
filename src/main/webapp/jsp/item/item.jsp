@@ -27,7 +27,7 @@
 
 			<ul>
 				<li>
-					Image: <%= item.getImageId() %>
+					Image: <img src="<%= item.getImageId() %>"/>
 				</li>
 				<li>
 					Name: <%= item.getName() %>
@@ -51,7 +51,11 @@
 			<% if (item.isApproved() && item.isAvailable()) { %>
 			<form action="${pageContext.request.contextPath}/item/loan" method="POST">
 				<input type="hidden" name="id" value="<%= item.getId() %>"/>
+<<<<<<< HEAD
 				<input type="submit" value="Loan"/>
+=======
+				<input type="submit" class="ui submit button" value="Loan"/>
+>>>>>>> ffa1672ef0311e0e3dd9fc5d279ae76b95288b70
 			</form>
 			<% } %>
 
