@@ -69,7 +69,7 @@
 						<td class="collapsing">
 							<form class="inline-form" action="${pageContext.request.contextPath}/user/items/remove" method="POST">
 								<input type="hidden" name="itemId" value="<%= item.getId() %>"/>
-								<input type="submit" value="Approve" class="ui orange button"/>
+								<input type="submit" value="Delete" class="ui red button"/>
 							</form>
 						</td>
 					</tr>

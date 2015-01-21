@@ -61,7 +61,7 @@ public class UserServlet extends HttpServlet{
         int id = Integer.parseInt(req.getParameter("itemId"));
         Item item = this.itemDao.read(id);
         if (item != null) {
-            if (item.getOwnerId() == user.getId() || this.isAdmin(req)) {
+            if (user != null && item.getOwnerId() == user.getId() || this.isAdmin(req)) {
                 this.itemDao.delete(id);
             } else {
                 req.getSession().setAttribute("error", 403);
@@ -71,7 +71,7 @@ public class UserServlet extends HttpServlet{
             req.getSession().setAttribute("error", 404);
             req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
         }
-        req.getRequestDispatcher(Constants.JSP_USER_ITEMS).forward(req, resp);
+        resp.sendRedirect("/user/items");
     }
 
     private boolean isAdmin(final HttpServletRequest req) {
