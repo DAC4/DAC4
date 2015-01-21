@@ -38,7 +38,14 @@
 					<c:forEach var="item" items="${items}">
 						<tr>
 							<td>
-								<img src="${item.imagePath}"/>
+								<c:choose>
+									<c:when test="${item.imagePath == null}">
+										<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+									</c:when>
+									<c:otherwise>
+										<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
+									</c:otherwise>
+								</c:choose>
 							</td>
 							<td>
 								<c:out value="${item.name}"/>
