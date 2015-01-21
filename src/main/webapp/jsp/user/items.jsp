@@ -24,7 +24,7 @@
 
 			<h1 class="ui block header">My Items</h1>
 
-			<table>
+			<table class="ui striped celled table">
 				<thead>
 					<th>Image</th>
 					<th>Name</th>
