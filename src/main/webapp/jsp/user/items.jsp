@@ -68,7 +68,6 @@
 						</td>
 						<td class="collapsing">
 							<form class="inline-form" action="${pageContext.request.contextPath}/user/items/remove" method="POST">
-								<input type="hidden" name="user" value="<%= user.getLogin() %>"/>
 								<input type="hidden" name="itemId" value="<%= item.getId() %>"/>
 								<input type="submit" value="Approve" class="ui orange button"/>
 							</form>

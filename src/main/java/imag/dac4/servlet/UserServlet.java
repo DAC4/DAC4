@@ -58,18 +58,18 @@ public class UserServlet extends HttpServlet{
 
     private void onItemRemoveRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final User user = (User) req.getSession().getAttribute("user");
-        int id = (int) req.getAttribute("itemId");
-        Item item = itemDao.read(id);
+        int id = Integer.parseInt(req.getParameter("itemId"));
+        Item item = this.itemDao.read(id);
         if (item != null) {
             if (item.getOwnerId() == user.getId() || this.isAdmin(req)) {
-                itemDao.delete(id);
+                this.itemDao.delete(id);
             } else {
                 req.getSession().setAttribute("error", 403);
-                req.getSession().setAttribute("error_msg", "Forbidden: this item is not yours.");
+                req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI() + " (This item is not yours)");
             }
         } else {
             req.getSession().setAttribute("error", 404);
-            req.getSession().setAttribute("error_msg", "Not found: no such item");
+            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
         }
         req.getRequestDispatcher(Constants.JSP_USER_ITEMS).forward(req, resp);
     }
