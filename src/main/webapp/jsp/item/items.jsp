@@ -96,44 +96,52 @@
 				</tbody>
 			</table>
 
-			<div class="ui page grid">
-				<%
-					final boolean isAdmin = session.getAttribute("isAdmin") != null ? (Boolean) session.getAttribute("isAdmin") : false;
-					@SuppressWarnings("unchecked")
-					final List<Item> items2 = (List<Item>) request.getAttribute("items");
-					if (items2 != null) {
-						for (Item item : items2) {
-							if (item.isApproved() || isAdmin) {
-				%>
-				<div class="four wide column">
-					<a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
-						<div type="button" class="ui animated button">
-							<div class="visible content">
-								<div class="ui fluid image">
-									<% if (item.getImagePath() == null) { %>
-									<img src="${pageContext.request.contextPath}/static/img/default.png" class="ui medium rounded image"/>
-									<% } else { %>
-									<img src="${pageContext.request.contextPath}<%= item.getImagePath() %>" class="ui medium rounded image"/>
-									<% } %>
-								</div>
-							</div>
-							<div class="hidden content">
-								<div class="header"><%= item.getName()%>
-								</div>
-								<% if (item.isAvailable()) { %>
-								<span style="color:green"><i class="checkmark icon"></i> Available</span>
-								<% } else { %>
-								<span style="color:red"><i class="remove icon"></i> Not available</span>
-								<% } %>
-							</div>
-						</div>
-				</div>
-				</a>
-			</div>
-			<% } %>
-			<% } %>
-			<% } %>
-		</div>
+                        <div class="ui page grid">
+                            <c:forEach var="item" items="${items}">
+                                <c:if test="${item.approved || isAdmin}">
+                                    <div class="four wide column">
+                                        <a href="${pageContext.request.contextPath}/item?id=${item.id}">  
+                                            <div type="button" class="ui animated button">
+                                                <div class="visible content">
+                                                    <div class="ui fluid image">
+                                                        <c:choose>
+                                                                <c:when test="${item.imagePath == null}">
+                                                                        <img src="${pageContext.request.contextPath}/static/img/default.png" class="ui medium rounded image"/>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                        <img src="${pageContext.request.contextPath}${item.imagePath}" class="ui medium rounded image"/>
+                                                                </c:otherwise>
+                                                        </c:choose>
+                                                    </div>
+                                                </div>
+                                                <div class="hidden content">
+                                                    <div class="header">
+                                                        <c:out value="${item.name}"/>
+                                                    </div>
+                                                    <c:choose>
+                                                        <c:when test="${item.available}">
+                                                            <span style="color:green"><i class="checkmark icon"></i> Available</span>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span style="color:red"><i class="remove icon"></i> Not available</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <a href="${pageContext.request.contextPath}/item?id=${item.id}">
+                                                            <button type="button" class="ui button">Details</button>
+                                                    </a>
+                                                    <c:if test="${item.available}">
+                                                            <form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
+                                                                    <input type="hidden" name="id" value="${item.id}"/>
+                                                                    <input type="submit" value="Borrow" class="ui green button"/>
+                                                            </form>
+                                                    </c:if>
+                                                </div>                      
+                                            </div>
+                                        </a>
+                                    </div>
+                                </c:if>
+                            </c:forEach>
+                        </div>
 
 		<c:if test="${isConnected}">
 			<a href="${pageContext.request.contextPath}/item/register">
