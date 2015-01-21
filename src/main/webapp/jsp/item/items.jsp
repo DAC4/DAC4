@@ -101,12 +101,7 @@
                             %>
                             <div class="four wide column">
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
-                                    <% if (item.isAvailable()) { %>
-                                    <div class="ui segment tertiary inverted green">
-                                    <% } else { %>
-                                    <div class="ui segment tertiary inverted red">
-                                    <% } %>
-                                        <div type="button" class="ui animated button">
+                                    <div type="button" class="ui animated button">
                                             <div class="visible content">
                                                 <div class="ui fluid image">
                                                     <% if (item.getImagePath() == null) { %>
