@@ -106,7 +106,7 @@
                                     <% } else { %>
                                     <button type="button" class="ui segment tertiary inverted red">
                                     <% } %>
-                                        <button type="button" class="ui animated button">
+                                        <div class="ui animated button">
                                             <div class="visible content">
                                                 <div class="ui fluid image">
                                                     <% if (item.getImagePath() == null) { %>
@@ -124,7 +124,7 @@
                                                 <span style="color:red"><i class="remove icon"></i> Not available</span>
                                                 <% } %>
                                             </div>
-                                        </button>        
+                                        </div>        
                                     </button>
                                 </a>
                             </div>
