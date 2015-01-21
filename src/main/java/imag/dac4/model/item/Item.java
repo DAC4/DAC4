@@ -20,8 +20,8 @@ public class Item implements Serializable {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "imageId")
-    private String imageId;
+    @Column(name = "imagePath")
+    private String imagePath;
 
     @Column(name = "description")
     private String description;
@@ -41,10 +41,10 @@ public class Item implements Serializable {
     public Item() {
     }
 
-    public Item(int ownerId, String name, String imageId, String description, int lockerNum, int maxLoanDuration) {
+    public Item(int ownerId, String name, String imagePath, String description, int lockerNum, int maxLoanDuration) {
         this.ownerId = ownerId;
         this.name = name;
-        this.imageId = imageId;
+        this.imagePath = imagePath;
         this.description = description;
         this.availability = true;
         this.lockerNum = lockerNum;
@@ -64,8 +64,8 @@ public class Item implements Serializable {
         return name;
     }
 
-    public String getImageId() {
-        return imageId;
+    public String getImagePath() {
+        return imagePath;
     }
 
     public String getDescription() {
@@ -92,8 +92,8 @@ public class Item implements Serializable {
         this.name = name;
     }
 
-    public void setImageId(String imageId) {
-        this.imageId = imageId;
+    public void setImagePath(String imageId) {
+        this.imagePath = imageId;
     }
 
     public void setDescription(String description) {

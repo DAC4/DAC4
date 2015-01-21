@@ -17,7 +17,7 @@ public class MainFilter implements Filter {
         final HttpServletRequest httpReq = (HttpServletRequest) req;
         final String path = httpReq.getRequestURI().substring(httpReq.getContextPath().length());
 
-        if (path.startsWith("/css") || path.startsWith("/js")) {
+        if (path.startsWith("/static")) {
             // Pass to default servlet
             filterChain.doFilter(httpReq, resp);
         } else {

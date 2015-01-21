@@ -2,11 +2,12 @@
 <%@ page import="imag.dac4.model.user.User" %>
 
 <%
-	final String header_currentPage = request.getParameter("menu-current-page");
+	final String header_currentPage = (String) request.getAttribute("menuCurrentPage");
 	final User user = (User) request.getSession().getAttribute("user");
 	final boolean isConnected = user != null;
 	final boolean isAdmin = isConnected && request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin");
 %>
+<c:set var="header_currentPage" value="${requestScope.menuCurrentPage}" scope="page"/>
 
 <div id="header" class="ui menu">
 	<a href="${pageContext.request.contextPath}/">
@@ -19,6 +20,12 @@
 	<a href="${pageContext.request.contextPath}/items">
 		<div class="<%= "items".equals(header_currentPage) ? "pointing " : "" %>item">
 			<span>Items</span>
+		</div>
+	</a>
+
+	<a href="${pageContext.request.contextPath}/user/items">
+		<div class="<%= "user-items".equals(header_currentPage) ? "pointing" : ""%>item">
+			<span>My Items</span>
 		</div>
 	</a>
 

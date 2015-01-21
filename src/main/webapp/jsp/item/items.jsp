@@ -46,8 +46,12 @@
 					%>
 					<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
 						<tr>
-							<td>
-								<img src="<%= item.getImageId() %>"/>
+							<td class="collapsing">
+								<% if (item.getImagePath() == null) { %>
+								<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+								<% } else { %>
+								<img src="${pageContext.request.contextPath}<%= item.getImagePath() %>" width="64" height="64"/>
+								<% } %>
 							</td>
 							<td>
 								<%= item.getName() %>
@@ -84,8 +88,8 @@
 							}
 						}
 					%>
-                                        </tbody>
-                        </table>
+				</tbody>
+			</table>
 
                         <div class="ui page grid">
                             <%
@@ -105,7 +109,11 @@
                                         <button type="button" class="ui animated button">
                                             <div class="visible content">
                                                 <div class="ui fluid image">
-                                                    <img src="<%= item.getImageId()%>" class="ui medium rounded image">
+                                                    <% if (item.getImagePath() == null) { %>
+                                                    <img src="${pageContext.request.contextPath}/static/img/default.png" class="ui medium rounded image"/>
+                                                    <% } else { %>
+                                                    <img src="${pageContext.request.contextPath}<%= item.getImagePath() %>" class="ui medium rounded image"/>
+                                                    <% } %>
                                                 </div>
                                             </div>
                                             <div class="hidden content">
@@ -125,8 +133,8 @@
                             <% } %>
                         </div>
 
-                        <% if (isConnected) { %>
-                        <a href="${pageContext.request.contextPath}/item/register">
+			<% if (isConnected) { %>
+			<a href="${pageContext.request.contextPath}/item/register">
 				<button type="button" class="ui primary button">Add Item</button>
 			</a>
 			<% } %>

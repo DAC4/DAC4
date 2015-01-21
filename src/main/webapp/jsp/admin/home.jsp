@@ -3,7 +3,7 @@
 
 <%
 	request.setAttribute("title", "Admin - Home");
-	request.setAttribute("menu-current-page", "admin-home");
+	request.setAttribute("menuCurrentPage", "admin-home");
 %>
 
 <!DOCTYPE html>
@@ -34,6 +34,13 @@
 					Email: <%= user.getEmail() %>
 				</li>
 			</ul>
+			<p>
+				<c:out value="${pageScope.menuCurrentPage}"/>
+			</p>
+
+			<p>
+				<c:out value="${requestScope.menuCurrentPage}"/>
+			</p>
 
 		</div>
 	</div>
