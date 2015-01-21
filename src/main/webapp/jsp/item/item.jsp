@@ -51,9 +51,9 @@
 			</ul>
 
 			<c:if test="${item.approved && item.available}">
-				<form action="${pageContext.request.contextPath}/item/loan" method="POST">
+				<form action="${pageContext.request.contextPath}/item/borrow" method="POST">
 					<input type="hidden" name="id" value="${item.id}"/>
-					<input type="submit" class="ui submit button" value="Loan"/>
+					<input type="submit" class="ui submit button" value="Borrow"/>
 				</form>
 			</c:if>
 

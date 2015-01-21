@@ -57,7 +57,7 @@ CREATE TABLE `loans` (
   `itemId`    INT(11) NOT NULL,
   `returned`  BOOLEAN NOT NULL,
   `startDate` DATE    NOT NULL,
-  `endDate`   DATE    NOT NULL,
+  `endDate`   DATE,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userId`) REFERENCES users (`id`),
   FOREIGN KEY (`itemId`) REFERENCES items (`id`)
