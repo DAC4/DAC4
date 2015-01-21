@@ -1,17 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-	request.setAttribute("title", "Home");
-	request.setAttribute("menuCurrentPage", "user-home");
-%>
+<c:set var="title" value="Home"/>
+<c:set var="currentPage" value="user-home"/>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		<%= request.getAttribute("title") %>
-	</title>
 	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>
@@ -24,13 +19,13 @@
 
 			<ul>
 				<li>
-					Login: <%= user.getLogin() %>
+					Login: <c:out value="${user.login}"/>
 				</li>
 				<li>
-					Name: <%= user.getName() %>
+					Name: <c:out value="${user.name}"/>
 				</li>
 				<li>
-					Email: <%= user.getEmail() %>
+					Email: <c:out value="${user.email}"/>
 				</li>
 			</ul>
 

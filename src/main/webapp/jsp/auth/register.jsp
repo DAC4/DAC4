@@ -1,17 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-	request.setAttribute("title", "User Registration");
-	request.setAttribute("menu-current-page", "auth-register");
-%>
+<c:set var="title" value="User Registration"/>
+<c:set var="currentPage" value="auth-register"/>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		<%= request.getAttribute("title") %>
-	</title>
 	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>

@@ -1,17 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-	request.setAttribute("title", "Registration - Awaiting Approval");
-	request.setAttribute("menu-current-page", "auth-awaiting-approval");
-%>
+<c:set var="title" value="Registration - Awaiting Approval"/>
+<c:set var="currentPage" value="auth-awaiting-approval"/>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		<%= request.getAttribute("title") %>
-	</title>
 	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>
