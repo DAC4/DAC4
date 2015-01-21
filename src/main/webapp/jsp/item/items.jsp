@@ -53,7 +53,7 @@
 										<c:out value="${item.name}"/>
 									</td>
 									<c:choose>
-										<c:when test="${item.approved}">
+										<c:when test="${item.available}">
 											<td class="positive collapsing">
 												<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 											</td>
