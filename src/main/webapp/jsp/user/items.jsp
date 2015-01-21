@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page import="imag.dac4.model.item.Item" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%
@@ -20,11 +22,72 @@
 	<div class="sixteen wide column">
 		<div class="section">
 
-			<h1 class="ui block header">User Home</h1>
+			<h1 class="ui block header">My Items</h1>
 
-			<ul>
-
-			</ul>
+			<table>
+				<thead>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Available</th>
+					<% if (isAdmin) { %>
+					<th>Approved</th>
+					<% } %>
+					<th></th>
+				</thead>
+				<tbody>
+				<%
+					@SuppressWarnings("unchecked")
+					final List<Item> items = (List<Item>) request.getAttribute("items");
+					if (items != null) {
+						for (Item item : items) {
+							if (item.isApproved() || isAdmin) {
+				%>
+				<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
+					<tr>
+						<td class="collapsing">
+							<% if (item.getImagePath() == null) { %>
+							<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+							<% } else { %>
+							<img src="${pageContext.request.contextPath}<%= item.getImagePath() %>" width="64" height="64"/>
+							<% } %>
+						</td>
+						<td>
+							<%= item.getName() %>
+						</td>
+						<% if (item.isAvailable()) { %>
+						<td class="positive collapsing">
+							<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+						</td>
+						<% } else { %>
+						<td class="negative collapsing">
+							<span style="color:red"><i class="remove icon"></i> No</span>
+						</td>
+						<% } %>
+						<% if (isAdmin) { %>
+						<% if (item.isApproved()) { %>
+						<td class="positive collapsing">
+							<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+						</td>
+						<% } else { %>
+						<td class="negative collapsing">
+							<span style="color:red"><i class="remove icon"></i> No</span>
+						</td>
+						<% } %>
+						<% } %>
+						<td class="collapsing">
+							<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
+								<button type="button" class="ui button">Details</button>
+							</a>
+						</td>
+					</tr>
+				</a>
+				<%
+							}
+						}
+					}
+				%>
+				</tbody>
+			</table>
 
 		</div>
 	</div>
