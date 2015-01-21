@@ -44,8 +44,12 @@ public class ItemDao {
     }
 
     public List<Item> getItems(User user) {
-        TypedQuery<Item> query = entityManager.createQuery("SELECT i FROM Item i WHERE i.ownerId = :id ORDER BY i.id", Item.class);
-        query.setParameter("id", user.getId());
-        return query.getResultList();
+        if (user != null) {
+            TypedQuery<Item> query = entityManager.createQuery("SELECT i FROM Item i WHERE i.ownerId = :id ORDER BY i.id", Item.class);
+            query.setParameter("id", user.getId());
+            return query.getResultList();
+        } else {
+            return null;
+        }
     }
 }
