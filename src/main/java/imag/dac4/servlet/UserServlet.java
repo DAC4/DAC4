@@ -4,6 +4,7 @@ import imag.dac4.Constants;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.user.User;
+import imag.dac4.model.user.UserDao;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import java.io.IOException;
 })
 public class UserServlet extends HttpServlet{
 
+    @EJB UserDao userDao;
     @EJB ItemDao itemDao;
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final User user = (User) req.getSession().getAttribute("user");
@@ -61,15 +63,31 @@ public class UserServlet extends HttpServlet{
         int id = Integer.parseInt(req.getParameter("itemId"));
         Item item = this.itemDao.read(id);
         if (item != null) {
-            if (user != null && item.getOwnerId() == user.getId() || this.isAdmin(req)) {
-                this.itemDao.delete(id);
-            } else {
+            // check user rights
+            if (user != null && (item.getOwnerId() == user.getId() || this.isAdmin(req))) {
+                // check item status
+                if (item.isAvailable()) {
+                    this.itemDao.delete(id);
+                    // take away 1 credit from user
+                    user.setCredits(user.getCredits() - 1);
+                    this.userDao.update(user);
+                } else { // item unavailable
+                    req.getSession().setAttribute("error", 400);
+                    req.getSession().setAttribute("error_msg", "Bad Request: "
+                            + req.getRequestURI()
+                            + " (This item is currently unavailable. You cannot delete it)");
+                }
+            } else { // user rights incorrect
                 req.getSession().setAttribute("error", 403);
-                req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI() + " (This item is not yours)");
+                req.getSession().setAttribute("error_msg", "Forbidden: "
+                        + req.getRequestURI()
+                        + " (This item is not yours)");
             }
-        } else {
+        } else { // item not found
             req.getSession().setAttribute("error", 404);
-            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+            req.getSession().setAttribute("error_msg", "Bad Request: "
+                    + req.getRequestURI()
+                    + " (Unknown or missing id)");
         }
         resp.sendRedirect("/user/items");
     }

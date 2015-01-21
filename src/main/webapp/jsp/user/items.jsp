@@ -66,12 +66,14 @@
 								<button type="button" class="ui button">Details</button>
 							</a>
 						</td>
+						<% if (item.isAvailable()) { %>
 						<td class="collapsing">
 							<form class="inline-form" action="${pageContext.request.contextPath}/user/items/remove" method="POST">
 								<input type="hidden" name="itemId" value="<%= item.getId() %>"/>
 								<input type="submit" value="Delete" class="ui red button"/>
 							</form>
 						</td>
+						<% } %>
 					</tr>
 				</a>
 				<%
