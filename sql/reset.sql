@@ -44,7 +44,7 @@ CREATE TABLE `items` (
   `maxLoanDuration` INT(11)       NOT NULL,
   `approved`        BOOLEAN       NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`ownerId`) REFERENCES users (`id`),
+  FOREIGN KEY (`ownerId`) REFERENCES users (`id`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8
