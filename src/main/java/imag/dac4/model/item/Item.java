@@ -38,9 +38,6 @@ public class Item implements Serializable {
     @Column(name = "approved")
     private boolean approved;
 
-    @Column(name = "bookerId")
-    private Integer bookerId;
-
     public Item() {
     }
 
@@ -53,7 +50,6 @@ public class Item implements Serializable {
         this.lockerNum = lockerNum;
         this.maxLoanDuration = maxLoanDuration;
         this.approved = false;
-        this.bookerId = null;
     }
 
     public int getId() {
@@ -92,14 +88,6 @@ public class Item implements Serializable {
         return approved;
     }
 
-    public Integer getBookerId() {
-        return bookerId;
-    }
-
-    public boolean isBooked() {
-        return this.bookerId != null;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -126,9 +114,5 @@ public class Item implements Serializable {
 
     public void setApproved(boolean accepted) {
         this.approved = accepted;
-    }
-
-    public void setBookerId(Integer bookerId) {
-        this.bookerId = bookerId;
     }
 }
