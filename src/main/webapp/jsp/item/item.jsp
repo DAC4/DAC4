@@ -27,7 +27,7 @@
 
 			<ul>
 				<li>
-					Image: <img src="<%= item.getImageId() %>"/>
+					Image: <img src="<%= item.getImagePath() %>"/>
 				</li>
 				<li>
 					Name: <%= item.getName() %>

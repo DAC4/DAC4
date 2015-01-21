@@ -47,7 +47,7 @@
 					%>
 					<tr>
 						<td>
-							<img src="<%= item.getImageId() %>"/>
+							<img src="<%= item.getImagePath() %>"/>
 						</td>
 						<td>
 							<%= item.getName() %>

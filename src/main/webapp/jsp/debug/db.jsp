@@ -106,7 +106,7 @@
 							<%= item.getName() %>
 						</td>
 						<td>
-							<%= item.getImageId() %>
+							<%= item.getImagePath() %>
 						</td>
 						<td>
 							<%= item.getDescription() %>
