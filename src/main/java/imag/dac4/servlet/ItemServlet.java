@@ -6,6 +6,7 @@ import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.loan.Loan;
 import imag.dac4.model.loan.LoanDao;
 import imag.dac4.model.user.User;
+import imag.dac4.model.user.UserDao;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -26,6 +27,7 @@ public class ItemServlet extends HttpServlet {
 
     @EJB ItemDao itemDao;
     @EJB LoanDao loanDao;
+    @EJB UserDao userDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -136,8 +138,12 @@ public class ItemServlet extends HttpServlet {
                 req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
                 resp.sendRedirect("/item?id=" + idString);
             } else {
+                // item is not available anymore
                 item.setAvailable(false);
                 this.itemDao.update(item);
+                // user spends 1 credit
+                user.setCredits(user.getCredits() - 1);
+                this.userDao.update(user);
                 this.loanDao.create(new Loan(user.getId(), item.getId()));
                 resp.sendRedirect("/items");
             }
