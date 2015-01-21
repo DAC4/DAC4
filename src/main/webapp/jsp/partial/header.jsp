@@ -12,7 +12,7 @@
 <div id="header" class="ui menu">
 	<a href="${pageContext.request.contextPath}/">
 		<div class="item bar-text-big">
-			<span>DAC4 - <c:out value="${pageScope.menuCurrentPage}"/></span>
+			<span>DAC4</span>
 		</div>
 	</a>
 

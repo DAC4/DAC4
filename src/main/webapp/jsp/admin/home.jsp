@@ -34,6 +34,13 @@
 					Email: <%= user.getEmail() %>
 				</li>
 			</ul>
+			<p>
+				<c:out value="${pageScope.menuCurrentPage}"/>
+			</p>
+
+			<p>
+				<c:out value="${param.menuCurrentPage}"/>
+			</p>
 
 		</div>
 	</div>
