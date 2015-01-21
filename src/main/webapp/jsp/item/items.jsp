@@ -96,30 +96,25 @@
                                         if (item.isApproved() || isAdmin) {
                             %>
                             <div class="five wide column">
-                                <div class="column">
-                                    <div class="ui segment">
-                                        <div style="color:green">
-                                            <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
-                                                <button type="button" class="ui button">
-                                                    <!-- <img src="<%= item.getImageId()%>" class="ui fluid image" /> -->
-                                                    <img src="http://i.imgur.com/YoO2kN7b.jpg" class="ui fluid image" />
-                                                    <div class="content">
-                                                        <div class="header"><%= item.getName()%></div>
-                                                        <% if (item.isAvailable()) { %>
+                                <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
+                                    <% if (item.isAvailable()) { %>
+                                    <button type="button" class="ui segment tertiary inverted green">
+                                    <% } else { %>
+                                    <button type="button" class="ui segment tertiary inverted red">
+                                    <% } %>
 
-                                                        <span style="color:green"><i class="checkmark icon"></i> Available</span>
-
-                                                        <% } else { %>
-                                                        <div class="negative collapsing">
-                                                            <span style="color:red"><i class="remove icon"></i> Not available</span>
-                                                        </div>
-                                                        <% } %>
-                                                    </div>
-                                                </button>
-                                            </a>
+                                        <!-- <img src="<%= item.getImageId()%>" class="ui fluid image" /> -->
+                                        <img src="http://i.imgur.com/YoO2kN7b.jpg" class="ui fluid image" />
+                                        <div class="content">
+                                            <div class="header"><%= item.getName()%></div>
+                                            <% if (item.isAvailable()) { %>
+                                            <span style="color:green"><i class="checkmark icon"></i> Available</span>
+                                            <% } else { %>
+                                            <span style="color:red"><i class="remove icon"></i> Not available</span>
+                                            <% } %>
                                         </div>
-                                    </div>
-                                </div>
+                                    </button>
+                                </a>
                             </div>
                             <% } %>
                             <% } %>
