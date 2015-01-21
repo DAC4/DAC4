@@ -27,7 +27,12 @@
 
 			<ul>
 				<li>
-					Image: <img src="<%= item.getImageId() %>"/>
+					Image:
+					<% if (item.getImagePath() == null) { %>
+					<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+					<% } else { %>
+					<img src="${pageContext.request.contextPath}<%= item.getImagePath() %>" width="64" height="64"/>
+					<% } %>
 				</li>
 				<li>
 					Name: <%= item.getName() %>
