@@ -98,8 +98,12 @@
                             <div class="four wide column">
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
                                     <button type="button" class="ui button">
-                                        <!-- <img src="<%= item.getImageId() %>"/> -->
+                                        <!-- <img src="<%= item.getImageId() %>" class="ui fluid image" /> -->
                                         <img src="http://i.imgur.com/YoO2kN7b.jpg" class="ui fluid image" />
+                                        <div class="content">
+                                            <div class="header">Tom</div>
+                                            Top Contributor
+                                        </div>
                                     </button>
                                 </a>
                             </div>
