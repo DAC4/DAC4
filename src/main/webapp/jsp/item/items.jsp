@@ -46,7 +46,7 @@
 					%>
 					<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
 						<tr>
-							<td>
+							<td class="collapsing">
 								<% if (item.getImagePath() == null) { %>
 								<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
 								<% } else { %>
