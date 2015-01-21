@@ -8,7 +8,7 @@
 <%--@elvariable id="isConnected" type="java.lang.Boolean"--%>
 <%--@elvariable id="isAdmin" type="java.lang.Boolean"--%>
 
-<c:if test="${user == null}" var="isConnected"/>
+<c:if test="${user != null}" var="isConnected"/>
 <c:if test="${isConnected && sessionScope.isAdmin != null && sessionScope.isAdmin == true}" var="isAdmin"/>
 
 <div id="header" class="ui menu">
