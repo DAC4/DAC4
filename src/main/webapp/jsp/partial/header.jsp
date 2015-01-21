@@ -12,7 +12,7 @@
 <div id="header" class="ui menu">
 	<a href="${pageContext.request.contextPath}/">
 		<div class="item bar-text-big">
-			<span>DAC4 - <c:out value="${pageScope.header_currentPage}"/></span>
+			<span>DAC4 - <c:out value="${pageContext.menuCurrentPage}"/></span>
 		</div>
 	</a>
 
@@ -24,7 +24,7 @@
 	</a>
 
 	<a href="${pageContext.request.contextPath}/user/items">
-		<div class ="<%= "user-items".equals(header_currentPage) ? "pointing" : ""%>item">
+		<div class="<%= "user-items".equals(header_currentPage) ? "pointing" : ""%>item">
 			<span>My Items</span>
 		</div>
 	</a>
