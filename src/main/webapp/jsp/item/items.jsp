@@ -31,7 +31,7 @@
 						<c:if test="${isAdmin}">
 							<th>Approved</th>
 						</c:if>
-						<th></th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -79,6 +79,12 @@
 										</c:choose>
 									</c:if>
 									<td class="collapsing">
+										<c:if test="${item.available}">
+											<form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
+												<input type="hidden" name="id" value="${item.id}"/>
+												<input type="submit" value="Borrow" class="ui green button"/>
+											</form>
+										</c:if>
 										<a href="${pageContext.request.contextPath}/item?id=${item.id}">
 											<button type="button" class="ui button">Details</button>
 										</a>

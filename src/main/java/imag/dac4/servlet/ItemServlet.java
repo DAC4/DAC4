@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @WebServlet(name = "ItemServlet", urlPatterns = {
         "/item",
-        "/item/loan",
+        "/item/borrow",
         "/item/register",
         "/item/awaiting-validation",
         "/items",
@@ -75,8 +75,8 @@ public class ItemServlet extends HttpServlet {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
-            case "loan":
-                this.onLoanItemRequest(req, resp);
+            case "borrow":
+                this.onBorrowItemRequest(req, resp);
                 break;
             case "register":
                 this.onItemRegistrationRequest(req, resp);
@@ -89,7 +89,7 @@ public class ItemServlet extends HttpServlet {
         }
     }
 
-    private void onLoanItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void onBorrowItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String idString = req.getParameter("id");
 
         if (idString == null) {
@@ -118,7 +118,7 @@ public class ItemServlet extends HttpServlet {
         } else if (!item.isAvailable()) {
             // Item not available
             req.getSession().setAttribute("error", 400);
-            req.getSession().setAttribute("error_msg", "Bad Request: Item already loaned");
+            req.getSession().setAttribute("error_msg", "Bad Request: Item already borrowed");
             resp.sendRedirect("/items");
         } else {
             final User user = (User) req.getSession().getAttribute("user");
