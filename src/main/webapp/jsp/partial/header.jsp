@@ -13,7 +13,7 @@
 <c:if test="${user != null}" var="isConnected"/>
 <c:if test="${isConnected && sessionScope.isAdmin != null && sessionScope.isAdmin == true}" var="isAdmin"/>
 
-<div id="header" class="ui pointing menu">
+<div id="header" class="ui inverted pointing menu">
 	<a href="${pageContext.request.contextPath}/">
 		<div class="header item bar-text-big">
 			<span>DAC4</span>
@@ -41,7 +41,7 @@
 		<c:if test="${isAdmin == true}">
 			<a href="${pageContext.request.contextPath}/admin/user">
 				<div class="${"admin-users" == currentPage ? "active " : ""}item">
-					<span style="color:red"><i class="setting icon"></i> Users</span>
+					<span style="color:#FF3333"><i class="setting icon"></i> Users</span>
 				</div>
 			</a>
 
@@ -54,7 +54,7 @@
 	</c:if>
 
 	<div class="right menu">
-		<div class="header item bar-text-medium">
+		<div class="item bar-text-medium">
 			<span style="font-style: italic"><c:out value="${title}"/></span>
 		</div>
 		<c:choose>
@@ -77,7 +77,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="header item bar-text-small">
+				<div class="item bar-text-small">
 					<span>Logged in as <c:out value="${user.name}"/></span>
 				</div>
 				<div class="item button-item">
