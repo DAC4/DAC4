@@ -76,8 +76,6 @@ public class AuthServlet extends HttpServlet {
         final User user = this.userDao.getByLogin(login);
         final boolean isAdmin = user != null && user.getId() == User.ADMIN_ID;
 
-        req.setAttribute("user", user);
-        req.setAttribute("admin", isAdmin);
         if (user == null || !user.getPassword().equals(password)) {
             // User doesn't exist, password is invalid
             req.getSession().setAttribute("error", 401);
