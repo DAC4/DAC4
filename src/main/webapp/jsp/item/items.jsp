@@ -95,7 +95,7 @@
                                     for (Item item : items2) {
                                         if (item.isApproved() || isAdmin) {
                             %>
-                            <div class="four wide column">
+                            <div class="five wide column">
                                 <div style="color:green">
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
                                     <button type="button" class="ui button">
