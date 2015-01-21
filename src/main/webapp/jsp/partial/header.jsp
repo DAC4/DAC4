@@ -22,6 +22,12 @@
 		</div>
 	</a>
 
+	<a href="${pageContext.request.contextPath}/user/items">
+		<div class ="<%= "user-items".equals(header_currentPage) ? "pointing" : ""%>item">
+			<span>My Items</span>
+		</div>
+	</a>
+
 	<a><!--href="${pageContext.request.contextPath}/loans"-->
 		<div class="disabled <%= "loans".equals(header_currentPage) ? "pointing " : "" %>item">
 			<span>Loans</span>
