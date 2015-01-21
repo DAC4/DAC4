@@ -15,7 +15,7 @@
 
 <div id="header" class="ui pointing menu">
 	<a href="${pageContext.request.contextPath}/">
-		<div class="item bar-text-big">
+		<div class="header item bar-text-big">
 			<span>DAC4</span>
 		</div>
 	</a>
@@ -54,7 +54,7 @@
 	</c:if>
 
 	<div class="right menu">
-		<div class="item bar-text-medium">
+		<div class="header item bar-text-medium">
 			<span style="font-style: italic"><c:out value="${title}"/></span>
 		</div>
 		<c:choose>
@@ -77,7 +77,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="item bar-text-small">
+				<div class="header item bar-text-small">
 					<span>Logged in as <c:out value="${user.name}"/></span>
 				</div>
 				<div class="item button-item">
