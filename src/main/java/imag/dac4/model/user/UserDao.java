@@ -1,40 +1,17 @@
 package imag.dac4.model.user;
 
+import imag.dac4.model.Dao;
+
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
-public class UserDao {
+public class UserDao extends Dao<Integer, User> {
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    // ##################### //
-    // ## CRUD operations ## //
-    // ##################### //
-
-    public void create(User user) {
-        entityManager.persist(user);
+    public UserDao() {
+        super(User.class);
     }
-
-    public User read(int id) {
-        return entityManager.find(User.class, id);
-    }
-
-    public void update(User user) {
-        entityManager.merge(user);
-    }
-
-    public void delete(int id) {
-        entityManager.remove(entityManager.find(User.class, id));
-    }
-
-    // ###################### //
-    // ## Other operations ## //
-    // ###################### //
 
     public User getByLogin(final String login) {
         try {
