@@ -100,8 +100,18 @@
                                     <button type="button" class="ui button">
                                         <!-- <img src="<%= item.getImageId() %>" class="ui fluid image" /> -->
                                         <img src="http://i.imgur.com/YoO2kN7b.jpg" class="ui fluid image" />
-                                        Tom
-                                            Top Contributor
+                                        <div class="content">
+                                            <div class="header"><%= item.getName() %></div>
+                                            <% if (item.isAvailable()) { %>
+                                            <div class="positive collapsing">
+                                                    <span style="color:green"><i class="checkmark icon"></i> Yes</span>
+                                            </div>
+                                            <% } else { %>
+                                            <div class="negative collapsing">
+                                                    <span style="color:red"><i class="remove icon"></i> No</span>
+                                            </div>
+                                            <% } %>
+                                        </div>
                                     </button>
                                 </a>
                             </div>
