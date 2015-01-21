@@ -97,7 +97,7 @@
                             %>
                             <div class="four wide column">
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
-                                    <button type="button" class="ui button">Details</button>
+                                    <button type="button" class="ui button"><img src="<%= item.getImageId() %>"/></button>
                                 </a>
                             </div>
                             <% } %>
