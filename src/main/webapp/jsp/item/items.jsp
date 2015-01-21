@@ -96,6 +96,7 @@
                                         if (item.isApproved() || isAdmin) {
                             %>
                             <div class="four wide column">
+                                <div class="positive collapsing">
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
                                     <button type="button" class="ui button">
                                         <!-- <img src="<%= item.getImageId() %>" class="ui fluid image" /> -->
@@ -103,7 +104,7 @@
                                         <div class="content">
                                             <div class="header"><%= item.getName() %></div>
                                             <% if (item.isAvailable()) { %>
-                                            <div class="positive collapsing">
+                                            
                                                     <span style="color:green"><i class="checkmark icon"></i> Available</span>
                                             </div>
                                             <% } else { %>
@@ -114,6 +115,7 @@
                                         </div>
                                     </button>
                                 </a>
+                                        </div>
                             </div>
                             <% } %>
                             <% } %>
