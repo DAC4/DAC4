@@ -39,7 +39,7 @@
 			</p>
 
 			<p>
-				<c:out value="${param.menuCurrentPage}"/>
+				<c:out value="${requestScope.menuCurrentPage}"/>
 			</p>
 
 		</div>
