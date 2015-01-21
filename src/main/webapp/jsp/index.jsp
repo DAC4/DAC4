@@ -2,7 +2,7 @@
 
 <%
 	request.setAttribute("title", "Index");
-	request.setAttribute("menu-current-page", "index");
+	request.setAttribute("menuCurrentPage", "index");
 %>
 
 <!DOCTYPE html>
