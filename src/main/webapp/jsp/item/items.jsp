@@ -106,7 +106,7 @@
                                             <% if (item.isAvailable()) { %>
                                             
                                                     <span style="color:green"><i class="checkmark icon"></i> Available</span>
-                                            </div>
+                                            
                                             <% } else { %>
                                             <div class="negative collapsing">
                                                     <span style="color:red"><i class="remove icon"></i> Not available</span>
