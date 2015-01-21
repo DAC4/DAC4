@@ -29,9 +29,7 @@
 					<th>Image</th>
 					<th>Name</th>
 					<th>Available</th>
-					<% if (isAdmin) { %>
-					<th>Approved</th>
-					<% } %>
+					<th></th>
 					<th></th>
 				</thead>
 				<tbody>
@@ -63,21 +61,17 @@
 							<span style="color:red"><i class="remove icon"></i> No</span>
 						</td>
 						<% } %>
-						<% if (isAdmin) { %>
-						<% if (item.isApproved()) { %>
-						<td class="positive collapsing">
-							<span style="color:green"><i class="checkmark icon"></i> Yes</span>
-						</td>
-						<% } else { %>
-						<td class="negative collapsing">
-							<span style="color:red"><i class="remove icon"></i> No</span>
-						</td>
-						<% } %>
-						<% } %>
 						<td class="collapsing">
 							<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
 								<button type="button" class="ui button">Details</button>
 							</a>
+						</td>
+						<td class="collapsing">
+							<form class="inline-form" action="${pageContext.request.contextPath}/user/items/remove" method="POST">
+								<input type="hidden" name="user" value="<%= user.getLogin() %>"/>
+								<input type="hidden" name="itemId" value="<%= item.getId() %>"/>
+								<input type="submit" value="Approve" class="ui orange button"/>
+							</form>
 						</td>
 					</tr>
 				</a>
