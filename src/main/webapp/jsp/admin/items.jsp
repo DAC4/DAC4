@@ -40,10 +40,10 @@
 							<td style="padding:0" class="collapsing">
 								<c:choose>
 									<c:when test="${item.imagePath == null}">
-										<img src="${pageContext.request.contextPath}/static/img/default.png" width="70" height="70"/>
+										<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
 									</c:when>
 									<c:otherwise>
-										<img src="${pageContext.request.contextPath}${item.imagePath}" width="70" height="70"/>
+										<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
 									</c:otherwise>
 								</c:choose>
 							</td>
