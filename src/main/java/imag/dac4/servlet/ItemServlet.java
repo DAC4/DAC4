@@ -3,6 +3,8 @@ package imag.dac4.servlet;
 import imag.dac4.Constants;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
+import imag.dac4.model.loan.Loan;
+import imag.dac4.model.loan.LoanDao;
 import imag.dac4.model.user.User;
 
 import javax.ejb.EJB;
@@ -23,6 +25,7 @@ import java.io.IOException;
 public class ItemServlet extends HttpServlet {
 
     @EJB ItemDao itemDao;
+    @EJB LoanDao loanDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -132,11 +135,12 @@ public class ItemServlet extends HttpServlet {
                 req.getSession().setAttribute("error", 403);
                 req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
                 resp.sendRedirect("/item?id=" + idString);
+            } else {
+                item.setAvailable(false);
+                this.itemDao.update(item);
+                this.loanDao.create(new Loan(user.getId(), item.getId()));
+                resp.sendRedirect("/items");
             }
-            item.setAvailable(false);
-            this.itemDao.update(item);
-            // TODO Register item loan
-            resp.sendRedirect("/item/awaiting-validation");
         }
     }
 
