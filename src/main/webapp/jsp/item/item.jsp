@@ -43,7 +43,7 @@
 				<li>
 					Max Loan Duration: ${item.maxLoanDuration}
 				</li>
-				<c:if test="${item.approved}">
+				<c:if test="${!item.approved}">
 					<li style="color:red">
 						Approved: no
 					</li>
