@@ -1,18 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-	request.setAttribute("title", "Admin - Users List");
-	request.setAttribute("menu-current-page", "admin-users");
-%>
+<%--@elvariable id="users" type="java.util.List"--%>
+<%--@elvariable id="u" type="imag.dac4.model.user.User"--%>
+
+<c:set var="title" value="Admin - Users List"/>
+<c:set var="currentPage" value="admin-users"/>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		<%= request.getAttribute("title") %>
-	</title>
 	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>
@@ -35,51 +32,46 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						@SuppressWarnings("unchecked")
-						List<User> users = (List<User>) request.getAttribute("users");
-						if (users != null) {
-							for (User u : users) {
-					%>
-					<tr>
-						<td>
-							<%= u.getLogin() %>
-						</td>
-						<td>
-							<%= u.getName() %>
-						</td>
-						<td>
-							<%= u.getEmail() %>
-						</td>
-						<td class="right aligned">
-							<%= u.getCredits() %>
-						</td>
-						<% if (u.isApproved()) { %>
-						<td class="positive collapsing">
-							<span style="color:green"><i class="checkmark icon"></i> Yes</span>
-						</td>
-						<% } else { %>
-						<td class="negative collapsing">
-							<span style="color:red"><i class="remove icon"></i> No</span>
-						</td>
-						<% } %>
-						<td class="right aligned collapsing">
-							<% if (!u.isApproved()) { %>
-							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
-								<input type="hidden" name="login" value="<%= u.getLogin() %>"/>
-								<input type="submit" value="Approve" class="ui orange button"/>
-							</form>
-							<% } %>
-							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
-								<input type="hidden" name="login" value="<%= u.getLogin() %>"/>
-								<input type="submit" value="Remove" class="ui disabled red button"/>
-							</form>
-						</td>
-					</tr>
-					<%
-							}
-						}
-					%>
+					<c:forEach var="u" items="${users}">
+						<tr>
+							<td>
+								<c:out value="${u.login}"/>
+							</td>
+							<td>
+								<c:out value="${u.name}"/>
+							</td>
+							<td>
+								<c:out value="${u.email}"/>
+							</td>
+							<td class="right aligned">
+								<c:out value="${u.credits}"/>
+							</td>
+							<c:choose>
+								<c:when test="${u.approved}">
+									<td class="positive collapsing">
+										<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+									</td>
+								</c:when>
+								<c:otherwise>
+									<td class="negative collapsing">
+										<span style="color:red"><i class="remove icon"></i> No</span>
+									</td>
+								</c:otherwise>
+							</c:choose>
+							<td class="right aligned collapsing">
+								<c:if test="${!u.approved}">
+									<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
+										<input type="hidden" name="login" value="${u.login}"/>
+										<input type="submit" value="Approve" class="ui orange button"/>
+									</form>
+								</c:if>
+								<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
+									<input type="hidden" name="login" value="${u.login}"/>
+									<input type="submit" value="Remove" class="ui disabled red button"/>
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 
