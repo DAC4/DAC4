@@ -99,7 +99,7 @@
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
                                     <button type="button" class="ui button">
                                         <!-- <img src="<%= item.getImageId() %>"/> -->
-                                        <img src="http://i.imgur.com/YoO2kN7b.jpg"/>
+                                        <img src="http://i.imgur.com/YoO2kN7b.jpg" class="ui fluid image" />
                                     </button>
                                 </a>
                             </div>
