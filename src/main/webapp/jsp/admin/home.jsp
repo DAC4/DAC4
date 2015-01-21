@@ -3,7 +3,7 @@
 
 <%
 	request.setAttribute("title", "Admin - Home");
-	request.setAttribute("menu-current-page", "admin-home");
+	request.setAttribute("menuCurrentPage", "admin-home");
 %>
 
 <!DOCTYPE html>
