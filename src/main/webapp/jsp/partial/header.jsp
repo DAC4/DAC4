@@ -1,13 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="imag.dac4.model.user.User" %>
 
-<%
-	final String header_currentPage = (String) request.getAttribute("menuCurrentPage");
-	final User user = (User) request.getSession().getAttribute("user");
-	final boolean isConnected = user != null;
-	final boolean isAdmin = isConnected && request.getSession().getAttribute("isAdmin") != null && (Boolean) request.getSession().getAttribute("isAdmin");
-%>
-<c:set var="header_currentPage" value="${requestScope.menuCurrentPage}" scope="page"/>
+<%--@elvariable id="title" type="java.lang.String"--%>
+<%--@elvariable id="currentPage" type="java.lang.String"--%>
+<%--@elvariable id="user" type="imag.dac4.model.user.User"--%>
+
+<c:set var="user" value="${sessionScope.user}" property=""/>
+<c:if test="${user = null}" var="isConnected"/>
+<c:if test="${isConnected && sessionScope.isAdmin}" var="isAdmin"/>
 
 <div id="header" class="ui menu">
 	<a href="${pageContext.request.contextPath}/">
@@ -16,90 +16,87 @@
 		</div>
 	</a>
 
-	<% if (isConnected) { %>
-	<a href="${pageContext.request.contextPath}/items">
-		<div class="<%= "items".equals(header_currentPage) ? "pointing " : "" %>item">
-			<span>Items</span>
-		</div>
-	</a>
+	<c:if test="${isConnected}">
+		<a href="${pageContext.request.contextPath}/items">
+			<div class="${"items" == currentPage ? "pointing " : ""}item">
+				<span>Items</span>
+			</div>
+		</a>
 
-	<a href="${pageContext.request.contextPath}/user/items">
-		<div class="<%= "user-items".equals(header_currentPage) ? "pointing" : ""%>item">
-			<span>My Items</span>
-		</div>
-	</a>
+		<a href="${pageContext.request.contextPath}/user/items">
+			<div class="${"user-items" == currentPage ? "pointing " : ""}item">
+				<span>My Items</span>
+			</div>
+		</a>
 
-	<a><!--href="${pageContext.request.contextPath}/loans"-->
-		<div class="disabled <%= "loans".equals(header_currentPage) ? "pointing " : "" %>item">
-			<span>Loans</span>
-		</div>
-	</a>
-	<% if (isAdmin) { %>
-	<a href="${pageContext.request.contextPath}/admin/user">
-		<div class="<%= "admin-users".equals(header_currentPage) ? "pointing " : "" %>item">
-			<span style="color:red"><i class="setting icon"></i> Users</span>
-		</div>
-	</a>
+		<a><!--href="${pageContext.request.contextPath}/loans"-->
+			<div class="disabled ${"loans" == currentPage ? "pointing " : ""}item">
+				<span>Loans</span>
+			</div>
+		</a>
+		<c:if test="${isAdmin}">
+			<a href="${pageContext.request.contextPath}/admin/user">
+				<div class="${"admin-users" == currentPage ? "pointing " : ""}item">
+					<span style="color:red"><i class="setting icon"></i> Users</span>
+				</div>
+			</a>
 
-	<a href="${pageContext.request.contextPath}/admin/item">
-		<div class="<%= "admin-items".equals(header_currentPage) ? "pointing " : "" %>item">
-			<span style="color:red"><i class="setting icon"></i> Items</span>
-		</div>
-	</a>
-	<% } %>
-	<% } %>
+			<a href="${pageContext.request.contextPath}/admin/item">
+				<div class="${"admin-items" == currentPage ? "pointing " : ""}item">
+					<span style="color:red"><i class="setting icon"></i> Items</span>
+				</div>
+			</a>
+		</c:if>
+	</c:if>
 
 	<div class="right menu">
 		<div class="item bar-text-medium">
-			<span style="font-style: italic"><%= request.getAttribute("title") %></span>
+			<span style="font-style: italic"><c:out value="${title}"/></span>
 		</div>
-		<% if (!isConnected) { %>
-		<div class="item button-item">
-			<form class="inline-form" method="POST" action="${pageContext.request.contextPath}/auth/login">
-				<div class="ui input">
-					<input id="login" type="text" placeholder="Login" name="login" required/>
+		<c:choose>
+			<c:when test="${!isConnected}">
+				<div class="item button-item">
+					<form class="inline-form" method="POST" action="${pageContext.request.contextPath}/auth/login">
+						<div class="ui input">
+							<input id="login" type="text" placeholder="Login" name="login" required/>
+						</div>
+						<div class="ui input">
+							<input id="password" type="password" placeholder="Password" name="password" required/>
+						</div>
+						<input class="ui submit button" type="submit" value="Login"/>
+					</form>
+					<c:if test="${\"auth-register\" != currentPage}">
+						<a href="${pageContext.request.contextPath}/auth/register">
+							<button type="button" class="ui primary button">Register</button>
+						</a>
+					</c:if>
 				</div>
-				<div class="ui input">
-					<input id="password" type="password" placeholder="Password" name="password" required/>
+			</c:when>
+			<c:otherwise>
+				<div class="item bar-text-small">
+					<span>Logged in as <c:out value="${user.name}"/></span>
 				</div>
-				<input class="ui submit button" type="submit" value="Login"/>
-			</form>
-			<% if (!"auth-register".equals(header_currentPage)) { %>
-			<a href="${pageContext.request.contextPath}/auth/register">
-				<button type="button" class="ui primary button">Register</button>
-			</a>
-			<% } %>
-		</div>
-		<% } else { %>
-		<div class="item bar-text-small">
-			<span>
-				Logged in as <%= user.getName() %>
-			</span>
-		</div>
-		<div class="item button-item">
-			<a href="${pageContext.request.contextPath}/auth/logout">
-				<button type="button" class="ui button">Logout</button>
-			</a>
-		</div>
-		<% } %>
+				<div class="item button-item">
+					<a href="${pageContext.request.contextPath}/auth/logout">
+						<button type="button" class="ui button">Logout</button>
+					</a>
+				</div>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </div>
 
 <div id="content" class="ui page grid">
-		<%
-		if (session.getAttribute("error") != null) {
-			final Integer header_error = (Integer) session.getAttribute("error");
-			final String header_error_msg = (String) session.getAttribute("error_msg");
-			session.removeAttribute("error");
-			session.removeAttribute("error_msg");
-	%>
-	<div id="error" class="ui negative message">
-		<h2 class="header">
-			Error <%= header_error %>
-		</h2>
+	<c:if test="${sessionScope.error != null}">
+		<div id="error" class="ui negative message">
+			<h2 class="header">
+				Error <c:out value="${sessionScope.error}"/>
+			</h2>
 
-		<p>
-			<%= header_error_msg %>
-		</p>
-	</div>
-		<% } %>
+			<p>
+				<c:out value="${sessionScope.msg}"/>
+			</p>
+		</div>
+		<c:remove var="sessionScope.error"/>
+		<c:remove var="sessionScope.error_msg"/>
+	</c:if>
