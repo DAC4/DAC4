@@ -102,11 +102,11 @@
                             <div class="four wide column">
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
                                     <% if (item.isAvailable()) { %>
-                                    <button type="button" class="ui segment tertiary inverted green">
+                                    <div class="ui segment tertiary inverted green">
                                     <% } else { %>
-                                    <button type="button" class="ui segment tertiary inverted red">
+                                    <div class="ui segment tertiary inverted red">
                                     <% } %>
-                                        <div class="ui animated button">
+                                        <button type="button" class="ui animated button">
                                             <div class="visible content">
                                                 <div class="ui fluid image">
                                                     <% if (item.getImagePath() == null) { %>
@@ -124,8 +124,8 @@
                                                 <span style="color:red"><i class="remove icon"></i> Not available</span>
                                                 <% } %>
                                             </div>
-                                        </div>        
-                                    </button>
+                                        </button>        
+                                    </div>
                                 </a>
                             </div>
                             <% } %>
