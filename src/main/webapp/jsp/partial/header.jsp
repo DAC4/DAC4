@@ -1,5 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="imag.dac4.model.user.User" %>
 
 <%--@elvariable id="title" type="java.lang.String"--%>
 <%--@elvariable id="currentPage" type="java.lang.String"--%>
@@ -7,6 +6,9 @@
 <%--@elvariable id="user" type="imag.dac4.model.user.User"--%>
 <%--@elvariable id="isConnected" type="java.lang.Boolean"--%>
 <%--@elvariable id="isAdmin" type="java.lang.Boolean"--%>
+
+<%--@elvariable id="error" type="java.lang.String"--%>
+<%--@elvariable id="error_msg" type="java.lang.String"--%>
 
 <c:if test="${user != null}" var="isConnected"/>
 <c:if test="${isConnected && sessionScope.isAdmin != null && sessionScope.isAdmin == true}" var="isAdmin"/>
@@ -92,13 +94,13 @@
 	<c:if test="${sessionScope.error != null}">
 		<div id="error" class="ui negative message">
 			<h2 class="header">
-				Error <c:out value="${sessionScope.error}"/>
+				Error <c:out value="${error}"/>
 			</h2>
 
 			<p>
-				<c:out value="${sessionScope.msg}"/>
+				<c:out value="${error_msg}"/>
 			</p>
 		</div>
-		<c:remove var="sessionScope.error"/>
-		<c:remove var="sessionScope.error_msg"/>
+		<c:remove var="error"/>
+		<c:remove var="error_msg"/>
 	</c:if>
