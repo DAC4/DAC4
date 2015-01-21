@@ -38,7 +38,7 @@
 					final List<Item> items = (List<Item>) request.getAttribute("items");
 					if (items != null) {
 						for (Item item : items) {
-							if (item.isApproved() || isAdmin) {
+							if (item.isApproved()) {
 				%>
 				<a href="${pageContext.request.contextPath}/item?id=<%= item.getId() %>">
 					<tr>
