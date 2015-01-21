@@ -71,25 +71,28 @@ public class UserServlet extends HttpServlet{
                     // take away 1 credit from user
                     user.setCredits(user.getCredits() - 1);
                     this.userDao.update(user);
+                    resp.sendRedirect("/user/items");
                 } else { // item unavailable
                     req.getSession().setAttribute("error", 400);
                     req.getSession().setAttribute("error_msg", "Bad Request: "
                             + req.getRequestURI()
                             + " (This item is currently unavailable. You cannot delete it)");
+                    resp.sendRedirect("/user/items");
                 }
             } else { // user rights incorrect
-                req.getSession().setAttribute("error", 403);
-                req.getSession().setAttribute("error_msg", "Forbidden: "
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad Request: "
                         + req.getRequestURI()
                         + " (This item is not yours)");
+                resp.sendRedirect("/");
             }
         } else { // item not found
             req.getSession().setAttribute("error", 404);
             req.getSession().setAttribute("error_msg", "Bad Request: "
                     + req.getRequestURI()
                     + " (Unknown or missing id)");
+            resp.sendRedirect("/user/items");
         }
-        resp.sendRedirect("/user/items");
     }
 
     private boolean isAdmin(final HttpServletRequest req) {
