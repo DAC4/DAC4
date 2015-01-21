@@ -100,10 +100,8 @@
                                     <button type="button" class="ui button">
                                         <!-- <img src="<%= item.getImageId() %>" class="ui fluid image" /> -->
                                         <img src="http://i.imgur.com/YoO2kN7b.jpg" class="ui fluid image" />
-                                        <div class="content">
-                                            <div class="header">Tom</div>
+                                        Tom
                                             Top Contributor
-                                        </div>
                                     </button>
                                 </a>
                             </div>
