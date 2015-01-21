@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 </div>
 
-<div id="footer" class="ui menu">
+<div id="footer" class="ui inverted menu">
 	<div class="item bar-text-medium">
 		<span>Footer</span>
 	</div>
