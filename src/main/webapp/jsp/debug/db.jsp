@@ -1,20 +1,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="imag.dac4.model.item.Item" %>
-<%@ page import="imag.dac4.model.loan.Loan" %>
-<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%
-	request.setAttribute("title", "Debug - Database dump");
-	request.setAttribute("menu-current-page", "db");
-%>
+<%--@elvariable id="users" type="java.util.List"--%>
+<%--@elvariable id="u" type="imag.dac4.model.user.User"--%>
+<%--@elvariable id="items" type="java.util.List"--%>
+<%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
+<%--@elvariable id="loans" type="java.util.List"--%>
+<%--@elvariable id="loan" type="imag.dac4.model.loan.Loan"--%>
+
+<c:set var="title" value="Debug - Database dump"/>
+<c:set var="currentPage" value="db"/>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>
-		<%= request.getAttribute("title") %>
-	</title>
 	<%@ include file="../partial/head.jsp" %>
 </head>
 
@@ -38,39 +37,31 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						@SuppressWarnings("unchecked")
-						List<User> users = (List<User>) request.getAttribute("users");
-						if (users != null) {
-							for (User u : users) {
-					%>
-					<tr>
-						<td>
-							<%= u.getId()%>
-						</td>
-						<td>
-							<%= u.getLogin() %>
-						</td>
-						<td>
-							<%= u.getPassword() %>
-						</td>
-						<td>
-							<%= u.getName() %>
-						</td>
-						<td>
-							<%= u.getEmail() %>
-						</td>
-						<td>
-							<%= u.getCredits() %>
-						</td>
-						<td>
-							<%= u.isApproved() %>
-						</td>
-					</tr>
-					<%
-							}
-						}
-					%>
+					<c:forEach var="u" items="${users}">
+						<tr>
+							<td>
+								<c:out value="${u.id}"/>
+							</td>
+							<td>
+								<c:out value="${u.login}"/>
+							</td>
+							<td>
+								<c:out value="${u.password}"/>
+							</td>
+							<td>
+								<c:out value="${u.name}"/>
+							</td>
+							<td>
+								<c:out value="${u.email}"/>
+							</td>
+							<td>
+								<c:out value="${u.credits}"/>
+							</td>
+							<td>
+								<c:out value="${u.approved}"/>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 
@@ -92,45 +83,37 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						@SuppressWarnings("unchecked")
-						List<Item> items = (List<Item>) request.getAttribute("items");
-						if (items != null) {
-							for (Item item : items) {
-					%>
-					<tr>
-						<td>
-							<%= item.getId()%>
-						</td>
-						<td>
-							<%= item.getName() %>
-						</td>
-						<td>
-							<%= item.getImagePath() %>
-						</td>
-						<td>
-							<%= item.getDescription() %>
-						</td>
-						<td>
-							<%= item.getOwnerId() %>
-						</td>
-						<td>
-							<%= item.isAvailable() %>
-						</td>
-						<td>
-							<%= item.getLockerNum() %>
-						</td>
-						<td>
-							<%= item.getMaxLoanDuration() %>
-						</td>
-						<td>
-							<%= item.isApproved() %>
-						</td>
-					</tr>
-					<%
-							}
-						}
-					%>
+					<c:forEach var="item" items="${items}">
+						<tr>
+							<td>
+								<c:out value="${item.id}"/>
+							</td>
+							<td>
+								<c:out value="${item.name}"/>
+							</td>
+							<td>
+								<c:out value="${item.imagePath}"/>
+							</td>
+							<td>
+								<c:out value="${item.description}"/>
+							</td>
+							<td>
+								<c:out value="${item.ownerId}"/>
+							</td>
+							<td>
+								<c:out value="${item.available}"/>
+							</td>
+							<td>
+								<c:out value="${item.lockerNum}"/>
+							</td>
+							<td>
+								<c:out value="${item.maxLoanDuration}"/>
+							</td>
+							<td>
+								<c:out value="${item.approved}"/>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 
@@ -149,36 +132,28 @@
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						@SuppressWarnings("unchecked")
-						List<Loan> loans = (List<Loan>) request.getAttribute("loans");
-						if (loans != null) {
-							for (Loan loan : loans) {
-					%>
-					<tr>
-						<td>
-							<%= loan.getId()%>
-						</td>
-						<td>
-							<%= loan.getUserId() %>
-						</td>
-						<td>
-							<%= loan.getItemId() %>
-						</td>
-						<td>
-							<%= loan.isReturned() %>
-						</td>
-						<td>
-							<%= loan.getStartDate() %>
-						</td>
-						<td>
-							<%= loan.getEndDate() %>
-						</td>
-					</tr>
-					<%
-							}
-						}
-					%>
+					<c:forEach var="loan" items="${loans}">
+						<tr>
+							<td>
+								<c:out value="${loan.id}"/>
+							</td>
+							<td>
+								<c:out value="${loan.userId}"/>
+							</td>
+							<td>
+								<c:out value="${loan.itemId}"/>
+							</td>
+							<td>
+								<c:out value="${loan.returned}"/>
+							</td>
+							<td>
+								<c:out value="${loan.startDate}"/>
+							</td>
+							<td>
+								<c:out value="${loan.endDate}"/>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 
