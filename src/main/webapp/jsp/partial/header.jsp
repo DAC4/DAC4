@@ -13,7 +13,7 @@
 <c:if test="${user != null}" var="isConnected"/>
 <c:if test="${isConnected && sessionScope.isAdmin != null && sessionScope.isAdmin == true}" var="isAdmin"/>
 
-<div id="header" class="ui menu">
+<div id="header" class="ui pointing menu">
 	<a href="${pageContext.request.contextPath}/">
 		<div class="item bar-text-big">
 			<span>DAC4</span>
@@ -22,31 +22,31 @@
 
 	<c:if test="${isConnected == true}">
 		<a href="${pageContext.request.contextPath}/items">
-			<div class="${"items" == currentPage ? "pointing " : ""}item">
+			<div class="${"items" == currentPage ? "active " : ""}item">
 				<span>Items</span>
 			</div>
 		</a>
 
 		<a href="${pageContext.request.contextPath}/user/items">
-			<div class="${"user-items" == currentPage ? "pointing " : ""}item">
+			<div class="${"user-items" == currentPage ? "active " : ""}item">
 				<span>My Items</span>
 			</div>
 		</a>
 
 		<a><!--href="${pageContext.request.contextPath}/loans"-->
-			<div class="disabled ${"loans" == currentPage ? "pointing " : ""}item">
+			<div class="disabled ${"loans" == currentPage ? "active " : ""}item">
 				<span>Loans</span>
 			</div>
 		</a>
 		<c:if test="${isAdmin == true}">
 			<a href="${pageContext.request.contextPath}/admin/user">
-				<div class="${"admin-users" == currentPage ? "pointing " : ""}item">
+				<div class="${"admin-users" == currentPage ? "active " : ""}item">
 					<span style="color:red"><i class="setting icon"></i> Users</span>
 				</div>
 			</a>
 
 			<a href="${pageContext.request.contextPath}/admin/item">
-				<div class="${"admin-items" == currentPage ? "pointing " : ""}item">
+				<div class="${"admin-items" == currentPage ? "active " : ""}item">
 					<span style="color:red"><i class="setting icon"></i> Items</span>
 				</div>
 			</a>
