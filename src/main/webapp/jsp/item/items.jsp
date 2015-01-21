@@ -95,24 +95,28 @@
                                     for (Item item : items2) {
                                         if (item.isApproved() || isAdmin) {
                             %>
-                            <div class="five wide column">
+                            <div class="four wide column">
                                 <a href="${pageContext.request.contextPath}/item?id=<%= item.getId()%>">
                                     <% if (item.isAvailable()) { %>
                                     <button type="button" class="ui segment tertiary inverted green">
                                     <% } else { %>
                                     <button type="button" class="ui segment tertiary inverted red">
                                     <% } %>
-
-                                        <!-- <img src="<%= item.getImageId()%>" class="ui fluid image" /> -->
-                                        <img src="http://i.imgur.com/YoO2kN7b.jpg" class="ui fluid image" />
-                                        <div class="content">
-                                            <div class="header"><%= item.getName()%></div>
-                                            <% if (item.isAvailable()) { %>
-                                            <span style="color:green"><i class="checkmark icon"></i> Available</span>
-                                            <% } else { %>
-                                            <span style="color:red"><i class="remove icon"></i> Not available</span>
-                                            <% } %>
-                                        </div>
+                                        <button type="button" class="ui animated button">
+                                            <div class="visible content">
+                                                <div class="ui fluid image">
+                                                    <img src="<%= item.getImageId()%>" class="ui medium rounded image">
+                                                </div>
+                                            </div>
+                                            <div class="hidden content">
+                                                <div class="header"><%= item.getName()%></div>
+                                                <% if (item.isAvailable()) { %>
+                                                <span style="color:green"><i class="checkmark icon"></i> Available</span>
+                                                <% } else { %>
+                                                <span style="color:red"><i class="remove icon"></i> Not available</span>
+                                                <% } %>
+                                            </div>
+                                        </button>        
                                     </button>
                                 </a>
                             </div>
