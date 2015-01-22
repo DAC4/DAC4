@@ -124,12 +124,19 @@
                                                     <!-- <a href="${pageContext.request.contextPath}/item?id=${item.id}">
                                                             <button type="button" class="ui button">Details</button>
                                                     </a>-->
-                                                    <c:if test="${item.available}">
+                                                    
                                                             <form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
                                                                     <input type="hidden" name="id" value="${item.id}"/>
-                                                                    <input type="submit" value="Borrow" class="ui green button"/>
+                                                                    <c:choose>
+                                                                        <c:when test="${item.available}">
+                                                                            <input type="submit" value="Borrow" class="ui green button"/>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <input type="submit" value="Borrow" class="ui disabled button"/>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
                                                             </form>
-                                                    </c:if>
+                                                    
                                             </div>
                                         </a>
                                     </div>
