@@ -54,7 +54,7 @@
 								<td>
 									<c:out value="${loan.startDateAsString}"/>
 								</td>
-								<td>
+								<td${loan.shouldHaveBeenReturned(item.maxLoanDuration) ? " class=\"negative\"" : ""}>
 									<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
 								</td>
 								<td class="collapsing">

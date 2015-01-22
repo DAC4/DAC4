@@ -46,6 +46,22 @@ public class Loan implements Serializable {
         this.endDate = null;
     }
 
+    public String getStartDateAsString() {
+        return FORMAT.format(startDate);
+    }
+
+    public String getEndDateAsString() {
+        return FORMAT.format(endDate);
+    }
+
+    public String getMaxEndDateAsString(final int maxLoanDuration) {
+        return FORMAT.format(DateUtils.addDays(startDate, maxLoanDuration));
+    }
+
+    public boolean shouldHaveBeenReturned(final int maxLoanDuration) {
+        return DateUtils.addDays(startDate, maxLoanDuration).after(new Date(System.currentTimeMillis()));
+    }
+
     public int getId() {
         return id;
     }
@@ -66,20 +82,8 @@ public class Loan implements Serializable {
         return startDate;
     }
 
-    public String getStartDateAsString() {
-        return FORMAT.format(startDate);
-    }
-
     public Date getEndDate() {
         return endDate;
-    }
-
-    public String getEndDateAsString() {
-        return FORMAT.format(endDate);
-    }
-
-    public String getMaxEndDateAsString(final int days) {
-        return FORMAT.format(DateUtils.addDays(endDate, days));
     }
 
     public void setUserId(int userId) {
