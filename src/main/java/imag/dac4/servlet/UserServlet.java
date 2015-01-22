@@ -87,6 +87,7 @@ public class UserServlet extends HttpServlet {
             if (user != null && (item.getOwnerId() == user.getId())) {
                 // check item status
                 if (item.isAvailable()) {
+                    this.loanDao.forgetItemHistory(id);
                     this.itemDao.delete(id);
                     // take away 1 credit from user
                     user.setCredits(user.getCredits() - 1);
