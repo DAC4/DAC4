@@ -120,7 +120,7 @@
 												</c:otherwise>
 											</c:choose>
 										</div>
-										<ul class="list">
+										<ul>
 											<li>It's good to see you again.</li>
 											<li>Did you know it's been a while?</li>
 										</ul>
