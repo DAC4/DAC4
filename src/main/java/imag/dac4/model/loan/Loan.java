@@ -1,14 +1,19 @@
 package imag.dac4.model.loan;
 
+import org.apache.commons.lang3.time.DateUtils;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 @Entity
 @Table(name = "loans")
 public class Loan implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,8 +66,20 @@ public class Loan implements Serializable {
         return startDate;
     }
 
+    public String getStartDateAsString() {
+        return FORMAT.format(startDate);
+    }
+
     public Date getEndDate() {
         return endDate;
+    }
+
+    public String getEndDateAsString() {
+        return FORMAT.format(endDate);
+    }
+
+    public String getMaxEndDateAsString(final int days) {
+        return FORMAT.format(DateUtils.addDays(endDate, days));
     }
 
     public void setUserId(int userId) {

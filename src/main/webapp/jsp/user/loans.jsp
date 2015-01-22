@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%--@elvariable id="loans" type="imag.dac4.util.pairlist.PairList"--%>
+<%--@elvariable id="loans" type="java.util.Iterator"--%>
 <%--@elvariable id="pair" type="imag.dac4.util.pairlist.Pair"--%>
 <%--@elvariable id="loan" type="imag.dac4.model.loan.Loan"--%>
 <%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
@@ -33,7 +33,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="pair" items="${loans.iterator()}">
+					<c:forEach var="pair" items="${loans}">
 						<c:set var="loan" value="${pair.key}"/>
 						<c:set var="item" value="${pair.value}"/>
 						<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">
@@ -52,10 +52,10 @@
 									<c:out value="${item.name}"/>
 								</td>
 								<td>
-									<c:out value="${loan.startDate}"/>
+									<c:out value="${loan.startDateAsString}"/>
 								</td>
 								<td>
-									<c:out value="${loan.startDate + item.maxLoanDuration}"/>
+									<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
 								</td>
 								<td class="collapsing">
 									<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">

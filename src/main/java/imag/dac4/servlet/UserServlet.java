@@ -51,7 +51,7 @@ public class UserServlet extends HttpServlet {
                 for (final Loan loan : loans) {
                     pairList.put(loan, this.itemDao.read(loan.getItemId()));
                 }
-                req.setAttribute("loans", pairList);
+                req.setAttribute("loans", pairList.iterator());
                 req.getRequestDispatcher(Constants.JSP_USER_LOANS).forward(req, resp);
                 break;
             default:
