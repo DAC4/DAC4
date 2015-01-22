@@ -136,7 +136,7 @@ public class ItemServlet extends HttpServlet {
                 // Not enough credits
                 req.getSession().setAttribute("error", 403);
                 req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
-                resp.sendRedirect("/item?id=" + idString);
+                resp.sendRedirect("/items");
             } else {
                 // item is not available anymore
                 item.setAvailable(false);
