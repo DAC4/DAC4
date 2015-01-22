@@ -14,6 +14,7 @@ public class AdminFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain filterChain) throws IOException, ServletException {
+        req.setCharacterEncoding("UTF-8");
         final HttpServletRequest httpReq = (HttpServletRequest) req;
         final String path = httpReq.getRequestURI().substring(httpReq.getContextPath().length());
 
