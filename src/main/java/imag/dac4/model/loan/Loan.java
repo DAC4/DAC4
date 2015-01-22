@@ -59,7 +59,7 @@ public class Loan implements Serializable {
     }
 
     public boolean shouldHaveBeenReturned(final int maxLoanDuration) {
-        return DateUtils.addDays(startDate, maxLoanDuration).after(new Date(System.currentTimeMillis()));
+        return DateUtils.addDays(startDate, maxLoanDuration).before(new Date(System.currentTimeMillis()));
     }
 
     public int getId() {
