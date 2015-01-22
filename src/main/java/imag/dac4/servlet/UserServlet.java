@@ -3,9 +3,11 @@ package imag.dac4.servlet;
 import imag.dac4.Constants;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
+import imag.dac4.model.loan.Loan;
 import imag.dac4.model.loan.LoanDao;
 import imag.dac4.model.user.User;
 import imag.dac4.model.user.UserDao;
+import imag.dac4.util.pairlist.PairList;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = {
         "/user/items",
@@ -37,7 +40,12 @@ public class UserServlet extends HttpServlet {
                 req.getRequestDispatcher(Constants.JSP_USER_ITEMS).forward(req, resp);
                 break;
             case "loans":
-                req.setAttribute("loans", this.loanDao.getLoans(user));
+                final List<Loan> loans = this.loanDao.getLoans(user);
+                final PairList<Loan, Item> pairList = new PairList<>();
+                for (final Loan loan : loans) {
+                    pairList.put(loan, this.itemDao.read(loan.getItemId()));
+                }
+                req.setAttribute("loans", pairList);
                 req.getRequestDispatcher(Constants.JSP_USER_LOANS).forward(req, resp);
                 break;
             default:
