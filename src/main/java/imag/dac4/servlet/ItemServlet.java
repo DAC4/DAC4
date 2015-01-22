@@ -144,14 +144,14 @@ public class ItemServlet extends HttpServlet {
                 req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
                 resp.sendRedirect("/items");
             } else {
-                // item is not available anymore
+                // set item not available
                 item.setAvailable(false);
                 this.itemDao.update(item);
                 // user spends 1 credit
                 user.setCredits(user.getCredits() - 1);
                 this.userDao.update(user);
                 this.loanDao.create(new Loan(user.getId(), item.getId()));
-                resp.sendRedirect("/items");
+                resp.sendRedirect("/user/loans");
             }
         }
     }
@@ -192,7 +192,7 @@ public class ItemServlet extends HttpServlet {
                 return;
             }
 
-            //process file upload
+            //TODO: process file upload
             String fileName = null;
             if(ServletFileUpload.isMultipartContent(req)) {
                 try {
