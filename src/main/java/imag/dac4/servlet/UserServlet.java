@@ -38,6 +38,7 @@ public class UserServlet extends HttpServlet {
                 break;
             case "loans":
                 req.setAttribute("loans", this.loanDao.getLoans(user));
+                req.getRequestDispatcher(Constants.JSP_USER_LOANS).forward(req, resp);
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());

@@ -20,6 +20,7 @@ public final class Constants {
 
     public static final String JSP_USER_HOME = "/jsp/user/home.jsp";
     public static final String JSP_USER_ITEMS = "/jsp/user/items.jsp";
+    public static final String JSP_USER_LOANS = "/jsp/user/loans.jsp";
 
     public static final String JSP_ITEMS                    = "/jsp/item/items.jsp";
     public static final String JSP_ITEM                     = "/jsp/item/item.jsp";
