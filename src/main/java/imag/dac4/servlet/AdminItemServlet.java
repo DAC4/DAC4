@@ -3,6 +3,7 @@ package imag.dac4.servlet;
 import imag.dac4.Constants;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
+import imag.dac4.model.loan.LoanDao;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import java.io.IOException;
 public class AdminItemServlet extends HttpServlet {
 
     @EJB ItemDao itemDao;
+    @EJB LoanDao loanDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -81,12 +83,46 @@ public class AdminItemServlet extends HttpServlet {
         } else {
             item.setApproved(true);
             this.itemDao.update(item);
+            req.getSession().setAttribute("success_msg", "Successfully approved item \"" + item.getName() + '"');
             resp.sendRedirect("/admin/item");
         }
     }
 
     private void onRemoveItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO
-        resp.sendRedirect("/admin/item");
+        final String idString = req.getParameter("id");
+
+        if (idString == null) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Missing Parameter");
+            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+            return;
+        }
+
+        final int id;
+        try {
+            id = Integer.parseInt(idString);
+        } catch (NumberFormatException e) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Invalid id");
+            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+            return;
+        }
+        final Item item = this.itemDao.read(id);
+        if (item == null) {
+            // User doesn't exist
+            req.getSession().setAttribute("error", 404);
+            req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
+            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+        } else if (item.isApproved() && !item.isAvailable()) {
+            // User registration is already complete
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Item not available");
+            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+        } else {
+            this.loanDao.forgetItemHistory(id);
+            this.itemDao.delete(id);
+            req.getSession().setAttribute("success_msg", "Successfully removed item \"" + item.getName() + '"');
+            resp.sendRedirect("/admin/items");
+        }
     }
 }

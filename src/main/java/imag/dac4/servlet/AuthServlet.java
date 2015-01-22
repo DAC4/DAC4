@@ -36,6 +36,7 @@ public class AuthServlet extends HttpServlet {
             case "logout":
                 req.getSession().removeAttribute("user");
                 req.getSession().removeAttribute("isAdmin");
+                req.getSession().setAttribute("success_msg", "Logged out successfully");
                 resp.sendRedirect("/");
                 break;
             case "awaiting-validation":
@@ -90,6 +91,7 @@ public class AuthServlet extends HttpServlet {
             // User exists and password is valid
             req.getSession().setAttribute("user", user);
             req.getSession().setAttribute("isAdmin", isAdmin);
+            req.getSession().setAttribute("success_msg", "Logged in successfully");
             resp.sendRedirect("/");
         }
     }
@@ -128,6 +130,7 @@ public class AuthServlet extends HttpServlet {
         } else {
             user = new User(login, password, name, email);
             this.userDao.create(user);
+            req.getSession().setAttribute("success_msg", "Registration completed successfully");
             resp.sendRedirect("/auth/awaiting-validation");
         }
     }

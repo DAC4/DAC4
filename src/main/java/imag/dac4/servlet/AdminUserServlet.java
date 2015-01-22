@@ -81,6 +81,7 @@ public class AdminUserServlet extends HttpServlet {
         } else {
             user.setApproved(true);
             this.userDao.update(user);
+            req.getSession().setAttribute("success_msg", "Successfully removed user \"" + user.getName() + '"');
             resp.sendRedirect("/admin/user");
         }
     }

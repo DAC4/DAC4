@@ -206,6 +206,7 @@ public class ItemServlet extends HttpServlet {
                 user.setCredits(user.getCredits() - 1);
                 this.userDao.update(user);
                 this.loanDao.create(new Loan(user.getId(), item.getId()));
+                req.getSession().setAttribute("success_msg", "Successfully borrowed item \"" + item.getName() + '"');
                 resp.sendRedirect("/user/loans");
             }
         }
@@ -249,7 +250,7 @@ public class ItemServlet extends HttpServlet {
 
             //TODO: process file upload
             String fileName = null;
-            if(ServletFileUpload.isMultipartContent(req)) {
+            if (ServletFileUpload.isMultipartContent(req)) {
                 try {
                     List<FileItem> multiparts = new ServletFileUpload(
                             new DiskFileItemFactory()).parseRequest(req);
@@ -272,6 +273,7 @@ public class ItemServlet extends HttpServlet {
 
             final Item item = new Item(user.getId(), name, fileName, description, lockerNum, maxLoanDuration);
             this.itemDao.create(item);
+            req.getSession().setAttribute("success_msg", "Successfully registered new item \"" + item.getName() + '"');
             resp.sendRedirect("/item/awaiting-validation");
         }
     }

@@ -78,16 +78,27 @@
 								</c:otherwise>
 							</c:choose>
 							<td class="right aligned collapsing">
+								<c:choose>
+									<c:when test="${!item.approved}">
+										<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
+											<input type="hidden" name="id" value="${item.id}"/>
+											<input type="submit" value="Approve" class="ui orange button"/>
+										</form>
+										<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/remove" method="POST">
+											<input type="hidden" name="id" value="${item.id}"/>
+											<input type="submit" value="Reject" class="ui red button"/>
+										</form>
+									</c:when>
+									<c:otherwise>
+										<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/remove" method="POST">
+											<input type="hidden" name="id" value="${item.id}"/>
+											<input type="submit" value="Remove" class="ui ${item.available ? "" : "disabled "}red button"/>
+										</form>
+									</c:otherwise>
+								</c:choose>
 								<c:if test="${!item.approved}">
-									<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/approve" method="POST">
-										<input type="hidden" name="id" value="${item.id}"/>
-										<input type="submit" value="Approve" class="ui orange button"/>
-									</form>
+
 								</c:if>
-								<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/remove" method="POST">
-									<input type="hidden" name="id" value="${item.id}"/>
-									<input type="submit" value="Remove" class="ui disabled red button"/>
-								</form>
 							</td>
 						</tr>
 					</c:forEach>

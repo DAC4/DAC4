@@ -37,34 +37,32 @@
 						<c:set var="loan" value="${pair.key}"/>
 						<c:set var="item" value="${pair.value}"/>
 						<c:if test="${!loan.returned}">
-							<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">
-								<tr>
-									<td style="padding:0" class="collapsing">
-										<c:choose>
-											<c:when test="${item.imagePath == null}">
-												<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
-											</c:when>
-											<c:otherwise>
-												<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
-											</c:otherwise>
-										</c:choose>
-									</td>
-									<td>
-										<c:out value="${item.name}"/>
-									</td>
-									<td>
-										<c:out value="${loan.startDateAsString}"/>
-									</td>
-									<td class="${loan.shouldHaveBeenReturned(item.maxLoanDuration) ? "negative" : "positive"}">
-										<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
-									</td>
-									<td class="collapsing">
-										<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">
-											<button type="button" class="ui button">Details</button>
-										</a>
-									</td>
-								</tr>
-							</a>
+							<tr>
+								<td style="padding:0" class="collapsing">
+									<c:choose>
+										<c:when test="${item.imagePath == null}">
+											<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+										</c:when>
+										<c:otherwise>
+											<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td>
+									<c:out value="${item.name}"/>
+								</td>
+								<td>
+									<c:out value="${loan.startDateAsString}"/>
+								</td>
+								<td class="${loan.shouldHaveBeenReturned(item.maxLoanDuration) ? "negative" : "positive"}">
+									<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
+								</td>
+								<td class="collapsing">
+									<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">
+										<button type="button" class="ui button">Details</button>
+									</a>
+								</td>
+							</tr>
 						</c:if>
 					</c:forEach>
 				</tbody>
