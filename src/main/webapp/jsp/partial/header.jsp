@@ -23,13 +23,13 @@
 	<c:if test="${isConnected == true}">
 		<c:choose>
 			<c:when test="${!isAdmin}">
-				<a href="${pageContext.request.contextPath}/item/list">
+				<a href="${pageContext.request.contextPath}/items">
 					<div class="${"items" == currentPage ? "active " : ""}item">
 						<span>Items</span>
 					</div>
 				</a>
 
-				<a href="${pageContext.request.contextPath}/user/item">
+				<a href="${pageContext.request.contextPath}/user/items">
 					<div class="${"user-items" == currentPage ? "active " : ""}item">
 						<span>My Items</span>
 					</div>
@@ -42,13 +42,13 @@
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="${pageContext.request.contextPath}/admin/user">
+				<a href="${pageContext.request.contextPath}/admin/users">
 					<div class="${"admin-users" == currentPage ? "active " : ""}item">
 						<span style="color:#FF3333"><i class="setting icon"></i> Users</span>
 					</div>
 				</a>
 
-				<a href="${pageContext.request.contextPath}/admin/item">
+				<a href="${pageContext.request.contextPath}/admin/items">
 					<div class="${"admin-items" == currentPage ? "active " : ""}item">
 						<span style="color:red"><i class="setting icon"></i> Items</span>
 					</div>

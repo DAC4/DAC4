@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "AdminItemServlet", urlPatterns = {
-        "/admin/item",
+        "/admin/items",
         "/admin/item/approve",
         "/admin/item/remove",
 })

@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "UserServlet", urlPatterns = {
-        "/user",
-        "/user/item",
+        "/user/items",
         "/user/item/remove",
 })
 public class UserServlet extends HttpServlet {
@@ -30,7 +29,7 @@ public class UserServlet extends HttpServlet {
         final String action = split[split.length - 1];
 
         switch (action.toLowerCase()) {
-            case "item":
+            case "items":
                 req.setAttribute("items", this.itemDao.getItems(user));
                 req.getRequestDispatcher(Constants.JSP_USER_ITEMS).forward(req, resp);
                 break;

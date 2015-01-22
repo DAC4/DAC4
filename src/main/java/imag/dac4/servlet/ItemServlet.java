@@ -26,7 +26,7 @@ import java.util.List;
         "/item/register",
         "/item/awaiting-validation",
         "/item/borrow",
-        "/item/list",
+        "/items",
 })
 public class ItemServlet extends HttpServlet {
 
@@ -68,7 +68,7 @@ public class ItemServlet extends HttpServlet {
             case "awaiting-validation":
                 req.getRequestDispatcher(Constants.JSP_ITEM_AWAITING_VALIDATION).forward(req, resp);
                 break;
-            case "list":
+            case "items":
                 req.setAttribute("isAdmin", isAdmin);
                 req.setAttribute("items", this.itemDao.getItems());
                 req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);

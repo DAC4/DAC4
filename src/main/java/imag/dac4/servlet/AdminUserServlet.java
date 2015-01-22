@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "AdminUserServlet", urlPatterns = {
-        "/admin/user",
+        "/admin/users",
         "/admin/user/approve",
         "/admin/user/remove",
 })
