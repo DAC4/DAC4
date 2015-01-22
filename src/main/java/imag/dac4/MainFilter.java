@@ -20,10 +20,19 @@ public class MainFilter implements Filter {
         if (path.startsWith("/static")) {
             // Pass to default servlet
             filterChain.doFilter(httpReq, resp);
+        } else if (path.startsWith("/admin") && !this.isAdmin(httpReq)) {
+            httpReq.getSession().setAttribute("error", 403);
+            httpReq.getSession().setAttribute("error_msg", "Forbidden: " + httpReq.getRequestURI());
+            httpReq.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
         } else {
             // Pass to our front servlet
             httpReq.getRequestDispatcher("/index").forward(httpReq, resp);
         }
+    }
+
+    private boolean isAdmin(final HttpServletRequest req) {
+        final Boolean isAdmin = (Boolean) req.getSession().getAttribute("isAdmin");
+        return isAdmin != null && isAdmin;
     }
 
     @Override

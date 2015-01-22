@@ -23,13 +23,6 @@ public class AdminUserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!this.isAdmin(req)) {
-            req.getSession().setAttribute("error", 403);
-            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
-            req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
-            return;
-        }
-
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
@@ -47,13 +40,6 @@ public class AdminUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!this.isAdmin(req)) {
-            req.getSession().setAttribute("error", 403);
-            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
-            req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
-            return;
-        }
-
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
@@ -102,10 +88,5 @@ public class AdminUserServlet extends HttpServlet {
     private void onRemoveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // TODO
         resp.sendRedirect("/admin/user");
-    }
-
-    private boolean isAdmin(final HttpServletRequest req) {
-        final Boolean isAdmin = (Boolean) req.getSession().getAttribute("isAdmin");
-        return isAdmin != null && isAdmin;
     }
 }
