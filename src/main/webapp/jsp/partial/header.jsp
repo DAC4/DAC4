@@ -30,7 +30,7 @@
 			<c:when test="${!isAdmin}">
 				<a href="${pageContext.request.contextPath}/items">
 					<div class="${"items" == currentPage ? "active " : ""}item">
-						<span>Items</span>
+						<span>Browse Items</span>
 					</div>
 				</a>
 
@@ -42,7 +42,7 @@
 
 				<a href="${pageContext.request.contextPath}/user/loans">
 					<div class="${"user-loans" == currentPage ? "active " : ""}item">
-						<span>Loans</span>
+						<span>My Loans</span>
 					</div>
 				</a>
 			</c:when>
