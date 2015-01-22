@@ -132,7 +132,7 @@
                                                                             <input type="submit" value="Borrow" class="ui green button"/>
                                                                         </c:when>
                                                                         <c:otherwise>
-                                                                            <input type="submit" value="Borrow" class="ui disabled button"/>
+                                                                            <input type="submit" value="Unavailable" class="ui disabled button"/>
                                                                         </c:otherwise>
                                                                     </c:choose>
                                                             </form>
