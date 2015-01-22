@@ -31,6 +31,7 @@
     margin: 0;
     height: 54px;
     z-index: 1337;
+    border-radius: 0;
 }
 
 /* Display menu Login form inline with Register button */
@@ -69,6 +70,7 @@
     margin: 0;
     height: 54px;
     z-index: 1337;
+    border-radius: 0;
 }
 
 /* Fix menu buttons width */
