@@ -64,4 +64,24 @@ public class Loan implements Serializable {
     public Date getEndDate() {
         return endDate;
     }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
+    }
+
+    public void setReturned(boolean returned) {
+        this.returned = returned;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 }

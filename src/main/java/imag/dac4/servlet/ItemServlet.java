@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @WebServlet(name = "ItemServlet", urlPatterns = {
@@ -26,6 +27,7 @@ import java.util.List;
         "/item/register",
         "/item/awaiting-validation",
         "/item/borrow",
+        "/item/return",
         "/items",
 })
 public class ItemServlet extends HttpServlet {
@@ -92,11 +94,64 @@ public class ItemServlet extends HttpServlet {
             case "register":
                 this.onItemRegistrationRequest(req, resp);
                 break;
+            case "return":
+                this.onItemReturnRequest(req, resp);
+                break;
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 resp.sendRedirect("/");
                 break;
+        }
+    }
+
+    private void onItemReturnRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final String idString = req.getParameter("id");
+
+        if (idString == null) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
+            resp.sendRedirect("/");
+            return;
+        }
+
+        final int id;
+        try {
+            id = Integer.parseInt(idString);
+        } catch (final NumberFormatException e) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+            resp.sendRedirect("/");
+            return;
+        }
+
+        final Loan loan = this.loanDao.read(id);
+        if (loan == null) {
+            // loan doesn't exist
+            req.getSession().setAttribute("error", 404);
+            req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
+            resp.sendRedirect("/user/loans");
+        } else {
+            final User user = (User) req.getSession().getAttribute("user");
+            if (loan.getUserId() != user.getId()) {
+                // user making the request isn't the borrower
+                req.getSession().setAttribute("error", 400);
+                req.getSession().setAttribute("error_msg", "Bad request: " + req.getRequestURI());
+                resp.sendRedirect("/user/loans");
+            } else {
+                final Item item = (Item) this.itemDao.read(loan.getItemId());
+                if (item == null) {
+                    //item doesn't exist, wtf ?
+                } else {
+                    item.setAvailable(true);
+                    this.itemDao.update(item);
+                    user.setCredits(user.getCredits() + 1);
+                    this.userDao.update(user);
+                    loan.setEndDate(new Date(System.currentTimeMillis()));
+                    this.loanDao.update(loan);
+                    //TODO: check if returned on time + stuff
+                }
+            }
         }
     }
 
