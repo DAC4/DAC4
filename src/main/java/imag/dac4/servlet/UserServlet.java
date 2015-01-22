@@ -34,6 +34,12 @@ public class UserServlet extends HttpServlet {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
 
+        if (user == null) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+            resp.sendRedirect("/");
+            return;
+        }
         switch (action.toLowerCase()) {
             case "items":
                 req.setAttribute("items", this.itemDao.getItems(user));
