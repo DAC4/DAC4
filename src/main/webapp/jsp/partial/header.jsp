@@ -82,9 +82,7 @@
 						<input class="ui submit button" type="submit" value="Login"/>
 					</form>
 					<c:if test="${\"auth-register\" != currentPage}">
-						<a href="${pageContext.request.contextPath}/auth/register">
-							<button type="button" class="ui primary button">Register</button>
-						</a>
+						<a class="ui primary button" href="${pageContext.request.contextPath}/auth/register">Register</a>
 					</c:if>
 				</div>
 			</c:when>
@@ -93,9 +91,7 @@
 					<span>Logged in as <c:out value="${user.name}"/></span>
 				</div>
 				<div class="item button-item">
-					<a href="${pageContext.request.contextPath}/auth/logout">
-						<button type="button" class="ui button">Logout</button>
-					</a>
+					<a class="ui button" href="${pageContext.request.contextPath}/auth/logout">Logout</a>
 				</div>
 			</c:otherwise>
 		</c:choose>

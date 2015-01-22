@@ -75,9 +75,7 @@
 								</c:otherwise>
 							</c:choose>
 							<td class="collapsing">
-								<a href="${pageContext.request.contextPath}/item?id=${item.id}">
-									<button type="button" class="ui button">Details</button>
-								</a>
+								<a class="ui button" href="${pageContext.request.contextPath}/item?id=${item.id}">Details</a>
 								<c:if test="${item.available}">
 									<form class="inline-form" action="${pageContext.request.contextPath}/user/item/remove" method="POST">
 										<input type="hidden" name="itemId" value="${item.id}"/>

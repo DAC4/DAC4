@@ -58,9 +58,7 @@
 									<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
 								</td>
 								<td class="collapsing">
-									<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">
-										<button type="button" class="ui button">Details</button>
-									</a>
+									<a class="ui button" href="${pageContext.request.contextPath}/loan?id=${loan.id}">Details</a>
 								</td>
 							</tr>
 						</c:if>
