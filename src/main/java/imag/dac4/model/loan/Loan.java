@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 @Entity
 @Table(name = "loans")
@@ -60,6 +61,23 @@ public class Loan implements Serializable {
 
     public boolean shouldHaveBeenReturned(final int maxLoanDuration) {
         return DateUtils.addDays(startDate, maxLoanDuration).before(new Date(System.currentTimeMillis()));
+    }
+
+    public boolean shouldReturnTomorrow(final int maxLoanDuration) {
+        final java.util.Date maxReturnDate = DateUtils.addDays(startDate, maxLoanDuration);
+
+        // Today + one day
+        final Calendar c1 = Calendar.getInstance();
+        c1.roll(Calendar.DATE, true);
+
+        // Last day to bring back the item
+        final Calendar c2 = Calendar.getInstance();
+        c2.setTime(DateUtils.addDays(startDate, maxLoanDuration));
+
+        // Check that they represent the same day
+        return c1.get(Calendar.ERA) == c2.get(Calendar.ERA)
+                && c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
+                && c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR);
     }
 
     public int getId() {

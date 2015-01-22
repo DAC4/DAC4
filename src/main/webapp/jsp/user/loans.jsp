@@ -54,7 +54,18 @@
 								<td>
 									<c:out value="${loan.startDateAsString}"/>
 								</td>
-								<td class="${loan.shouldHaveBeenReturned(item.maxLoanDuration) ? "negative" : "positive"}">
+								<c:choose>
+									<c:when test="${loan.shouldHaveBeenReturned(item.maxLoanDuration)}">
+										<c:set var="maxEndDateClass" value="negative"/>
+									</c:when>
+									<c:when test="${loan.shouldReturnTomorrow(item.maxLoanDuration)}">
+										<c:set var="maxEndDateClass" value="warning"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="maxEndDateClass" value="positive"/>
+									</c:otherwise>
+								</c:choose>
+								<td class="${maxEndDateClass}">
 									<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
 								</td>
 								<td class="collapsing">
