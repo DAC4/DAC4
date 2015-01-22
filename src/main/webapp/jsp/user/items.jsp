@@ -76,7 +76,7 @@
 										<button type="button" class="ui button">Details</button>
 									</a>
 									<c:if test="${item.available}">
-										<form class="inline-form" action="${pageContext.request.contextPath}/item/remove" method="POST">
+										<form class="inline-form" action="${pageContext.request.contextPath}/user/item/remove" method="POST">
 											<input type="hidden" name="itemId" value="${item.id}"/>
 											<input type="submit" value="Delete" class="ui red button"/>
 										</form>

@@ -18,10 +18,9 @@ import java.io.IOException;
 
 @WebServlet(name = "ItemServlet", urlPatterns = {
         "/item",
-        "/item/borrow",
         "/item/register",
-        "/item/remove",
         "/item/awaiting-validation",
+        "/item/borrow",
         "/item/list",
 })
 public class ItemServlet extends HttpServlet {
@@ -57,16 +56,16 @@ public class ItemServlet extends HttpServlet {
                 }
                 req.getRequestDispatcher(Constants.JSP_ITEM).forward(req, resp);
                 break;
-            case "list":
-                req.setAttribute("isAdmin", isAdmin);
-                req.setAttribute("items", this.itemDao.getItems());
-                req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
-                break;
             case "register":
                 req.getRequestDispatcher(Constants.JSP_ITEM_REGISTER).forward(req, resp);
                 break;
             case "awaiting-validation":
                 req.getRequestDispatcher(Constants.JSP_ITEM_AWAITING_VALIDATION).forward(req, resp);
+                break;
+            case "list":
+                req.setAttribute("isAdmin", isAdmin);
+                req.setAttribute("items", this.itemDao.getItems());
+                req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
                 break;
             default:
                 req.getSession().setAttribute("error", 400);
@@ -87,8 +86,6 @@ public class ItemServlet extends HttpServlet {
             case "register":
                 this.onItemRegistrationRequest(req, resp);
                 break;
-            case "remove":
-                this.onItemRemoveRequest(req, resp);
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
@@ -193,43 +190,4 @@ public class ItemServlet extends HttpServlet {
             resp.sendRedirect("/item/awaiting-validation");
         }
     }
-
-
-    private void onItemRemoveRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final User user = (User) req.getSession().getAttribute("user");
-        int id = Integer.parseInt(req.getParameter("itemId"));
-        Item item = this.itemDao.read(id);
-        if (item != null) {
-            // check user rights
-            if (user != null && (item.getOwnerId() == user.getId())) {
-                // check item status
-                if (item.isAvailable()) {
-                    this.itemDao.delete(id);
-                    // take away 1 credit from user
-                    user.setCredits(user.getCredits() - 1);
-                    this.userDao.update(user);
-                    resp.sendRedirect("/user/items");
-                } else { // item unavailable
-                    req.getSession().setAttribute("error", 400);
-                    req.getSession().setAttribute("error_msg", "Bad Request: "
-                            + req.getRequestURI()
-                            + " (This item is currently unavailable. You cannot delete it)");
-                    resp.sendRedirect("/user/items");
-                }
-            } else { // user rights incorrect
-                req.getSession().setAttribute("error", 400);
-                req.getSession().setAttribute("error_msg", "Bad Request: "
-                        + req.getRequestURI()
-                        + " (This item is not yours)");
-                resp.sendRedirect("/");
-            }
-        } else { // item not found
-            req.getSession().setAttribute("error", 404);
-            req.getSession().setAttribute("error_msg", "Bad Request: "
-                    + req.getRequestURI()
-                    + " (Unknown or missing id)");
-            resp.sendRedirect("/user/items");
-        }
-    }
-
 }
