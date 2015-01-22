@@ -11,9 +11,9 @@
 			<span>Credits: <c:out value="${user.credits}"/> </span>
 		</div>
 	</c:if>
-	<div class="right item bar-text-big">
+	<div class="right item bar-text-huge">
 		<span>
-			<a href="https://html5.validator.nu/?doc=http%3A%2F%2Fdac.ribesg.fr">
+			<a style="color:#E34C26" href="https://html5.validator.nu/?doc=http%3A%2F%2Fdac.ribesg.fr">
 				<i class="html5 icon"></i>
 			</a>
 		</span>
