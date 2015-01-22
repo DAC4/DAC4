@@ -35,7 +35,7 @@
 					</div>
 				</a>
 
-				<a><!--href="${pageContext.request.contextPath}/loans"-->
+				<a<%-- href="${pageContext.request.contextPath}/loans"--%>>
 					<div class="disabled ${"loans" == currentPage ? "active " : ""}item">
 						<span>Loans</span>
 					</div>
@@ -54,9 +54,9 @@
 					</div>
 				</a>
 
-				<a><!--href="${pageContext.request.contextPath}/admin/loan"-->
+				<a<%-- href="${pageContext.request.contextPath}/admin/loan"--%>>
 					<div class="disabled ${"admin-loans" == currentPage ? "active " : ""}item">
-						<span style="color:red"><i class="setting icon"></i> Items</span>
+						<span<%-- style="color:red"--%>><i class="setting icon"></i> Loans</span>
 					</div>
 				</a>
 			</c:otherwise>
