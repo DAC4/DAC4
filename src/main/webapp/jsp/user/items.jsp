@@ -22,11 +22,13 @@
 
 			<table class="ui striped celled table">
 				<thead>
-					<th>Image</th>
-					<th>Name</th>
-					<th>Approved</th>
-					<th>Available</th>
-					<th>Action</th>
+					<tr>
+						<th>Image</th>
+						<th>Name</th>
+						<th>Approved</th>
+						<th>Available</th>
+						<th>Action</th>
+					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="item" items="${items}">
@@ -74,7 +76,7 @@
 										<button type="button" class="ui button">Details</button>
 									</a>
 									<c:if test="${item.available}">
-										<form class="inline-form" action="${pageContext.request.contextPath}/user/items/remove" method="POST">
+										<form class="inline-form" action="${pageContext.request.contextPath}/item/remove" method="POST">
 											<input type="hidden" name="itemId" value="${item.id}"/>
 											<input type="submit" value="Delete" class="ui red button"/>
 										</form>

@@ -21,13 +21,13 @@
 	</a>
 
 	<c:if test="${isConnected == true}">
-		<a href="${pageContext.request.contextPath}/items">
+		<a href="${pageContext.request.contextPath}/item/list">
 			<div class="${"items" == currentPage ? "active " : ""}item">
 				<span>Items</span>
 			</div>
 		</a>
 
-		<a href="${pageContext.request.contextPath}/user/items">
+		<a href="${pageContext.request.contextPath}/user/item">
 			<div class="${"user-items" == currentPage ? "active " : ""}item">
 				<span>My Items</span>
 			</div>
