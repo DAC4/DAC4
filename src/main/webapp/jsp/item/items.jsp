@@ -101,19 +101,29 @@
                                 <c:if test="${item.approved || isAdmin}">
                                     <div class="four wide column">
                                         <a href="${pageContext.request.contextPath}/item?id=${item.id}">
-                                            <div class="ui positive message">
-                                                    <div class="ui fluid image">
-                                                        <c:choose>
-                                                                <c:when test="${item.imagePath == null}">
-                                                                        <img src="${pageContext.request.contextPath}/static/img/default.png" class="ui medium rounded image"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                        <img src="${pageContext.request.contextPath}${item.imagePath}" class="ui medium rounded image"/>
-                                                                </c:otherwise>
-                                                        </c:choose>
-                                                    </div>
+                                            <c:choose>
+                                                <c:when test="${item.available}">
+                                                    <div class="ui positive message">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="ui negative message">
+                                                </c:otherwise>
+                                            </c:choose>
+                                                <div class="header"> 
+                                                    <c:out value="${item.name}"/> 
+                                                </div>
+                                                <div class="ui fluid image">
+                                                    <c:choose>
+                                                            <c:when test="${item.imagePath == null}">
+                                                                    <img src="${pageContext.request.contextPath}/static/img/default.png" class="ui medium rounded image"/>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                    <img src="${pageContext.request.contextPath}${item.imagePath}" class="ui medium rounded image"/>
+                                                            </c:otherwise>
+                                                    </c:choose>
+                                                </div>
                                                 
-                                                    <div class="header"> <c:out value="${item.name}"/> </div>
+                                                    
                                                     <p>
                                                         <!-- <c:choose>
                                                         <c:when test="${item.available}">
@@ -123,10 +133,9 @@
                                                             <span style="color:red"><i class="remove icon"></i> Not available</span>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    -->
                                                     <a href="${pageContext.request.contextPath}/item?id=${item.id}">
                                                             <button type="button" class="ui button">Details</button>
-                                                    </a>
+                                                    </a>-->
                                                     
                                                             <form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
                                                                     <input type="hidden" name="id" value="${item.id}"/>
@@ -147,6 +156,7 @@
                                             </div>
                                         </a>
                                     </div>
+                                                                    
                                 </c:if>
                             </c:forEach>
                         </div>
