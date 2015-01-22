@@ -112,7 +112,7 @@
                                                                 </c:otherwise>
                                                         </c:choose>
                                                     </div>
-                                                    <c:out value="${item.name}"/>
+                                                    <div class="ui segment"> <c:out value="${item.name}"/> </div>
                                                     <!-- <c:choose>
                                                         <c:when test="${item.available}">
                                                             <span style="color:green"><i class="checkmark icon"></i> Available</span>
