@@ -100,9 +100,7 @@
                             <c:forEach var="item" items="${items}">
                                 <c:if test="${item.approved || isAdmin}">
                                     <div class="four wide column">
-                                        <a href="${pageContext.request.contextPath}/item?id=${item.id}">  
-                                            <div type="button" class="ui animated button">
-                                                <div class="visible content">
+                                        <a href="${pageContext.request.contextPath}/item?id=${item.id}">
                                                     <div class="ui fluid image">
                                                         <c:choose>
                                                                 <c:when test="${item.imagePath == null}">
@@ -113,8 +111,6 @@
                                                                 </c:otherwise>
                                                         </c:choose>
                                                     </div>
-                                                </div>
-                                                <div class="hidden content">
                                                     <c:out value="${item.name}"/>
                                                     <c:choose>
                                                         <c:when test="${item.available}">
@@ -124,9 +120,9 @@
                                                             <span style="color:red"><i class="remove icon"></i> Not available</span>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    <a href="${pageContext.request.contextPath}/item?id=${item.id}">
+                                                    <!-- <a href="${pageContext.request.contextPath}/item?id=${item.id}">
                                                             <button type="button" class="ui button">Details</button>
-                                                    </a>
+                                                    </a>-->
                                                     <c:if test="${item.available}">
                                                             <form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
                                                                     <input type="hidden" name="id" value="${item.id}"/>
