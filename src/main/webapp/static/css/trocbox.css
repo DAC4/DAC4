@@ -95,6 +95,7 @@
     height: 54px;
 }
 
+/* Define some custom item text sizes */
 .ui.menu .item.bar-text-huge span,
 .ui.menu .item.bar-text-big span,
 .ui.menu .item.bar-text-medium span,
@@ -116,4 +117,13 @@
 
 .ui.menu .item.bar-text-small span {
     font-size: 1.1rem;
+}
+
+/* ########## */
+/* ## Misc ## */
+/* ########## */
+
+/* Fix button width to stay aligned */
+table .ui.button {
+    width: 100px;
 }
