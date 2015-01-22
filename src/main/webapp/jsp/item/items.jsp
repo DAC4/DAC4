@@ -101,7 +101,7 @@
                                 <c:if test="${item.approved || isAdmin}">
                                     <div class="four wide column">
                                         <a href="${pageContext.request.contextPath}/item?id=${item.id}">
-                                            <div class="ui message">
+                                            <div class="ui positive message">
                                                     <div class="ui fluid image">
                                                         <c:choose>
                                                                 <c:when test="${item.imagePath == null}">
@@ -140,6 +140,10 @@
                                                                     </c:choose>
                                                             </form>
                                             </p>
+                                            <ul class="list">
+    <li>It's good to see you again.</li>
+    <li>Did you know it's been a while?</li>
+  </ul>
                                             </div>
                                         </a>
                                     </div>
