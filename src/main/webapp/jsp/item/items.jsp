@@ -144,10 +144,10 @@
                                                                     <input type="hidden" name="id" value="${item.id}"/>
                                                                     <c:choose>
                                                                         <c:when test="${item.available}">
-                                                                            <input type="submit" value="Borrow" class="ui green button"/>
+                                                                            <input type="submit" value="Borrow" class="fluid ui green button"/>
                                                                         </c:when>
                                                                         <c:otherwise>
-                                                                            <input type="submit" value="Borrow" class="ui disabled button"/>
+                                                                            <input type="submit" value="Borrow" class="fluid ui disabled button"/>
                                                                         </c:otherwise>
                                                                     </c:choose>
                                                             </form>
