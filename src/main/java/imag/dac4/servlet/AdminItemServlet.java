@@ -87,6 +87,7 @@ public class AdminItemServlet extends HttpServlet {
 
     private void onRemoveItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // TODO
+        /*ARDUINO : ArduinoInterface.removeProduct(item.getLockerNum()); */
         resp.sendRedirect("/admin/item");
     }
 }

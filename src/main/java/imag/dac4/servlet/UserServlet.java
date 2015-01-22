@@ -71,6 +71,7 @@ public class UserServlet extends HttpServlet {
             if (user != null && (item.getOwnerId() == user.getId())) {
                 // check item status
                 if (item.isAvailable()) {
+                    /*ARDUINO : ArduinoInterface.removeProduct(item.getLockerNum()); */
                     this.itemDao.delete(id);
                     // take away 1 credit from user
                     user.setCredits(user.getCredits() - 1);

@@ -143,6 +143,7 @@ public class ItemServlet extends HttpServlet {
                 if (item == null) {
                     //item doesn't exist, wtf ?
                 } else {
+                    /*ARDUINO : ArduinoInterface.insertProduct(item.getLockerNum()); */
                     item.setAvailable(true);
                     this.itemDao.update(item);
                     user.setCredits(user.getCredits() + 1);
@@ -199,6 +200,7 @@ public class ItemServlet extends HttpServlet {
                 req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
                 resp.sendRedirect("/items");
             } else {
+                 /*ARDUINO : ArduinoInterface.removeProduct(item.getLockerNum()); */
                 // set item not available
                 item.setAvailable(false);
                 this.itemDao.update(item);
@@ -206,6 +208,7 @@ public class ItemServlet extends HttpServlet {
                 user.setCredits(user.getCredits() - 1);
                 this.userDao.update(user);
                 this.loanDao.create(new Loan(user.getId(), item.getId()));
+
                 resp.sendRedirect("/user/loans");
             }
         }
@@ -271,6 +274,7 @@ public class ItemServlet extends HttpServlet {
             }
 
             final Item item = new Item(user.getId(), name, fileName, description, lockerNum, maxLoanDuration);
+            /*ARDUINO : ArduinoInterface.insertProduct(item.getLockerNum()); */
             this.itemDao.create(item);
             resp.sendRedirect("/item/awaiting-validation");
         }
