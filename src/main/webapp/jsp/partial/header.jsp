@@ -35,8 +35,8 @@
 					</div>
 				</a>
 
-				<a<%-- href="${pageContext.request.contextPath}/loans"--%>>
-					<div class="disabled ${"loans" == currentPage ? "active " : ""}item">
+				<a href="${pageContext.request.contextPath}/loans">
+					<div class="${"user-loans" == currentPage ? "active " : ""}item">
 						<span>Loans</span>
 					</div>
 				</a>

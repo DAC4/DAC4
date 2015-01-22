@@ -3,6 +3,7 @@ package imag.dac4.servlet;
 import imag.dac4.Constants;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
+import imag.dac4.model.loan.LoanDao;
 import imag.dac4.model.user.User;
 import imag.dac4.model.user.UserDao;
 
@@ -17,11 +18,13 @@ import java.io.IOException;
 @WebServlet(name = "UserServlet", urlPatterns = {
         "/user/items",
         "/user/item/remove",
+        "/user/loans"
 })
 public class UserServlet extends HttpServlet {
 
     @EJB UserDao userDao;
     @EJB ItemDao itemDao;
+    @EJB LoanDao loanDao;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final User user = (User) req.getSession().getAttribute("user");
@@ -33,6 +36,8 @@ public class UserServlet extends HttpServlet {
                 req.setAttribute("items", this.itemDao.getItems(user));
                 req.getRequestDispatcher(Constants.JSP_USER_ITEMS).forward(req, resp);
                 break;
+            case "loans":
+                req.setAttribute("loans", this.loanDao.getLoans(user));
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
