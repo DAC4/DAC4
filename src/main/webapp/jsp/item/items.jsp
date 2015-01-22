@@ -122,7 +122,10 @@
                                                             </c:otherwise>
                                                     </c:choose>
                                                 </div>
-                                                
+                                                <ul class="list">
+    <li>It's good to see you again.</li>
+    <li>Did you know it's been a while?</li>
+  </ul>
                                                     
                                                     <p>
                                                         <!-- <c:choose>
@@ -149,10 +152,7 @@
                                                                     </c:choose>
                                                             </form>
                                             </p>
-                                            <ul class="list">
-    <li>It's good to see you again.</li>
-    <li>Did you know it's been a while?</li>
-  </ul>
+                                            
                                             </div>
                                         </a>
                                     </div>
