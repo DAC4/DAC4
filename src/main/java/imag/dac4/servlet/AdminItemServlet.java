@@ -84,7 +84,7 @@ public class AdminItemServlet extends HttpServlet {
             item.setApproved(true);
             this.itemDao.update(item);
             req.getSession().setAttribute("success_msg", "Successfully approved item \"" + item.getName() + '"');
-            resp.sendRedirect("/admin/item");
+            resp.sendRedirect("/admin/items");
         }
     }
 

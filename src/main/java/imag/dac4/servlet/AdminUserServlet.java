@@ -82,12 +82,12 @@ public class AdminUserServlet extends HttpServlet {
             user.setApproved(true);
             this.userDao.update(user);
             req.getSession().setAttribute("success_msg", "Successfully removed user \"" + user.getName() + '"');
-            resp.sendRedirect("/admin/user");
+            resp.sendRedirect("/admin/users");
         }
     }
 
     private void onRemoveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // TODO
-        resp.sendRedirect("/admin/user");
+        resp.sendRedirect("/admin/users");
     }
 }
