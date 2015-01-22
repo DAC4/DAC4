@@ -1,6 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="imag.dac4.model.item.Item" %>
-<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%--@elvariable id="items" type="java.util.List"--%>
@@ -96,39 +94,39 @@
 				</tbody>
 			</table>
 
-                        <div class="ui page grid">
-                            <c:forEach var="item" items="${items}">
-                                <c:if test="${item.approved || isAdmin}">
-                                    <div class="four wide column">
-                                        <a href="${pageContext.request.contextPath}/item?id=${item.id}">
-                                            <c:choose>
-                                                <c:when test="${item.available}">
-                                                    <div class="ui positive message">
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <div class="ui negative message">
-                                                </c:otherwise>
-                                            </c:choose>
-                                                <div class="header"> 
-                                                    <c:out value="${item.name}"/> 
-                                                </div>
-                                                <div class="ui fluid image">
-                                                    <c:choose>
-                                                            <c:when test="${item.imagePath == null}">
-                                                                    <img src="${pageContext.request.contextPath}/static/img/default.png" class="ui medium rounded image"/>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                    <img src="${pageContext.request.contextPath}${item.imagePath}" class="ui medium rounded image"/>
-                                                            </c:otherwise>
-                                                    </c:choose>
-                                                </div>
-                                                <ul class="list">
-    <li>It's good to see you again.</li>
-    <li>Did you know it's been a while?</li>
-  </ul>
-                                                    
-                                                    <p>
-                                                        <!-- <c:choose>
+			<div class="ui grid">
+				<c:forEach var="item" items="${items}">
+					<c:if test="${item.approved || isAdmin}">
+						<div class="four wide column">
+							<a href="${pageContext.request.contextPath}/item?id=${item.id}">
+								<c:choose>
+								<c:when test="${item.available}">
+								<div class="ui positive message">
+									</c:when>
+									<c:otherwise>
+									<div class="ui negative message">
+										</c:otherwise>
+										</c:choose>
+										<div class="header">
+											<c:out value="${item.name}"/>
+										</div>
+										<div class="ui fluid image">
+											<c:choose>
+												<c:when test="${item.imagePath == null}">
+													<img src="${pageContext.request.contextPath}/static/img/default.png" class="ui medium rounded image"/>
+												</c:when>
+												<c:otherwise>
+													<img src="${pageContext.request.contextPath}${item.imagePath}" class="ui medium rounded image"/>
+												</c:otherwise>
+											</c:choose>
+										</div>
+										<ul class="list">
+											<li>It's good to see you again.</li>
+											<li>Did you know it's been a while?</li>
+										</ul>
+
+										<p>
+											<!-- <c:choose>
                                                         <c:when test="${item.available}">
                                                             <span style="color:green"><i class="checkmark icon"></i> Available</span>
                                                         </c:when>
@@ -139,35 +137,35 @@
                                                     <a href="${pageContext.request.contextPath}/item?id=${item.id}">
                                                             <button type="button" class="ui button">Details</button>
                                                     </a>-->
-                                                    
-                                                            <form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
-                                                                    <input type="hidden" name="id" value="${item.id}"/>
-                                                                    <c:choose>
-                                                                        <c:when test="${item.available}">
-                                                                            <input type="submit" value="Borrow" class="fluid ui green button"/>
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <input type="submit" value="Borrow" class="fluid ui disabled button"/>
-                                                                        </c:otherwise>
-                                                                    </c:choose>
-                                                            </form>
-                                            </p>
-                                            
-                                            </div>
-                                        </a>
-                                    </div>
-                                                                    
-                                </c:if>
-                            </c:forEach>
-                        </div>
 
-		<c:if test="${isConnected}">
-			<a href="${pageContext.request.contextPath}/item/register">
-				<button type="button" class="ui primary button">Add Item</button>
-			</a>
-		</c:if>
+										<form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
+											<input type="hidden" name="id" value="${item.id}"/>
+											<c:choose>
+												<c:when test="${item.available}">
+													<input type="submit" value="Borrow" class="fluid ui green button"/>
+												</c:when>
+												<c:otherwise>
+													<input type="submit" value="Borrow" class="fluid ui disabled button"/>
+												</c:otherwise>
+											</c:choose>
+										</form>
+										</p>
 
-	</div>
+									</div>
+							</a>
+						</div>
+
+					</c:if>
+				</c:forEach>
+			</div>
+
+			<c:if test="${isConnected}">
+				<a href="${pageContext.request.contextPath}/item/register">
+					<button type="button" class="ui primary button">Add Item</button>
+				</a>
+			</c:if>
+
+		</div>
 	</div>
 
 	<%@ include file="../partial/footer.jsp" %>
