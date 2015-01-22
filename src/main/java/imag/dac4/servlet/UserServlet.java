@@ -39,6 +39,7 @@ public class UserServlet extends HttpServlet {
             case "loans":
                 req.setAttribute("loans", this.loanDao.getLoans(user));
                 req.getRequestDispatcher(Constants.JSP_USER_LOANS).forward(req, resp);
+                break;
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
@@ -54,6 +55,7 @@ public class UserServlet extends HttpServlet {
         switch (action.toLowerCase()) {
             case "remove":
                 this.onItemRemoveRequest(req, resp);
+                break;
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
