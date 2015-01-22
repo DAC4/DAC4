@@ -113,7 +113,7 @@
                                                         </c:choose>
                                                     </div>
                                                     <c:out value="${item.name}"/>
-                                                    <c:choose>
+                                                    <!-- <c:choose>
                                                         <c:when test="${item.available}">
                                                             <span style="color:green"><i class="checkmark icon"></i> Available</span>
                                                         </c:when>
@@ -121,9 +121,10 @@
                                                             <span style="color:red"><i class="remove icon"></i> Not available</span>
                                                         </c:otherwise>
                                                     </c:choose>
-                                                    <!-- <a href="${pageContext.request.contextPath}/item?id=${item.id}">
+                                                    -->
+                                                    <a href="${pageContext.request.contextPath}/item?id=${item.id}">
                                                             <button type="button" class="ui button">Details</button>
-                                                    </a>-->
+                                                    </a>
                                                     
                                                             <form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
                                                                     <input type="hidden" name="id" value="${item.id}"/>
@@ -132,7 +133,7 @@
                                                                             <input type="submit" value="Borrow" class="ui green button"/>
                                                                         </c:when>
                                                                         <c:otherwise>
-                                                                            <input type="submit" value="Unavailable" class="ui disabled button"/>
+                                                                            <input type="submit" value="Borrow" class="ui disabled button"/>
                                                                         </c:otherwise>
                                                                     </c:choose>
                                                             </form>
