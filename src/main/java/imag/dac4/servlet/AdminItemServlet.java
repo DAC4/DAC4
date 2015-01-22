@@ -26,7 +26,7 @@ public class AdminItemServlet extends HttpServlet {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
-            case "item":
+            case "items":
                 req.setAttribute("items", this.itemDao.getItems());
                 req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
                 break;

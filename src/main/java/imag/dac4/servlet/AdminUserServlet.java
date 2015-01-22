@@ -26,7 +26,7 @@ public class AdminUserServlet extends HttpServlet {
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
-            case "user":
+            case "users":
                 req.setAttribute("users", this.userDao.getUsers());
                 req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
                 break;
