@@ -33,7 +33,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="pair" items="${loans}">
+					<c:forEach var="pair" items="${loans.iterator()}">
 						<c:set var="loan" value="${pair.key}"/>
 						<c:set var="item" value="${pair.value}"/>
 						<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">
