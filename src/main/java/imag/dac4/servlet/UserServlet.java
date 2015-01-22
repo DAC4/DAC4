@@ -30,7 +30,7 @@ public class UserServlet extends HttpServlet{
 
         switch (action.toLowerCase()) {
             case "item":
-                req.setAttribute("item", this.itemDao.getItems(user));
+                req.setAttribute("items", this.itemDao.getItems(user));
                 req.getRequestDispatcher(Constants.JSP_USER_ITEMS).forward(req, resp);
                 break;
             default:
