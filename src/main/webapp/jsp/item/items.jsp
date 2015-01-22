@@ -101,7 +101,7 @@
                                 <c:if test="${item.approved || isAdmin}">
                                     <div class="four wide column">
                                         <a href="${pageContext.request.contextPath}/item?id=${item.id}">
-                                            <div class="ui segment">
+                                            <div class="ui message">
                                                     <div class="ui fluid image">
                                                         <c:choose>
                                                                 <c:when test="${item.imagePath == null}">
@@ -112,8 +112,10 @@
                                                                 </c:otherwise>
                                                         </c:choose>
                                                     </div>
-                                                    <div class="ui segment"> <c:out value="${item.name}"/> </div>
-                                                    <!-- <c:choose>
+                                                
+                                                    <div class="header"> <c:out value="${item.name}"/> </div>
+                                                    <p>
+                                                        <!-- <c:choose>
                                                         <c:when test="${item.available}">
                                                             <span style="color:green"><i class="checkmark icon"></i> Available</span>
                                                         </c:when>
@@ -137,7 +139,7 @@
                                                                         </c:otherwise>
                                                                     </c:choose>
                                                             </form>
-                                                    
+                                            </p>
                                             </div>
                                         </a>
                                     </div>
