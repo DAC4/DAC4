@@ -56,9 +56,18 @@
 							<td class="right aligned collapsing">
 								<c:out value="${item.ownerId}"/> <!-- TODO Login with Link to User page -->
 							</td>
-							<td class="right aligned collapsing">
-								<c:out value="${item.available}"/>
-							</td>
+							<c:choose>
+								<c:when test="${item.available}">
+									<td class="positive collapsing">
+										<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+									</td>
+								</c:when>
+								<c:otherwise>
+									<td class="negative collapsing">
+										<span style="color:red"><i class="remove icon"></i> No</span>
+									</td>
+								</c:otherwise>
+							</c:choose>
 							<td class="right aligned collapsing">
 								<c:out value="${item.lockerNum}"/>
 							</td>
