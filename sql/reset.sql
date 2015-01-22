@@ -71,13 +71,13 @@ CREATE TABLE `loans` (
 --
 
 INSERT INTO `users` VALUES (DEFAULT, 'admin', 'admin', 'Mr Admin', 'admin@admin.admin', 0, TRUE);
-INSERT INTO `users` VALUES (DEFAULT, 'Ribesg', 'mdp', 'Gael Ribes', 'ribesg@yahoo.fr', 5, TRUE);
+INSERT INTO `users` VALUES (DEFAULT, 'Ribesg', 'mdp', 'Gael Ribes', 'ribesg@yahoo.fr', 11, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'Phalexei', 'mdp', 'Tom André-Poyaud', 'tandrepoyaud@gmail.com', 5, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'pacaletx', 'mdp', 'Xavier Pacalet', 'x.pacalet@gmail.com', 5, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'momo', 'mdp', 'Mohammed Taha El Ahmar', 'med.taha.elahmar@gmail.com', 2, TRUE);
-INSERT INTO `users` VALUES (DEFAULT, 'laforesy', 'mdp', 'Yann Laforest', 'laforest.yann@gmail.com', 3, TRUE);
-INSERT INTO `users` VALUES (DEFAULT, 'levillar', 'mdp', 'Remi Levillain', 'levillain.remi@gmail.com', 5, TRUE);
-INSERT INTO `users` VALUES (DEFAULT, 'bienners', 'mdp', 'Solenne Bienner', 'solenne.bienner@gmail.com', 5, TRUE);
+INSERT INTO `users` VALUES (DEFAULT, 'laforesy', 'mdp', 'Yann Laforest', 'laforest.yann@gmail.com', 2, TRUE);
+INSERT INTO `users` VALUES (DEFAULT, 'levillar', 'mdp', 'Remi Levillain', 'levillain.remi@gmail.com', 10, TRUE);
+INSERT INTO `users` VALUES (DEFAULT, 'bienners', 'mdp', 'Solenne Bienner', 'solenne.bienner@gmail.com', 0, TRUE);
 INSERT INTO `users` VALUES (DEFAULT, 'test', 'test', 'Test', 'test@test.test', 5, FALSE);
 
 INSERT INTO `items` VALUES (DEFAULT, 'Item1', NULL, 'Description of item 1', 7, FALSE, 1, 8, TRUE);
@@ -113,7 +113,7 @@ INSERT INTO `items` VALUES (DEFAULT, 'Item30', NULL, 'Description of item 30', 2
 INSERT INTO `items` VALUES (DEFAULT, 'Item31', NULL, 'Description of item 31', 4, FALSE, 31, 17, TRUE);
 INSERT INTO `items` VALUES (DEFAULT, 'Item32', NULL, 'Description of item 32', 7, TRUE, 32, 15, FALSE);
 INSERT INTO `items` VALUES (DEFAULT, 'Item33', NULL, 'Description of item 33', 7, TRUE, 33, 16, TRUE);
-INSERT INTO `items` VALUES (DEFAULT, 'Item34', NULL, 'Description of item 34', 7, FALSE, 34, 6, TRUE);
+INSERT INTO `items` VALUES (DEFAULT, 'Item34', NULL, 'Description of item 34', 7, TRUE, 34, 6, TRUE);
 INSERT INTO `items` VALUES (DEFAULT, 'Item35', NULL, 'Description of item 35', 3, TRUE, 35, 8, FALSE);
 INSERT INTO `items` VALUES (DEFAULT, 'Item36', NULL, 'Description of item 36', 5, TRUE, 36, 16, FALSE);
 INSERT INTO `items` VALUES (DEFAULT, 'Item37', NULL, 'Description of item 37', 2, FALSE, 37, 17, TRUE);
@@ -131,21 +131,39 @@ INSERT INTO `items` VALUES (DEFAULT, 'Item48', NULL, 'Description of item 48', 6
 INSERT INTO `items` VALUES (DEFAULT, 'Item49', NULL, 'Description of item 49', 7, TRUE, 49, 11, FALSE);
 INSERT INTO `items` VALUES (DEFAULT, 'Item50', NULL, 'Description of item 50', 6, FALSE, 50, 18, TRUE);
 
-INSERT INTO `loans` VALUES (DEFAULT, 5, 12, FALSE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 5, 7, FALSE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 5, 33, FALSE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 3, 15, TRUE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 4, 23, TRUE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 6, 42, FALSE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 7, 9, TRUE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 3, 3, TRUE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 3, 42, TRUE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 6, 1, FALSE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 2, 8, TRUE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 6, 7, TRUE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 7, 23, TRUE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 7, 32, TRUE, '1970-01-01', '1970-01-01');
-INSERT INTO `loans` VALUES (DEFAULT, 6, 39, TRUE, '1970-01-01', '1970-01-01');
+-- Past loans
+INSERT INTO `loans` VALUES (DEFAULT, 5, 27, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 6, 15, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 3, 13, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 2, 2, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 4, 11, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 3, 42, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 4, 28, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 4, 7, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 5, 4, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 3, 38, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 5, 1, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 4, 37, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 5, 29, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 3, 31, TRUE, '2015-01-01', '2015-01-20');
+INSERT INTO `loans` VALUES (DEFAULT, 4, 50, TRUE, '2015-01-01', '2015-01-20');
+
+-- Items currently borrowed
+INSERT INTO `loans` VALUES (DEFAULT, 5, 1, FALSE, '2015-01-12', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 5, 7, FALSE, '2015-01-15', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 5, 4, FALSE, '2015-01-17', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 3, 15, FALSE, '2015-01-14', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 4, 23, FALSE, '2015-01-15', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 6, 43, FALSE, '2015-01-07', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 7, 47, FALSE, '2015-01-10', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 3, 50, FALSE, '2015-01-10', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 3, 30, FALSE, '2015-01-01', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 6, 31, FALSE, '2015-01-10', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 2, 27, FALSE, '2015-01-05', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 6, 37, FALSE, '2015-01-10', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 7, 19, FALSE, '2015-01-10', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 7, 20, FALSE, '2015-01-05', NULL);
+INSERT INTO `loans` VALUES (DEFAULT, 6, 38, FALSE, '2015-01-10', NULL);
 
 -- Commit
 COMMIT;
