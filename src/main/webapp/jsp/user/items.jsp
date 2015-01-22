@@ -20,6 +20,10 @@
 
 			<h1 class="ui block header">My Items</h1>
 
+			<a href="${pageContext.request.contextPath}/item/register">
+				<button type="button" class="ui primary button">Add an Item</button>
+			</a>
+
 			<table class="ui striped celled table">
 				<thead>
 					<tr>

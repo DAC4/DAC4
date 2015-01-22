@@ -14,7 +14,8 @@
 
 	<div class="sixteen wide column">
 
-		<form class="ui form" method="POST" action="${pageContext.request.contextPath}/item/register">
+		<form class="ui form" method="POST" enctype="multipart/form-data"
+			  action="${pageContext.request.contextPath}/item/register">
 			<h1 class="ui dividing header">Item Registration</h1>
 
 			<div class="field">
@@ -24,6 +25,10 @@
 			<div class="field">
 				<label for="description">Description:</label>
 				<textarea id="description" placeholder="Description" name="description" rows="5" maxlength="1000" required></textarea>
+			</div>
+			<div class="field">
+				<label for="image">Image:</label>
+				<input id="image" type="file" name="image" />
 			</div>
 			<div class="two fields">
 				<div class="field">

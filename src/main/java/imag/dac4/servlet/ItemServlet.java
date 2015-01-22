@@ -7,6 +7,9 @@ import imag.dac4.model.loan.Loan;
 import imag.dac4.model.loan.LoanDao;
 import imag.dac4.model.user.User;
 import imag.dac4.model.user.UserDao;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -14,7 +17,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "ItemServlet", urlPatterns = {
         "/item",
@@ -25,6 +30,7 @@ import java.io.IOException;
 })
 public class ItemServlet extends HttpServlet {
 
+    private static final String UPLOAD_DIRECTORY = "/img"; //TODO
     @EJB ItemDao itemDao;
     @EJB LoanDao loanDao;
     @EJB UserDao userDao;
@@ -185,7 +191,31 @@ public class ItemServlet extends HttpServlet {
                 resp.sendRedirect("/item/register");
                 return;
             }
-            final Item item = new Item(user.getId(), name, null /* TODO */, description, lockerNum, maxLoanDuration);
+
+            //process file upload
+            String fileName = null;
+            if(ServletFileUpload.isMultipartContent(req)) {
+                try {
+                    List<FileItem> multiparts = new ServletFileUpload(
+                            new DiskFileItemFactory()).parseRequest(req);
+
+                    for (FileItem item : multiparts) {
+                        if (!item.isFormField()) {
+                            fileName = new File(item.getName()).getName();
+                            item.write(new File(UPLOAD_DIRECTORY + File.separator + fileName));
+                        }
+                    }
+
+                    //File uploaded successfully
+                    req.setAttribute("message", "File Uploaded Successfully");
+                } catch (Exception ex) {
+                    req.setAttribute("message", "File Upload Failed due to " + ex);
+                }
+            } else {
+                req.setAttribute("message", "Sorry this Servlet only handles file upload request");
+            }
+
+            final Item item = new Item(user.getId(), name, fileName, description, lockerNum, maxLoanDuration);
             this.itemDao.create(item);
             resp.sendRedirect("/item/awaiting-validation");
         }

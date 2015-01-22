@@ -15,10 +15,10 @@
 	<div class="sixteen wide column">
 		<div class="section">
 
-			<h1 class="ui block header">Item Registration Complete</h1>
+			<h1 class="ui block header">Item Registration Incomplete</h1>
 
 			<p class="ui section">
-				The administrator needs to approve your item before in order to finalize registration.
+				The administrator needs to approve your item in order to finalize registration.
 			</p>
 
 		</div>
