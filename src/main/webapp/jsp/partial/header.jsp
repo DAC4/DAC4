@@ -21,36 +21,46 @@
 	</a>
 
 	<c:if test="${isConnected == true}">
-		<a href="${pageContext.request.contextPath}/item/list">
-			<div class="${"items" == currentPage ? "active " : ""}item">
-				<span>Items</span>
-			</div>
-		</a>
+		<c:choose>
+			<c:when test="${!isAdmin}">
+				<a href="${pageContext.request.contextPath}/item/list">
+					<div class="${"items" == currentPage ? "active " : ""}item">
+						<span>Items</span>
+					</div>
+				</a>
 
-		<a href="${pageContext.request.contextPath}/user/item">
-			<div class="${"user-items" == currentPage ? "active " : ""}item">
-				<span>My Items</span>
-			</div>
-		</a>
+				<a href="${pageContext.request.contextPath}/user/item">
+					<div class="${"user-items" == currentPage ? "active " : ""}item">
+						<span>My Items</span>
+					</div>
+				</a>
 
-		<a><!--href="${pageContext.request.contextPath}/loans"-->
-			<div class="disabled ${"loans" == currentPage ? "active " : ""}item">
-				<span>Loans</span>
-			</div>
-		</a>
-		<c:if test="${isAdmin == true}">
-			<a href="${pageContext.request.contextPath}/admin/user">
-				<div class="${"admin-users" == currentPage ? "active " : ""}item">
-					<span style="color:#FF3333"><i class="setting icon"></i> Users</span>
-				</div>
-			</a>
+				<a><!--href="${pageContext.request.contextPath}/loans"-->
+					<div class="disabled ${"loans" == currentPage ? "active " : ""}item">
+						<span>Loans</span>
+					</div>
+				</a>
+			</c:when>
+			<c:otherwise>
+				<a href="${pageContext.request.contextPath}/admin/user">
+					<div class="${"admin-users" == currentPage ? "active " : ""}item">
+						<span style="color:#FF3333"><i class="setting icon"></i> Users</span>
+					</div>
+				</a>
 
-			<a href="${pageContext.request.contextPath}/admin/item">
-				<div class="${"admin-items" == currentPage ? "active " : ""}item">
-					<span style="color:red"><i class="setting icon"></i> Items</span>
-				</div>
-			</a>
-		</c:if>
+				<a href="${pageContext.request.contextPath}/admin/item">
+					<div class="${"admin-items" == currentPage ? "active " : ""}item">
+						<span style="color:red"><i class="setting icon"></i> Items</span>
+					</div>
+				</a>
+
+				<a><!--href="${pageContext.request.contextPath}/admin/loan"-->
+					<div class="disabled ${"admin-loans" == currentPage ? "active " : ""}item">
+						<span style="color:red"><i class="setting icon"></i> Items</span>
+					</div>
+				</a>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 
 	<div class="right menu">
