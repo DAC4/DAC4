@@ -34,7 +34,7 @@
 				</thead>
 				<tbody>
 					<c:forEach var="loan" items="${loans}">
-						<c:set var="item" value="${itemDao.read(loan.itemId)}" />
+						<c:set var="item" value="${itemDao.read(loan.itemId)}" scope="request" />
 							<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">
 								<tr>
 									<td style="padding:0" class="collapsing">
