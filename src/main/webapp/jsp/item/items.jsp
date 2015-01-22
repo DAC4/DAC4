@@ -101,6 +101,7 @@
                                 <c:if test="${item.approved || isAdmin}">
                                     <div class="four wide column">
                                         <a href="${pageContext.request.contextPath}/item?id=${item.id}">
+                                            <div class="ui segment">
                                                     <div class="ui fluid image">
                                                         <c:choose>
                                                                 <c:when test="${item.imagePath == null}">
@@ -129,7 +130,6 @@
                                                                     <input type="submit" value="Borrow" class="ui green button"/>
                                                             </form>
                                                     </c:if>
-                                                </div>                      
                                             </div>
                                         </a>
                                     </div>
