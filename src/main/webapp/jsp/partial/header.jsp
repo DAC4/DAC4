@@ -17,7 +17,7 @@
 
 <div id="header" class="ui inverted pointing menu">
 	<a href="${pageContext.request.contextPath}/">
-		<div class="borderless item bar-text-huge">
+		<div class="borderless header item bar-text-huge">
 			<span><i class="exchange icon"></i></span>
 		</div>
 		<div class="header item bar-text-big">

@@ -38,10 +38,12 @@
     display: inline-block;
 }
 
-/* Fix menu buttons width */
+/* Fix menu buttons */
 #header .ui.button {
     width: 100px;
     height: 38px;
+    font-size: 1rem;
+    padding: .78571em 1.5em; /* Initial Semantic UI non-menu Button padding */
 }
 
 /* Reduce padding on form menu item */
