@@ -35,7 +35,7 @@
 					</div>
 				</a>
 
-				<a href="${pageContext.request.contextPath}/loans">
+				<a href="${pageContext.request.contextPath}/user/loans">
 					<div class="${"user-loans" == currentPage ? "active " : ""}item">
 						<span>Loans</span>
 					</div>
