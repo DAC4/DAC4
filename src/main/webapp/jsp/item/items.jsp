@@ -116,14 +116,17 @@
                         </div>
                         <div class="extra content">
                             <a>
-                                <c:choose>
-                                    <c:when test="${item.available}">
-                                        <span style="color:green"><i class="checkmark icon"></i> Available</span>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <span style="color:red"><i class="remove icon"></i> Not available</span>
-                                    </c:otherwise>
-                                </c:choose>
+                                <form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
+                                            <input type="hidden" name="id" value="${item.id}"/>
+                                            <c:choose>
+                                                <c:when test="${item.available}">
+                                                    <input type="submit" value="Borrow" class="fluid ui green button"/>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <input type="submit" value="Borrow" class="fluid ui disabled button"/>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </form>
                             </a>
                         </div>
                     </div>
