@@ -77,7 +77,7 @@ public class ItemServlet extends HttpServlet {
             case "register":
                 req.getRequestDispatcher(Constants.JSP_ITEM_REGISTER).forward(req, resp);
                 break;
-            case "awaiting-validation":
+            case "awaiting-approval":
                 req.getRequestDispatcher(Constants.JSP_ITEM_AWAITING_APPROVAL).forward(req, resp);
                 break;
             case "items":
