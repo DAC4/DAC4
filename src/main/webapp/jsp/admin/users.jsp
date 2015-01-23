@@ -49,8 +49,8 @@
 						<td>
 							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/update-credit" method="POST">
 								<input type="hidden" name="id" value="${u.id}"/>
-								<input type="number" name="amount" placeholder="${u.credits}" min="0"/>
-								<input type="submit" value="↻" class="ui button"/>
+								<input type="number" name="amount" value="${u.credits}" placeholder="${u.credits}" min="0"/>
+								<input type="submit" value="↻" class="ui button" style="width: 10px"/>
 							</form>
 						</td>
 						<c:choose>
