@@ -4,6 +4,8 @@ import imag.dac4.Constants;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.loan.LoanDao;
+import imag.dac4.model.user.User;
+import imag.dac4.model.user.UserDao;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -20,6 +22,7 @@ import java.io.IOException;
 })
 public class AdminItemServlet extends HttpServlet {
 
+    @EJB UserDao userDao;
     @EJB ItemDao itemDao;
     @EJB LoanDao loanDao;
 
@@ -82,6 +85,9 @@ public class AdminItemServlet extends HttpServlet {
         } else {
             item.setApproved(true);
             this.itemDao.update(item);
+            final User owner = this.userDao.read(item.getOwnerId());
+            owner.setCredits(owner.getCredits() + 1);
+            this.userDao.update(owner);
             req.getSession().setAttribute("success_msg", "Successfully approved item \"" + item.getName() + '"');
             resp.sendRedirect("/admin/items");
         }

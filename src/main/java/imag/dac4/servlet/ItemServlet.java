@@ -274,32 +274,7 @@ public class ItemServlet extends HttpServlet {
                 req.getSession().setAttribute("error_msg", "Bad Request: Invalid parameter type");
                 resp.sendRedirect("/item/register");
                 return;
-            }/*
-
-            //TODO: process file upload
-            String fileName = null;
-            if (ServletFileUpload.isMultipartContent(req)) {
-                try {
-                    List<FileItem> multiparts = new ServletFileUpload(
-                            new DiskFileItemFactory()).parseRequest(req);
-
-                    for (FileItem item : multiparts) {
-                        if (!item.isFormField()) {
-                            fileName = new File(item.getName()).getName();
-                            item.write(new File(UPLOAD_DIRECTORY + File.separator + fileName));
-                        }
-                    }
-
-                    //File uploaded successfully
-                    req.setAttribute("message", "File Uploaded Successfully");
-                } catch (Exception ex) {
-                    req.setAttribute("message", "File Upload Failed due to " + ex);
-                }
-            } else {
-                req.setAttribute("message", "Sorry this Servlet only handles file upload request");
             }
-            */
-
             String filePathString = null;
             if (imageFile != null) {
                 final String imageFileName = imageFile.getName();
