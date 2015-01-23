@@ -73,7 +73,7 @@
 							</c:when>
 							<c:otherwise>
 								<c:choose>
-									<c:when test="${loan.endDate.after(loan.maxEndDate)}">
+									<c:when test="${loan.endDate.after(loan.getMaxEndDate(item.maxLoanDuration))}">
 										<c:set var="maxEndDateClass" value="negative"/>
 									</c:when>
 									<c:otherwise>
