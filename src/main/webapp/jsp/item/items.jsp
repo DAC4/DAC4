@@ -90,6 +90,18 @@
 				</tbody>
 			</table>
 
+			<c:if test="${isConnected}">
+				<a href="${pageContext.request.contextPath}/item/register">
+					<button type="button" class="ui primary button">Add Item</button>
+				</a>
+			</c:if>
+
+		</div>
+
+		<div class="section">
+
+			<h2 class="ui block header">Testing future new interface...</h2>
+
 			<div class="ui grid">
 				<c:forEach var="item" items="${items}">
 					<c:if test="${item.approved || isAdmin}">
@@ -154,16 +166,8 @@
 					</c:if>
 				</c:forEach>
 			</div>
-
-			<c:if test="${isConnected}">
-				<a href="${pageContext.request.contextPath}/item/register">
-					<button type="button" class="ui primary button">Add Item</button>
-				</a>
-			</c:if>
-
 		</div>
-	</div>
 
-	<%@ include file="../partial/footer.jsp" %>
+		<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>
