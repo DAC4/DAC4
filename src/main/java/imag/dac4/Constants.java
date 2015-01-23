@@ -11,22 +11,22 @@ public final class Constants {
     public static final String JSP_HEADER = "/jsp/header.jsp";
     public static final String JSP_INDEX  = "/jsp/index.jsp";
 
-    public static final String JSP_AUTH_REGISTER            = "/jsp/auth/register.jsp";
-    public static final String JSP_AUTH_AWAITING_VALIDATION = "/jsp/auth/awaitingApproval.jsp";
+    public static final String JSP_AUTH_REGISTER          = "/jsp/auth/register.jsp";
+    public static final String JSP_AUTH_AWAITING_APPROVAL = "/jsp/auth/awaitingApproval.jsp";
 
     public static final String JSP_ADMIN_HOME  = "/jsp/admin/home.jsp";
     public static final String JSP_ADMIN_USERS = "/jsp/admin/users.jsp";
     public static final String JSP_ADMIN_ITEMS = "/jsp/admin/items.jsp";
     public static final String JSP_ADMIN_LOANS = "/jsp/admin/loans.jsp";
 
-    public static final String JSP_USER_HOME = "/jsp/user/home.jsp";
+    public static final String JSP_USER_HOME  = "/jsp/user/home.jsp";
     public static final String JSP_USER_ITEMS = "/jsp/user/items.jsp";
     public static final String JSP_USER_LOANS = "/jsp/user/loans.jsp";
 
-    public static final String JSP_ITEMS                    = "/jsp/item/items.jsp";
-    public static final String JSP_ITEM                     = "/jsp/item/item.jsp";
-    public static final String JSP_ITEM_REGISTER            = "/jsp/item/register.jsp";
-    public static final String JSP_ITEM_AWAITING_VALIDATION = "/jsp/item/awaitingApproval.jsp";
+    public static final String JSP_ITEMS                  = "/jsp/item/items.jsp";
+    public static final String JSP_ITEM                   = "/jsp/item/item.jsp";
+    public static final String JSP_ITEM_REGISTER          = "/jsp/item/register.jsp";
+    public static final String JSP_ITEM_AWAITING_APPROVAL = "/jsp/item/awaitingApproval.jsp";
 
     public static final String JSP_DEBUG = "/jsp/debug/db.jsp";
 

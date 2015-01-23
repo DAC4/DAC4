@@ -16,7 +16,7 @@ import java.io.IOException;
         "/auth/register",
         "/auth/login",
         "/auth/logout",
-        "/auth/awaiting-validation"
+        "/auth/awaiting-approval"
 })
 public class AuthServlet extends HttpServlet {
 
@@ -39,8 +39,8 @@ public class AuthServlet extends HttpServlet {
                 req.getSession().setAttribute("success_msg", "Logged out successfully");
                 resp.sendRedirect("/");
                 break;
-            case "awaiting-validation":
-                req.getRequestDispatcher(Constants.JSP_AUTH_AWAITING_VALIDATION).forward(req, resp);
+            case "awaiting-approval":
+                req.getRequestDispatcher(Constants.JSP_AUTH_AWAITING_APPROVAL).forward(req, resp);
                 break;
             default:
                 req.getSession().setAttribute("error", 400);
@@ -131,7 +131,7 @@ public class AuthServlet extends HttpServlet {
             user = new User(login, password, name, email);
             this.userDao.create(user);
             req.getSession().setAttribute("success_msg", "Registration completed successfully");
-            resp.sendRedirect("/auth/awaiting-validation");
+            resp.sendRedirect("/auth/awaiting-approval");
         }
     }
 }

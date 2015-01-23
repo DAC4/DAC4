@@ -33,7 +33,7 @@ import java.util.UUID;
 @WebServlet(name = "ItemServlet", urlPatterns = {
         "/item",
         "/item/register",
-        "/item/awaiting-validation",
+        "/item/awaiting-approval",
         "/item/borrow",
         "/item/return",
         "/items",
@@ -78,7 +78,7 @@ public class ItemServlet extends HttpServlet {
                 req.getRequestDispatcher(Constants.JSP_ITEM_REGISTER).forward(req, resp);
                 break;
             case "awaiting-validation":
-                req.getRequestDispatcher(Constants.JSP_ITEM_AWAITING_VALIDATION).forward(req, resp);
+                req.getRequestDispatcher(Constants.JSP_ITEM_AWAITING_APPROVAL).forward(req, resp);
                 break;
             case "items":
                 req.setAttribute("isAdmin", isAdmin);
@@ -303,7 +303,7 @@ public class ItemServlet extends HttpServlet {
             /*ARDUINO : ArduinoInterface.insertProduct(item.getLockerNum()); */
             this.itemDao.create(item);
             req.getSession().setAttribute("success_msg", "Successfully registered new item \"" + item.getName() + '"');
-            resp.sendRedirect("/item/awaiting-validation");
+            resp.sendRedirect("/item/awaiting-approval");
         }
     }
 }
