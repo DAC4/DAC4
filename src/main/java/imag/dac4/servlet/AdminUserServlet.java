@@ -68,16 +68,25 @@ public class AdminUserServlet extends HttpServlet {
     }
 
     private void onApproveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String login = req.getParameter("login");
-
-        if (login == null) {
+        final String idString = req.getParameter("id");
+        if (idString == null) {
             req.getSession().setAttribute("error", 400);
-            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
-            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
+            req.getSession().setAttribute("error_msg", "Bad Request: Missing Parameter");
+            resp.sendRedirect("/admin/users");
             return;
         }
 
-        final User user = this.userDao.getByLogin(login);
+        final int id;
+        try {
+            id = Integer.parseInt(idString);
+        } catch (NumberFormatException e) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Invalid id");
+            resp.sendRedirect("/admin/users");
+            return;
+        }
+
+        final User user = this.userDao.read(id);
         if (user == null) {
             // User doesn't exist
             req.getSession().setAttribute("error", 404);
