@@ -160,6 +160,7 @@ public class ItemServlet extends HttpServlet {
                     this.userDao.update(user);
                     loan.setEndDate(new Date(System.currentTimeMillis()));
                     this.loanDao.update(loan);
+                    resp.sendRedirect("/user/loans");
                 }
             }
         }

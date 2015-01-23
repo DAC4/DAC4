@@ -27,9 +27,6 @@ public class Loan implements Serializable {
     @Column(name = "itemId")
     private int itemId;
 
-    @Column(name = "returned")
-    private boolean returned;
-
     @Column(name = "startDate")
     private Date startDate;
 
@@ -42,7 +39,6 @@ public class Loan implements Serializable {
     public Loan(int userId, int itemId) {
         this.userId = userId;
         this.itemId = itemId;
-        this.returned = false;
         this.startDate = new Date(System.currentTimeMillis());
         this.endDate = null;
     }
@@ -64,8 +60,6 @@ public class Loan implements Serializable {
     }
 
     public boolean shouldReturnTomorrow(final int maxLoanDuration) {
-        final java.util.Date maxReturnDate = DateUtils.addDays(startDate, maxLoanDuration);
-
         // Today + one day
         final Calendar c1 = Calendar.getInstance();
         c1.roll(Calendar.DATE, true);
@@ -80,6 +74,10 @@ public class Loan implements Serializable {
                 && c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR);
     }
 
+    public boolean isReturned() {
+        return endDate != null;
+    }
+
     public int getId() {
         return id;
     }
@@ -90,10 +88,6 @@ public class Loan implements Serializable {
 
     public int getItemId() {
         return itemId;
-    }
-
-    public boolean isReturned() {
-        return returned;
     }
 
     public Date getStartDate() {
@@ -110,10 +104,6 @@ public class Loan implements Serializable {
 
     public void setItemId(int itemId) {
         this.itemId = itemId;
-    }
-
-    public void setReturned(boolean returned) {
-        this.returned = returned;
     }
 
     public void setStartDate(Date startDate) {
