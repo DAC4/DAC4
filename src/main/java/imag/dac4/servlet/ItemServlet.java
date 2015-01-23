@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.HashMap;
@@ -41,7 +40,7 @@ import java.util.UUID;
 @MultipartConfig
 public class ItemServlet extends HttpServlet {
 
-    private static final String UPLOAD_DIRECTORY = "static/img"; //TODO
+    private static final String UPLOAD_DIRECTORY = "/static/img";
 
     @EJB ItemDao itemDao;
     @EJB LoanDao loanDao;
@@ -310,14 +309,14 @@ public class ItemServlet extends HttpServlet {
             }
             */
 
-            Path filePath = null;
+            String filePathString = null;
             if (imageFile != null) {
                 final String imageFileName = imageFile.getName();
                 final String[] imageFileNameSplit = imageFileName.split("\\.");
                 final String imageFileType = imageFileNameSplit[imageFileNameSplit.length - 1];
-                filePath = Paths.get(getServletContext().getRealPath(File.separator), UPLOAD_DIRECTORY, UUID.randomUUID().toString().replace("-", "") + '.' + imageFileType);
+                filePathString = UPLOAD_DIRECTORY + File.separatorChar + UUID.randomUUID().toString().replace("-", "") + '.' + imageFileType;
                 try {
-                    imageFile.write(filePath.toFile());
+                    imageFile.write(Paths.get(getServletContext().getRealPath(File.separator), filePathString).toFile());
                 } catch (Exception e) {
                     req.getSession().setAttribute("error", 500);
                     req.getSession().setAttribute("error_msg", "Internal Server Error: Failed to write file: " + e.getMessage());
@@ -327,7 +326,7 @@ public class ItemServlet extends HttpServlet {
                 }
             }
 
-            final Item item = new Item(user.getId(), name, filePath != null ? ('/' + filePath.toString()) : null, description, lockerNum, maxLoanDuration);
+            final Item item = new Item(user.getId(), name, filePathString != null ? filePathString : null, description, lockerNum, maxLoanDuration);
             this.itemDao.create(item);
             req.getSession().setAttribute("success_msg", "Successfully registered new item \"" + item.getName() + '"');
             resp.sendRedirect("/item/awaiting-validation");
