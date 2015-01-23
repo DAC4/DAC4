@@ -69,19 +69,18 @@
 									<c:set var="maxEndDateClass" value="positive"/>
 								</c:otherwise>
 							</c:choose>
-							<td class="${maxEndDateClass}">
-								<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
-							</td>
-							<td>
-								<c:choose>
-									<c:when test="${loan.returned}">
+							<c:choose>
+								<c:when test="${loan.returned}">
+									<td>
 										<c:out value="on ${loan.endDateAsString}"/>
-									</c:when>
-									<c:otherwise>
+									</td>
+								</c:when>
+								<c:otherwise>
+									<td class="${maxEndDateClass}">
 										<c:out value="before ${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
-									</c:otherwise>
-								</c:choose>
-							</td>
+									</td>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 					</c:if>
 				</c:forEach>
