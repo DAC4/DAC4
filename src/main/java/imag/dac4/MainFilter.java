@@ -24,7 +24,7 @@ public class MainFilter implements Filter {
         if (path.startsWith("/static")) {
             filterChain.doFilter(req, resp);
         } else if (!path.equals("/")) {
-            if (!path.equals("/auth/login") && !Tools.isConnected(httpReq)) {
+            if (!path.equals("/auth/login") && !path.equals("/auth/register") && !Tools.isConnected(httpReq)) {
                 httpReq.getSession().setAttribute("error", 403);
                 httpReq.getSession().setAttribute("error_msg", "Forbidden: Please login");
                 httpResp.sendRedirect("/");
