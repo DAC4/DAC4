@@ -222,7 +222,7 @@ public class ItemServlet extends HttpServlet {
     }
 
     private void onItemRegistrationRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (ServletFileUpload.isMultipartContent(req)) {
+        if (!ServletFileUpload.isMultipartContent(req)) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Awaiting multipart content");
             resp.sendRedirect("/");
