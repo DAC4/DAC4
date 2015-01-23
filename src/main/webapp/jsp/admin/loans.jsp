@@ -20,7 +20,7 @@
 
 	<div class="sixteen wide column">
 
-		<h1 class="ui block header">My Loans</h1>
+		<h1 class="ui block header">Loans</h1>
 
 		<table class="ui striped celled table">
 			<thead>
@@ -29,7 +29,7 @@
 					<th>Name</th>
 					<th>Borrowed by</th>
 					<th>Borrowed on</th>
-					<th>Must return before</th>
+					<th>Return</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -71,6 +71,16 @@
 							</c:choose>
 							<td class="${maxEndDateClass}">
 								<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
+							</td>
+							<td>
+								<c:choose>
+									<c:when test="${loan.returned}">
+										<c:out value="on ${loan.endDateAsString}"/>
+									</c:when>
+									<c:otherwise>
+										<c:out value="before ${loan.getMaxEndDateAsString(item.maxLoanDuration)}"
+									</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 					</c:if>
