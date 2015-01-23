@@ -75,7 +75,7 @@
 										</form>
 									</c:when>
 									<c:otherwise>
-										<form class="inline-form" action="${pageContext.request.contextPath}/admin/item/remove" method="POST">
+										<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
 											<input type="hidden" name="id" value="${u.id}"/>
 											<input type="submit" value="Remove" class="ui ${removable ? "" : "disabled "}red button"/>
 										</form>

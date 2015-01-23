@@ -95,7 +95,38 @@ public class AdminUserServlet extends HttpServlet {
     }
 
     private void onRemoveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO
-        resp.sendRedirect("/admin/users");
+        final String idString = req.getParameter("id");
+        if (idString == null) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Missing Parameter");
+            resp.sendRedirect("/admin/users");
+            return;
+        }
+
+        final int id;
+        try {
+            id = Integer.parseInt(idString);
+        } catch (NumberFormatException e) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Invalid id");
+            req.getRequestDispatcher("/admin/users").forward(req, resp);
+            return;
+        }
+        final User user = this.userDao.read(id);
+        if (user == null) {
+            // User doesn't exist
+            req.getSession().setAttribute("error", 404);
+            req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
+            req.getRequestDispatcher("/admin/users").forward(req, resp);
+        } else if (!this.userDao.isRemovable(user)) {
+            // User can't be removed
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Cannot remove user with items and/or running loans");
+            req.getRequestDispatcher("/admin/users").forward(req, resp);
+        } else {
+            this.userDao.delete(id);
+            req.getSession().setAttribute("success_msg", "Successfully removed user \"" + user.getLogin() + '"');
+            resp.sendRedirect("/admin/items");
+        }
     }
 }

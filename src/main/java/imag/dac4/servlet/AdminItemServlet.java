@@ -101,7 +101,7 @@ public class AdminItemServlet extends HttpServlet {
         if (idString == null) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Missing Parameter");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+            req.getRequestDispatcher("/admin/items").forward(req, resp);
             return;
         }
 
@@ -111,20 +111,20 @@ public class AdminItemServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Invalid id");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+            req.getRequestDispatcher("/admin/items").forward(req, resp);
             return;
         }
         final Item item = this.itemDao.read(id);
         if (item == null) {
-            // User doesn't exist
+            // Item doesn't exist
             req.getSession().setAttribute("error", 404);
             req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+            req.getRequestDispatcher("/admin/items").forward(req, resp);
         } else if (item.isApproved() && !item.isAvailable()) {
-            // User registration is already complete
+            // Item is not in the system
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Item not available");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
+            req.getRequestDispatcher("/admin/items").forward(req, resp);
         } else {
             this.loanDao.forgetItemHistory(id);
             this.itemDao.delete(id);
