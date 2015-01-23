@@ -132,10 +132,10 @@
                                 </c:choose>
                             </a>
                         </div>
-                    </div>
+                    </div></div>
                 </c:if>
             </c:forEach>
-        </div>
+        
 
         <%@ include file="../partial/footer.jsp" %>
     </body>
