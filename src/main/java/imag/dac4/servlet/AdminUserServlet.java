@@ -35,7 +35,7 @@ public class AdminUserServlet extends HttpServlet {
                 for (User user : users) {
                     pairs.put(user, this.userDao.isRemovable(user));
                 }
-                req.setAttribute("users", pairs);
+                req.setAttribute("users", pairs.iterator());
                 req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
                 break;
             default:
