@@ -33,7 +33,9 @@ public class AdminUserServlet extends HttpServlet {
                 final List<User> users = this.userDao.getUsers();
                 final PairList<User, Boolean> pairs = new PairList<>();
                 for (User user : users) {
-                    pairs.put(user, this.userDao.isRemovable(user));
+                    if (user.getId() != 1) {
+                        pairs.put(user, this.userDao.isRemovable(user));
+                    }
                 }
                 req.setAttribute("users", pairs.iterator());
                 req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
@@ -80,18 +82,16 @@ public class AdminUserServlet extends HttpServlet {
             // User doesn't exist
             req.getSession().setAttribute("error", 404);
             req.getSession().setAttribute("error_msg", "Not Found: Invalid login");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
         } else if (user.isApproved()) {
             // User registration is already complete
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: User registration already complete");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
         } else {
             user.setApproved(true);
             this.userDao.update(user);
             req.getSession().setAttribute("success_msg", "Successfully removed user \"" + user.getName() + '"');
-            resp.sendRedirect("/admin/users");
         }
+        resp.sendRedirect("/admin/users");
     }
 
     private void onRemoveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -109,24 +109,30 @@ public class AdminUserServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Invalid id");
-            req.getRequestDispatcher("/admin/users").forward(req, resp);
+            resp.sendRedirect("/admin/users");
             return;
         }
+
+        if (id == 1) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Can't remove Admin");
+            resp.sendRedirect("/admin/users");
+            return;
+        }
+
         final User user = this.userDao.read(id);
         if (user == null) {
             // User doesn't exist
             req.getSession().setAttribute("error", 404);
             req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
-            req.getRequestDispatcher("/admin/users").forward(req, resp);
         } else if (!this.userDao.isRemovable(user)) {
             // User can't be removed
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Cannot remove user with items and/or running loans");
-            req.getRequestDispatcher("/admin/users").forward(req, resp);
         } else {
             this.userDao.delete(id);
             req.getSession().setAttribute("success_msg", "Successfully removed user \"" + user.getLogin() + '"');
-            resp.sendRedirect("/admin/items");
         }
+        resp.sendRedirect("/admin/users");
     }
 }
