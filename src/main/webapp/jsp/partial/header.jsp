@@ -60,7 +60,7 @@
 				</a>
 
 				<a href="${pageContext.request.contextPath}/admin/loans">
-					<div class="disabled ${"admin-loans" == currentPage ? "active " : ""}item">
+					<div class="${"admin-loans" == currentPage ? "active " : ""}item">
 						<span style="color:#FF3333"><i class="setting icon"></i> Loans</span>
 					</div>
 				</a>
