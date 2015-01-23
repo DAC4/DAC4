@@ -292,7 +292,7 @@ public class ItemServlet extends HttpServlet {
                 }
             }
 
-            final Item item = new Item(user.getId(), name, filePathString != null ? filePathString : null, description, lockerNum, maxLoanDuration);
+            final Item item = new Item(user.getId(), name, filePathString, description, lockerNum, maxLoanDuration);
             this.itemDao.create(item);
             req.getSession().setAttribute("success_msg", "Successfully registered new item \"" + item.getName() + '"');
             resp.sendRedirect("/item/awaiting-validation");
