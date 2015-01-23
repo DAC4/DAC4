@@ -62,6 +62,7 @@ public class AdminUserServlet extends HttpServlet {
                 break;
             case "update-credit":
                 this.onUpdateUserCredit(req, resp);
+                break;
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
