@@ -89,7 +89,7 @@
         <div class="ui special cards">
             <c:forEach var="item" items="${items}">
                 <c:if test="${item.approved || isAdmin}">
-                    <a href="${pageContext.request.contextPath}/item?id=${item.id}">
+                    
                     <div class="card">
                         <div class="dimmable image">
                             <div class="ui dimmer">
@@ -109,7 +109,7 @@
                             </c:choose>
                         </div>
                         <div class="content">
-                            <a class="header"><c:out value="${item.name}"/>
+                            <a class="header"><a href="${pageContext.request.contextPath}/item?id=${item.id}"><c:out value="${item.name}"/></a>
                             <div class="meta">
                                 <span class="date"><c:out value="${item.description}"/></span>
                             </div>
@@ -130,7 +130,7 @@
                             </a>
                         </div>
                     </div>
-                    </a>
+                    
                 </c:if>
             </c:forEach>
         </div>
