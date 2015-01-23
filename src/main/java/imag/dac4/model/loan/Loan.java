@@ -56,7 +56,7 @@ public class Loan implements Serializable {
     }
 
     public Date getMaxEndDate(final int maxLoanDuration) {
-        return (Date) DateUtils.addDays(startDate, maxLoanDuration);
+        return new Date(DateUtils.addDays(startDate, maxLoanDuration).getTime());
     }
 
     public boolean shouldHaveBeenReturned(final int maxLoanDuration) {
