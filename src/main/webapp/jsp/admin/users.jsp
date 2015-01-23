@@ -46,8 +46,12 @@
 						<td>
 							<c:out value="${u.email}"/>
 						</td>
-						<td class="right aligned">
-							<c:out value="${u.credits}"/>
+						<td>
+							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/update-credit" method="POST">
+								<input type="hidden" name="id" value="${u.id}"/>
+								<input type="number" name="amount" placeholder="${u.credits}" min="0"/>
+								<input type="submit" value="↻" class="ui button"/>
+							</form>
 						</td>
 						<c:choose>
 							<c:when test="${u.approved}">

@@ -18,6 +18,7 @@ import java.util.List;
         "/admin/users",
         "/admin/user/approve",
         "/admin/user/remove",
+        "/admin/user/update-credit"
 })
 public class AdminUserServlet extends HttpServlet {
 
@@ -59,11 +60,51 @@ public class AdminUserServlet extends HttpServlet {
             case "remove":
                 this.onRemoveUserRequest(req, resp);
                 break;
+            case "update-credit":
+                this.onUpdateUserCredit(req, resp);
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
                 req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
                 break;
+        }
+    }
+
+    private void onUpdateUserCredit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final String idString = req.getParameter("id");
+        final String amountString = req.getParameter("amount");
+
+        if (idString == null || amountString == null) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Missing Parameter");
+            resp.sendRedirect("/admin/users");
+            return;
+        }
+
+        final int id;
+        final int amount;
+        try {
+            id = Integer.parseInt(idString);
+            amount = Integer.parseInt(amountString);
+        } catch (NumberFormatException e) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Invalid parameter");
+            resp.sendRedirect("/admin/users");
+            return;
+        }
+
+        final User user = this.userDao.read(id);
+        if (user == null) {
+            // User doesn't exist
+            req.getSession().setAttribute("error", 404);
+            req.getSession().setAttribute("error_msg", "Not Found: Invalid login");
+        } else if (amount < 0) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Invalid amount");
+        } else {
+                user.setCredits(amount);
+                userDao.update(user);
+                resp.sendRedirect("/admin/users");
         }
     }
 
