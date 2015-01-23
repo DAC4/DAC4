@@ -1,6 +1,7 @@
 package imag.dac4.servlet;
 
 import imag.dac4.Constants;
+import imag.dac4.Tools;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.loan.Loan;
@@ -48,8 +49,8 @@ public class ItemServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final Boolean isAdminParam = (Boolean) req.getSession().getAttribute("isAdmin");
-        final boolean isAdmin = isAdminParam != null && isAdminParam;
+        final User user = Tools.getUser(req);
+        final boolean isAdmin = Tools.isAdmin(req);
 
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
@@ -65,7 +66,7 @@ public class ItemServlet extends HttpServlet {
                     return;
                 }
                 final Item item = this.itemDao.read(id);
-                if (item == null || !item.isApproved() && !isAdmin) {
+                if (item == null || !item.isApproved() && !isAdmin && item.getOwnerId() != user.getId()) {
                     req.getSession().setAttribute("error", 400);
                     req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
                 } else {
@@ -116,7 +117,6 @@ public class ItemServlet extends HttpServlet {
 
     private void onItemReturnRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String idString = req.getParameter("id");
-
         if (idString == null) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
@@ -141,16 +141,18 @@ public class ItemServlet extends HttpServlet {
             req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
             resp.sendRedirect("/user/loans");
         } else {
-            final User user = (User) req.getSession().getAttribute("user");
+            final User user = Tools.getUser(req);
             if (loan.getUserId() != user.getId()) {
                 // user making the request isn't the borrower
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad request: " + req.getRequestURI());
                 resp.sendRedirect("/user/loans");
             } else {
-                final Item item = (Item) this.itemDao.read(loan.getItemId());
+                final Item item = this.itemDao.read(loan.getItemId());
                 if (item == null) {
-                    //item doesn't exist, wtf ?
+                    req.getSession().setAttribute("error", 400);
+                    req.getSession().setAttribute("error_msg", "Bad request: Item not found");
+                    resp.sendRedirect("/user/loans");
                 } else {
                     item.setAvailable(true);
                     this.itemDao.update(item);
@@ -166,7 +168,6 @@ public class ItemServlet extends HttpServlet {
 
     private void onItemBorrowRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String idString = req.getParameter("id");
-
         if (idString == null) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
@@ -196,13 +197,8 @@ public class ItemServlet extends HttpServlet {
             req.getSession().setAttribute("error_msg", "Bad Request: Item already borrowed");
             resp.sendRedirect("/items");
         } else {
-            final User user = (User) req.getSession().getAttribute("user");
-            if (user == null) {
-                // Not logged in
-                req.getSession().setAttribute("error", 403);
-                req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
-                resp.sendRedirect("/");
-            } else if (user.getCredits() <= 0) {
+            final User user = Tools.getUser(req);
+            if (user.getCredits() <= 0) {
                 // Not enough credits
                 req.getSession().setAttribute("error", 403);
                 req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
@@ -255,14 +251,9 @@ public class ItemServlet extends HttpServlet {
         final String lockerNumString = parameters.get("lockerNum");
         final String maxLoanDurationString = parameters.get("maxLoanDuration");
 
-        final User user = (User) req.getSession().getAttribute("user");
+        final User user = Tools.getUser(req);
 
-        if (user == null) {
-            // Not logged in
-            req.getSession().setAttribute("error", 403);
-            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
-            resp.sendRedirect("/");
-        } else if (name == null || description == null || lockerNumString == null || maxLoanDurationString == null) {
+        if (name == null || description == null || lockerNumString == null || maxLoanDurationString == null) {
             // Missing parameter
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");

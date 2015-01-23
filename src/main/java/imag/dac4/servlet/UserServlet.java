@@ -1,6 +1,7 @@
 package imag.dac4.servlet;
 
 import imag.dac4.Constants;
+import imag.dac4.Tools;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.loan.Loan;
@@ -30,16 +31,9 @@ public class UserServlet extends HttpServlet {
     @EJB LoanDao loanDao;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final User user = (User) req.getSession().getAttribute("user");
+        final User user = Tools.getUser(req);
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
-
-        if (user == null) {
-            req.getSession().setAttribute("error", 400);
-            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
-            resp.sendRedirect("/");
-            return;
-        }
         switch (action.toLowerCase()) {
             case "items":
                 req.setAttribute("items", this.itemDao.getItems(user));
@@ -79,7 +73,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void onItemRemoveRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final User user = (User) req.getSession().getAttribute("user");
+        final User user = Tools.getUser(req);
         int id = Integer.parseInt(req.getParameter("itemId"));
         Item item = this.itemDao.read(id);
         if (item != null) {

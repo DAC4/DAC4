@@ -61,7 +61,6 @@ public class AdminItemServlet extends HttpServlet {
 
     private void onApproveItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String id = req.getParameter("id");
-
         if (id == null) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
@@ -90,7 +89,6 @@ public class AdminItemServlet extends HttpServlet {
 
     private void onRemoveItemRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String idString = req.getParameter("id");
-
         if (idString == null) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Missing Parameter");
