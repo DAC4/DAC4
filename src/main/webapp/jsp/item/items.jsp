@@ -109,7 +109,7 @@
                             </c:choose>
                         </div>
                         <div class="content">
-                            <a class="header"><c:out value="${item.name}"/></a>
+                            <a class="header"><c:out value="${item.name}"/>
                             <div class="meta">
                                 <span class="date"><c:out value="${item.description}"/></span>
                             </div>
