@@ -18,76 +18,74 @@
 	<%@ include file="../partial/header.jsp" %>
 
 	<div class="sixteen wide column">
-		<div class="section">
 
-			<h1 class="ui block header">Users List</h1>
+		<h1 class="ui block header">Users List</h1>
 
-			<table class="ui striped celled table">
-				<thead>
+		<table class="ui striped celled table">
+			<thead>
+				<tr>
+					<th>Login</th>
+					<th>Name</th>
+					<th>E-Mail</th>
+					<th>Credits</th>
+					<th>Approved</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="pair" items="${users}">
+					<c:set var="u" value="${pair.key}"/>
+					<c:set var="removable" value="${pair.value}"/>
 					<tr>
-						<th>Login</th>
-						<th>Name</th>
-						<th>E-Mail</th>
-						<th>Credits</th>
-						<th>Approved</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="pair" items="${users}">
-						<c:set var="u" value="${pair.key}"/>
-						<c:set var="removable" value="${pair.value}"/>
-						<tr>
-							<td>
-								<c:out value="${u.login}"/>
-							</td>
-							<td>
-								<c:out value="${u.name}"/>
-							</td>
-							<td>
-								<c:out value="${u.email}"/>
-							</td>
-							<td class="right aligned">
-								<c:out value="${u.credits}"/>
-							</td>
+						<td>
+							<c:out value="${u.login}"/>
+						</td>
+						<td>
+							<c:out value="${u.name}"/>
+						</td>
+						<td>
+							<c:out value="${u.email}"/>
+						</td>
+						<td class="right aligned">
+							<c:out value="${u.credits}"/>
+						</td>
+						<c:choose>
+							<c:when test="${u.approved}">
+								<td class="positive collapsing">
+									<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td class="negative collapsing">
+									<span style="color:red"><i class="remove icon"></i> No</span>
+								</td>
+							</c:otherwise>
+						</c:choose>
+						<td class="right aligned collapsing">
 							<c:choose>
-								<c:when test="${u.approved}">
-									<td class="positive collapsing">
-										<span style="color:green"><i class="checkmark icon"></i> Yes</span>
-									</td>
+								<c:when test="${!u.approved}">
+									<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
+										<input type="hidden" name="id" value="${u.id}"/>
+										<input type="submit" value="Approve" class="ui green button"/>
+									</form>
+									<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
+										<input type="hidden" name="id" value="${u.id}"/>
+										<input type="submit" value="Reject" class="ui red button"/>
+									</form>
 								</c:when>
 								<c:otherwise>
-									<td class="negative collapsing">
-										<span style="color:red"><i class="remove icon"></i> No</span>
-									</td>
+									<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
+										<input type="hidden" name="id" value="${u.id}"/>
+										<input type="submit" value="Remove" class="ui ${removable ? "" : "disabled "}red button"/>
+									</form>
 								</c:otherwise>
 							</c:choose>
-							<td class="right aligned collapsing">
-								<c:choose>
-									<c:when test="${!u.approved}">
-										<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/approve" method="POST">
-											<input type="hidden" name="id" value="${u.id}"/>
-											<input type="submit" value="Approve" class="ui green button"/>
-										</form>
-										<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
-											<input type="hidden" name="id" value="${u.id}"/>
-											<input type="submit" value="Reject" class="ui red button"/>
-										</form>
-									</c:when>
-									<c:otherwise>
-										<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/remove" method="POST">
-											<input type="hidden" name="id" value="${u.id}"/>
-											<input type="submit" value="Remove" class="ui ${removable ? "" : "disabled "}red button"/>
-										</form>
-									</c:otherwise>
-								</c:choose>
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 
-		</div>
 	</div>
 
 	<%@ include file="../partial/footer.jsp" %>
