@@ -1,9 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%--@elvariable id="loans" type="java.util.List"--%>
+<%--@elvariable id="loans" type="java.util.Iterator"--%>
+<%--@elvariable id="pair" type="imag.dac4.util.pairlist.Pair"--%>
 <%--@elvariable id="loan" type="imag.dac4.model.loan.Loan"--%>
-<%--@elvariable id="itemDao" type="imag.dac4.model.item.ItemDao"--%>
 <%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
 
 <c:set var="title" value="My Loans"/>
@@ -33,38 +33,49 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="loan" items="${loans}">
-						<%--TODO: this doesn't work. How :( --%>
-						<c:set var="item" value="${itemDao.read(loan.itemId)}" scope="request" />
-							<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">
-								<tr>
-									<td style="padding:0" class="collapsing">
-										<c:choose>
-											<c:when test="${item.imagePath == null}">
-												<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
-											</c:when>
-											<c:otherwise>
-												<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
-											</c:otherwise>
-										</c:choose>
-									</td>
-									<td>
-										<c:out value="${item.name}"/>
-									</td>
-									<td>
-										<c:out value="${loan.startDate}"/>
-									</td>
-									<td>
-										<c:out value="${loan.startDate + item.maxLoanDuration}" />
-									</td>
-									<td class="collapsing">
-										<a href="${pageContext.request.contextPath}/
-										<a href="${pageContext.request.contextPath}/loan?id=${loan.id}">
-											<button type="button" class="ui button">Details</button>
-										</a>
-									</td>
-								</tr>
-							</a>
+					<c:forEach var="pair" items="${loans}">
+						<c:set var="loan" value="${pair.key}"/>
+						<c:set var="item" value="${pair.value}"/>
+						<c:if test="${!loan.returned}">
+							<tr>
+								<td style="padding:0" class="collapsing">
+									<c:choose>
+										<c:when test="${item.imagePath == null}">
+											<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+										</c:when>
+										<c:otherwise>
+											<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td>
+									<c:out value="${item.name}"/>
+								</td>
+								<td>
+									<c:out value="${loan.startDateAsString}"/>
+								</td>
+								<c:choose>
+									<c:when test="${loan.shouldHaveBeenReturned(item.maxLoanDuration)}">
+										<c:set var="maxEndDateClass" value="negative"/>
+									</c:when>
+									<c:when test="${loan.shouldReturnTomorrow(item.maxLoanDuration)}">
+										<c:set var="maxEndDateClass" value="warning"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="maxEndDateClass" value="positive"/>
+									</c:otherwise>
+								</c:choose>
+								<td class="${maxEndDateClass}">
+									<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
+								</td>
+								<td class="collapsing">
+									<form class="inline-form" action="${pageContext.request.contextPath}/item/return" method="POST">
+										<input type="hidden" name="id" value="${loan.id}"/>
+										<input type="submit" value="Return" class="fluid ui primary button"/>
+									</form>
+								</td>
+							</tr>
+						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>

@@ -3,6 +3,7 @@ package imag.dac4.servlet;
 import imag.dac4.Constants;
 import imag.dac4.model.user.User;
 import imag.dac4.model.user.UserDao;
+import imag.dac4.util.pairlist.PairList;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "AdminUserServlet", urlPatterns = {
         "/admin/users",
@@ -27,7 +29,15 @@ public class AdminUserServlet extends HttpServlet {
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
             case "users":
-                req.setAttribute("users", this.userDao.getUsers());
+                // TODO: Not Optimal AT ALL (but admin)
+                final List<User> users = this.userDao.getUsers();
+                final PairList<User, Boolean> pairs = new PairList<>();
+                for (User user : users) {
+                    if (user.getId() != 1) {
+                        pairs.put(user, this.userDao.isRemovable(user));
+                    }
+                }
+                req.setAttribute("users", pairs.iterator());
                 req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
                 break;
             default:
@@ -72,21 +82,57 @@ public class AdminUserServlet extends HttpServlet {
             // User doesn't exist
             req.getSession().setAttribute("error", 404);
             req.getSession().setAttribute("error_msg", "Not Found: Invalid login");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
         } else if (user.isApproved()) {
             // User registration is already complete
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: User registration already complete");
-            req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
         } else {
             user.setApproved(true);
             this.userDao.update(user);
-            resp.sendRedirect("/admin/user");
+            req.getSession().setAttribute("success_msg", "Successfully removed user \"" + user.getName() + '"');
         }
+        resp.sendRedirect("/admin/users");
     }
 
     private void onRemoveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // TODO
-        resp.sendRedirect("/admin/user");
+        final String idString = req.getParameter("id");
+        if (idString == null) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Missing Parameter");
+            resp.sendRedirect("/admin/users");
+            return;
+        }
+
+        final int id;
+        try {
+            id = Integer.parseInt(idString);
+        } catch (NumberFormatException e) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Invalid id");
+            resp.sendRedirect("/admin/users");
+            return;
+        }
+
+        if (id == 1) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Can't remove Admin");
+            resp.sendRedirect("/admin/users");
+            return;
+        }
+
+        final User user = this.userDao.read(id);
+        if (user == null) {
+            // User doesn't exist
+            req.getSession().setAttribute("error", 404);
+            req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
+        } else if (!this.userDao.isRemovable(user)) {
+            // User can't be removed
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Cannot remove user with items and/or running loans");
+        } else {
+            this.userDao.delete(id);
+            req.getSession().setAttribute("success_msg", "Successfully removed user \"" + user.getLogin() + '"');
+        }
+        resp.sendRedirect("/admin/users");
     }
 }

@@ -1,7 +1,7 @@
 package imag.dac4.servlet;
 
 import imag.dac4.Constants;
-import imag.dac4.model.user.User;
+import imag.dac4.Tools;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,9 +15,8 @@ public class MainServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final User user = (User) req.getSession().getAttribute("user");
-        if (user != null) {
-            if ((Boolean) req.getSession().getAttribute("isAdmin")) {
+        if (Tools.isConnected(req)) {
+            if (Tools.isAdmin(req)) {
                 req.getRequestDispatcher(Constants.JSP_ADMIN_HOME).forward(req, resp);
             } else {
                 req.getRequestDispatcher(Constants.JSP_USER_HOME).forward(req, resp);

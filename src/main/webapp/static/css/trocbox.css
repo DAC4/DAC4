@@ -1,5 +1,5 @@
 /*
- * DAC4 CSS
+ * TrocBox CSS
  */
 
 /* ############################ */
@@ -31,6 +31,7 @@
     margin: 0;
     height: 54px;
     z-index: 1337;
+    border-radius: 0;
 }
 
 /* Display menu Login form inline with Register button */
@@ -38,10 +39,12 @@
     display: inline-block;
 }
 
-/* Fix menu buttons width */
+/* Fix menu buttons */
 #header .ui.button {
     width: 100px;
     height: 38px;
+    font-size: 1rem;
+    padding: .78571em 1.5em; /* Initial Semantic UI non-menu Button padding */
 }
 
 /* Reduce padding on form menu item */
@@ -67,6 +70,7 @@
     margin: 0;
     height: 54px;
     z-index: 1337;
+    border-radius: 0;
 }
 
 /* Fix menu buttons width */
@@ -91,10 +95,16 @@
     height: 54px;
 }
 
+/* Define some custom item text sizes */
+.ui.menu .item.bar-text-huge span,
 .ui.menu .item.bar-text-big span,
 .ui.menu .item.bar-text-medium span,
 .ui.menu .item.bar-text-small span {
     font-weight: bold;
+}
+
+.ui.menu .item.bar-text-huge span {
+    font-size: 2.5rem;
 }
 
 .ui.menu .item.bar-text-big span {
@@ -107,4 +117,18 @@
 
 .ui.menu .item.bar-text-small span {
     font-size: 1.1rem;
+}
+
+/* ########## */
+/* ## Misc ## */
+/* ########## */
+
+/* Fix button width to stay aligned */
+table .ui.button {
+    width: 100px;
+}
+
+/* Fix additional space below images in tables */
+table img {
+    display: block;
 }

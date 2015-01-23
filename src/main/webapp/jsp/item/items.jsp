@@ -35,23 +35,35 @@
 				<tbody>
 					<c:forEach var="item" items="${items}">
 						<c:if test="${item.approved || isAdmin}">
-							<a href="${pageContext.request.contextPath}/item?id=${item.id}">
-								<tr>
-									<td style="padding:0" class="collapsing">
-										<c:choose>
-											<c:when test="${item.imagePath == null}">
-												<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
-											</c:when>
-											<c:otherwise>
-												<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
-											</c:otherwise>
-										</c:choose>
-									</td>
-									<td>
-										<c:out value="${item.name}"/>
-									</td>
+							<tr>
+								<td style="padding:0" class="collapsing">
 									<c:choose>
-										<c:when test="${item.available}">
+										<c:when test="${item.imagePath == null}">
+											<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+										</c:when>
+										<c:otherwise>
+											<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td>
+									<c:out value="${item.name}"/>
+								</td>
+								<c:choose>
+									<c:when test="${item.available}">
+										<td class="positive collapsing">
+											<span style="color:green"><i class="checkmark icon"></i> Yes</span>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td class="negative collapsing">
+											<span style="color:red"><i class="remove icon"></i> No</span>
+										</td>
+									</c:otherwise>
+								</c:choose>
+								<c:if test="${isAdmin}">
+									<c:choose>
+										<c:when test="${item.approved}">
 											<td class="positive collapsing">
 												<span style="color:green"><i class="checkmark icon"></i> Yes</span>
 											</td>
@@ -62,37 +74,33 @@
 											</td>
 										</c:otherwise>
 									</c:choose>
-									<c:if test="${isAdmin}">
-										<c:choose>
-											<c:when test="${item.approved}">
-												<td class="positive collapsing">
-													<span style="color:green"><i class="checkmark icon"></i> Yes</span>
-												</td>
-											</c:when>
-											<c:otherwise>
-												<td class="negative collapsing">
-													<span style="color:red"><i class="remove icon"></i> No</span>
-												</td>
-											</c:otherwise>
-										</c:choose>
+								</c:if>
+								<td class="collapsing">
+									<a class="ui button" href="${pageContext.request.contextPath}/item?id=${item.id}">Details</a>
+									<c:if test="${item.available}">
+										<form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
+											<input type="hidden" name="id" value="${item.id}"/>
+											<input type="submit" value="Borrow" class="ui green button"/>
+										</form>
 									</c:if>
-									<td class="collapsing">
-										<a href="${pageContext.request.contextPath}/item?id=${item.id}">
-											<button type="button" class="ui button">Details</button>
-										</a>
-										<c:if test="${item.available}">
-											<form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
-												<input type="hidden" name="id" value="${item.id}"/>
-												<input type="submit" value="Borrow" class="ui green button"/>
-											</form>
-										</c:if>
-									</td>
-								</tr>
-							</a>
+								</td>
+							</tr>
 						</c:if>
 					</c:forEach>
 				</tbody>
 			</table>
+
+			<c:if test="${isConnected}">
+				<a href="${pageContext.request.contextPath}/item/register">
+					<button type="button" class="ui primary button">Add Item</button>
+				</a>
+			</c:if>
+
+		</div>
+
+		<div class="section">
+
+			<h2 class="ui block header">Testing future new interface...</h2>
 
 			<div class="ui grid">
 				<c:forEach var="item" items="${items}">
@@ -158,16 +166,8 @@
 					</c:if>
 				</c:forEach>
 			</div>
-
-			<c:if test="${isConnected}">
-				<a href="${pageContext.request.contextPath}/item/register">
-					<button type="button" class="ui primary button">Add Item</button>
-				</a>
-			</c:if>
-
 		</div>
-	</div>
 
-	<%@ include file="../partial/footer.jsp" %>
+		<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

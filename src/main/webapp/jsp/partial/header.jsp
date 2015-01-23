@@ -10,13 +10,18 @@
 <%--@elvariable id="error" type="java.lang.String"--%>
 <%--@elvariable id="error_msg" type="java.lang.String"--%>
 
+<%--@elvariable id="success_msg" type="java.lang.String"--%>
+
 <c:if test="${user != null}" var="isConnected"/>
 <c:if test="${isConnected && sessionScope.isAdmin != null && sessionScope.isAdmin == true}" var="isAdmin"/>
 
 <div id="header" class="ui inverted pointing menu">
 	<a href="${pageContext.request.contextPath}/">
+		<div class="borderless header item bar-text-huge">
+			<span><i class="exchange icon"></i></span>
+		</div>
 		<div class="header item bar-text-big">
-			<span>DAC4</span>
+			<span>TrocBox</span>
 		</div>
 	</a>
 
@@ -25,7 +30,7 @@
 			<c:when test="${!isAdmin}">
 				<a href="${pageContext.request.contextPath}/items">
 					<div class="${"items" == currentPage ? "active " : ""}item">
-						<span>Items</span>
+						<span>Browse Items</span>
 					</div>
 				</a>
 
@@ -37,7 +42,7 @@
 
 				<a href="${pageContext.request.contextPath}/user/loans">
 					<div class="${"user-loans" == currentPage ? "active " : ""}item">
-						<span>Loans</span>
+						<span>My Loans</span>
 					</div>
 				</a>
 			</c:when>
@@ -80,9 +85,7 @@
 						<input class="ui submit button" type="submit" value="Login"/>
 					</form>
 					<c:if test="${\"auth-register\" != currentPage}">
-						<a href="${pageContext.request.contextPath}/auth/register">
-							<button type="button" class="ui primary button">Register</button>
-						</a>
+						<a class="ui primary button" href="${pageContext.request.contextPath}/auth/register">Register</a>
 					</c:if>
 				</div>
 			</c:when>
@@ -91,9 +94,7 @@
 					<span>Logged in as <c:out value="${user.name}"/></span>
 				</div>
 				<div class="item button-item">
-					<a href="${pageContext.request.contextPath}/auth/logout">
-						<button type="button" class="ui button">Logout</button>
-					</a>
+					<a class="ui button" href="${pageContext.request.contextPath}/auth/logout">Logout</a>
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -113,4 +114,16 @@
 		</div>
 		<c:remove var="error"/>
 		<c:remove var="error_msg"/>
+	</c:if>
+	<c:if test="${sessionScope.success_msg != null}">
+		<div id="success" class="ui positive message">
+			<h2 class="header">
+				Success!
+			</h2>
+
+			<p>
+				<c:out value="${success_msg}"/>
+			</p>
+		</div>
+		<c:remove var="success_msg"/>
 	</c:if>

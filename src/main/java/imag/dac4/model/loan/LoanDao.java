@@ -2,8 +2,10 @@ package imag.dac4.model.loan;
 
 import imag.dac4.model.Dao;
 import imag.dac4.model.item.Item;
+import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.user.User;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -28,5 +30,10 @@ public class LoanDao extends Dao<Integer, Loan> {
         } else {
             return null;
         }
+    }
+
+    public void forgetItemHistory(Integer id) {
+        TypedQuery<Loan> query = entityManager.createQuery("DELETE FROM Loan l WHERE l.itemId = :id", Loan.class);
+        query.setParameter("id", id);
     }
 }

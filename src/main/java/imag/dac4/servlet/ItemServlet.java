@@ -1,6 +1,7 @@
 package imag.dac4.servlet;
 
 import imag.dac4.Constants;
+import imag.dac4.Tools;
 import imag.dac4.model.item.Item;
 import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.loan.Loan;
@@ -8,19 +9,26 @@ import imag.dac4.model.loan.LoanDao;
 import imag.dac4.model.user.User;
 import imag.dac4.model.user.UserDao;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @WebServlet(name = "ItemServlet", urlPatterns = {
         "/item",
@@ -30,17 +38,19 @@ import java.util.List;
         "/item/return",
         "/items",
 })
+@MultipartConfig
 public class ItemServlet extends HttpServlet {
 
-    private static final String UPLOAD_DIRECTORY = "/img"; //TODO
+    private static final String UPLOAD_DIRECTORY = "/static/img";
+
     @EJB ItemDao itemDao;
     @EJB LoanDao loanDao;
     @EJB UserDao userDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final Boolean isAdminParam = (Boolean) req.getSession().getAttribute("isAdmin");
-        final boolean isAdmin = isAdminParam != null && isAdminParam;
+        final User user = Tools.getUser(req);
+        final boolean isAdmin = Tools.isAdmin(req);
 
         final String[] split = req.getRequestURI().split("/");
         final String action = split[split.length - 1];
@@ -56,7 +66,7 @@ public class ItemServlet extends HttpServlet {
                     return;
                 }
                 final Item item = this.itemDao.read(id);
-                if (item == null || !item.isApproved() && !isAdmin) {
+                if (item == null || !item.isApproved() && !isAdmin && item.getOwnerId() != user.getId()) {
                     req.getSession().setAttribute("error", 400);
                     req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
                 } else {
@@ -107,11 +117,10 @@ public class ItemServlet extends HttpServlet {
 
     private void onItemReturnRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String idString = req.getParameter("id");
-
         if (idString == null) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
-            resp.sendRedirect("/");
+            resp.sendRedirect("/user/loans");
             return;
         }
 
@@ -120,8 +129,8 @@ public class ItemServlet extends HttpServlet {
             id = Integer.parseInt(idString);
         } catch (final NumberFormatException e) {
             req.getSession().setAttribute("error", 400);
-            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
-            resp.sendRedirect("/");
+            req.getSession().setAttribute("error_msg", "Bad Request: Invalid id");
+            resp.sendRedirect("/user/loans");
             return;
         }
 
@@ -132,16 +141,18 @@ public class ItemServlet extends HttpServlet {
             req.getSession().setAttribute("error_msg", "Not Found: Invalid id");
             resp.sendRedirect("/user/loans");
         } else {
-            final User user = (User) req.getSession().getAttribute("user");
+            final User user = Tools.getUser(req);
             if (loan.getUserId() != user.getId()) {
                 // user making the request isn't the borrower
                 req.getSession().setAttribute("error", 400);
-                req.getSession().setAttribute("error_msg", "Bad request: " + req.getRequestURI());
+                req.getSession().setAttribute("error_msg", "Bad request: Not your loan");
                 resp.sendRedirect("/user/loans");
             } else {
-                final Item item = (Item) this.itemDao.read(loan.getItemId());
+                final Item item = this.itemDao.read(loan.getItemId());
                 if (item == null) {
-                    //item doesn't exist, wtf ?
+                    req.getSession().setAttribute("error", 400);
+                    req.getSession().setAttribute("error_msg", "Bad request: Item not found (wtf)");
+                    resp.sendRedirect("/user/loans");
                 } else {
                     /*ARDUINO : ArduinoInterface.insertProduct(item.getLockerNum()); */
                     item.setAvailable(true);
@@ -150,7 +161,7 @@ public class ItemServlet extends HttpServlet {
                     this.userDao.update(user);
                     loan.setEndDate(new Date(System.currentTimeMillis()));
                     this.loanDao.update(loan);
-                    //TODO: check if returned on time + stuff
+                    resp.sendRedirect("/user/loans");
                 }
             }
         }
@@ -158,7 +169,6 @@ public class ItemServlet extends HttpServlet {
 
     private void onItemBorrowRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String idString = req.getParameter("id");
-
         if (idString == null) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
@@ -188,16 +198,16 @@ public class ItemServlet extends HttpServlet {
             req.getSession().setAttribute("error_msg", "Bad Request: Item already borrowed");
             resp.sendRedirect("/items");
         } else {
-            final User user = (User) req.getSession().getAttribute("user");
-            if (user == null) {
-                // Not logged in
-                req.getSession().setAttribute("error", 403);
-                req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
-                resp.sendRedirect("/");
-            } else if (user.getCredits() <= 0) {
+            final User user = Tools.getUser(req);
+            if (user.getCredits() <= 0) {
                 // Not enough credits
                 req.getSession().setAttribute("error", 403);
                 req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
+                resp.sendRedirect("/items");
+            } else if (!this.userDao.canUserBorrow(user)) {
+                // Late on another loan
+                req.getSession().setAttribute("error", 403);
+                req.getSession().setAttribute("error_msg", "Forbidden: Please return late loans before borrowing anything else");
                 resp.sendRedirect("/items");
             } else {
                  /*ARDUINO : ArduinoInterface.removeProduct(item.getLockerNum()); */
@@ -208,26 +218,49 @@ public class ItemServlet extends HttpServlet {
                 user.setCredits(user.getCredits() - 1);
                 this.userDao.update(user);
                 this.loanDao.create(new Loan(user.getId(), item.getId()));
-
+                req.getSession().setAttribute("success_msg", "Successfully borrowed item \"" + item.getName() + '"');
                 resp.sendRedirect("/user/loans");
             }
         }
     }
 
     private void onItemRegistrationRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String name = req.getParameter("name");
-        final String description = req.getParameter("description");
-        final String lockerNumString = req.getParameter("lockerNum");
-        final String maxLoanDurationString = req.getParameter("maxLoanDuration");
-
-        final User user = (User) req.getSession().getAttribute("user");
-
-        if (user == null) {
-            // Not logged in
-            req.getSession().setAttribute("error", 403);
-            req.getSession().setAttribute("error_msg", "Forbidden: " + req.getRequestURI());
+        if (!ServletFileUpload.isMultipartContent(req)) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Awaiting multipart content");
             resp.sendRedirect("/");
-        } else if (name == null || description == null || lockerNumString == null || maxLoanDurationString == null) {
+            return;
+        }
+        final FileItemFactory fileItemFactory = new DiskFileItemFactory();
+        final ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
+        final List<FileItem> fileItems;
+        try {
+            fileItems = servletFileUpload.parseRequest(req);
+        } catch (FileUploadException e) {
+            req.getSession().setAttribute("error", 500);
+            req.getSession().setAttribute("error_msg", "Internal Server Error: " + e.getMessage());
+            e.printStackTrace();
+            resp.sendRedirect("/");
+            return;
+        }
+        final Map<String, String> parameters = new HashMap<>();
+        FileItem imageFile = null;
+        for (FileItem fileItem : fileItems) {
+            if (fileItem.isFormField()) {
+                parameters.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));
+            } else {
+                imageFile = fileItem;
+            }
+        }
+
+        final String name = parameters.get("name");
+        final String description = parameters.get("description");
+        final String lockerNumString = parameters.get("lockerNum");
+        final String maxLoanDurationString = parameters.get("maxLoanDuration");
+
+        final User user = Tools.getUser(req);
+
+        if (name == null || description == null || lockerNumString == null || maxLoanDurationString == null) {
             // Missing parameter
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
@@ -249,33 +282,27 @@ public class ItemServlet extends HttpServlet {
                 resp.sendRedirect("/item/register");
                 return;
             }
-
-            //TODO: process file upload
-            String fileName = null;
-            if(ServletFileUpload.isMultipartContent(req)) {
+            String filePathString = null;
+            if (imageFile != null) {
+                final String imageFileName = imageFile.getName();
+                final String[] imageFileNameSplit = imageFileName.split("\\.");
+                final String imageFileType = imageFileNameSplit[imageFileNameSplit.length - 1];
+                filePathString = UPLOAD_DIRECTORY + File.separatorChar + UUID.randomUUID().toString().replace("-", "") + '.' + imageFileType;
                 try {
-                    List<FileItem> multiparts = new ServletFileUpload(
-                            new DiskFileItemFactory()).parseRequest(req);
-
-                    for (FileItem item : multiparts) {
-                        if (!item.isFormField()) {
-                            fileName = new File(item.getName()).getName();
-                            item.write(new File(UPLOAD_DIRECTORY + File.separator + fileName));
-                        }
-                    }
-
-                    //File uploaded successfully
-                    req.setAttribute("message", "File Uploaded Successfully");
-                } catch (Exception ex) {
-                    req.setAttribute("message", "File Upload Failed due to " + ex);
+                    imageFile.write(Paths.get(getServletContext().getRealPath(File.separator), filePathString).toFile());
+                } catch (Exception e) {
+                    req.getSession().setAttribute("error", 500);
+                    req.getSession().setAttribute("error_msg", "Internal Server Error: Failed to write file: " + e.getMessage());
+                    e.printStackTrace();
+                    resp.sendRedirect("/item/register");
+                    return;
                 }
-            } else {
-                req.setAttribute("message", "Sorry this Servlet only handles file upload request");
             }
 
-            final Item item = new Item(user.getId(), name, fileName, description, lockerNum, maxLoanDuration);
+            final Item item = new Item(user.getId(), name, filePathString, description, lockerNum, maxLoanDuration);
             /*ARDUINO : ArduinoInterface.insertProduct(item.getLockerNum()); */
             this.itemDao.create(item);
+            req.getSession().setAttribute("success_msg", "Successfully registered new item \"" + item.getName() + '"');
             resp.sendRedirect("/item/awaiting-validation");
         }
     }
