@@ -92,9 +92,10 @@
             
             
             
-        <div class="ui special cards">
+        
             <c:forEach var="item" items="${items}">
                 <c:if test="${item.approved || isAdmin}">
+                    <div class="ui special cards">
                     <div class="card">
                         <div class="dimmable image">
                             <div class="ui dimmer">
