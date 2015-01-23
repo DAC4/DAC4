@@ -21,7 +21,9 @@ public class MainFilter implements Filter {
         final HttpServletResponse httpResp = (HttpServletResponse) resp;
         final String path = httpReq.getRequestURI().substring(httpReq.getContextPath().length());
 
-        if (!path.equals("/")) {
+        if (path.startsWith("/static")) {
+            filterChain.doFilter(req, resp);
+        } else if (!path.equals("/")) {
             if (!Tools.isConnected(httpReq)) {
                 httpReq.getSession().setAttribute("error", 403);
                 httpReq.getSession().setAttribute("error_msg", "Forbidden: Please login");
@@ -30,9 +32,11 @@ public class MainFilter implements Filter {
                 httpReq.getSession().setAttribute("error", 403);
                 httpReq.getSession().setAttribute("error_msg", "Forbidden: Reserved to administrator");
                 httpResp.sendRedirect("/");
+            } else {
+                filterChain.doFilter(req, resp);
             }
         } else {
-            filterChain.doFilter(req, resp);
+            httpReq.getRequestDispatcher("/index").forward(httpReq, resp);
         }
     }
 
