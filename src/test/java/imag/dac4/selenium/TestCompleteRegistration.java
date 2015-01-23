@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +16,7 @@ public class TestCompleteRegistration {
 
     @Before
     public void setUp() throws Exception {
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         baseUrl = "http://dac.ribesg.fr/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
