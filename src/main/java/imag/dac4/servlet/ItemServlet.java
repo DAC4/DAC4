@@ -120,7 +120,7 @@ public class ItemServlet extends HttpServlet {
         if (idString == null) {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Missing parameter");
-            resp.sendRedirect("/");
+            resp.sendRedirect("/user/loans");
             return;
         }
 
@@ -129,8 +129,8 @@ public class ItemServlet extends HttpServlet {
             id = Integer.parseInt(idString);
         } catch (final NumberFormatException e) {
             req.getSession().setAttribute("error", 400);
-            req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
-            resp.sendRedirect("/");
+            req.getSession().setAttribute("error_msg", "Bad Request: Invalid id");
+            resp.sendRedirect("/user/loans");
             return;
         }
 
@@ -145,13 +145,13 @@ public class ItemServlet extends HttpServlet {
             if (loan.getUserId() != user.getId()) {
                 // user making the request isn't the borrower
                 req.getSession().setAttribute("error", 400);
-                req.getSession().setAttribute("error_msg", "Bad request: " + req.getRequestURI());
+                req.getSession().setAttribute("error_msg", "Bad request: Not your loan");
                 resp.sendRedirect("/user/loans");
             } else {
                 final Item item = this.itemDao.read(loan.getItemId());
                 if (item == null) {
                     req.getSession().setAttribute("error", 400);
-                    req.getSession().setAttribute("error_msg", "Bad request: Item not found");
+                    req.getSession().setAttribute("error_msg", "Bad request: Item not found (wtf)");
                     resp.sendRedirect("/user/loans");
                 } else {
                     item.setAvailable(true);
@@ -160,7 +160,6 @@ public class ItemServlet extends HttpServlet {
                     this.userDao.update(user);
                     loan.setEndDate(new Date(System.currentTimeMillis()));
                     this.loanDao.update(loan);
-                    //TODO: check if returned on time + stuff
                 }
             }
         }
@@ -202,6 +201,11 @@ public class ItemServlet extends HttpServlet {
                 // Not enough credits
                 req.getSession().setAttribute("error", 403);
                 req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
+                resp.sendRedirect("/items");
+            } else if (!this.loanDao.canUserBorrow(user)) {
+                // Late on another loan
+                req.getSession().setAttribute("error", 403);
+                req.getSession().setAttribute("error_msg", "Forbidden: Please return late loans before borrowing anything else");
                 resp.sendRedirect("/items");
             } else {
                 // set item not available

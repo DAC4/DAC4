@@ -69,7 +69,10 @@
 									<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
 								</td>
 								<td class="collapsing">
-									<a class="ui button" href="${pageContext.request.contextPath}/loan?id=${loan.id}">Details</a>
+									<form class="inline-form" action="${pageContext.request.contextPath}/item/return" method="POST">
+										<input type="hidden" name="id" value="${loan.id}"/>
+										<input type="submit" value="Return" class="fluid ui primary button"/>
+									</form>
 								</td>
 							</tr>
 						</c:if>
