@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -311,7 +312,10 @@ public class ItemServlet extends HttpServlet {
 
             Path filePath = null;
             if (imageFile != null) {
-                filePath = Paths.get(UPLOAD_DIRECTORY, UUID.randomUUID().toString().replace("-", ""));
+                final String imageFileName = imageFile.getName();
+                final String[] imageFileNameSplit = imageFileName.split("\\.");
+                final String imageFileType = imageFileNameSplit[imageFileNameSplit.length - 1];
+                filePath = Paths.get(getServletContext().getRealPath(File.separator), UPLOAD_DIRECTORY, UUID.randomUUID().toString().replace("-", "") + '.' + imageFileType);
                 try {
                     imageFile.write(filePath.toFile());
                 } catch (Exception e) {
