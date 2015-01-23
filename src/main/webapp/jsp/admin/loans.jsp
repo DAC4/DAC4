@@ -7,8 +7,8 @@
 <%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
 <%--@elvariable id="user" type="imag.dac4.model.user.User"--%>
 
-<c:set var="title" value="My Loans"/>
-<c:set var="currentPage" value="user-loans"/>
+<c:set var="title" value="Loans"/>
+<c:set var="currentPage" value="admin-loans"/>
 
 <!DOCTYPE html>
 <html>
