@@ -58,28 +58,40 @@
 							<c:out value="${loan.startDateAsString}"/>
 						</td>
 						<c:choose>
-							<c:when test="${loan.shouldHaveBeenReturned(item.maxLoanDuration)}">
-								<c:set var="maxEndDateClass" value="negative"/>
-							</c:when>
-							<c:when test="${loan.shouldReturnTomorrow(item.maxLoanDuration)}">
-								<c:set var="maxEndDateClass" value="warning"/>
+							<c:when test="${!loan.returned}">
+								<c:choose>
+									<c:when test="${loan.shouldHaveBeenReturned(item.maxLoanDuration)}">
+										<c:set var="maxEndDateClass" value="negative"/>
+									</c:when>
+									<c:when test="${loan.shouldReturnTomorrow(item.maxLoanDuration)}">
+										<c:set var="maxEndDateClass" value="warning"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="maxEndDateClass" value="positive"/>
+									</c:otherwise>
+								</c:choose>
 							</c:when>
 							<c:otherwise>
-								<c:set var="maxEndDateClass" value="positive"/>
+								<c:choose>
+									<c:when test="${loan.endDate.after(loan.getMaxEndDate(item.maxLoanDuration))}">
+										<c:set var="maxEndDateClass" value="negative"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="maxEndDateClass" value="positive"/>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
-						<c:choose>
-							<c:when test="${loan.returned}">
-								<td>
+						<td class="${maxEndDateClass}">
+							<c:choose>
+								<c:when test="${loan.returned}">
 									<c:out value="on ${loan.endDateAsString}"/>
-								</td>
-							</c:when>
-							<c:otherwise>
-								<td class="${maxEndDateClass}">
+								</c:when>
+								<c:otherwise>
 									<c:out value="before ${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
-								</td>
-							</c:otherwise>
-						</c:choose>
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
