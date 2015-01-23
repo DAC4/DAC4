@@ -107,10 +107,10 @@
                             <div class="ui fluid image">
                             <c:choose>
                                 <c:when test="${item.imagePath == null}">
-                                    <img src="${pageContext.request.contextPath}/static/img/default.png" class="ui medium rounded image"/>
+                                    <img src="${pageContext.request.contextPath}/static/img/default.png" />
                                 </c:when>
                                 <c:otherwise>
-                                    <img src="${pageContext.request.contextPath}${item.imagePath}" class="ui medium rounded image"/>
+                                    <img src="${pageContext.request.contextPath}${item.imagePath}" />
                                 </c:otherwise>
                             </c:choose>
                                     </div>
