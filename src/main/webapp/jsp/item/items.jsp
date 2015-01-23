@@ -164,6 +164,8 @@
 			</c:forEach>
 		</div>
 
-		<%@ include file="../partial/footer.jsp" %>
+	</div>
+
+	<%@ include file="../partial/footer.jsp" %>
 </body>
 </html>

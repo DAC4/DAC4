@@ -19,67 +19,65 @@
 	<%@ include file="../partial/header.jsp" %>
 
 	<div class="sixteen wide column">
-		<div class="section">
 
-			<h1 class="ui block header">My Loans</h1>
+		<h1 class="ui block header">My Loans</h1>
 
-			<table class="ui striped celled table">
-				<thead>
-					<tr>
-						<th>Image</th>
-						<th>Name</th>
-						<th>Borrowed by</th>
-						<th>Borrowed on</th>
-						<th>Must return before</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="pair" items="${loans}">
-						<c:set var="loan" value="${pair.key}"/>
-						<c:set var="item" value="${pair.value.key}"/>
-						<c:set var="user" value="${pair.value.value}"/>
-						<c:if test="${!loan.returned}">
-							<tr>
-								<td style="padding:0" class="collapsing">
-									<c:choose>
-										<c:when test="${item.imagePath == null}">
-											<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
-										</c:when>
-										<c:otherwise>
-											<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
-										</c:otherwise>
-									</c:choose>
-								</td>
-								<td>
-									<c:out value="${item.name}"/>
-								</td>
-								<td>
-									<c:out value="${user.name}"/>
-								</td>
-								<td>
-									<c:out value="${loan.startDateAsString}"/>
-								</td>
+		<table class="ui striped celled table">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Borrowed by</th>
+					<th>Borrowed on</th>
+					<th>Must return before</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="pair" items="${loans}">
+					<c:set var="loan" value="${pair.key}"/>
+					<c:set var="item" value="${pair.value.key}"/>
+					<c:set var="user" value="${pair.value.value}"/>
+					<c:if test="${!loan.returned}">
+						<tr>
+							<td style="padding:0" class="collapsing">
 								<c:choose>
-									<c:when test="${loan.shouldHaveBeenReturned(item.maxLoanDuration)}">
-										<c:set var="maxEndDateClass" value="negative"/>
-									</c:when>
-									<c:when test="${loan.shouldReturnTomorrow(item.maxLoanDuration)}">
-										<c:set var="maxEndDateClass" value="warning"/>
+									<c:when test="${item.imagePath == null}">
+										<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
 									</c:when>
 									<c:otherwise>
-										<c:set var="maxEndDateClass" value="positive"/>
+										<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
 									</c:otherwise>
 								</c:choose>
-								<td class="${maxEndDateClass}">
-									<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
-								</td>
-							</tr>
-						</c:if>
-					</c:forEach>
-				</tbody>
-			</table>
+							</td>
+							<td>
+								<c:out value="${item.name}"/>
+							</td>
+							<td>
+								<c:out value="${user.name}"/>
+							</td>
+							<td>
+								<c:out value="${loan.startDateAsString}"/>
+							</td>
+							<c:choose>
+								<c:when test="${loan.shouldHaveBeenReturned(item.maxLoanDuration)}">
+									<c:set var="maxEndDateClass" value="negative"/>
+								</c:when>
+								<c:when test="${loan.shouldReturnTomorrow(item.maxLoanDuration)}">
+									<c:set var="maxEndDateClass" value="warning"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="maxEndDateClass" value="positive"/>
+								</c:otherwise>
+							</c:choose>
+							<td class="${maxEndDateClass}">
+								<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
+							</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
 
-		</div>
 	</div>
 
 	<%@ include file="../partial/footer.jsp" %>
