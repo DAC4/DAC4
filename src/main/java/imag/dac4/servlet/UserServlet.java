@@ -83,6 +83,7 @@ public class UserServlet extends HttpServlet {
                 // check item status
                 if (item.isAvailable()) {
                     this.loanDao.forgetItemHistory(id);
+                    /*ARDUINO : ArduinoInterface.removeProduct(item.getLockerNum()); */
                     this.itemDao.delete(id);
                     // take away 1 credit from user
                     user.setCredits(user.getCredits() - 1);

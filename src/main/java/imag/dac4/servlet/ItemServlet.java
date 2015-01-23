@@ -154,6 +154,7 @@ public class ItemServlet extends HttpServlet {
                     req.getSession().setAttribute("error_msg", "Bad request: Item not found (wtf)");
                     resp.sendRedirect("/user/loans");
                 } else {
+                    /*ARDUINO : ArduinoInterface.insertProduct(item.getLockerNum()); */
                     item.setAvailable(true);
                     this.itemDao.update(item);
                     user.setCredits(user.getCredits() + 1);
@@ -209,6 +210,7 @@ public class ItemServlet extends HttpServlet {
                 req.getSession().setAttribute("error_msg", "Forbidden: Please return late loans before borrowing anything else");
                 resp.sendRedirect("/items");
             } else {
+                 /*ARDUINO : ArduinoInterface.removeProduct(item.getLockerNum()); */
                 // set item not available
                 item.setAvailable(false);
                 this.itemDao.update(item);
@@ -298,6 +300,7 @@ public class ItemServlet extends HttpServlet {
             }
 
             final Item item = new Item(user.getId(), name, filePathString, description, lockerNum, maxLoanDuration);
+            /*ARDUINO : ArduinoInterface.insertProduct(item.getLockerNum()); */
             this.itemDao.create(item);
             req.getSession().setAttribute("success_msg", "Successfully registered new item \"" + item.getName() + '"');
             resp.sendRedirect("/item/awaiting-validation");

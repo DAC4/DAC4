@@ -130,7 +130,9 @@ public class AdminItemServlet extends HttpServlet {
             this.itemDao.delete(id);
             Files.delete(Paths.get(getServletContext().getRealPath(File.separator), item.getImagePath()));
             req.getSession().setAttribute("success_msg", "Successfully removed item \"" + item.getName() + '"');
+           /*ARDUINO : ArduinoInterface.removeProduct(item.getLockerNum()); */
             resp.sendRedirect("/admin/items");
         }
+        
     }
 }
