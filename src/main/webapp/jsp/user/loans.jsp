@@ -70,7 +70,7 @@
 							<td class="collapsing">
 								<form class="inline-form" action="${pageContext.request.contextPath}/item/return" method="POST">
 									<input type="hidden" name="id" value="${loan.id}"/>
-									<input type="submit" value="Return" class="fluid ui primary button"/>
+									<input type="submit" value="Return" class="ui primary button"/>
 								</form>
 							</td>
 						</tr>
