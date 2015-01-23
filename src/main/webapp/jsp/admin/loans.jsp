@@ -20,7 +20,7 @@
 
 	<div class="sixteen wide column">
 
-		<h1 class="ui block header">Loans</h1>
+		<h1 class="ui block header">Current Loans</h1>
 
 		<table class="ui striped celled table">
 			<thead>
@@ -29,7 +29,7 @@
 					<th>Name</th>
 					<th>Borrowed by</th>
 					<th>Borrowed on</th>
-					<th>Return</th>
+					<th>Return before</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -37,50 +37,101 @@
 					<c:set var="loan" value="${pair.key}"/>
 					<c:set var="item" value="${pair.value.key}"/>
 					<c:set var="user" value="${pair.value.value}"/>
-					<tr>
-						<td style="padding:0" class="collapsing">
+					<c:if test="${!loan.returned}">
+						<tr>
+							<td style="padding:0" class="collapsing">
+								<c:choose>
+									<c:when test="${item.imagePath == null}">
+										<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+									</c:when>
+									<c:otherwise>
+										<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
+									</c:otherwise>
+								</c:choose>
+							</td>
+							<td>
+								<c:out value="${item.name}"/>
+							</td>
+							<td>
+								<c:out value="${user.name}"/>
+							</td>
+							<td>
+								<c:out value="${loan.startDateAsString}"/>
+							</td>
 							<c:choose>
-								<c:when test="${item.imagePath == null}">
-									<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+								<c:when test="${loan.shouldHaveBeenReturned(item.maxLoanDuration)}">
+									<c:set var="maxEndDateClass" value="negative"/>
+								</c:when>
+								<c:when test="${loan.shouldReturnTomorrow(item.maxLoanDuration)}">
+									<c:set var="maxEndDateClass" value="warning"/>
 								</c:when>
 								<c:otherwise>
-									<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
+									<c:set var="maxEndDateClass" value="positive"/>
 								</c:otherwise>
 							</c:choose>
-						</td>
-						<td>
-							<c:out value="${item.name}"/>
-						</td>
-						<td>
-							<c:out value="${user.name}"/>
-						</td>
-						<td>
-							<c:out value="${loan.startDateAsString}"/>
-						</td>
-						<c:choose>
-							<c:when test="${loan.shouldHaveBeenReturned(item.maxLoanDuration)}">
-								<c:set var="maxEndDateClass" value="negative"/>
-							</c:when>
-							<c:when test="${loan.shouldReturnTomorrow(item.maxLoanDuration)}">
-								<c:set var="maxEndDateClass" value="warning"/>
-							</c:when>
-							<c:otherwise>
-								<c:set var="maxEndDateClass" value="positive"/>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
+							<td class="${maxEndDateClass}">
+								<c:out value="${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
+							</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
+
+		<h1 class="ui block header">Past Loans</h1>
+
+		<table class="ui striped celled table">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Name</th>
+					<th>Borrowed by</th>
+					<th>Borrowed on</th>
+					<th>Returned on</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="pair" items="${loans}">
+					<c:set var="loan" value="${pair.key}"/>
+					<c:set var="item" value="${pair.value.key}"/>
+					<c:set var="user" value="${pair.value.value}"/>
+					<c:if test="${loan.returned}">
+						<tr>
+							<td style="padding:0" class="collapsing">
+								<c:choose>
+									<c:when test="${item.imagePath == null}">
+										<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+									</c:when>
+									<c:otherwise>
+										<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
+									</c:otherwise>
+								</c:choose>
+							</td>
+							<td>
+								<c:out value="${item.name}"/>
+							</td>
+							<td>
+								<c:out value="${user.name}"/>
+							</td>
+							<td>
+								<c:out value="${loan.startDateAsString}"/>
+							</td>
+
+							<c:choose>
+								<c:when test="${loan.endDate.after(loan.maxEndDate)}">
+									<c:set var="maxEndDateClass" value="negative"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="maxEndDateClass" value="positive"/>
+								</c:otherwise>
+							</c:choose>
 							<c:when test="${loan.returned}">
 								<td>
 									<c:out value="on ${loan.endDateAsString}"/>
 								</td>
 							</c:when>
-							<c:otherwise>
-								<td class="${maxEndDateClass}">
-									<c:out value="before ${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
-								</td>
-							</c:otherwise>
-						</c:choose>
-					</tr>
+						</tr>
+					</c:if>
 				</c:forEach>
 			</tbody>
 		</table>
