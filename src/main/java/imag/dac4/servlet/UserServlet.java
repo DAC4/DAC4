@@ -40,6 +40,7 @@ public class UserServlet extends HttpServlet {
                 req.getRequestDispatcher(Constants.JSP_USER_ITEMS).forward(req, resp);
                 break;
             case "loans":
+                // TODO: Not optimal
                 final List<Loan> loans = this.loanDao.getLoans(user);
                 final PairList<Loan, Item> pairList = new PairList<>();
                 for (final Loan loan : loans) {

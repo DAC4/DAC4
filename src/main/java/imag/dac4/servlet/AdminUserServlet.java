@@ -3,6 +3,7 @@ package imag.dac4.servlet;
 import imag.dac4.Constants;
 import imag.dac4.model.user.User;
 import imag.dac4.model.user.UserDao;
+import imag.dac4.util.pairlist.PairList;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "AdminUserServlet", urlPatterns = {
         "/admin/users",
@@ -27,7 +29,13 @@ public class AdminUserServlet extends HttpServlet {
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
             case "users":
-                req.setAttribute("users", this.userDao.getUsers());
+                // TODO: Not Optimal AT ALL (but admin)
+                final List<User> users = this.userDao.getUsers();
+                final PairList<User, Boolean> pairs = new PairList<>();
+                for (User user : users) {
+                    pairs.put(user, this.userDao.isRemovable(user));
+                }
+                req.setAttribute("users", pairs);
                 req.getRequestDispatcher(Constants.JSP_ADMIN_USERS).forward(req, resp);
                 break;
             default:

@@ -13,7 +13,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 @WebServlet(name = "AdminItemServlet", urlPatterns = {
         "/admin/items",
@@ -125,6 +128,7 @@ public class AdminItemServlet extends HttpServlet {
         } else {
             this.loanDao.forgetItemHistory(id);
             this.itemDao.delete(id);
+            Files.delete(Paths.get(getServletContext().getRealPath(File.separator), item.getImagePath()));
             req.getSession().setAttribute("success_msg", "Successfully removed item \"" + item.getName() + '"');
             resp.sendRedirect("/admin/items");
         }

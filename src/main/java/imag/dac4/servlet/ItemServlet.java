@@ -203,7 +203,7 @@ public class ItemServlet extends HttpServlet {
                 req.getSession().setAttribute("error", 403);
                 req.getSession().setAttribute("error_msg", "Forbidden: Not enough credits");
                 resp.sendRedirect("/items");
-            } else if (!this.loanDao.canUserBorrow(user)) {
+            } else if (!this.userDao.canUserBorrow(user)) {
                 // Late on another loan
                 req.getSession().setAttribute("error", 403);
                 req.getSession().setAttribute("error_msg", "Forbidden: Please return late loans before borrowing anything else");

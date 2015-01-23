@@ -54,7 +54,7 @@
 								<c:out value="${item.description}"/>
 							</td>
 							<td class="right aligned collapsing">
-								<c:out value="${item.ownerId}"/> <!-- TODO Login with Link to User page -->
+								<c:out value="${item.ownerId}"/> <!-- TODO Login -->
 							</td>
 							<c:choose>
 								<c:when test="${item.available}">
@@ -105,9 +105,6 @@
 										</form>
 									</c:otherwise>
 								</c:choose>
-								<c:if test="${!item.approved}">
-
-								</c:if>
 							</td>
 						</tr>
 					</c:forEach>

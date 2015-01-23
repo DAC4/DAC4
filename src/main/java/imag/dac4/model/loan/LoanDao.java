@@ -13,8 +13,6 @@ import java.util.List;
 @Stateless
 public class LoanDao extends Dao<Integer, Loan> {
 
-    @EJB ItemDao itemDao;
-
     public LoanDao() {
         super(Loan.class);
     }
@@ -37,16 +35,5 @@ public class LoanDao extends Dao<Integer, Loan> {
     public void forgetItemHistory(Integer id) {
         TypedQuery<Loan> query = entityManager.createQuery("DELETE FROM Loan l WHERE l.itemId = :id", Loan.class);
         query.setParameter("id", id);
-    }
-
-    public boolean canUserBorrow(User user) {
-        final List<Loan> loans = getLoans(user);
-        for (Loan loan : loans) {
-            final Item item = this.itemDao.read(loan.getItemId());
-            if (!loan.isReturned() && loan.shouldHaveBeenReturned(item.getMaxLoanDuration())) {
-                return false;
-            }
-        }
-        return true;
     }
 }
