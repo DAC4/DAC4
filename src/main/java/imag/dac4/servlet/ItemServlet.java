@@ -8,19 +8,26 @@ import imag.dac4.model.loan.LoanDao;
 import imag.dac4.model.user.User;
 import imag.dac4.model.user.UserDao;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @WebServlet(name = "ItemServlet", urlPatterns = {
         "/item",
@@ -30,9 +37,11 @@ import java.util.List;
         "/item/return",
         "/items",
 })
+@MultipartConfig
 public class ItemServlet extends HttpServlet {
 
-    private static final String UPLOAD_DIRECTORY = "/img"; //TODO
+    private static final String UPLOAD_DIRECTORY = "static/img"; //TODO
+
     @EJB ItemDao itemDao;
     @EJB LoanDao loanDao;
     @EJB UserDao userDao;
@@ -213,10 +222,38 @@ public class ItemServlet extends HttpServlet {
     }
 
     private void onItemRegistrationRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String name = req.getParameter("name");
-        final String description = req.getParameter("description");
-        final String lockerNumString = req.getParameter("lockerNum");
-        final String maxLoanDurationString = req.getParameter("maxLoanDuration");
+        if (ServletFileUpload.isMultipartContent(req)) {
+            req.getSession().setAttribute("error", 400);
+            req.getSession().setAttribute("error_msg", "Bad Request: Awaiting multipart content");
+            resp.sendRedirect("/");
+            return;
+        }
+        final FileItemFactory fileItemFactory = new DiskFileItemFactory();
+        final ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
+        final List<FileItem> fileItems;
+        try {
+            fileItems = servletFileUpload.parseRequest(req);
+        } catch (FileUploadException e) {
+            req.getSession().setAttribute("error", 500);
+            req.getSession().setAttribute("error_msg", "Internal Server Error: " + e.getMessage());
+            e.printStackTrace();
+            resp.sendRedirect("/");
+            return;
+        }
+        final Map<String, String> parameters = new HashMap<>();
+        FileItem imageFile = null;
+        for (FileItem fileItem : fileItems) {
+            if (fileItem.isFormField()) {
+                parameters.put(fileItem.getFieldName(), fileItem.getString("UTF-8"));
+            } else {
+                imageFile = fileItem;
+            }
+        }
+
+        final String name = parameters.get("name");
+        final String description = parameters.get("description");
+        final String lockerNumString = parameters.get("lockerNum");
+        final String maxLoanDurationString = parameters.get("maxLoanDuration");
 
         final User user = (User) req.getSession().getAttribute("user");
 
@@ -246,7 +283,7 @@ public class ItemServlet extends HttpServlet {
                 req.getSession().setAttribute("error_msg", "Bad Request: Invalid parameter type");
                 resp.sendRedirect("/item/register");
                 return;
-            }
+            }/*
 
             //TODO: process file upload
             String fileName = null;
@@ -270,8 +307,23 @@ public class ItemServlet extends HttpServlet {
             } else {
                 req.setAttribute("message", "Sorry this Servlet only handles file upload request");
             }
+            */
 
-            final Item item = new Item(user.getId(), name, fileName, description, lockerNum, maxLoanDuration);
+            Path filePath = null;
+            if (imageFile != null) {
+                filePath = Paths.get(UPLOAD_DIRECTORY, UUID.randomUUID().toString().replace("-", ""));
+                try {
+                    imageFile.write(filePath.toFile());
+                } catch (Exception e) {
+                    req.getSession().setAttribute("error", 500);
+                    req.getSession().setAttribute("error_msg", "Internal Server Error: Failed to write file: " + e.getMessage());
+                    e.printStackTrace();
+                    resp.sendRedirect("/item/register");
+                    return;
+                }
+            }
+
+            final Item item = new Item(user.getId(), name, filePath != null ? ('/' + filePath.toString()) : null, description, lockerNum, maxLoanDuration);
             this.itemDao.create(item);
             req.getSession().setAttribute("success_msg", "Successfully registered new item \"" + item.getName() + '"');
             resp.sendRedirect("/item/awaiting-validation");
