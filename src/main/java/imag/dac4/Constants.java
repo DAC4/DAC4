@@ -17,6 +17,7 @@ public final class Constants {
     public static final String JSP_ADMIN_HOME  = "/jsp/admin/home.jsp";
     public static final String JSP_ADMIN_USERS = "/jsp/admin/users.jsp";
     public static final String JSP_ADMIN_ITEMS = "/jsp/admin/items.jsp";
+    public static final String JSP_ADMIN_LOANS = "/jsp/admin/loans.jsp";
 
     public static final String JSP_USER_HOME = "/jsp/user/home.jsp";
     public static final String JSP_USER_ITEMS = "/jsp/user/items.jsp";

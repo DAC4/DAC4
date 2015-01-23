@@ -55,13 +55,13 @@
 
 				<a href="${pageContext.request.contextPath}/admin/items">
 					<div class="${"admin-items" == currentPage ? "active " : ""}item">
-						<span style="color:red"><i class="setting icon"></i> Items</span>
+						<span style="color:#FF3333"><i class="setting icon"></i> Items</span>
 					</div>
 				</a>
 
-				<a<%-- href="${pageContext.request.contextPath}/admin/loan"--%>>
+				<a href="${pageContext.request.contextPath}/admin/loans">
 					<div class="disabled ${"admin-loans" == currentPage ? "active " : ""}item">
-						<span<%-- style="color:red"--%>><i class="setting icon"></i> Loans</span>
+						<span style="color:#FF3333"><i class="setting icon"></i> Loans</span>
 					</div>
 				</a>
 			</c:otherwise>

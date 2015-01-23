@@ -20,6 +20,10 @@
 
 			<h1 class="ui block header">Items List</h1>
 
+			<p>
+				<a class="ui primary button" href="${pageContext.request.contextPath}/item/register">Add an Item</a>
+			</p>
+
 			<table class="ui striped celled table">
 				<thead>
 					<tr>
@@ -89,12 +93,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-
-			<c:if test="${isConnected}">
-				<a href="${pageContext.request.contextPath}/item/register">
-					<button type="button" class="ui primary button">Add Item</button>
-				</a>
-			</c:if>
 
 		</div>
 
