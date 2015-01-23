@@ -53,9 +53,8 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </div>
-                                        Description: ${item.description}
+                                        Description: <c:out value="${item.description}"/>
 
-                                        <p>
                                             <!-- <c:choose>
                                                 <c:when test="${item.available}">
                                                     <span style="color:green"><i class="checkmark icon"></i> Available</span>
@@ -79,7 +78,6 @@
                                                 </c:otherwise>
                                             </c:choose>
                                         </form>
-                                        </p>
 
                                     </div>
                             </a>
@@ -89,6 +87,53 @@
                 </c:forEach>
             </div>
 
+        </div>
+            
+            
+            
+            
+        <div class="ui special cards">
+            <c:forEach var="item" items="${items}">
+                <c:if test="${item.approved || isAdmin}">
+                    <div class="card">
+                        <div class="dimmable image">
+                            <div class="ui dimmer">
+                                <div class="content">
+                                    <div class="center">
+                                        <div class="ui inverted button">Borrow</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <c:choose>
+                                <c:when test="${item.imagePath == null}">
+                                    <img src="${pageContext.request.contextPath}/static/img/default.png" class="ui medium rounded image"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <img src="${pageContext.request.contextPath}${item.imagePath}" class="ui medium rounded image"/>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="content">
+                            <a class="header"><c:out value="${item.name}"/></a>
+                            <div class="meta">
+                                <span class="date"><c:out value="${item.description}"/></span>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <a>
+                                <c:choose>
+                                    <c:when test="${item.available}">
+                                        <span style="color:green"><i class="checkmark icon"></i> Available</span>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <span style="color:red"><i class="remove icon"></i> Not available</span>
+                                    </c:otherwise>
+                                </c:choose>
+                            </a>
+                        </div>
+                    </div>
+                </c:if>
+            </c:forEach>
         </div>
 
         <%@ include file="../partial/footer.jsp" %>
