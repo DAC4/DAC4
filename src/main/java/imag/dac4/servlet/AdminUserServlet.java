@@ -62,6 +62,7 @@ public class AdminUserServlet extends HttpServlet {
                 break;
             case "update-credit":
                 this.onUpdateUserCredit(req, resp);
+                break;
             default:
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
@@ -102,10 +103,10 @@ public class AdminUserServlet extends HttpServlet {
             req.getSession().setAttribute("error", 400);
             req.getSession().setAttribute("error_msg", "Bad Request: Invalid amount");
         } else {
-                user.setCredits(amount);
-                userDao.update(user);
-                resp.sendRedirect("/admin/users");
+            user.setCredits(amount);
+            userDao.update(user);
         }
+        resp.sendRedirect("/admin/users");
     }
 
     private void onApproveUserRequest(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
