@@ -78,7 +78,7 @@
 										<c:out value="on ${loan.endDateAsString}"/>
 									</c:when>
 									<c:otherwise>
-										<c:out value="before ${loan.getMaxEndDateAsString(item.maxLoanDuration)}"
+										<c:out value="before ${loan.getMaxEndDateAsString(item.maxLoanDuration)}"/>
 									</c:otherwise>
 								</c:choose>
 							</td>
