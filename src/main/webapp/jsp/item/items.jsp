@@ -23,10 +23,6 @@
                 <a class="ui primary button" href="${pageContext.request.contextPath}/item/register">Add an Item</a>
             </p>
 
-        </div>
-
-        <div class="sixteen wide column">
-
             <div class="ui grid">
                 <c:forEach var="item" items="${items}">
                     <c:if test="${item.approved || isAdmin}">
@@ -87,8 +83,6 @@
                 </c:forEach>
             </div>
 
-        </div>
-            
             
             
             
@@ -137,6 +131,8 @@
             </c:forEach>
         
 
+        </div>
+            
         <%@ include file="../partial/footer.jsp" %>
     </body>
 </html>
