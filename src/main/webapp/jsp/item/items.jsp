@@ -23,7 +23,7 @@
                 <a class="ui primary button" href="${pageContext.request.contextPath}/item/register">Add an Item</a>
             </p>
 
-            <table class="ui striped celled table">
+           <!-- <table class="ui striped celled table">
                 <thead>
                     <tr>
                         <th>Image</th>
@@ -91,7 +91,7 @@
                         </c:if>
                     </c:forEach>
                 </tbody>
-            </table>
+            </table>-->
 
         </div>
 
