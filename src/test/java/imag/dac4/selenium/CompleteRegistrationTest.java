@@ -37,7 +37,7 @@ public class CompleteRegistrationTest {
         driver.findElement(By.id("password")).sendKeys("admin");
         driver.findElement(By.xpath("//input[@value='Login']")).click();
         driver.findElement(By.xpath("//div[@id='header']/a[@data-menu='admin-users']/div")).click();
-        driver.findElement(By.xpath("(//tr[@data-login='" + randomString + "']/input[@value='Approve']")).click();
+        driver.findElement(By.xpath("//tr[@data-login='" + randomString + "']/input[@value='Approve']")).click();
         driver.findElement(By.linkText("Logout")).click();
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("chat");
