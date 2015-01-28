@@ -23,51 +23,6 @@
                 <a class="ui primary button" href="${pageContext.request.contextPath}/item/register">Add an Item</a>
             </p>
             <div class="ui special cards">
-                <div class="card">
-                    <div class="dimmable image">
-                        <div class="ui dimmer">
-                            <div class="content">
-                                <div class="center">
-                                    <div class="ui inverted button">Borrow</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="width:290px;height:300px">
-                            <c:choose>
-                                <c:when test="${item.imagePath == null}">
-                                    <img src="${pageContext.request.contextPath}/static/img/default.png" style="width:290px;height:auto" />
-                                </c:when>
-                                <c:otherwise>
-                                    <img src="${pageContext.request.contextPath}${item.imagePath}" style="width:290px;height:auto" />
-                                </c:otherwise>
-                            </c:choose>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <a class="header" href="${pageContext.request.contextPath}/item?id=${item.id}"><c:out value="${item.name}"/></a>
-                        <div class="meta">
-                            <span class="date"><c:out value="${item.description}"/></span>
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <a>
-                            <form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
-                                <input type="hidden" name="id" value="${item.id}"/>
-                                <c:choose>
-                                    <c:when test="${item.available}">
-                                        <input type="submit" value="Borrow" class="fluid ui green button"/>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <input type="submit" value="Borrow" class="fluid ui disabled button"/>
-                                    </c:otherwise>
-                                </c:choose>
-                            </form>
-                        </a>
-                    </div>
-                </div>
-                
-                
-                
                 <c:forEach var="item" items="${items}">
                     <c:if test="${item.approved || isAdmin}">
 
