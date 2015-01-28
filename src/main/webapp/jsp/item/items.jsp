@@ -26,7 +26,7 @@
                 <c:forEach var="item" items="${items}">
                     <c:if test="${item.approved || isAdmin}">
 
-                        <div class="card">
+                        <div class="card" data-item-name="${item.name}">
                             <div class="dimmable image">
                                 <div class="ui dimmer">
                                     <div class="content">
