@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
+<%--@elvariable id="user" type="imag.dac4.model.user.User"--%>
 
 <c:set var="title" value="Item Details"/>
 <c:set var="currentPage" value="item"/>
@@ -31,25 +32,25 @@
                                 </c:choose>
                             </div>
                             <div class="content">
-                                <a class="header">${item.name}</a>
+                                <a class="header"><c:out value="${item.name}"/></a>
                                 <div class="meta">
-                                    <span class="date">${item.description}</span>
+                                    <span class="date"> Owner : <c:out value="${user.name}"/></span>
                                 </div>
                                 <div class="description">
-                                    ${item.description}
+                                    <c:out value="${item.description}"/>
                                 </div>
                             </div>
                             <div class="extra content">
                                 <ul>
 				<li>
-					Locker Number: ${item.lockerNum}
+					Locker Number: <c:out value="${item.lockerNum}"/>
 				</li>
 				<li>
-					Max Loan Duration: ${item.maxLoanDuration}
+					Max Loan Duration: <c:out value="${item.maxLoanDuration}"/>
 				</li>
 				<c:if test="${!item.approved}">
 					<li style="color:red">
-						Approved: no
+						Approved: No
 					</li>
 				</c:if>
                                 </ul>
