@@ -52,7 +52,7 @@ public class CompleteRegistrationTest {
 
         driver.findElement(By.linkText("Logout")).click();
 
-        System.out.println("\t\tLogging in as...");
+        System.out.println("\t\tLogging in as '" + randomString + "'...");
 
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys(randomString);
