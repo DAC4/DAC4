@@ -17,7 +17,7 @@ public class AddItemTest {
         final String randomString = new BigInteger(130, new Random()).toString(32);
         driver.get(TestSuiteSelenium.BASE_URL);
 
-        System.out.println("\t\tLogging in as test...");
+        System.out.println("\t\tLogging in as ribesg...");
 
         driver.findElement(By.id("login")).clear();
         driver.findElement(By.id("login")).sendKeys("ribesg");
