@@ -35,7 +35,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="width:290px;height:290px">
                                 <c:choose>
                                     <c:when test="${item.imagePath == null}">
                                         <img src="${pageContext.request.contextPath}/static/img/default.png" style="width:290px;height:290px" />
@@ -44,7 +43,6 @@
                                         <img src="${pageContext.request.contextPath}${item.imagePath}" style="width:290px;height:290px" />
                                     </c:otherwise>
                                 </c:choose>
-                                </div>
                             </div>
                             <div class="content">
                                 <a class="header" href="${pageContext.request.contextPath}/item?id=${item.id}"><c:out value="${item.name}"/></a>
