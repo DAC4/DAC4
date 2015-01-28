@@ -11,7 +11,7 @@ public class CompleteRegistrationTest {
 
     @Test
     public void testRegistration() throws Exception {
-        System.out.println("Starting Complete Registration Test");
+        System.out.println("\tStarting Complete Registration Test");
 
         final WebDriver driver = TestSuiteSelenium.getDriver();
         final String randomString = new BigInteger(130, new Random()).toString(32);
@@ -40,12 +40,12 @@ public class CompleteRegistrationTest {
         driver.findElement(By.xpath("//tr[@data-login='" + randomString + "']/input[@value='Approve']")).click();
         driver.findElement(By.linkText("Logout")).click();
         driver.findElement(By.id("login")).clear();
-        driver.findElement(By.id("login")).sendKeys("chat");
+        driver.findElement(By.id("login")).sendKeys(randomString);
         driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("chat");
+        driver.findElement(By.id("password")).sendKeys(randomString);
         driver.findElement(By.xpath("//input[@value='Login']")).click();
-        driver.findElement(By.xpath("//div[@id='header']/a[2]/div/span")).click();
+        driver.findElement(By.xpath("//div[@id='header']/a[@data-menu='items']/div")).click();
 
-        System.out.println("Ending Complete Registration Test");
+        System.out.println("\tEnding Complete Registration Test");
     }
 }
