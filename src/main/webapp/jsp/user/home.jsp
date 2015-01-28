@@ -37,7 +37,7 @@
                             </div>
                             <div class="extra content">
                                 <a>
-                                    <i class="user icon"></i>
+                                    <i class="empty star icon"></i>
                                     Credits: <c:out value="${user.credits}"/>
                                 </a>
                             </div>
