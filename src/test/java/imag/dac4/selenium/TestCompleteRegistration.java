@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -16,7 +17,9 @@ public class TestCompleteRegistration {
 
     @Before
     public void setUp() throws Exception {
-        driver = new FirefoxDriver();
+        final FirefoxBinary bin = new FirefoxBinary();
+        bin.setEnvironmentProperty("DISPLAY", ":20");
+        driver = new FirefoxDriver(bin, null);
         baseUrl = "http://dac.ribesg.fr/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
