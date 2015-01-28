@@ -48,6 +48,15 @@
 				<li>
 					Max Loan Duration: <c:out value="${item.maxLoanDuration}"/>
 				</li>
+                                <c:choose>
+                                    <c:when test="${item.available == true}">
+                                        <li style="color:green">Approved: Yes</li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li style="color:red">Approved: No</li>
+                                    </c:otherwise>
+                                </c:choose>
+                                    
 				<c:if test="${!item.approved}">
 					<li style="color:red">
 						Approved: No
