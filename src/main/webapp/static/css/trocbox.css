@@ -132,3 +132,13 @@ table .ui.button {
 table img {
     display: block;
 }
+
+/* Credit form inside Admin Users List */
+.credit-form div {
+    max-width: 85px;
+}
+
+.credit-form input.submit {
+    max-width: 85px;
+    height: 36px;
+}
