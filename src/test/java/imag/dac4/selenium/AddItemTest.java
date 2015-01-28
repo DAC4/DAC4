@@ -20,9 +20,9 @@ public class AddItemTest {
         System.out.println("\t\tLogging in as test...");
 
         driver.findElement(By.id("login")).clear();
-        driver.findElement(By.id("login")).sendKeys("test");
+        driver.findElement(By.id("login")).sendKeys("ribesg");
         driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("test");
+        driver.findElement(By.id("password")).sendKeys("mdp");
         driver.findElement(By.xpath("//input[@value='Login']")).click();
 
         System.out.println("\t\tBrowsing to Items page...");
@@ -79,12 +79,12 @@ public class AddItemTest {
 
         driver.findElement(By.linkText("Logout")).click();
 
-        System.out.println("\t\tLogging in as test...");
+        System.out.println("\t\tLogging in as ribesg...");
 
         driver.findElement(By.id("login")).clear();
-        driver.findElement(By.id("login")).sendKeys("test");
+        driver.findElement(By.id("login")).sendKeys("ribesg");
         driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("test");
+        driver.findElement(By.id("password")).sendKeys("mdp");
         driver.findElement(By.xpath("//input[@value='Login']")).click();
 
         System.out.println("\t\tBrowsing to Items page...");
