@@ -111,7 +111,7 @@
 				<configuration>
 					<skipTests>${skipTests}</skipTests>
 					<excludes>
-						<exclude>imag.dac4.selenium.*Test.java</exclude>
+						<exclude>**/*Test.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
