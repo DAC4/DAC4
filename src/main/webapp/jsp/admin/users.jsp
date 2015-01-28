@@ -50,10 +50,10 @@
 							<form class="inline-form" action="${pageContext.request.contextPath}/admin/user/update-credit" method="POST">
 								<input type="hidden" name="id" value="${u.id}"/>
 
-								<div class="ui input">
+								<div class="ui input" style="max-width:85px">
 									<input type="number" name="amount" value="${u.credits}" placeholder="${u.credits}" min="0"/>
 								</div>
-								<input type="submit" value="Save" class="ui submit button"/>
+								<input type="submit" value="Save" class="ui submit button" style="height:36px"/>
 							</form>
 						</td>
 						<c:choose>
