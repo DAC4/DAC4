@@ -6,15 +6,12 @@ import org.openqa.selenium.WebDriver;
 
 import java.math.BigInteger;
 import java.util.Random;
-import java.util.logging.Logger;
 
 public class CompleteRegistrationTest {
 
-    private static final Logger LOGGER = Logger.getLogger(CompleteRegistrationTest.class.getName());
-
     @Test
     public void testRegistration() throws Exception {
-        LOGGER.info("Starting Complete Registration Test");
+        System.out.println("Starting Complete Registration Test");
 
         final WebDriver driver = TestSuiteSelenium.getDriver();
         final String randomString = new BigInteger(130, new Random()).toString(32);
@@ -49,6 +46,6 @@ public class CompleteRegistrationTest {
         driver.findElement(By.xpath("//input[@value='Login']")).click();
         driver.findElement(By.xpath("//div[@id='header']/a[2]/div/span")).click();
 
-        LOGGER.info("Ending Complete Registration Test");
+        System.out.println("Ending Complete Registration Test");
     }
 }
