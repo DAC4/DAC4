@@ -16,18 +16,32 @@
 		<div class="section">
 
 			<h1 class="ui block header">User Home</h1>
+                        
 
-			<ul>
-				<li>
-					Login: <c:out value="${user.login}"/>
-				</li>
-				<li>
-					Name: <c:out value="${user.name}"/>
-				</li>
-				<li>
-					Email: <c:out value="${user.email}"/>
-				</li>
-			</ul>
+                        <div class="ui card">
+                            <div class="image">
+                                <img src="http://semantic-ui.com/images/avatar/large/elliot.jpg">
+                            </div>
+                            <div class="content">
+                                <a class="header"><c:out value="${user.name}"/></a>
+                                <div class="description">
+                                    <ul>
+                                        <li>
+                                                Login: <c:out value="${user.login}"/>
+                                        </li>
+                                        <li>
+                                                Email: <c:out value="${user.email}"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <a>
+                                    <i class="user icon"></i>
+                                    Credits: <c:out value="${user.credits}"/>
+                                </a>
+                            </div>
+                        </div>
 
 		</div>
 	</div>
