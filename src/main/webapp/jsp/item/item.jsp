@@ -19,24 +19,28 @@
 
 			<h1 class="ui block header">Item Page</h1>
 
-			<ul>
-				<li>
-					Image:
-					<c:choose>
-						<c:when test="${item.imagePath == null}">
-							<img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
-						</c:when>
-						<c:otherwise>
-							<img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
-						</c:otherwise>
-					</c:choose>
-				</li>
-				<li>
-					Name: ${item.name}
-				</li>
-				<li>
-					Description: ${item.description}
-				</li>
+                        <div class="ui card">
+                            <div class="image">
+                                <c:choose>
+                                    <c:when test="${item.imagePath == null}">
+                                        <img src="${pageContext.request.contextPath}/static/img/default.png" width="64" height="64"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img src="${pageContext.request.contextPath}${item.imagePath}" width="64" height="64"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
+                            <div class="content">
+                                <a class="header">${item.name}</a>
+                                <div class="meta">
+                                    <span class="date">${item.description}</span>
+                                </div>
+                                <div class="description">
+                                    ${item.description}
+                                </div>
+                            </div>
+                            <div class="extra content">
+                                <ul>
 				<li>
 					Locker Number: ${item.lockerNum}
 				</li>
@@ -48,7 +52,9 @@
 						Approved: no
 					</li>
 				</c:if>
-			</ul>
+                                </ul>
+                            </div>
+                        </div>
 		</div>
 	</div>
 
