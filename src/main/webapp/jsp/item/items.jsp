@@ -51,19 +51,20 @@
                                     </div>
                             </div>
                             <div class="extra content">
-                                <a>
+                                <div class="collapsing">
+                                    <a class="ui orange button" href="${pageContext.request.contextPath}/item?id=${item.id}">Details</a>
                                     <form class="inline-form" action="${pageContext.request.contextPath}/item/borrow" method="POST">
                                         <input type="hidden" name="id" value="${item.id}"/>
                                         <c:choose>
                                             <c:when test="${item.available}">
-                                                <input type="submit" value="Borrow" class="fluid ui green button"/>
+                                                <input type="submit" value="Borrow" class="ui green button"/>
                                             </c:when>
                                             <c:otherwise>
-                                                <input type="submit" value="Borrow" class="fluid ui disabled button"/>
+                                                <input type="submit" value="Borrow" class="ui disabled button"/>
                                             </c:otherwise>
                                         </c:choose>
                                     </form>
-                                </a>
+                                </div>
                             </div>
                         </div>
 
