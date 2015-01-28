@@ -110,6 +110,10 @@
 				<version>2.18.1</version>
 				<configuration>
 					<skipTests>${skipTests}</skipTests>
+					<includes>
+						<include>imag.dac4.*</include>
+						<include>imag.dac4.selenium.TestSuiteSelenium</include>
+					</includes>
 				</configuration>
 			</plugin>
 
