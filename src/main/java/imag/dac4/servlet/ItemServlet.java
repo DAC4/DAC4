@@ -72,6 +72,13 @@ public class ItemServlet extends HttpServlet {
                 } else {
                     req.setAttribute("item", item);
                 }
+                final User owner = this.userDao.read(item.getOwnerId());
+                if (user == null) {
+                    req.getSession().setAttribute("error", 400);
+                    req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+                } else {
+                    req.setAttribute("owner", owner);
+                }
                 req.getRequestDispatcher(Constants.JSP_ITEM).forward(req, resp);
                 break;
             case "register":

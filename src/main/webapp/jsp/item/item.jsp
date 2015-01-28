@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
-<%--@elvariable id="user" type="imag.dac4.model.user.User"--%>
+<%--@elvariable id="owner" type="imag.dac4.model.user.User"--%>
 
 <c:set var="title" value="Item Details"/>
 <c:set var="currentPage" value="item"/>
@@ -34,7 +34,7 @@
                             <div class="content">
                                 <a class="header"><c:out value="${item.name}"/></a>
                                 <div class="meta">
-                                    <span class="date"> Owner : <c:out value="${user.name}"/></span>
+                                    <span class="date"> Owner : <c:out value="${owner.name}"/></span>
                                 </div>
                                 <div class="description">
                                     <c:out value="${item.description}"/>
