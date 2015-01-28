@@ -50,10 +50,10 @@
 				</li>
                                 <c:choose>
                                     <c:when test="${item.available == true}">
-                                        <li style="color:green">Approved: Yes</li>
+                                        <li style="color:green">Available: Yes</li>
                                     </c:when>
                                     <c:otherwise>
-                                        <li style="color:red">Approved: No</li>
+                                        <li style="color:red">Available: No</li>
                                     </c:otherwise>
                                 </c:choose>
                                     
