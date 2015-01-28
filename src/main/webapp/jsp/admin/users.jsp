@@ -36,7 +36,7 @@
 				<c:forEach var="pair" items="${users}">
 					<c:set var="u" value="${pair.key}"/>
 					<c:set var="removable" value="${pair.value}"/>
-					<tr>
+					<tr data-login="${u.login}">
 						<td>
 							<c:out value="${u.login}"/>
 						</td>

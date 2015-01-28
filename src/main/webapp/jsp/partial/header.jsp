@@ -28,38 +28,38 @@
 	<c:if test="${isConnected == true}">
 		<c:choose>
 			<c:when test="${!isAdmin}">
-				<a href="${pageContext.request.contextPath}/items">
+				<a data-menu="items" href="${pageContext.request.contextPath}/items">
 					<div class="${"items" == currentPage ? "active " : ""}item">
 						<span>Browse Items</span>
 					</div>
 				</a>
 
-				<a href="${pageContext.request.contextPath}/user/items">
+				<a data-menu="my-items" href="${pageContext.request.contextPath}/user/items">
 					<div class="${"user-items" == currentPage ? "active " : ""}item">
 						<span>My Items</span>
 					</div>
 				</a>
 
-				<a href="${pageContext.request.contextPath}/user/loans">
+				<a data-menu="my-loans" href="${pageContext.request.contextPath}/user/loans">
 					<div class="${"user-loans" == currentPage ? "active " : ""}item">
 						<span>My Loans</span>
 					</div>
 				</a>
 			</c:when>
 			<c:otherwise>
-				<a href="${pageContext.request.contextPath}/admin/users">
+				<a data-menu="admin-users" href="${pageContext.request.contextPath}/admin/users">
 					<div class="${"admin-users" == currentPage ? "active " : ""}item">
 						<span style="color:#FF3333"><i class="setting icon"></i> Users</span>
 					</div>
 				</a>
 
-				<a href="${pageContext.request.contextPath}/admin/items">
+				<a data-menu="admin-items" href="${pageContext.request.contextPath}/admin/items">
 					<div class="${"admin-items" == currentPage ? "active " : ""}item">
 						<span style="color:#FF3333"><i class="setting icon"></i> Items</span>
 					</div>
 				</a>
 
-				<a href="${pageContext.request.contextPath}/admin/loans">
+				<a data-menu="admin-loans" href="${pageContext.request.contextPath}/admin/loans">
 					<div class="${"admin-loans" == currentPage ? "active " : ""}item">
 						<span style="color:#FF3333"><i class="setting icon"></i> Loans</span>
 					</div>
