@@ -73,7 +73,7 @@
 			<span style="font-style: italic"><c:out value="${title}"/></span>
 		</div>
 		<c:choose>
-			<c:when test="${isConnected == false}">
+			<c:when test="${!isConnected}">
 				<div class="item button-item">
 					<form class="inline-form" method="POST" action="${pageContext.request.contextPath}/auth/login">
 						<div class="ui input">
