@@ -37,6 +37,9 @@ public class UserServlet extends HttpServlet {
         switch (action.toLowerCase()) {
             case "items":
                 req.setAttribute("items", this.itemDao.getItems(user));
+                if (this.itemDao.getFreeLockers().size() == 0) {
+                    req.setAttribute("warning_msg", "No locker available");
+                }
                 req.getRequestDispatcher(Constants.JSP_USER_ITEMS).forward(req, resp);
                 break;
             case "loans":

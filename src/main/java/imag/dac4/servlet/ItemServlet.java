@@ -100,9 +100,6 @@ public class ItemServlet extends HttpServlet {
                 break;
             case "items":
                 req.setAttribute("items", this.itemDao.getItems());
-                if (this.itemDao.getFreeLockers().size() == 0) {
-                    req.setAttribute("warning", "No locker available");
-                }
                 req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
                 break;
             default:
