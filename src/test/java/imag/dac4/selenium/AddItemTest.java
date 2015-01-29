@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.math.BigInteger;
 import java.util.Random;
@@ -50,7 +52,9 @@ public class AddItemTest {
         driver.findElement(By.id("description")).sendKeys(randomString);
         // driver.findElement(By.id("image")).sendKeys("src/test/resources/dog.jpg"); // Selenium problem or something
         driver.findElement(By.cssSelector(".ui.dropdown.selection")).click();
-        driver.findElement(By.id("lockerNum")).findElements(By.tagName("option")).get(1).click();
+        final WebElement option = driver.findElement(By.id("lockerNum")).findElements(By.tagName("option")).get(1);
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(option));
+        option.click();
         driver.findElement(By.id("maxLoanDuration")).clear();
         driver.findElement(By.id("maxLoanDuration")).sendKeys("10");
         driver.findElement(By.xpath("//input[@value='Register Item']")).click();
