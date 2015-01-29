@@ -42,7 +42,7 @@ public class AdminItemServlet extends HttpServlet {
                 for (Item item : items) {
                     pairs.put(item, this.userDao.read(item.getOwnerId()));
                 }
-                req.setAttribute("pairs", pairs);
+                req.setAttribute("pairs", pairs.iterator());
                 req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
                 break;
             default:
