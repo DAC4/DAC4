@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.math.BigInteger;
 import java.util.Random;
@@ -52,6 +53,12 @@ public class AddItemTest {
         driver.findElement(By.id("maxLoanDuration")).clear();
         driver.findElement(By.id("maxLoanDuration")).sendKeys("10");
         driver.findElement(By.xpath("//input[@value='Register Item']")).click();
+
+        try {
+            final WebElement e = driver.findElement(By.id("error"));
+            System.out.println(e.findElement(By.tagName("h2")).getText() + ": " + e.findElement(By.tagName("p")).getText());
+        } catch (final NoSuchElementException ignored) {
+        }
 
         System.out.println("\t\tBrowsing to Items page...");
 

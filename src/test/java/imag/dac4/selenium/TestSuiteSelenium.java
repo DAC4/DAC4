@@ -39,8 +39,8 @@ public class TestSuiteSelenium {
         final FirefoxBinary bin = new FirefoxBinary();
         bin.setEnvironmentProperty("DISPLAY", ":20");
         driver = new FirefoxDriver(bin, null);
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().setSize(new Dimension(1920, 1080));
 
         System.out.println("Firefox Driver ready, launching test suite");
