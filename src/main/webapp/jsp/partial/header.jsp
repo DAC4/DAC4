@@ -127,7 +127,7 @@
 				<c:out value="${warning_msg}"/>
 			</p>
 		</div>
-			<c:remove var="success_msg"/>
+			<c:remove var="warning_msg"/>
 	</c:if>
 	<c:if test="${sessionScope.success_msg != null}">
 		<div id="success" class="ui positive message">
