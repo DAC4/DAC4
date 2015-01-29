@@ -1,4 +1,4 @@
-package imag.dac4.model;
+package imag.dac4.model.config;
 
 import javax.ejb.Stateless;
 
