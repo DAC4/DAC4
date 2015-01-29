@@ -51,8 +51,9 @@ public class AddItemTest {
         driver.findElement(By.id("description")).clear();
         driver.findElement(By.id("description")).sendKeys(randomString);
         // driver.findElement(By.id("image")).sendKeys("src/test/resources/dog.jpg"); // Selenium problem or something
-        driver.findElement(By.cssSelector(".ui.dropdown.selection")).click();
-        final WebElement option = driver.findElement(By.id("lockerNum")).findElements(By.tagName("option")).get(1);
+        final WebElement selectorDiv = driver.findElement(By.cssSelector(".ui.dropdown.selection"));
+        selectorDiv.click();
+        final WebElement option = selectorDiv.findElements(By.className("item")).get(0);
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOf(option));
         option.click();
         driver.findElement(By.id("maxLoanDuration")).clear();
