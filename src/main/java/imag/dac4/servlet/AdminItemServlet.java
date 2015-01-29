@@ -6,6 +6,7 @@ import imag.dac4.model.item.ItemDao;
 import imag.dac4.model.loan.LoanDao;
 import imag.dac4.model.user.User;
 import imag.dac4.model.user.UserDao;
+import imag.dac4.util.pairlist.PairList;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 @WebServlet(name = "AdminItemServlet", urlPatterns = {
         "/admin/items",
@@ -35,7 +37,12 @@ public class AdminItemServlet extends HttpServlet {
         final String action = split[split.length - 1];
         switch (action.toLowerCase()) {
             case "items":
-                req.setAttribute("items", this.itemDao.getItems());
+                final List<Item> items = this.itemDao.getItems();
+                final PairList<Item, User> pairs = new PairList<>();
+                for (Item item : items) {
+                    pairs.put(item, this.userDao.read(item.getOwnerId()));
+                }
+                req.setAttribute("pairs", pairs);
                 req.getRequestDispatcher(Constants.JSP_ADMIN_ITEMS).forward(req, resp);
                 break;
             default:

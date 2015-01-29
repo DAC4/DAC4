@@ -1,8 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%--@elvariable id="items" type="java.util.List"--%>
+<%--@elvariable id="pairs" type="java.util.Iterator"--%>
+<%--@elvariable id="pair" type="imag.dac4.util.pairlist.Pair"--%>
 <%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
+<%--@elvariable id="u" type="imag.dac4.model.user.User"--%>
 
 <c:set var="title" value="Admin - Items List"/>
 <c:set var="currentPage" value="admin-items"/>
@@ -34,7 +36,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="item" items="${items}">
+				<c:forEach var="pair" items="${pairs}">
+					<c:set var="item" value="${pair.key}"/>
+					<c:set var="u" value="${pair.value}"/>
 					<tr>
 						<td style="padding:0" class="collapsing">
 							<c:choose>
@@ -53,7 +57,7 @@
 							<c:out value="${item.description}"/>
 						</td>
 						<td class="right aligned collapsing">
-							<c:out value="${item.ownerId}"/> <!-- TODO Login -->
+							<c:out value="${u.login}"/>
 						</td>
 						<c:choose>
 							<c:when test="${item.available}">

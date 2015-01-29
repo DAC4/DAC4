@@ -15,7 +15,7 @@
 	<%@ include file="../partial/head.jsp" %>
 </head>
 <body>
-	<%@ include file="../partial/header.jsp" %>
+	<%@ include file="../partial/header.jsp" %> x
 
 	<div class="sixteen wide column">
 
