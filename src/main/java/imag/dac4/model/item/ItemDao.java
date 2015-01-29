@@ -33,7 +33,7 @@ public class ItemDao extends Dao<Integer, Item> {
     public List<Integer> getFreeLockers() {
         List<Integer> result = new ArrayList<>();
 
-        for (int i = 0; i < 50/*TODO MAX LOCKER*/; i++) {
+        for (int i = 1; i < 50/*TODO MAX LOCKER*/; i++) {
             TypedQuery<Item> query = entityManager.createQuery("SELECT i FROM Item i WHERE i.lockerNum = :locker", Item.class);
             query.setParameter("locker", i);
             if (query.getResultList().size() == 0) {

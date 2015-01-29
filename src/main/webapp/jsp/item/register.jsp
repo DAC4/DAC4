@@ -35,14 +35,12 @@
 			<div class="two fields">
 				<div class="field">
 					<label for="lockerNum">Locker Number:</label>
-					<select class="ui dropdown" id="lockerNum">
+					<select class="ui dropdown" id="lockerNum" name="lockerNum" required>
 						<option value="">Number</option>
 						<c:forEach var="locker" items="${lockers}">
 							<option value="${locker}">${locker}</option>
 						</c:forEach>
 					</select>
-
-					<!--<input id="lockerNum" type="number" min="1" max="9" step="1" placeholder="1" name="lockerNum" required/>-->
 				</div>
 				<div class="field">
 					<label for="maxLoanDuration">Maximum Loan Duration:</label>
