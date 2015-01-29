@@ -39,7 +39,7 @@
 				<c:forEach var="pair" items="${pairs}">
 					<c:set var="item" value="${pair.key}"/>
 					<c:set var="u" value="${pair.value}"/>
-					<tr>
+					<tr data-item-name="${item.name}">
 						<td style="padding:0" class="collapsing">
 							<c:choose>
 								<c:when test="${item.imagePath == null}">
