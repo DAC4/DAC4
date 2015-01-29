@@ -19,10 +19,6 @@
 
         <h1 class="ui block header">Items List</h1>
 
-        <p>
-            <a class="ui primary button" href="${pageContext.request.contextPath}/item/register">Add an Item</a>
-        </p>
-
         <div class="ui special cards">
             <c:forEach var="item" items="${items}">
                 <c:if test="${item.approved || isAdmin}">
