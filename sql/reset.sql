@@ -18,7 +18,9 @@ USE `troc_box`;
 -- Config table
 CREATE TABLE `config` (
   `key`   VARCHAR(50) NOT NULL UNIQUE,
-  `value` VARCHAR(250)
+  `value` VARCHAR(250),
+
+  PRIMARY KEY (`key`)
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = UTF8;
