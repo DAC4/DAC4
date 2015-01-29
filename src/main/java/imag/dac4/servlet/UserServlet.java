@@ -38,7 +38,10 @@ public class UserServlet extends HttpServlet {
             case "items":
                 req.setAttribute("items", this.itemDao.getItems(user));
                 if (this.itemDao.getFreeLockers().size() == 0) {
-                    req.setAttribute("warning_msg", "No locker available");
+                    req.getSession().setAttribute("warning_msg", "No locker available");
+                    req.setAttribute("lockerAvailable", false);
+                } else {
+                    req.setAttribute("lockerAvailable", true);
                 }
                 req.getRequestDispatcher(Constants.JSP_USER_ITEMS).forward(req, resp);
                 break;

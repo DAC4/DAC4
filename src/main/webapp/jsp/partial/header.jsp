@@ -118,7 +118,7 @@
 		<c:remove var="error_msg"/>
 	</c:if>
 	<c:if test="${sessionScope.warning_msg != null}">
-		<div id="success" class="ui warning message">
+		<div id="warning" class="ui warning message">
 			<h2 class="header">
 				Warning:
 			</h2>

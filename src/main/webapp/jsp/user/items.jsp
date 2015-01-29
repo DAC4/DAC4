@@ -3,6 +3,7 @@
 
 <%--@elvariable id="items" type="java.util.List"--%>
 <%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
+<%--@elvariable id="lockerAvailable" type="java.lang.Boolean"--%>
 
 <c:set var="title" value="My Items"/>
 <c:set var="currentPage" value="user-items"/>
@@ -20,7 +21,7 @@
 		<h1 class="ui block header">My Items</h1>
 
 		<p>
-			<a class="ui primary button" href="${pageContext.request.contextPath}/item/register">Add an Item</a>
+			<a class="ui primary button ${lockerAvailable ? "" : "disabled"}" href="${pageContext.request.contextPath}/item/register">Add an Item</a>
 		</p>
 
 		<table class="ui striped celled table">
