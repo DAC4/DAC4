@@ -82,6 +82,7 @@ public class ItemServlet extends HttpServlet {
                 req.getRequestDispatcher(Constants.JSP_ITEM).forward(req, resp);
                 break;
             case "register":
+                req.setAttribute("lockers", this.itemDao.getFreeLockers());
                 req.getRequestDispatcher(Constants.JSP_ITEM_REGISTER).forward(req, resp);
                 break;
             case "awaiting-approval":

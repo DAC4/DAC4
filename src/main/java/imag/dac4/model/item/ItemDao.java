@@ -5,6 +5,7 @@ import imag.dac4.model.user.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -27,5 +28,18 @@ public class ItemDao extends Dao<Integer, Item> {
         } else {
             return null;
         }
+    }
+
+    public List<Integer> getFreeLockers() {
+        List<Integer> result = new ArrayList<>();
+
+        for (int i = 0; i < 50/*TODO MAX LOCKER*/; i++) {
+            TypedQuery<Item> query = entityManager.createQuery("SELECT i FROM Item i WHERE i.lockerNum = :locker", Item.class);
+            query.setParameter("locker", i);
+            if (query.getSingleResult() != null) {
+                result.add(i);
+            }
+        }
+        return result;
     }
 }
