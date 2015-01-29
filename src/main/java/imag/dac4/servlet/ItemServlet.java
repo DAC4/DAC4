@@ -43,9 +43,12 @@ public class ItemServlet extends HttpServlet {
 
     private static final String UPLOAD_DIRECTORY = "/static/img";
 
-    @EJB ItemDao itemDao;
-    @EJB LoanDao loanDao;
-    @EJB UserDao userDao;
+    @EJB
+    ItemDao itemDao;
+    @EJB
+    LoanDao loanDao;
+    @EJB
+    UserDao userDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -241,6 +244,7 @@ public class ItemServlet extends HttpServlet {
         }
         final FileItemFactory fileItemFactory = new DiskFileItemFactory();
         final ServletFileUpload servletFileUpload = new ServletFileUpload(fileItemFactory);
+        servletFileUpload.setFileSizeMax(5000000);
         final List<FileItem> fileItems;
         try {
             fileItems = servletFileUpload.parseRequest(req);
@@ -295,6 +299,19 @@ public class ItemServlet extends HttpServlet {
                 final String imageFileName = imageFile.getName();
                 final String[] imageFileNameSplit = imageFileName.split("\\.");
                 final String imageFileType = imageFileNameSplit[imageFileNameSplit.length - 1];
+                switch (imageFileType.toLowerCase()) {
+                    case "png":
+                    case "jpg":
+                    case "jpeg":
+                    case "gif":
+                        break;
+                    default:
+                        // Invalid parameter type
+                        req.getSession().setAttribute("error", 400);
+                        req.getSession().setAttribute("error_msg", "Bad Request: Invalid file type");
+                        resp.sendRedirect("/item/register");
+                        return;
+                }
                 filePathString = UPLOAD_DIRECTORY + File.separatorChar + UUID.randomUUID().toString().replace("-", "") + '.' + imageFileType;
                 try {
                     imageFile.write(Paths.get(getServletContext().getRealPath(File.separator), filePathString).toFile());

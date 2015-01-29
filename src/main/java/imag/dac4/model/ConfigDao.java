@@ -1,8 +1,8 @@
 package imag.dac4.model;
 
-/**
- * @author Ribesg
- */
+import javax.ejb.Stateless;
+
+@Stateless
 public class ConfigDao extends Dao<String, String> {
 
     public ConfigDao() {

@@ -1,8 +1,10 @@
 package imag.dac4.model.item;
 
+import imag.dac4.model.ConfigDao;
 import imag.dac4.model.Dao;
 import imag.dac4.model.user.User;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Stateless
 public class ItemDao extends Dao<Integer, Item> {
+
+    @EJB ConfigDao configDao;
 
     public ItemDao() {
         super(Item.class);
@@ -33,7 +37,7 @@ public class ItemDao extends Dao<Integer, Item> {
     public List<Integer> getFreeLockers() {
         List<Integer> result = new ArrayList<>();
 
-        for (int i = 1; i < 50/*TODO MAX LOCKER*/; i++) {
+        for (int i = 1; i < configDao.getLockerAmount(); i++) {
             TypedQuery<Item> query = entityManager.createQuery("SELECT i FROM Item i WHERE i.lockerNum = :locker", Item.class);
             query.setParameter("locker", i);
             if (query.getResultList().size() == 0) {
