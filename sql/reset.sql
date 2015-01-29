@@ -80,7 +80,7 @@ CREATE TABLE `loans` (
 --
 
 -- Config
-INSERT INTO `config` VALUES ('lockerAmount', '5');
+INSERT INTO `config` VALUES ('lockerAmount', '27');
 
 -- Users
 INSERT INTO `users` VALUES (DEFAULT, 'admin', 'admin', 'Mr Admin', 'admin@admin.admin', 0, TRUE);
@@ -89,10 +89,10 @@ INSERT INTO `users` VALUES (DEFAULT, 'user2', 'user2', 'User 2', 'user2@test.tes
 INSERT INTO `users` VALUES (DEFAULT, 'test', 'test', 'Test', 'test@test.test', 5, FALSE);
 
 -- Items
-INSERT INTO `items` VALUES (DEFAULT, 'Item1', NULL, 'Description of item 1', 2, FALSE, 1, 8, TRUE);
-INSERT INTO `items` VALUES (DEFAULT, 'Item2', NULL, 'Description of item 2', 2, TRUE, 2, 19, TRUE);
+INSERT INTO `items` VALUES (DEFAULT, 'Item1', NULL, 'Description of item 1', 2, FALSE, 14, 8, TRUE);
+INSERT INTO `items` VALUES (DEFAULT, 'Item2', NULL, 'Description of item 2', 2, TRUE, 7, 19, TRUE);
 INSERT INTO `items` VALUES (DEFAULT, 'Item3', NULL, 'Description of item 3', 3, TRUE, 3, 11, TRUE);
-INSERT INTO `items` VALUES (DEFAULT, 'Item4', NULL, 'Description of item 4', 3, TRUE, 4, 11, FALSE);
+INSERT INTO `items` VALUES (DEFAULT, 'Item4', NULL, 'Description of item 4', 3, TRUE, 20, 11, FALSE);
 
 -- Past loans
 INSERT INTO `loans` VALUES (DEFAULT, 2, 2, '2015-01-12', '2015-01-24');
