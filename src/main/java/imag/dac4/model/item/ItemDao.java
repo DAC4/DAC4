@@ -1,7 +1,7 @@
 package imag.dac4.model.item;
 
-import imag.dac4.model.ConfigDao;
 import imag.dac4.model.Dao;
+import imag.dac4.model.config.ConfigDao;
 import imag.dac4.model.user.User;
 
 import javax.ejb.EJB;
