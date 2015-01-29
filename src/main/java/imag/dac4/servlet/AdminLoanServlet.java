@@ -50,18 +50,4 @@ public class AdminLoanServlet extends HttpServlet {
                 break;
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final String[] split = req.getRequestURI().split("/");
-        final String action = split[split.length - 1];
-        switch (action.toLowerCase()) {
-            default:
-                req.getSession().setAttribute("error", 400);
-                req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
-                req.getRequestDispatcher(Constants.JSP_INDEX).forward(req, resp);
-                break;
-        }
-    }
-
 }

@@ -6,6 +6,7 @@
 <%--@elvariable id="loan" type="imag.dac4.model.loan.Loan"--%>
 <%--@elvariable id="item" type="imag.dac4.model.item.Item"--%>
 <%--@elvariable id="user" type="imag.dac4.model.user.User"--%>
+<%--@elvariable id="u" type="imag.dac4.model.user.User"--%>
 
 <c:set var="title" value="Admin - Loans List"/>
 <c:set var="currentPage" value="admin-loans"/>
@@ -36,7 +37,7 @@
 				<c:forEach var="pair" items="${loans}">
 					<c:set var="loan" value="${pair.key}"/>
 					<c:set var="item" value="${pair.value.key}"/>
-					<c:set var="user" value="${pair.value.value}"/>
+					<c:set var="u" value="${pair.value.value}"/>
 					<tr>
 						<td style="padding:0" class="collapsing">
 							<c:choose>
@@ -52,7 +53,7 @@
 							<c:out value="${item.name}"/>
 						</td>
 						<td>
-							<c:out value="${user.name}"/>
+							<c:out value="${u.name}"/>
 						</td>
 						<td>
 							<c:out value="${loan.startDateAsString}"/>
