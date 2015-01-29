@@ -301,7 +301,7 @@ public class ItemServlet extends HttpServlet {
                 return;
             }
             String filePathString = null;
-            if (imageFile != null) {
+            if (imageFile != null && !imageFile.getName().isEmpty()) {
                 final String imageFileName = imageFile.getName();
                 final String[] imageFileNameSplit = imageFileName.split("\\.");
                 final String imageFileType = imageFileNameSplit[imageFileNameSplit.length - 1];
@@ -314,7 +314,7 @@ public class ItemServlet extends HttpServlet {
                     default:
                         // Invalid parameter type
                         req.getSession().setAttribute("error", 400);
-                        req.getSession().setAttribute("error_msg", "Bad Request: Invalid file type" + imageFileName + imageFileType + imageFile);
+                        req.getSession().setAttribute("error_msg", "Bad Request: Invalid file type");
                         resp.sendRedirect("/item/register");
                         return;
                 }
