@@ -2,10 +2,10 @@ package imag.dac4.selenium;
 
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import java.math.BigInteger;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class CompleteRegistrationTest {
