@@ -27,7 +27,7 @@ public class AddItemTest {
 
         System.out.println("\t\tBrowsing to Items page...");
 
-        driver.findElement(By.xpath("//div[@id='header']/a[@data-menu='items']/div")).click();
+        driver.findElement(By.xpath("//div[@id='header']/a[@data-menu='my-items']/div")).click();
 
         System.out.println("\t\tBrowsing to Item Registration page...");
 
