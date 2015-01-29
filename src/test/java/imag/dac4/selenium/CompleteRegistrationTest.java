@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.math.BigInteger;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class CompleteRegistrationTest {
@@ -16,6 +17,13 @@ public class CompleteRegistrationTest {
         final WebDriver driver = TestSuiteSelenium.getDriver();
         final String randomString = new BigInteger(130, new Random()).toString(32);
         driver.get(TestSuiteSelenium.BASE_URL);
+
+        System.out.println("\t\tEventually logging out...");
+
+        try {
+            driver.findElement(By.linkText("Logout")).click();
+        } catch (final NoSuchElementException ignored) {
+        }
 
         System.out.println("\t\tRegistering account '" + randomString + "'...");
 
