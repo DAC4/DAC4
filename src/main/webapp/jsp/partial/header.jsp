@@ -10,6 +10,8 @@
 <%--@elvariable id="error" type="java.lang.String"--%>
 <%--@elvariable id="error_msg" type="java.lang.String"--%>
 
+<%--@elvariable id="warning_msg" type="java.lang.String"--%>
+
 <%--@elvariable id="success_msg" type="java.lang.String"--%>
 
 <c:if test="${user != null}" var="isConnected"/>
@@ -114,6 +116,18 @@
 		</div>
 		<c:remove var="error"/>
 		<c:remove var="error_msg"/>
+	</c:if>
+	<c:if test="${sessionScope.warning_msg != null}">
+		<div id="success" class="ui warning message">
+			<h2 class="header">
+				Warning:
+			</h2>
+
+			<p>
+				<c:out value="${warning_msg}"/>
+			</p>
+		</div>
+			<c:remove var="success_msg"/>
 	</c:if>
 	<c:if test="${sessionScope.success_msg != null}">
 		<div id="success" class="ui positive message">
