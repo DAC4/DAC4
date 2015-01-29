@@ -85,15 +85,24 @@ public class ItemServlet extends HttpServlet {
                 req.getRequestDispatcher(Constants.JSP_ITEM).forward(req, resp);
                 break;
             case "register":
-                req.setAttribute("lockers", this.itemDao.getFreeLockers());
-                req.getRequestDispatcher(Constants.JSP_ITEM_REGISTER).forward(req, resp);
+                List<Integer> lockers = this.itemDao.getFreeLockers();
+                if (lockers.size() == 0) {
+                    req.getSession().setAttribute("error", 400);
+                    req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI());
+                    resp.sendRedirect("/user/items");
+                } else {
+                    req.setAttribute("lockers", lockers);
+                    req.getRequestDispatcher(Constants.JSP_ITEM_REGISTER).forward(req, resp);
+                }
                 break;
             case "awaiting-approval":
                 req.getRequestDispatcher(Constants.JSP_ITEM_AWAITING_APPROVAL).forward(req, resp);
                 break;
             case "items":
-                req.setAttribute("isAdmin", isAdmin);
                 req.setAttribute("items", this.itemDao.getItems());
+                if (this.itemDao.getFreeLockers().size() == 0) {
+                    req.setAttribute("warning", "No locker available");
+                }
                 req.getRequestDispatcher(Constants.JSP_ITEMS).forward(req, resp);
                 break;
             default:
