@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%--@elvariable id="lockers" type="java.util.List"--%>
-<%--@elvariable id="lockers" type="java.lang.Integer"--%>
+<%--@elvariable id="locker" type="java.lang.Integer"--%>
 <c:set var="title" value="Item Registration"/>
 <c:set var="currentPage" value="item-register"/>
 
@@ -17,7 +17,7 @@
 	<div class="sixteen wide column">
 
 		<form class="ui form" method="POST" enctype="multipart/form-data"
-			  action="${pageContext.request.contextPath}/item/register">
+		      action="${pageContext.request.contextPath}/item/register">
 			<h1 class="ui dividing header">Item Registration</h1>
 
 			<div class="field">
@@ -30,7 +30,7 @@
 			</div>
 			<div class="field">
 				<label for="image">Image:</label>
-				<input id="image" type="file" name="image" />
+				<input id="image" type="file" name="image"/>
 			</div>
 			<div class="two fields">
 				<div class="field">
