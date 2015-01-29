@@ -314,7 +314,7 @@ public class ItemServlet extends HttpServlet {
                     default:
                         // Invalid parameter type
                         req.getSession().setAttribute("error", 400);
-                        req.getSession().setAttribute("error_msg", "Bad Request: Invalid file type");
+                        req.getSession().setAttribute("error_msg", "Bad Request: Invalid file type" + imageFileName + imageFileType + imageFile);
                         resp.sendRedirect("/item/register");
                         return;
                 }
