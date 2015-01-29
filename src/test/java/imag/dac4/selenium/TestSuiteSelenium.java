@@ -19,7 +19,12 @@ import java.util.concurrent.TimeUnit;
                     })
 public class TestSuiteSelenium {
 
-    public static final String BASE_URL = "http://dac.ribesg.fr/";
+    public static final String BASE_URL;
+
+    static {
+        final String url = System.getProperty("trocbox.testInstanceUrl");
+        BASE_URL = url == null ? "http://localhost:8080" : url;
+    }
 
     private static WebDriver driver;
 
