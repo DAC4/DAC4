@@ -127,6 +127,7 @@
 							<goal>start-server</goal>
 						</goals>
 						<configuration>
+							<skip>${skipTests}</skip>
 							<background>true</background>
 							<logOutput>true</logOutput>
 						</configuration>
@@ -137,6 +138,9 @@
 						<goals>
 							<goal>xvfb</goal>
 						</goals>
+						<configuration>
+							<skip>${skipTests}</skip>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
