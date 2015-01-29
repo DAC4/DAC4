@@ -36,7 +36,7 @@ public class ItemDao extends Dao<Integer, Item> {
         for (int i = 0; i < 50/*TODO MAX LOCKER*/; i++) {
             TypedQuery<Item> query = entityManager.createQuery("SELECT i FROM Item i WHERE i.lockerNum = :locker", Item.class);
             query.setParameter("locker", i);
-            if (query.getSingleResult() != null) {
+            if (query.getResultList().size() == 0) {
                 result.add(i);
             }
         }
