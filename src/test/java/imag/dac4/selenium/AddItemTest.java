@@ -17,12 +17,12 @@ public class AddItemTest {
         final String randomString = new BigInteger(130, new Random()).toString(32);
         driver.get(TestSuiteSelenium.BASE_URL);
 
-        System.out.println("\t\tLogging in as ribesg...");
+        System.out.println("\t\tLogging in as user1...");
 
         driver.findElement(By.id("login")).clear();
-        driver.findElement(By.id("login")).sendKeys("ribesg");
+        driver.findElement(By.id("login")).sendKeys("user1");
         driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("mdp");
+        driver.findElement(By.id("password")).sendKeys("user1");
         driver.findElement(By.xpath("//input[@value='Login']")).click();
 
         System.out.println("\t\tBrowsing to Items page...");
@@ -79,12 +79,12 @@ public class AddItemTest {
 
         driver.findElement(By.linkText("Logout")).click();
 
-        System.out.println("\t\tLogging in as ribesg...");
+        System.out.println("\t\tLogging in as user1...");
 
         driver.findElement(By.id("login")).clear();
-        driver.findElement(By.id("login")).sendKeys("ribesg");
+        driver.findElement(By.id("login")).sendKeys("user1");
         driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("mdp");
+        driver.findElement(By.id("password")).sendKeys("user1");
         driver.findElement(By.xpath("//input[@value='Login']")).click();
 
         System.out.println("\t\tBrowsing to Items page...");
