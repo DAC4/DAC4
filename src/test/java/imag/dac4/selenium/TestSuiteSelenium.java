@@ -13,13 +13,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({
-                      CompleteRegistrationTest.class,
-                      AddItemTest.class,
-                      BorrowItemTest.class,
-                      ReturnItemTest.class,
-                      DeleteItemTest.class
-                    })
+@Suite.SuiteClasses(
+    {
+        CompleteRegistrationTest.class,
+        AddItemTest.class,
+        BorrowItemTest.class,
+        ReturnItemTest.class,
+        DeleteItemTest.class
+    }
+)
 public class TestSuiteSelenium {
 
     public static final  String BASE_URL;

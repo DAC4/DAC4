@@ -38,7 +38,7 @@ public class Pair<K, V> {
             return false;
         }
 
-        final Pair pair = (Pair)o;
+        final Pair pair = (Pair) o;
 
         return !(this.key != null ? !this.key.equals(pair.key) : pair.key != null) && !(this.value != null ? !this.value.equals(pair.value) : pair.value != null);
     }
@@ -53,8 +53,8 @@ public class Pair<K, V> {
     @Override
     public String toString() {
         return "Pair{" +
-               "key=" + this.key +
-               ", value=" + this.value +
-               '}';
+            "key=" + this.key +
+            ", value=" + this.value +
+            '}';
     }
 }

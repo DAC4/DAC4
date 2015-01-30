@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "AdminUserServlet", urlPatterns = {
-        "/admin/users",
-        "/admin/user/approve",
-        "/admin/user/remove",
-        "/admin/user/update-credit"
+    "/admin/users",
+    "/admin/user/approve",
+    "/admin/user/remove",
+    "/admin/user/update-credit"
 })
 public class AdminUserServlet extends HttpServlet {
 

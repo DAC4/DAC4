@@ -97,13 +97,13 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", credits=" + credits +
-                ", approved=" + approved +
-                '}';
+            "id=" + id +
+            ", login='" + login + '\'' +
+            ", password='" + password + '\'' +
+            ", name='" + name + '\'' +
+            ", email='" + email + '\'' +
+            ", credits=" + credits +
+            ", approved=" + approved +
+            '}';
     }
 }

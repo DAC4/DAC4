@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "AuthServlet", urlPatterns = {
-        "/auth/register",
-        "/auth/login",
-        "/auth/logout",
-        "/auth/awaiting-approval"
+    "/auth/register",
+    "/auth/login",
+    "/auth/logout",
+    "/auth/awaiting-approval"
 })
 public class AuthServlet extends HttpServlet {
 

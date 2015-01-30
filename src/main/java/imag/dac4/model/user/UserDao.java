@@ -24,9 +24,9 @@ public class UserDao extends Dao<Integer, User> {
     public User getByLogin(final String login) {
         try {
             return entityManager
-                    .createQuery("SELECT u FROM User u WHERE u.login = :login", User.class)
-                    .setParameter("login", login)
-                    .getSingleResult();
+                .createQuery("SELECT u FROM User u WHERE u.login = :login", User.class)
+                .setParameter("login", login)
+                .getSingleResult();
         } catch (NoResultException e) {
             return null;
         }
