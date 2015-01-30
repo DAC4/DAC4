@@ -1,5 +1,7 @@
 package imag.dac4.selenium;
 
+import java.math.BigInteger;
+import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -15,72 +17,36 @@ public class Loan {
   private boolean acceptNextAlert = true;
   private StringBuffer verificationErrors = new StringBuffer();
 
-  @Before
-  public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://dac.ribesg.fr/";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
 
   @Test
   public void testLoan() throws Exception {
-    driver.get(baseUrl + "/");
+
+    System.out.println("\tStarting Complete Registration Test");
+
+    final WebDriver driver = TestSuiteSelenium.getDriver();
+    final String login = "user1";
+    final String password = "user1";
+
+    System.out.println("\t\tlogin in as user1 ...");
+
     driver.findElement(By.id("login")).clear();
-    driver.findElement(By.id("login")).sendKeys("test");
+    driver.findElement(By.id("login")).sendKeys("laforesy");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("test");
+    driver.findElement(By.id("password")).sendKeys("mdp");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
+
+    System.out.println("\t\tSwitching to browse item list...");
+
+    driver.findElement(By.xpath("//div[@id='header']/a[@data-menu='items']/div")).click();
+
+    System.out.println("\t\tBorrow the item 2...");
+
     driver.findElement(By.xpath("//div[@id='header']/a[2]/div/span")).click();
     driver.findElement(By.xpath("(//input[@value='Borrow'])[2]")).click();
+
+    System.out.println("\t\tLogging out...");
+
     driver.findElement(By.linkText("Logout")).click();
-    driver.findElement(By.id("login")).clear();
-    driver.findElement(By.id("login")).sendKeys("admin");
-    driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("admin");
-    driver.findElement(By.xpath("//input[@value='Login']")).click();
-    driver.findElement(By.xpath("//div[@id='header']/a[4]/div/span")).click();
-    driver.findElement(By.linkText("Logout")).click();
-  }
 
-  @After
-  public void tearDown() throws Exception {
-    driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
-  }
-
-  private boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      driver.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
   }
 }

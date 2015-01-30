@@ -1,5 +1,7 @@
 package imag.dac4.selenium;
 
+import java.math.BigInteger;
+import java.util.Random;
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
 import org.junit.*;
@@ -10,71 +12,49 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class DeletItemTest {
-  private WebDriver driver;
-  private String baseUrl;
-  private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
 
-  @Before
-  public void setUp() throws Exception {
-    driver = new FirefoxDriver();
-    baseUrl = "http://dac.ribesg.fr/";
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-  }
 
   @Test
   public void testDeletItem() throws Exception {
-    driver.get(baseUrl + "/");
+
+    System.out.println("\tStarting Add Item Test");
+
+    final WebDriver driver = TestSuiteSelenium.getDriver();
+    final String randomString = new BigInteger(130, new Random()).toString(32);
+    driver.get(TestSuiteSelenium.BASE_URL);
+
+    System.out.println("\t\tEventually logging out...");
+
+    try {
+      driver.findElement(By.linkText("Logout")).click();
+    } catch (final NoSuchElementException ignored) {
+    }
+
+    System.out.println("\t\tLogging in as user1...");
+
     driver.findElement(By.id("login")).clear();
-    driver.findElement(By.id("login")).sendKeys("test");
+    driver.findElement(By.id("login")).sendKeys("user1");
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("test");
+    driver.findElement(By.id("password")).sendKeys("user1");
     driver.findElement(By.xpath("//input[@value='Login']")).click();
-    driver.findElement(By.xpath("//div[@id='header']/a[3]/div/span")).click();
+
+    System.out.println("\t\tBrowsing to Items page...");
+
+    driver.findElement(By.xpath("//div[@id='header']/a[@data-menu='my-items']/div")).click();
+
+    System.out.println("\t\tDeleting an object...");
     driver.findElement(By.xpath("//input[@value='Delete']")).click();
-    driver.findElement(By.xpath("//div[@id='header']/a[2]/div/span")).click();
+
+    System.out.println("\t\tVerifying the object is deleted...");
+
+    try {
+      final WebElement e = driver.findElement(By.linkText("Success!"));
+    } catch (final NoSuchElementException ignored) {
+    }
+
+    System.out.println("\t\tLogging out...");
+
     driver.findElement(By.linkText("Logout")).click();
-  }
 
-  @After
-  public void tearDown() throws Exception {
-    driver.quit();
-    String verificationErrorString = verificationErrors.toString();
-    if (!"".equals(verificationErrorString)) {
-      fail(verificationErrorString);
-    }
-  }
-
-  private boolean isElementPresent(By by) {
-    try {
-      driver.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      driver.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
-
-  private String closeAlertAndGetItsText() {
-    try {
-      Alert alert = driver.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
   }
 }
