@@ -1,5 +1,8 @@
 # DAC4
 
+## Live test instance
+A live test instance is available at http://dac.ribesg.fr/ and will stay available until 2015-03-01.
+
 ## Builds
 Find DAC4.war and the DAC4 VM at http://ci.ribesg.fr/browse/DAC ([Direct link to latest VM](http://ci.ribesg.fr/browse/DAC-VM/latestSuccessful/artifact/shared/VM/dac4.vmdk))
 
