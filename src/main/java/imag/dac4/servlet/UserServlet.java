@@ -92,7 +92,7 @@ public class UserServlet extends HttpServlet {
                     /*ARDUINO : ArduinoInterface.removeProduct(item.getLockerNum()); */
                     this.itemDao.delete(id);
                     // take away 1 credit from user if possible
-                    user.setCredits(user.getCredits() == 0 ? 0 : user.getCredits() - 1);
+                    user.setCredits(user.getCredits() <= 0 ? 0 : user.getCredits() - 1);
                     this.userDao.update(user);
                     req.getSession().setAttribute("success_msg", "Successfully removed item \"" + item.getName() + '"');
                     resp.sendRedirect("/user/items");

@@ -135,6 +135,11 @@ public class AdminItemServlet extends HttpServlet {
         } else {
             this.loanDao.forgetItemHistory(id);
             this.itemDao.delete(id);
+            // take away 1 credit from user if possible
+            final User owner = this.userDao.read(item.getOwnerId());
+            if (owner != null) {
+                owner.setCredits(owner.getCredits() <= 0 ? 0 : owner.getCredits() - 1);
+            }
             if (item.getImagePath() != null && !item.getImagePath().isEmpty()) {
                 Files.delete(Paths.get(getServletContext().getRealPath(File.separator), item.getImagePath()));
             }
