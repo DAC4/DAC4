@@ -178,6 +178,7 @@ public class ItemServlet extends HttpServlet {
                     this.userDao.update(user);
                     loan.setEndDate(new Date(System.currentTimeMillis()));
                     this.loanDao.update(loan);
+                    req.getSession().setAttribute("success_msg", "Successfully returned item \"" + item.getName() + '"');
                     resp.sendRedirect("/user/loans");
                 }
             }
