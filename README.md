@@ -43,11 +43,15 @@ After starting the VM, login as vagrant user (password being vagrant).
 #### Deploying a DAC4.war
 Download the DAC4.war file to ``/home/vagrant`` then run the following command:
 ````bash
-./glassfish4/glassfish/bin/asadmin --user=admin --passwordfile pwd --interactive=false deploy --force=true DAC4.war
+./gf/bin/asadmin --user=admin --passwordfile pwd --interactive=false deploy --force=true DAC4.war
 ````
 Make sure you've got the ``pwd`` file in ``/home/vagrant`` containing ``AS_ADMIN_PASSWORD=admin``.
 #### Resetting the MySQL Database
 Download the ``reset.sql`` file available in this repository under ``./sql/``, then launch the following command:
 ````bash
 mysql -u root -proot < reset.sql
+````
+You may have to restart Glassfish or redeploy the application to clear Glassfish's DB cache. Restarting Glassfish:
+````bash
+./gf/bin/asadmin restart-domain
 ````
