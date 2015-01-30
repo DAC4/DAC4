@@ -15,7 +15,11 @@ import java.util.concurrent.TimeUnit;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
                       AddItemTest.class,
-                      CompleteRegistrationTest.class
+                      CompleteRegistrationTest.class,
+                      Loan.class,
+                      ReturnItem.class,
+                      DeletItemTest.class
+
                     })
 public class TestSuiteSelenium {
 
