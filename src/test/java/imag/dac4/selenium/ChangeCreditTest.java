@@ -1,21 +1,19 @@
 package imag.dac4.selenium;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.math.BigInteger;
 import java.util.Random;
 
-public class ChangeCrediTest {
+public class ChangeCreditTest {
 
     @Test
     public void testChangeCredit() throws Exception {
-        System.out.println("\tStarting change credit Test");
+        System.out.println("\tStarting Change Credit Test");
 
         final WebDriver driver = TestSuiteSelenium.getDriver();
         final String randomString = new BigInteger(130, new Random()).toString(32);
@@ -55,7 +53,7 @@ public class ChangeCrediTest {
         driver.findElement(By.id("password")).sendKeys("user1");
         driver.findElement(By.xpath("//input[@value='Login']")).click();
 
-        driver.findElement(By.linkText("Credits: 10"));
+        Assert.assertTrue(driver.findElement(By.cssSelector("#footer .item.bar-text-medium span")).getText().trim().equals("Credits: 10"));
 
         System.out.println("\tEnding change credit Test");
     }

@@ -16,10 +16,9 @@ import java.util.concurrent.TimeUnit;
 @Suite.SuiteClasses({
                       AddItemTest.class,
                       CompleteRegistrationTest.class,
-                      Loan.class,
-                      ReturnItem.class,
-                      DeletItemTest.class
-
+                      BorrowItemTest.class,
+                      ReturnItemTest.class,
+                      DeleteItemTest.class
                     })
 public class TestSuiteSelenium {
 
@@ -27,6 +26,7 @@ public class TestSuiteSelenium {
 
     static {
         final String url = System.getProperty("trocbox.testInstanceUrl");
+        // Use provided URL or fallback to default Glassfish port on localhost
         BASE_URL = url == null ? "http://localhost:8080" : url;
     }
 
