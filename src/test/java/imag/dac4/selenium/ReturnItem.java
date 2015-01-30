@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 public class ReturnItem {
 
+  @Test
   public void testReturnItem() throws Exception {
 
     final WebDriver driver = TestSuiteSelenium.getDriver();
