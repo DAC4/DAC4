@@ -135,7 +135,7 @@ public class AdminItemServlet extends HttpServlet {
         } else {
             this.loanDao.forgetItemHistory(id);
             this.itemDao.delete(id);
-            if (!item.getImagePath().isEmpty()) {
+            if (item.getImagePath() != null && !item.getImagePath().isEmpty()) {
                 Files.delete(Paths.get(getServletContext().getRealPath(File.separator), item.getImagePath()));
             }
             req.getSession().setAttribute("success_msg", "Successfully removed item \"" + item.getName() + '"');
