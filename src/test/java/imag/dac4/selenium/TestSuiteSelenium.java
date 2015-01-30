@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-                      AddItemTest.class,
                       CompleteRegistrationTest.class,
+                      AddItemTest.class,
                       BorrowItemTest.class,
                       ReturnItemTest.class,
                       DeleteItemTest.class
