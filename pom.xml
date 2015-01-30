@@ -17,6 +17,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<skipTests>true</skipTests>
+		<trocbox.test.skipXvfb>true</trocbox.test.skipXvfb>
 	</properties>
 
 	<dependencies>
@@ -139,7 +140,7 @@
 							<goal>xvfb</goal>
 						</goals>
 						<configuration>
-							<skip>${skipTests}</skip>
+							<skip>${trocbox.test.skipXvfb}</skip>
 						</configuration>
 					</execution>
 				</executions>
