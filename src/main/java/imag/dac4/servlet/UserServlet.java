@@ -20,9 +20,9 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", urlPatterns = {
-        "/user/items",
-        "/user/item/remove",
-        "/user/loans"
+    "/user/items",
+    "/user/item/remove",
+    "/user/loans"
 })
 public class UserServlet extends HttpServlet {
 
@@ -99,22 +99,22 @@ public class UserServlet extends HttpServlet {
                 } else { // item unavailable
                     req.getSession().setAttribute("error", 400);
                     req.getSession().setAttribute("error_msg", "Bad Request: "
-                            + req.getRequestURI()
-                            + " (This item is currently unavailable. You cannot delete it)");
+                        + req.getRequestURI()
+                        + " (This item is currently unavailable. You cannot delete it)");
                     resp.sendRedirect("/user/items");
                 }
             } else { // user rights incorrect
                 req.getSession().setAttribute("error", 400);
                 req.getSession().setAttribute("error_msg", "Bad Request: "
-                        + req.getRequestURI()
-                        + " (This item is not yours)");
+                    + req.getRequestURI()
+                    + " (This item is not yours)");
                 resp.sendRedirect("/");
             }
         } else { // item not found
             req.getSession().setAttribute("error", 404);
             req.getSession().setAttribute("error_msg", "Bad Request: "
-                    + req.getRequestURI()
-                    + " (Unknown or missing id)");
+                + req.getRequestURI()
+                + " (Unknown or missing id)");
             resp.sendRedirect("/user/items");
         }
     }

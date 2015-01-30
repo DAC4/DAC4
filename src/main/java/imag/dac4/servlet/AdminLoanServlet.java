@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(name = "AdminLoanServlet", urlPatterns = {
-        "/admin/loans"
+    "/admin/loans"
 })
 public class AdminLoanServlet extends HttpServlet {
 

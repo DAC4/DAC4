@@ -31,24 +31,21 @@ import java.util.Map;
 import java.util.UUID;
 
 @WebServlet(name = "ItemServlet", urlPatterns = {
-        "/item",
-        "/item/register",
-        "/item/awaiting-approval",
-        "/item/borrow",
-        "/item/return",
-        "/items",
+    "/item",
+    "/item/register",
+    "/item/awaiting-approval",
+    "/item/borrow",
+    "/item/return",
+    "/items",
 })
 @MultipartConfig
 public class ItemServlet extends HttpServlet {
 
     private static final String UPLOAD_DIRECTORY = "/static/img";
 
-    @EJB
-    ItemDao itemDao;
-    @EJB
-    LoanDao loanDao;
-    @EJB
-    UserDao userDao;
+    @EJB ItemDao itemDao;
+    @EJB LoanDao loanDao;
+    @EJB UserDao userDao;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,13 +62,15 @@ public class ItemServlet extends HttpServlet {
                 } catch (final NumberFormatException e) {
                     req.getSession().setAttribute("error", 400);
                     req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
-                    req.getRequestDispatcher(Constants.JSP_ITEM).forward(req, resp);
+                    resp.sendRedirect("/");
                     return;
                 }
                 final Item item = this.itemDao.read(id);
                 if (item == null || !item.isApproved() && !isAdmin && item.getOwnerId() != user.getId()) {
                     req.getSession().setAttribute("error", 400);
                     req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+                    resp.sendRedirect("/");
+                    return;
                 } else {
                     req.setAttribute("item", item);
                 }
@@ -79,6 +78,8 @@ public class ItemServlet extends HttpServlet {
                 if (user == null) {
                     req.getSession().setAttribute("error", 400);
                     req.getSession().setAttribute("error_msg", "Bad Request: " + req.getRequestURI() + " (Unknown or missing id)");
+                    resp.sendRedirect("/");
+                    return;
                 } else {
                     req.setAttribute("owner", owner);
                 }
@@ -178,6 +179,7 @@ public class ItemServlet extends HttpServlet {
                     this.userDao.update(user);
                     loan.setEndDate(new Date(System.currentTimeMillis()));
                     this.loanDao.update(loan);
+                    req.getSession().setAttribute("success_msg", "Successfully returned item \"" + item.getName() + '"');
                     resp.sendRedirect("/user/loans");
                 }
             }
@@ -289,8 +291,8 @@ public class ItemServlet extends HttpServlet {
                 lockerNum = Integer.parseInt(lockerNumString);
                 maxLoanDuration = Integer.parseInt(maxLoanDurationString);
                 if (lockerNum < Constants.LOCKER_NUM_MIN ||
-                        lockerNum > Constants.LOCKER_NUM_MAX ||
-                        maxLoanDuration < Constants.MAX_LOAN_DURATION_MIN) {
+                    lockerNum > Constants.LOCKER_NUM_MAX ||
+                    maxLoanDuration < Constants.MAX_LOAN_DURATION_MIN) {
                     throw new IllegalArgumentException();
                 }
             } catch (final IllegalArgumentException e) {

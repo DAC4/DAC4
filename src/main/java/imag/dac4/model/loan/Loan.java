@@ -74,8 +74,8 @@ public class Loan implements Serializable {
 
         // Check that they represent the same day
         return c1.get(Calendar.ERA) == c2.get(Calendar.ERA)
-                && c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
-                && c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR);
+            && c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
+            && c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR);
     }
 
     public boolean isReturned() {

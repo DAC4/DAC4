@@ -13,17 +13,28 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({
-                      AddItemTest.class,
-                      CompleteRegistrationTest.class
-                    })
+@Suite.SuiteClasses(
+    {
+        CompleteRegistrationTest.class,
+        AddItemTest.class,
+        BorrowItemTest.class,
+        ReturnItemTest.class,
+        DeleteItemTest.class
+    }
+)
 public class TestSuiteSelenium {
 
-    public static final String BASE_URL;
+    public static final  String BASE_URL;
+    private static final String DISPLAY;
 
     static {
-        final String url = System.getProperty("trocbox.testInstanceUrl");
+        final String url = System.getProperty("trocbox.test.instanceUrl");
+        // Use provided URL or fallback to default Glassfish port on localhost
         BASE_URL = url == null ? "http://localhost:8080" : url;
+
+        final String display = System.getProperty("trocbox.test.display");
+        // Use provided display or fallback to default :0 value
+        DISPLAY = display == null ? ":0" : display;
     }
 
     private static WebDriver driver;
@@ -37,11 +48,11 @@ public class TestSuiteSelenium {
         System.out.println("Initializing Selenium Test Suite. Creating Firefox Driver...");
 
         final FirefoxBinary bin = new FirefoxBinary();
-        bin.setEnvironmentProperty("DISPLAY", ":20");
+        bin.setEnvironmentProperty("DISPLAY", DISPLAY);
         driver = new FirefoxDriver(bin, null);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.manage().window().setSize(new Dimension(1920, 1080));
+        driver.manage().window().setSize(new Dimension(1280, 720));
 
         System.out.println("Firefox Driver ready, launching test suite");
     }

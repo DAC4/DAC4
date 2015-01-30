@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "AuthServlet", urlPatterns = {
-        "/auth/register",
-        "/auth/login",
-        "/auth/logout",
-        "/auth/awaiting-approval"
+    "/auth/register",
+    "/auth/login",
+    "/auth/logout",
+    "/auth/awaiting-approval"
 })
 public class AuthServlet extends HttpServlet {
 
@@ -130,7 +130,7 @@ public class AuthServlet extends HttpServlet {
         } else {
             user = new User(login, password, name, email);
             this.userDao.create(user);
-            req.getSession().setAttribute("success_msg", "Registration completed successfully");
+            req.getSession().setAttribute("success_msg", "Successfully registered new account \"" + login + '"');
             resp.sendRedirect("/auth/awaiting-approval");
         }
     }

@@ -25,9 +25,9 @@ public class MainFilter implements Filter {
             filterChain.doFilter(req, resp);
         } else if (!path.equals("/")) {
             if (!path.equals("/auth/login")
-                    && !path.equals("/auth/register")
-                    && !path.equals("/auth/awaiting-approval")
-                    && !Tools.isConnected(httpReq)) {
+                && !path.equals("/auth/register")
+                && !path.equals("/auth/awaiting-approval")
+                && !Tools.isConnected(httpReq)) {
                 httpReq.getSession().setAttribute("error", 403);
                 httpReq.getSession().setAttribute("error_msg", "Forbidden: Please login");
                 httpResp.sendRedirect("/");

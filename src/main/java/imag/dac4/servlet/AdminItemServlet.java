@@ -21,9 +21,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @WebServlet(name = "AdminItemServlet", urlPatterns = {
-        "/admin/items",
-        "/admin/item/approve",
-        "/admin/item/remove",
+    "/admin/items",
+    "/admin/item/approve",
+    "/admin/item/remove",
 })
 public class AdminItemServlet extends HttpServlet {
 
@@ -142,6 +142,5 @@ public class AdminItemServlet extends HttpServlet {
            /*ARDUINO : ArduinoInterface.removeProduct(item.getLockerNum()); */
             resp.sendRedirect("/admin/items");
         }
-        
     }
 }

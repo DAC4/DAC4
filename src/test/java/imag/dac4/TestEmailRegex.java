@@ -14,15 +14,15 @@ public class TestEmailRegex {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
-                {"test@test.test", true},
-                {"TEST@TEST.TEST", true},
-                {"test", false},
-                {"test@test", false},
-                {"test@", false},
-                {"test@.", false},
-                {"test@.test", false},
-                {"&test@test.test", false},
-                {"test@test.", false},
+            {"test@test.test", true},
+            {"TEST@TEST.TEST", true},
+            {"test", false},
+            {"test@test", false},
+            {"test@", false},
+            {"test@.", false},
+            {"test@.test", false},
+            {"&test@test.test", false},
+            {"test@test.", false},
         });
     }
 
