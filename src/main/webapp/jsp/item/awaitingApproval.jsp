@@ -15,7 +15,7 @@
 	<div class="sixteen wide column">
 		<div class="section">
 
-			<h1 class="ui block header">Item Registration Incomplete</h1>
+			<h1 class="ui block header">Item registration pending approval</h1>
 
 			<p class="ui section">
 				The administrator needs to approve your item in order to finalize registration.
