@@ -47,10 +47,7 @@ public class DeletItemTest {
 
     System.out.println("\t\tVerifying the object is deleted...");
 
-    try {
-      final WebElement e = driver.findElement(By.linkText("Success!"));
-    } catch (final NoSuchElementException ignored) {
-    }
+    driver.findElement(By.linkText("Success!"));
 
     System.out.println("\t\tLogging out...");
 
