@@ -17,6 +17,13 @@ public class ReturnItem {
     final String login = "user1";
     final String password = "user1";
 
+    System.out.println("\t\tEventually logging out...");
+
+    try {
+      driver.findElement(By.linkText("Logout")).click();
+    } catch (final NoSuchElementException ignored) {
+    }
+
     System.out.println("\t\tlogin in as user1 ...");
 
     driver.findElement(By.id("login")).clear();

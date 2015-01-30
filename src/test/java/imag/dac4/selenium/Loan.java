@@ -27,12 +27,19 @@ public class Loan {
     final String login = "user1";
     final String password = "user1";
 
+    System.out.println("\t\tEventually logging out...");
+
+    try {
+      driver.findElement(By.linkText("Logout")).click();
+    } catch (final NoSuchElementException ignored) {
+    }
+
     System.out.println("\t\tlogin in as user1 ...");
 
     driver.findElement(By.id("login")).clear();
-    driver.findElement(By.id("login")).sendKeys("laforesy");
+    driver.findElement(By.id("login")).sendKeys(login);
     driver.findElement(By.id("password")).clear();
-    driver.findElement(By.id("password")).sendKeys("mdp");
+    driver.findElement(By.id("password")).sendKeys(password);
     driver.findElement(By.xpath("//input[@value='Login']")).click();
 
     System.out.println("\t\tSwitching to browse item list...");
