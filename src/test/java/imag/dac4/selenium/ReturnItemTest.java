@@ -24,9 +24,9 @@ public class ReturnItemTest {
         System.out.println("\t\tLogging in as user1...");
 
         driver.findElement(By.id("login")).clear();
-        driver.findElement(By.id("login")).sendKeys("user1");
+        driver.findElement(By.id("login")).sendKeys("user2");
         driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("user1");
+        driver.findElement(By.id("password")).sendKeys("user2");
         driver.findElement(By.xpath("//input[@value='Login']")).click();
 
         System.out.println("\t\tBrowsing to Loans page...");

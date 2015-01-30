@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 public class BorrowItemTest {
 
     @Test
-    public void testLoan() throws Exception {
+    public void testBorrowItem() throws Exception {
         System.out.println("\tStarting Borrow Item Test");
 
         final WebDriver driver = TestSuiteSelenium.getDriver();
@@ -29,13 +29,13 @@ public class BorrowItemTest {
         driver.findElement(By.id("password")).sendKeys("user1");
         driver.findElement(By.xpath("//input[@value='Login']")).click();
 
-        System.out.println("\t\tSwitching to browse item list...");
+        System.out.println("\t\tSwitching to Items List...");
 
         driver.findElement(By.xpath("//div[@id='header']/a[@data-menu='items']/div")).click();
 
         System.out.println("\t\tBorrow the item 2...");
 
-        driver.findElement(By.xpath("div[@data-item-name='Item2']//input[@value='Borrow']")).click();
+        driver.findElement(By.xpath("//div[@data-item-name='Item2']//input[@value='Borrow']")).click();
 
         System.out.println("\t\tVerifying success...");
 
